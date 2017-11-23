@@ -14,6 +14,7 @@ using AutoRest.Python;
 using AutoRest.Python.Model;
 using AutoRest.Python.vanilla.Templates;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace AutoRest.Python
 {
@@ -65,28 +66,41 @@ namespace AutoRest.Python
 
             do
             {
-                if (!codeModelPure.ModuleName.EndsWith("_facts"))
+                try
                 {
-                    var ansibleTemplate = new AnsibleTemplate { Model = codeModelPure };
-                    await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
-                }
-                else
+                    if (!codeModelPure.ModuleName.EndsWith("_facts"))
+                    {
+                        var ansibleTemplate = new AnsibleTemplate { Model = codeModelPure };
+                        await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
+                    }
+                    else
+                    {
+                        var ansibleTemplate = new AnsibleFactsTemplate { Model = codeModelPure };
+                        await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
+                    }
+
+                    var aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
+                    await WriteWithLf(aliasesTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
+
+                    var metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
+                    await WriteWithLf(metaMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+
+                    var tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
+                    await WriteWithLf(tasksMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
+                } catch (Exception e)
                 {
-                    var ansibleTemplate = new AnsibleFactsTemplate { Model = codeModelPure };
-                    await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
+
+                    List<string> updated = new List<string>();
+                    updated.AddRange(codeModelPure.MergeReport);
+                    updated.Add("EXCEPTION WHILE GENERATING: " + codeModelPure.ModuleName);
+                    codeModelPure.MergeReport = updated.ToArray();
                 }
-
-                var aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
-                await WriteWithLf(aliasesTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
-
-                var metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
-                await WriteWithLf(metaMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
-
-                var tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
-                await WriteWithLf(tasksMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
+                List<string> updatedx = new List<string>();
+                updatedx.AddRange(codeModelPure.MergeReport);
+                updatedx.Add("GENERATED: " + codeModelPure.ModuleName);
+                codeModelPure.MergeReport = updatedx.ToArray();
 
             } while (codeModelPure.SelectNextMethod());
-
 
             var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };
             await WriteWithLf(ansibleInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".template.json"));

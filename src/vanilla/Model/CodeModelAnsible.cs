@@ -49,15 +49,23 @@ namespace AutoRest.Python.Model
             _map = new MapAnsible();
 
             var modules = new List<MapAnsibleModule>();
+            var operations = new List<string>();
 
             var oldIndex = CurrentOperationIndex;
             for (int idx = 0; idx < Operations.Count; idx++)
             {
                 CurrentOperationIndex = idx;
+                string op = Operations[CurrentOperationIndex].Name + "[";
+                foreach (var m in Operations[CurrentOperationIndex].Methods)
+                {
+                    op += " " + m.Name;
+                }
+
                 var module = new MapAnsibleModule();
 
                 if (ModuleCreateOrUpdateMethod != null)
                 {
+                    op += " MAIN";
                     module.ModuleName = AnsibleModuleName;
                     module.ModuleNameAlt = module.ModuleName;
                     module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name, true) : new List<ModuleOption>().ToArray();
@@ -108,6 +116,7 @@ namespace AutoRest.Python.Model
 
                 if (factMethods.Length > 0)
                 {
+                    op += " FACTS";
                     module = new MapAnsibleModule();
                     module.ModuleName = AnsibleModuleNameFacts;
                     module.ModuleNameAlt = module.ModuleName;
@@ -134,6 +143,7 @@ namespace AutoRest.Python.Model
 
                     modules.Add(module);
                 }
+                operations.Add(op += " ]");
             }
 
             CurrentOperationIndex = oldIndex;
@@ -143,6 +153,7 @@ namespace AutoRest.Python.Model
             Map.Namespace = Namespace;
             Map.NamespaceUpper = NamespaceUpper;
             Map.Name = Name;
+            Map.Operations = operations.ToArray();
         }
 
         public override string Namespace
@@ -150,6 +161,7 @@ namespace AutoRest.Python.Model
             get { return base.Namespace; }
             set
             {
+                value = value.Split(".").Last();
                 _namespace_upper = value;
                 base.Namespace = value;
             }

@@ -41,6 +41,7 @@ namespace AutoRest.Python.Model
             _merged.Name = _new.Name;
             _merged.Namespace = _new.Namespace;
             _merged.NamespaceUpper = _new.NamespaceUpper;
+            _merged.Operations = _new.Operations;
 
             _merged.Modules = MergeModuleLists(_old.Modules, _new.Modules);
         }
@@ -51,6 +52,7 @@ namespace AutoRest.Python.Model
 
             foreach (var oldModule in o)
             {
+                _output.Add("OLD : " + oldModule.ModuleName);
                 var newModule = Array.Find(n, e => (e.ModuleName == oldModule.ModuleName));
                 if (newModule != null)
                 {
@@ -65,10 +67,11 @@ namespace AutoRest.Python.Model
 
             foreach (var newModule in n)
             {
+                _output.Add("NEW : " + newModule.ModuleName);
                 var oldModule = Array.Find(o, e => (e.ModuleName == newModule.ModuleName));
                 if (oldModule == null)
                 {
-                    m.Add(oldModule);
+                    m.Add(newModule);
                     _output.Add("Module '" + newModule.ModuleName + "' in new template only - ADDING");
                 }
             }

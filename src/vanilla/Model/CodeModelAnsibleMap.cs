@@ -27,7 +27,14 @@ namespace AutoRest.Python.Model
         {
             get
             {
-                return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].ModuleName : "INVALID";
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].ModuleName : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
             }
         }
 
@@ -35,7 +42,14 @@ namespace AutoRest.Python.Model
         {
             get
             {
-                return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].ModuleNameAlt : "INVALID";
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].ModuleNameAlt : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
             }
         }
 
