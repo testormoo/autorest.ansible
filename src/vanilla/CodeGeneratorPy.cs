@@ -95,11 +95,6 @@ namespace AutoRest.Python
                     updated.Add("EXCEPTION WHILE GENERATING: " + codeModelPure.ModuleName);
                     codeModelPure.MergeReport = updated.ToArray();
                 }
-                List<string> updatedx = new List<string>();
-                updatedx.AddRange(codeModelPure.MergeReport);
-                updatedx.Add("GENERATED: " + codeModelPure.ModuleName);
-                codeModelPure.MergeReport = updatedx.ToArray();
-
             } while (codeModelPure.SelectNextMethod());
 
             var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };
