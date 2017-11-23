@@ -4256,26 +4256,26 @@
       "ObjectName": "ServiceObjectives"
     },
     {
-      "ModuleName": "azure_rm_sql_servers",
+      "ModuleName": "azure_rm_servers",
       "ModuleNameAlt": "azure_rm_sql_server",
       "Options": [
         {
           "Name": "resource_group_name",
-          "NameAlt": "resource_group_name",
+          "NameAlt": "resource_group",
           "Disposition": "default",
           "Type": "str",
           "IsList": false,
           "Required": "True",
           "VariableValue": "None",
           "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-          "DefaultValueSample": "\"{{ resource_group_name }}\"",
-          "DefaultValueTest": "",
+          "DefaultValueSample": "\"{{ resource_group }}\"",
+          "DefaultValueTest": "\"{{ resource_group }}\"",
           "SubOptions": null,
           "RequiredCount": 0
         },
         {
           "Name": "server_name",
-          "NameAlt": "server_name",
+          "NameAlt": "name",
           "Disposition": "default",
           "Type": "str",
           "IsList": false,
@@ -4283,7 +4283,7 @@
           "VariableValue": "None",
           "Documentation": "The name of the server.",
           "DefaultValueSample": "\"{{ server_name }}\"",
-          "DefaultValueTest": "",
+          "DefaultValueTest": "zims-server",
           "SubOptions": null,
           "RequiredCount": 0
         },
@@ -4302,20 +4302,6 @@
           "RequiredCount": 0
         },
         {
-          "Name": "tags",
-          "NameAlt": "tags",
-          "Disposition": "parameters",
-          "Type": "dict",
-          "IsList": false,
-          "Required": "False",
-          "VariableValue": "None",
-          "Documentation": "Resource tags.",
-          "DefaultValueSample": "\"{{ tags }}\"",
-          "DefaultValueTest": "",
-          "SubOptions": [],
-          "RequiredCount": 0
-        },
-        {
           "Name": "location",
           "NameAlt": "location",
           "Disposition": "parameters",
@@ -4325,6 +4311,20 @@
           "VariableValue": "None",
           "Documentation": "Resource location.",
           "DefaultValueSample": "\"{{ location }}\"",
+          "DefaultValueTest": "westus",
+          "SubOptions": [],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "tags",
+          "NameAlt": "tags",
+          "Disposition": "parameters",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "Resource tags.",
+          "DefaultValueSample": "\"{{ tags }}\"",
           "DefaultValueTest": "",
           "SubOptions": [],
           "RequiredCount": 0
@@ -4368,7 +4368,7 @@
           "VariableValue": "None",
           "Documentation": "Administrator username for the server. Once created it cannot be changed.",
           "DefaultValueSample": "\"{{ administrator_login }}\"",
-          "DefaultValueTest": "",
+          "DefaultValueTest": "mylogin",
           "SubOptions": [],
           "RequiredCount": 0
         },
@@ -4382,7 +4382,7 @@
           "VariableValue": "None",
           "Documentation": "The administrator login password (required for server creation).",
           "DefaultValueSample": "\"{{ administrator_login_password }}\"",
-          "DefaultValueTest": "",
+          "DefaultValueTest": "Testpasswordxyz12!",
           "SubOptions": [],
           "RequiredCount": 0
         },
@@ -4443,7 +4443,7 @@
       "AssertStateExpectedValue": "Ready",
       "ModuleOperationNameUpper": "Servers",
       "ModuleOperationName": "servers",
-      "ObjectName": "Servers"
+      "ObjectName": "Server"
     },
     {
       "ModuleName": "azure_rm_sql_servers_facts",
