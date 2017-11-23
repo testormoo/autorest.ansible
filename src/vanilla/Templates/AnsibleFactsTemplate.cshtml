@@ -1,0 +1,153 @@
+@using AutoRest.Python.vanilla.Templates
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Python
+@using AutoRest.Python.Model
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Model.CodeModelAnsibleMap>
+#!/usr/bin/python
+#
+# Copyright (c) 2017 Zim Kalinowski, <zikalino@microsoft.com>
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+@EmptyLine
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+@EmptyLine
+@EmptyLine
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+@EmptyLine
+@EmptyLine
+DOCUMENTATION = '''
+---
+module: @(Model.ModuleNameAlt)
+version_added: "2.5"
+short_description: Get @(Model.ObjectName) facts.
+description:
+    - Get facts of @(Model.ObjectName).
+@EmptyLine
+options:
+@foreach (var line in Model.ModuleHelp)
+{
+@:@(line)
+}
+@EmptyLine
+extends_documentation_fragment:
+    - azure
+    - azure_tags
+@EmptyLine
+author:
+    - "Zim Kalinowski (@@zikalino)"
+@EmptyLine
+'''
+@EmptyLine
+EXAMPLES = '''
+@foreach (var line in Model.ModuleFactsExamples)
+{
+    if (line != "")
+    {
+    @:@(line)
+    }
+    else
+    {
+    @EmptyLine
+    }
+}
+'''
+@EmptyLine
+from ansible.module_utils.azure_rm_common import AzureRMModuleBase
+@EmptyLine
+try:
+    from msrestazure.azure_exceptions import CloudError
+    from msrestazure.azure_operation import AzureOperationPoller
+    from @(Model.MgmtClientImportPath) import @(Model.MgmtClientName)
+    from msrest.serialization import Model
+except ImportError:
+    # This is handled in azure_rm_common
+    pass 
+@EmptyLine
+@EmptyLine
+class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
+
+    def __init__(self):
+
+        # define user inputs into argument
+        self.module_arg_spec = dict(
+@foreach (var param in Model.ModuleOptions)
+{
+@:            @(param.NameAlt)=dict(
+@:                type='@(param.Type)',
+@:                required=@(param.Required)
+@:            ),
+}
+        )
+
+        # store the results of the module operation
+        self.results = dict(
+            changed=False,
+            ansible_facts=dict(azure_dnsrecordset=[])
+        )
+
+@foreach (var v in Model.ModuleOptions)
+{
+@:        self.@(v.NameAlt) = None
+}
+
+        super(AzureRM@(Model.ModuleOperationNameUpper)Facts, self).__init__(self.module_arg_spec)
+@EmptyLine
+    def exec_module(self, **kwargs):
+
+        for key in self.module_arg_spec:
+            setattr(self, key, kwargs[key])
+@EmptyLine
+@{
+    string ifStatement = "if (";
+    string ifPadding = "        ";
+    foreach (var f in Model.ModuleMethods)
+    {
+        string[] ps = Model.GetMethodRequiredOptionNames(f.Name);
+        for (int idx = 0; idx < ps.Length; idx++)
+        {
+@:        @((idx == 0) ? ifStatement : ifPadding)self.@(ps[idx]) is not None@((idx != ps.Length - 1) ? " and" : "):")
+        }
+@:            self.results['ansible_facts']['@(f.Name)'] = self.@(f.Name)()
+        ifStatement = "elif (";
+        ifPadding = "      ";
+    }
+}
+        return self.results
+@foreach (var m in Model.ModuleMethods)
+{
+@EmptyLine
+@:    def @(m.Name)(self):
+@:        '''
+@:        Gets facts of the specified @(Model.ObjectName).
+@EmptyLine
+@:        :return: deserialized @(Model.ObjectName)instance state dictionary
+@:        '''
+@:        self.log("Checking if the @(Model.ObjectName) instance {0} is present".format(self.@(Model.ModuleResourceName)))
+@:        found = False
+@:        try:
+foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
+{
+@:@line
+}
+@:            found = True
+@:            self.log("Response : {0}".format(response))
+@:            self.log("@(Model.ObjectName) instance : {0} found".format(response.name))
+@:        except CloudError as e:
+@:            self.log('Did not find the @(Model.ModuleOperationNameUpper) instance.')
+@:        if found is True:
+@:            return response.as_dict()
+@EmptyLine
+@:        return False
+}
+@EmptyLine
+@EmptyLine
+def main():
+    AzureRM@(Model.ObjectName)Facts()
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,18 @@
+@using AutoRest.Python.vanilla.Templates
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Python
+@using AutoRest.Python.Model
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Model.CodeModelAnsibleMap>
+
+@foreach (var line in Model.ModuleTest)
+{
+@:@(line)
+}
+  register: output
+- name: Assert the resource instance is well created
+  assert:
+    that:
+      - output.changed
+      - output.state.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'

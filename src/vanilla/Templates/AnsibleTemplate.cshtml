@@ -1,0 +1,234 @@
+﻿@using AutoRest.Python.vanilla.Templates
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Python
+@using AutoRest.Python.Model
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Model.CodeModelAnsibleMap>
+#!/usr/bin/python
+#
+# Copyright (c) 2017 Zim Kalinowski, <zikalino@microsoft.com>
+#
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+@EmptyLine
+from __future__ import absolute_import, division, print_function
+__metaclass__ = type
+@EmptyLine
+@EmptyLine
+ANSIBLE_METADATA = {'metadata_version': '1.1',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+@EmptyLine
+@EmptyLine
+DOCUMENTATION = '''
+---
+module: @(Model.ModuleNameAlt)
+version_added: "2.5"
+short_description: Manage an @(Model.ObjectName).
+description:
+    - Create, update and delete an instance of @(Model.ObjectName).
+@EmptyLine
+options:
+@foreach (var line in Model.ModuleHelp)
+{
+@:@(line)
+}
+@EmptyLine
+extends_documentation_fragment:
+    - azure
+    - azure_tags
+@EmptyLine
+author:
+    - "Zim Kalinowski (@@zikalino)"
+@EmptyLine
+'''
+@EmptyLine
+EXAMPLES = '''
+@foreach (var line in Model.ModuleExamples)
+{
+    @:@(line)
+}
+'''
+@EmptyLine
+RETURN = '''
+state:
+    description: Current state of @(Model.ObjectName)
+    returned: always
+    type: dict
+'''
+@EmptyLine
+from ansible.module_utils.azure_rm_common import AzureRMModuleBase
+@EmptyLine
+try:
+    from msrestazure.azure_exceptions import CloudError
+    from msrestazure.azure_operation import AzureOperationPoller
+    from @(Model.MgmtClientImportPath) import @(Model.MgmtClientName)
+    from msrest.serialization import Model
+except ImportError:
+    # This is handled in azure_rm_common
+    pass 
+@EmptyLine
+@EmptyLine
+class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
+    """Configuration class for an Azure RM @(Model.ObjectName) resource"""
+@EmptyLine
+    def __init__(self):
+        self.module_arg_spec = dict(
+@foreach (var param in Model.ModuleOptions)
+{
+@:            @(param.NameAlt)=dict(
+@:                type='@(param.Type)',
+@:                required=@(param.Required)
+@:            ),
+}
+            state=dict(
+                type='str',
+                required=False,
+                default='present',
+                choices=['present', 'absent']
+            )
+        )
+@EmptyLine
+@foreach (var v in Model.ModuleOptionsUnflattened)
+{
+@:        self.@(v.NameAlt) = @(v.VariableValue)
+}
+@EmptyLine
+        self.results = dict(changed=False, state=dict())
+        self.mgmt_client = None
+        self.state = None
+@EmptyLine
+        super(AzureRM@(Model.ModuleOperationNameUpper), self).__init__(derived_arg_spec=self.module_arg_spec,
+                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_check_mode=True,
+                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=True)
+@EmptyLine
+    def exec_module(self, **kwargs):
+        """Main module execution method"""
+@EmptyLine
+        for key in list(self.module_arg_spec.keys()) + ['tags']:
+            if hasattr(self, key):
+                setattr(self, key, kwargs[key])
+@foreach (var o in Model.ModuleOptionsSecondLevel)
+{
+@:            elif key == "@(o.NameAlt)":
+@:                self.@(o.Disposition)["@(o.Name)"] = kwargs[key]
+}
+@EmptyLine
+        response = None
+        results = dict()
+        to_be_updated = False
+@EmptyLine
+        self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
+                                                    base_url=self._cloud_environment.endpoints.resource_manager)
+@EmptyLine
+        try:
+            resource_group = self.get_resource_group(self.@(Model.ModuleResourceGroupName))
+        except CloudError:
+            self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
+@EmptyLine
+        response = self.get_@(Model.Namespace)()
+@EmptyLine
+        if not response:
+            self.log("@(Model.ObjectName) instance doesn't exist")
+
+            if self.state == 'absent':
+                self.log("Nothing to delete")
+            else:
+                to_be_updated = True
+        else:
+            self.log("@(Model.ObjectName) instance already exists")
+
+            if self.state == 'absent':
+                self.delete_@(Model.Namespace)()
+                self.results['changed'] = True
+                self.log("@(Model.ObjectName) instance deleted")
+            elif self.state == 'present':
+                self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
+                to_be_updated = True
+@EmptyLine
+        if self.state == 'present':
+@EmptyLine
+            self.log("Need to Create / Update the @(Model.ObjectName) instance")
+@EmptyLine
+            if self.check_mode:
+                return self.results
+@EmptyLine
+            if to_be_updated:
+                self.results['state'] = self.create_update_@(Model.Namespace)()
+                self.results['changed'] = True
+            else:
+                self.results['state'] = response
+@EmptyLine
+            self.log("Creation / Update done")
+@EmptyLine
+        return self.results
+@EmptyLine
+    def create_update_@(Model.Namespace)(self):
+        '''
+        Creates or updates @(Model.ObjectName) with the specified configuration.
+@EmptyLine
+        :return: deserialized @(Model.ObjectName) instance state dictionary
+        '''
+        self.log("Creating / Updating the @(Model.ObjectName) instance {0}".format(self.@(Model.ModuleResourceName)))
+@EmptyLine
+        try:
+@foreach (var line in Model.ModuleGenerateApiCall("            ", "create_or_update"))
+{
+@:@line
+}
+            if isinstance(response, AzureOperationPoller):
+                response = self.get_poller_result(response)
+@EmptyLine
+        except CloudError as exc:
+            self.log('Error attempting to create the @(Model.ObjectName) instance.')
+            self.fail("Error creating the @(Model.ObjectName) instance: {0}".format(str(exc)))
+        return response.as_dict()
+@EmptyLine
+    def delete_@(Model.Namespace)(self):
+        '''
+        Deletes specified @(Model.ObjectName) instance in the specified subscription and resource group.
+@EmptyLine
+        :return: True
+        '''
+        self.log("Deleting the @(Model.ObjectName) instance {0}".format(self.@(Model.ModuleResourceName)))
+        try:
+@foreach (var line in Model.ModuleGenerateApiCall("            ", "delete"))
+{
+@:@line
+}
+        except CloudError as e:
+            self.log('Error attempting to delete the @(Model.ObjectName) instance.')
+            self.fail("Error deleting the @(Model.ObjectName) instance: {0}".format(str(e)))
+@EmptyLine
+        return True
+@EmptyLine
+    def get_@(Model.Namespace)(self):
+        '''
+        Gets the properties of the specified @(Model.ObjectName).
+@EmptyLine
+        :return: deserialized @(Model.ObjectName) instance state dictionary
+        '''
+        self.log("Checking if the @(Model.ObjectName) instance {0} is present".format(self.@(Model.ModuleResourceName)))
+        found = False
+        try:
+@foreach (var line in Model.ModuleGenerateApiCall("            ", "get"))
+{
+@:@line
+}
+            found = True
+            self.log("Response : {0}".format(response))
+            self.log("@(Model.ObjectName) instance : {0} found".format(response.name))
+        except CloudError as e:
+            self.log('Did not find the @(Model.ObjectName) instance.')
+        if found is True:
+            return response.as_dict()
+@EmptyLine
+        return False
+@EmptyLine
+@EmptyLine
+def main():
+    """Main execution"""
+    AzureRM@(Model.ModuleOperationNameUpper)()
+@EmptyLine
+if __name__ == '__main__':
+    main()
