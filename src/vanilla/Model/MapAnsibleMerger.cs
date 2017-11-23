@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     class MapAnsibleMerger
     {

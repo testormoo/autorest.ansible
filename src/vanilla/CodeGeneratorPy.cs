@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Python;
-using AutoRest.Python.Model;
-using AutoRest.Python.vanilla.Templates;
+using AutoRest.Ansible;
+using AutoRest.Ansible.Model;
+using AutoRest.Ansible.vanilla.Templates;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public class CodeGeneratorPy : CodeGenerator
     {

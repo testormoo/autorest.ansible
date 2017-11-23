@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class EnumTypePy : EnumType, IExtendedModelTypePy
     {

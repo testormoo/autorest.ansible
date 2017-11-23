@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
-namespace AutoRest.Python.Model {
+namespace AutoRest.Ansible.Model {
     public interface IExtendedModelTypePy {
         string TypeDocumentation {get;}
         string ReturnTypeDocumentation { get; }

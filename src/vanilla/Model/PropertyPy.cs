@@ -5,7 +5,7 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class PropertyPy : Property
     {

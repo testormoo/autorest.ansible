@@ -10,7 +10,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public class CodeNamerPy : CodeNamer
     {

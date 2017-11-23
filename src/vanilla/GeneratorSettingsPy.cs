@@ -5,7 +5,7 @@
 using AutoRest.Core.Extensibility;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public class GeneratorSettingsPy : IGeneratorSettings
     {

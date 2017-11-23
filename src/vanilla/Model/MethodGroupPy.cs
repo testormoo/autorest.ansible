@@ -9,7 +9,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class MethodGroupPy : MethodGroup
     {

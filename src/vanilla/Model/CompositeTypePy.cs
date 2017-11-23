@@ -11,7 +11,7 @@ using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class CompositeTypePy : CompositeType, IExtendedModelTypePy
     {

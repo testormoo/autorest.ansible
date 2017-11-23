@@ -11,7 +11,7 @@ using Microsoft.Perks.JsonRPC;
 
 using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public class Program : NewPlugin
     {
@@ -93,7 +93,7 @@ namespace AutoRest.Python
             }
 
             // process
-            var plugin = (IAnyPlugin)new AutoRest.Python.PluginPy();
+            var plugin = (IAnyPlugin)new AutoRest.Ansible.PluginPy();
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             
             using (plugin.Activate())

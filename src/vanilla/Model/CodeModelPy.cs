@@ -12,7 +12,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class CodeModelPy : CodeModel
     {

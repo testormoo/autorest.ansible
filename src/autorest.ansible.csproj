@@ -2,7 +2,7 @@
   <PropertyGroup><PowerShell># 2&gt;nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyName>autorest.python</AssemblyName>
+    <AssemblyName>autorest.ansible</AssemblyName>
     <PackageTags>autorest.extension</PackageTags>
     <VersionPrefix>1.0.0</VersionPrefix>
     
@@ -26,7 +26,7 @@
  
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>AutoRest.Python</RootNamespace>
+    <RootNamespace>AutoRest.Ansible</RootNamespace>
  
     <BaseOutputPath>$(MSBuildProjectDirectory)/bin</BaseOutputPath>
     <OutputPath>$(BaseOutputPath)</OutputPath>

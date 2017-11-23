@@ -11,7 +11,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public static class ClientModelExtensions
     {

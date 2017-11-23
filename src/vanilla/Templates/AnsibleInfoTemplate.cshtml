@@ -1,10 +1,10 @@
-﻿@using AutoRest.Python.vanilla.Templates
+﻿@using AutoRest.Ansible.vanilla.Templates
 @using System.Linq
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.Python
-@using AutoRest.Python.Model
-@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Model.CodeModelAnsibleMap>
+@using AutoRest.Ansible
+@using AutoRest.Ansible.Model
+@inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
 @foreach (var line in Model.GetInfo)
 {
 @:@(line)

@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class CodeModelAnsibleMap
     {

@@ -6,10 +6,10 @@ using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Python.Model;
+using AutoRest.Ansible.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public sealed class PluginPy : Plugin<GeneratorSettingsPy, TransformerPy, CodeGeneratorPy, CodeNamerPy, CodeModelPy>
     {

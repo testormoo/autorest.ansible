@@ -4,7 +4,7 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Python
+namespace AutoRest.Ansible
 {
     public abstract class PythonTemplate<T> : Template<T>
     {

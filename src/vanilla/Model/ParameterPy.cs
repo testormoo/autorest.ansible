@@ -7,7 +7,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Python.Model
+namespace AutoRest.Ansible.Model
 {
     public class ParameterPy : Parameter
     {

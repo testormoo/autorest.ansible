@@ -1,10 +1,10 @@
 {
   "name": "@microsoft.azure/autorest.python",
   "version": "2.0.0",
-  "description": "The Python extension for classic generators in AutoRest.",
+  "description": "The Ansible extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "dotnet src/bin/netcoreapp2.0/autorest.python.dll --server",
+    "start": "dotnet src/bin/netcoreapp2.0/autorest.ansible.dll --server",
     "test": "gulp test",
     "testci": "gulp testci",
     "build": "gulp build",
@@ -16,20 +16,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Azure/autorest.python"
+    "url": "https://github.com/zikalino/autorest.ansible"
   },
-  "readme": "https://github.com/Azure/autorest.python/readme.md",
+  "readme": "https://github.com/zikalino/autorest.ansible/readme.md",
   "keywords": [
     "autorest",
     "classic-generators",
-    "python"
+    "ansible"
   ],
   "author": "Microsoft Corporation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.python/blob/master/README.md",
+  "homepage": "https://github.com/zikalino/autorest.ansible/blob/master/README.md",
   "devDependencies": {
     "autorest": "^2.0.0",
     "coffee-script": "^1.11.1",
