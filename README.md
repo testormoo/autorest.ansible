@@ -26,6 +26,28 @@ Note that you have to specify location **autorest.ansible** repo, and the plugin
 
 Also note that **--tag** value comes from **readme.txt** file you can find in your curent directory.
 
+# How it works?
+
+Ansible generator works as follows:
+
+(1) Parses entire REST API definition, just like other autorest plugins
+
+(2) Generates Ansible Module Map which will be later used to generate ansible modules.
+
+(3) Merges newly generated map with old version (if exists in **templates** directory)
+
+(4) Generates Ansible modules and tests in a directory structure matching Ansible directory layout.
+
+(5) ALso generates **xxx.template.json** file and **xxx.merge.txt** file
+
+**xxx.template.json** is an updated (merged) version of new template generated in (2) merged with older version.
+You can copy **xxx.template.json** to **templates** directory in **autorest.ansible**.
+You can modify almost any values in this file to override values that were automatically generated from REST API.
+
+**xxx.merge.txt** file is a short merge report. It will tell you which fields in the template were overriden.
+
+
+
 # AutoRest extension configuration
 
 ``` yaml
