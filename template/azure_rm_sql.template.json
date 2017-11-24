@@ -329,7 +329,7 @@
           ]
         }
       ],
-      "TestPrerequisitesModule": "azure_rm_sql_server",
+      "TestPrerequisitesModule": "azure_rm_sql_servers",
       "AssertStateVariable": "status",
       "AssertStateExpectedValue": "Online",
       "ModuleOperationNameUpper": "Databases",
@@ -745,7 +745,7 @@
           ]
         }
       ],
-      "TestPrerequisitesModule": "azure_rm_sql_server",
+      "TestPrerequisitesModule": "azure_rm_sql_servers",
       "AssertStateVariable": "state",
       "AssertStateExpectedValue": "Ready",
       "ModuleOperationNameUpper": "ElasticPools",
@@ -4283,7 +4283,7 @@
           "VariableValue": "None",
           "Documentation": "The name of the server.",
           "DefaultValueSample": "\"{{ server_name }}\"",
-          "DefaultValueTest": "zimsserver",
+          "DefaultValueTest": "zims-server",
           "SubOptions": null,
           "RequiredCount": 0
         },

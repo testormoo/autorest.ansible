@@ -59,6 +59,17 @@ namespace AutoRest.Ansible.Model
             return (_selectedMethod < Map.Modules.Length);
         }
 
+        private bool SelectModuleByName(string name)
+        {
+            for (_selectedMethod = 0; _selectedMethod < Map.Modules.Length; _selectedMethod++)
+            {
+                if (Map.Modules[_selectedMethod].ModuleName == name)
+                    return true;
+            }
+
+            return false;
+        }
+
         private int _selectedMethod = 0;
 
         public ModuleOption[] ModuleOptions
@@ -127,48 +138,29 @@ namespace AutoRest.Ansible.Model
 
         public string[] ModuleTest
         {
-            get
+            get { return GetModuleTest(0); }
+        }
+
+        private string[] GetModuleTest(int level)
+        {
+            List<string> prePlaybook = new List<string>();
+            string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+
+            if ((prerequisites != null) && (prerequisites != ""))
             {
-                List<string> prePlaybook = new List<string>();
-                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
-
-                if ((prerequisites != null) && (prerequisites != ""))
+                int old = _selectedMethod;
+                if (SelectModuleByName(prerequisites))
                 {
-                    string oldMapPath = Path.Combine("template", prerequisites + "_test.yml");
-
-                    if (File.Exists(oldMapPath))
+                    if (level <= 1)
                     {
-                        using (var streamReader = new StreamReader(oldMapPath, Encoding.UTF8))
-                        {
-                            string text = streamReader.ReadToEnd();
-                            prePlaybook.AddRange(text.Split("\n"));
-                        }
+                        prePlaybook.AddRange(GetModuleTest(level + 1));
                     }
-                    //    int old = _selectedMethod;
-
-                    //    for (int _selectedMethod = 0; _selectedMethod < Map.Modules.Length; _selectedMethod++)
-                    //    {
-                    //        if (ModuleName == prerequisites)
-                    //        {
-                    //            prePlaybook.AddRange(ModuleTest);
-                    //            break;
-                    //        }
-                    //    }
-
-                    //    _selectedMethod = old;
                 }
-                // XXX-SORT-OUT
-                //if (ModuleCreateOrUpdateMethod != null)
-                //{
-                prePlaybook.AddRange(GetPlaybook("Create instance of", ModuleOptions, "", true));
-                //}
-                //else
-                //{
-                //    return new List<string>().ToArray();
-                //}
-
-                return prePlaybook.ToArray();
+                _selectedMethod = old;
             }
+            prePlaybook.AddRange(GetPlaybook("Create instance of", ModuleOptions, "", true));
+
+            return prePlaybook.ToArray();
         }
 
         public string MgmtClientImportPath
