@@ -1,54 +1,27 @@
 
-# Contributing
+# Prerequisites
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+To use this extenstion you have to install autorest. Just follow instructions here:
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+https://github.com/Azure/autorest
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+You also need Azure REST API specification, clone it from here:
 
-# AutoRest extension configuration
+https://github.com/Azure/azure-rest-api-specs
 
-``` yaml
-use-extension:
-  "@microsoft.azure/autorest.modeler": "2.1.22"
+and you need to clone this repo as well.
 
-pipeline:
-  python/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: python
-  python/commonmarker:
-    input: modeler
-    output-artifact: code-model-v1
-  python/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-  python/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-  python/generate:
-    plugin: python
-    input: cm/transform
-    output-artifact: source-file-python
-  python/transform:
-    input: generate
-    output-artifact: source-file-python
-    scope: scope-transform-string
-  python/emitter:
-    input: transform
-    scope: scope-python/emitter
 
-scope-python/emitter:
-  input-artifact: source-file-python
-  output-uri-expr: $key
+# How to use?
 
-output-artifact:
-- source-file-python
-```
+To generate ansibel modules, go to selected directory in REST API spec, for example:
+
+     cd ...\azure-rest-api-specs\specification\sql\resource-manager\
+
+and execute following command:
+
+     autorest --output-folder=[your output directory]\ --use=[your source directory]\autorest.ansible\ --python --tag=package-2017-03-preview
+
+Note that you have to specify location **autorest.ansible** repo, and the plugin should be already built here, either using **npm** or **Visual Studio**.
+
+Also note that **--tag** value comes from **readme.txt** file you can find in your curent directory.
