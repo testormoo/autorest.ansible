@@ -4360,7 +4360,7 @@
         },
         {
           "Name": "administrator_login",
-          "NameAlt": "administrator_login",
+          "NameAlt": "admin_username",
           "Disposition": "parameters",
           "Type": "str",
           "IsList": false,
@@ -4374,7 +4374,7 @@
         },
         {
           "Name": "administrator_login_password",
-          "NameAlt": "administrator_login_password",
+          "NameAlt": "admin_password",
           "Disposition": "parameters",
           "Type": "str",
           "IsList": false,
