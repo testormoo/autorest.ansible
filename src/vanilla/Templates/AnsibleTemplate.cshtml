@@ -24,9 +24,9 @@ DOCUMENTATION = '''
 ---
 module: @(Model.ModuleNameAlt)
 version_added: "2.5"
-short_description: Manage an @(Model.ObjectName).
+short_description: Manage @(Model.ObjectName) instance
 description:
-    - Create, update and delete an instance of @(Model.ObjectName).
+    - Create, update and delete instance of @(Model.ObjectName)
 @EmptyLine
 options:
 @foreach (var line in Model.ModuleHelp)
@@ -126,7 +126,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         except CloudError:
             self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
 @EmptyLine
-        response = self.get_@(Model.ObjectName.ToLower())()
+        response = self.get_@(Model.ObjectNamePythonized)()
 @EmptyLine
         if not response:
             self.log("@(Model.ObjectName) instance doesn't exist")
@@ -139,7 +139,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             self.log("@(Model.ObjectName) instance already exists")
 
             if self.state == 'absent':
-                self.delete_@(Model.ObjectName.ToLower())()
+                self.delete_@(Model.ObjectNamePythonized)()
                 self.results['changed'] = True
                 self.log("@(Model.ObjectName) instance deleted")
             elif self.state == 'present':
@@ -154,7 +154,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
                 return self.results
 @EmptyLine
             if to_be_updated:
-                self.results['state'] = self.create_update_@(Model.ObjectName.ToLower())()
+                self.results['state'] = self.create_update_@(Model.ObjectNamePythonized)()
                 self.results['changed'] = True
             else:
                 self.results['state'] = response
@@ -163,7 +163,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @EmptyLine
         return self.results
 @EmptyLine
-    def create_update_@(Model.ObjectName.ToLower())(self):
+    def create_update_@(Model.ObjectNamePythonized)(self):
         '''
         Creates or updates @(Model.ObjectName) with the specified configuration.
 @EmptyLine
@@ -184,7 +184,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             self.fail("Error creating the @(Model.ObjectName) instance: {0}".format(str(exc)))
         return response.as_dict()
 @EmptyLine
-    def delete_@(Model.ObjectName.ToLower())(self):
+    def delete_@(Model.ObjectNamePythonized)(self):
         '''
         Deletes specified @(Model.ObjectName) instance in the specified subscription and resource group.
 @EmptyLine
@@ -202,7 +202,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @EmptyLine
         return True
 @EmptyLine
-    def get_@(Model.ObjectName.ToLower())(self):
+    def get_@(Model.ObjectNamePythonized)(self):
         '''
         Gets the properties of the specified @(Model.ObjectName).
 @EmptyLine

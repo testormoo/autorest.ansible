@@ -370,6 +370,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string ObjectNamePythonized
+        {
+            get
+            {
+                return String.Join("", GetModuleMap(ModuleName).ObjectName.ToLower().Split(' '));
+            }
+        }
+
         public string Name
         {
             get

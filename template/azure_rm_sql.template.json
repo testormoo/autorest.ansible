@@ -4443,7 +4443,7 @@
       "AssertStateExpectedValue": "Ready",
       "ModuleOperationNameUpper": "Servers",
       "ModuleOperationName": "servers",
-      "ObjectName": "Server"
+      "ObjectName": "SQL Server"
     },
     {
       "ModuleName": "azure_rm_sql_servers_facts",
