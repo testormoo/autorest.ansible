@@ -525,7 +525,11 @@ namespace AutoRest.Ansible.Model
                     }
                 }
 
-                help.Add(padding + "    required: " + option.Required);
+                // write only if true
+                if (option.Required != "False")
+                {
+                    help.Add(padding + "    required: " + option.Required);
+                }
 
                 if (option.SubOptions != null && option.SubOptions.Length > 0)
                 {
