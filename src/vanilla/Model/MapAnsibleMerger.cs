@@ -239,6 +239,7 @@ namespace AutoRest.Ansible.Model
             m.NameAlt = o.NameAlt;
             m.SampleValue = o.SampleValue;
             m.SubFields = MergeResponseFieldLists(o.SubFields, n.SubFields);
+            m.Returned = (o.Returned != null) ? o.Returned : n.Returned;
 
             if (o.Description != n.Description)
                 _output.Add("Option '" + o.Name + "' Description - KEEPING OLD");
