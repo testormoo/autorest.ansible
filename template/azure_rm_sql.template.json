@@ -6193,12 +6193,12 @@
           "Description": "Resource ID.",
           "Type": "str",
           "Returned": "always",
-          "SampleValue": "id",
+          "SampleValue": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645",
           "SubFields": []
         },
         {
           "Name": "name",
-          "NameAlt": "name",
+          "NameAlt": "x",
           "Description": "Resource name.",
           "Type": "str",
           "Returned": "always",
@@ -6207,7 +6207,7 @@
         },
         {
           "Name": "type",
-          "NameAlt": "type",
+          "NameAlt": "x",
           "Description": "Resource type.",
           "Type": "str",
           "Returned": "always",
@@ -6216,7 +6216,7 @@
         },
         {
           "Name": "tags",
-          "NameAlt": "tags",
+          "NameAlt": "x",
           "Description": "Resource tags.",
           "Type": "complex",
           "Returned": "always",
@@ -6225,7 +6225,7 @@
         },
         {
           "Name": "location",
-          "NameAlt": "location",
+          "NameAlt": "x",
           "Description": "Resource location.",
           "Type": "str",
           "Returned": "always",
@@ -6234,7 +6234,7 @@
         },
         {
           "Name": "identity",
-          "NameAlt": "identity",
+          "NameAlt": "x",
           "Description": "The Azure Active Directory identity of the server.",
           "Type": "complex",
           "Returned": "always",
@@ -6271,7 +6271,7 @@
         },
         {
           "Name": "kind",
-          "NameAlt": "kind",
+          "NameAlt": "x",
           "Description": "Kind of sql server. This is metadata used for the Azure portal experience.",
           "Type": "str",
           "Returned": "always",
@@ -6280,7 +6280,7 @@
         },
         {
           "Name": "administrator_login",
-          "NameAlt": "administrator_login",
+          "NameAlt": "x",
           "Description": "Administrator username for the server. Once created it cannot be changed.",
           "Type": "str",
           "Returned": "always",
@@ -6289,7 +6289,7 @@
         },
         {
           "Name": "administrator_login_password",
-          "NameAlt": "administrator_login_password",
+          "NameAlt": "x",
           "Description": "The administrator login password (required for server creation).",
           "Type": "str",
           "Returned": "always",
@@ -6302,12 +6302,12 @@
           "Description": "The version of the server.",
           "Type": "str",
           "Returned": "always",
-          "SampleValue": "version",
+          "SampleValue": "12.0",
           "SubFields": []
         },
         {
           "Name": "state",
-          "NameAlt": "state",
+          "NameAlt": "x",
           "Description": "The state of the server.",
           "Type": "str",
           "Returned": "always",
@@ -6320,7 +6320,7 @@
           "Description": "The fully qualified domain name of the server.",
           "Type": "str",
           "Returned": "always",
-          "SampleValue": "fully_qualified_domain_name",
+          "SampleValue": "sqlcrudtest-4645.database.windows.net",
           "SubFields": []
         }
       ],
