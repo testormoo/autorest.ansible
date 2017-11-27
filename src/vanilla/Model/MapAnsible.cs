@@ -45,6 +45,27 @@ namespace AutoRest.Ansible.Model
         public int RequiredCount { get; set; }
     }
 
+    public class ModuleResponseField
+    {
+        public ModuleResponseField(string name, string type, string description, string sampleValue)
+        {
+            Name = name; NameAlt = name; Type = type;
+            SubFields = null; // if dictionary or list of dictionaries
+            Description = description;
+            SampleValue = sampleValue;
+        }
+
+        public string Name { get; set; }
+        public string NameAlt { get; set; }
+
+        public string Description { get; set; }
+        public string Type { get; set; }
+
+        public string Returned { get; set; }
+        public string SampleValue { get; set; }
+        public ModuleResponseField[] SubFields { get; set; }
+    }
+
     public class ModuleMethod
     {
         public string Name { get; set; }
@@ -59,7 +80,7 @@ namespace AutoRest.Ansible.Model
         public string ModuleNameAlt { get; set; }
         public ModuleOption[] Options { get; set; }
         public ModuleMethod[] Methods { get; set; }
-
+        public ModuleResponseField[] ResponseFields { get; set; }
         public string TestPrerequisitesModule { get; set; }
         public string AssertStateVariable { get; set; }
         public string AssertStateExpectedValue { get; set; }

@@ -190,10 +190,78 @@ namespace AutoRest.Ansible.Model
             return m;
         }
 
+        private ModuleResponseField[] MergeResponseFieldLists(ModuleResponseField[] o, ModuleResponseField[] n)
+        {
+            if ((o == null) && (n == null))
+                return null;
+
+            List<ModuleResponseField> m = new List<ModuleResponseField>();
+
+            if (o != null)
+            {
+                foreach (var oldOption in o)
+                {
+                    var newOption = (n != null) ? Array.Find(n, e => (e.Name == oldOption.Name)) : null;
+                    if (newOption != null)
+                    {
+                        m.Add(MergeResponseFields(oldOption, newOption));
+                    }
+                    else
+                    {
+                        m.Add(oldOption);
+                        _output.Add("Option '" + oldOption.Name + "' in old template only - KEEPING");
+                    }
+                }
+            }
+
+            if (n != null)
+            {
+                foreach (var newOption in n)
+                {
+                    var oldOption = (o != null) ? Array.Find(o, e => (e.Name == newOption.Name)) : null;
+                    if (oldOption == null)
+                    {
+                        m.Add(newOption);
+                        _output.Add("Option '" + newOption.Name + "' in new template only - ADDING");
+                    }
+                }
+            }
+
+            return m.ToArray();
+        }
+
+        private ModuleResponseField MergeResponseFields(ModuleResponseField o, ModuleResponseField n)
+        {
+            ModuleResponseField m = new ModuleResponseField(n.Name, n.Type, n.Description, n.SampleValue);
+
+            m.Description = o.Description;
+            m.NameAlt = o.NameAlt;
+            m.SampleValue = o.SampleValue;
+            m.SubFields = MergeResponseFieldLists(o.SubFields, n.SubFields);
+
+            if (o.Description != n.Description)
+                _output.Add("Option '" + o.Name + "' Description - KEEPING OLD");
+
+            if (o.NameAlt != n.NameAlt)
+                _output.Add("Option '" + o.Name + "' NameAlt - KEEPING OLD");
+
+            if (o.Type != n.Type)
+                _output.Add("Option '" + o.Name + "' Type - KEEPING OLD");
+
+            if (o.SampleValue != n.SampleValue)
+                _output.Add("Option '" + o.Name + "' SampleValue - KEEPING OLD");
+
+            if (o.Returned != n.Returned)
+                _output.Add("Option '" + o.Name + "' Returned - KEEPING OLD");
+
+            return m;
+        }
+
         private MapAnsible _old;
         private MapAnsible _new;
         private MapAnsible _merged;
 
         private List<string> _output;
+
     }
 }
