@@ -90,6 +90,7 @@ namespace AutoRest.Ansible.Model
             m.TestPrerequisitesModule = (o.TestPrerequisitesModule != null) ? o.TestPrerequisitesModule : n.TestPrerequisitesModule;
             m.AssertStateExpectedValue = o.AssertStateExpectedValue;
             m.Options = MergeOptionLists(o.Options, n.Options);
+            m.ResponseFields = MergeResponseFieldLists(o.ResponseFields, n.ResponseFields);
 
             // methods are not modifiable, so will always come from the new version
             m.Methods = n.Methods;

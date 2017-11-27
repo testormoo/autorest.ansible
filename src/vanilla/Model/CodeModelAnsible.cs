@@ -89,6 +89,9 @@ namespace AutoRest.Ansible.Model
                         method.Options = GetMethodOptionNames(ModuleCreateOrUpdateMethod.Name, false);
                         method.RequiredOptions = GetMethodOptionNames(ModuleCreateOrUpdateMethod.Name);
                         methods.Add(method);
+
+                        // XXX - make sure this should be here
+                        module.ResponseFields = CreateMethodResponseFields(method.Name);
                     }
 
                     if (ModuleDeleteMethod != null)
@@ -99,7 +102,6 @@ namespace AutoRest.Ansible.Model
                         method.RequiredOptions = GetMethodOptionNames(ModuleDeleteMethod.Name);
                         methods.Add(method);
                     }
-
                     module.Methods = methods.ToArray();
 
                     module.AssertStateVariable = AssertStateVariable;
@@ -228,6 +230,22 @@ namespace AutoRest.Ansible.Model
             return name;
         }
 
+        private ModuleResponseField[] CreateMethodResponseFields(string methodName)
+        {
+            var fields = new List<ModuleResponseField>();
+            var method = ModuleFindMethod(methodName);
+
+            if (method != null)
+            {
+                string responseModel = method.ReturnType.Body.ClassName;
+
+                var suboptions = GetModelFields(responseModel);
+                fields.AddRange(suboptions);
+            }
+
+            return fields.ToArray();
+        }
+
         private ModuleOption[] CreateMethodOptions(string methodName, bool flatten = false)
         {
             var option = new List<ModuleOption>();
@@ -314,6 +332,41 @@ namespace AutoRest.Ansible.Model
             }
 
             return options.ToArray();
+        }
+
+        private ModuleResponseField[] GetModelFields(string modelName)
+        {
+            CompositeTypePy model = GetModelTypeByName(modelName);
+            var fields = new List<ModuleResponseField>();
+
+            if (model != null)
+            {
+                foreach (var attr in model.ComposedProperties)
+                {
+                    string type = ModelTypeNameToYamlTypeName(attr.ModelType);
+                    string modelTypeName = attr.ModelTypeName;
+                    var field = new ModuleResponseField(attr.Name, type, attr.Documentation, attr.Name);
+                    field.Returned = "always";
+                    if (attr.ModelTypeName == "list")
+                    {
+                        string subtype = ModelTypeNameToYamlTypeName(attr.ModelType);
+                        //option.IsList = true;
+
+                        SequenceType list = attr.ModelType as SequenceType;
+
+                        modelTypeName = list.ElementType.Name;
+                    }
+                    else
+                    {
+                        modelTypeName = attr.ModelTypeName;
+                    }
+                    field.Description = attr.Documentation;
+                    field.SubFields = GetModelFields(modelTypeName);
+                    fields.Add(field);
+                }
+            }
+
+            return fields.ToArray();
         }
 
         private string[] GetMethodOptionNames(string methodName, bool required = true)
