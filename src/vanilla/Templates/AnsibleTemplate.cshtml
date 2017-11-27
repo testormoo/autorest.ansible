@@ -114,9 +114,8 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @:                self.@(o.Disposition)["@(o.Name)"] = kwargs[key]
 }
 @EmptyLine
-        response = None
+        old_response = None
         results = dict()
-        to_be_updated = False
 @EmptyLine
         self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
                                                     base_url=self._cloud_environment.endpoints.resource_manager)
@@ -126,15 +125,13 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         except CloudError:
             self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
 @EmptyLine
-        response = self.get_@(Model.ObjectNamePythonized)()
+        old_response = self.get_@(Model.ObjectNamePythonized)()
 @EmptyLine
-        if not response:
+        if not old_response:
             self.log("@(Model.ObjectName) instance doesn't exist")
 
             if self.state == 'absent':
-                self.log("Nothing to delete")
-            else:
-                to_be_updated = True
+                self.log("Old instance didn't exist")
         else:
             self.log("@(Model.ObjectName) instance already exists")
 
@@ -144,7 +141,6 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
                 self.log("@(Model.ObjectName) instance deleted")
             elif self.state == 'present':
                 self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
-                to_be_updated = True
 @EmptyLine
         if self.state == 'present':
 @EmptyLine
@@ -153,11 +149,11 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             if self.check_mode:
                 return self.results
 @EmptyLine
-            if to_be_updated:
-                self.results['state'] = self.create_update_@(Model.ObjectNamePythonized)()
+            self.results['state'] = self.create_update_@(Model.ObjectNamePythonized)()
+            if not old_response:
                 self.results['changed'] = True
             else:
-                self.results['state'] = response
+                self.results['changed'] = (cmp(old_response, self.results['state']) != 0)
 @EmptyLine
             self.log("Creation / Update done")
 @EmptyLine
