@@ -519,7 +519,7 @@ namespace AutoRest.Ansible.Model
                         string chunk = doc.Substring(currentIdx, chunkLength);
                         if (currentIdx == 0)
                         {
-                            help.Add(padding + "        - \"" + chunk);
+                            help.Add(padding + "        - \"" + chunk + ((docLength > chunkLength) ? "" : "\""));
                         }
                         else if (currentIdx + chunk.Length != docLength)
                         {
