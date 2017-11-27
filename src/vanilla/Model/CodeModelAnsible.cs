@@ -344,6 +344,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var attr in model.ComposedProperties)
                 {
                     string type = ModelTypeNameToYamlTypeName(attr.ModelType);
+                    type = (type == "dict") ? "complex" : type;
                     string modelTypeName = attr.ModelTypeName;
                     var field = new ModuleResponseField(attr.Name, type, attr.Documentation, attr.Name);
                     field.Returned = "always";

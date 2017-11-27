@@ -82,6 +82,15 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public ModuleResponseField[] ModuleResponseFields
+        {
+            get
+            {
+                var m = GetModuleMap(ModuleName);
+                return m.ResponseFields;
+            }
+        }
+
         public ModuleOption[] ModuleOptionsUnflattened
         {
             get
@@ -107,6 +116,14 @@ namespace AutoRest.Ansible.Model
             get
             {
                 return GetHelpFromOptions(ModuleOptions, "    ");
+            }
+        }
+
+        public string[] ModuleReturnResponseFields
+        {
+            get
+            {
+                return GetHelpFromResponseFields(ModuleResponseFields, "        ");
             }
         }
 
@@ -543,6 +560,66 @@ namespace AutoRest.Ansible.Model
                 {
                     help.Add(padding + "    suboptions:");
                     help.AddRange(GetHelpFromOptions(option.SubOptions, padding + "        "));
+                }
+            }
+
+            return help.ToArray();
+        }
+
+        private string[] GetHelpFromResponseFields(ModuleResponseField[] fields, string padding)
+        {
+            List<string> help = new List<string>();
+            foreach (var field in fields)
+            {
+                // setting nameAlt to empty or "x" will remove the field
+                if (field.NameAlt == "" || field.NameAlt.ToLower() == "x")
+                    continue;
+
+                string doc = NormalizeString(field.Description);
+                help.Add(padding + field.NameAlt + ":");
+                help.Add(padding + "    description:");
+                int indent = (padding + "        - ").Length;
+
+                if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n".ToCharArray()) == -1))
+                {
+                    help.Add(padding + "        - " + doc);
+                }
+                else
+                {
+                    doc = String.Join("\\n", doc.Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None));
+                    doc = String.Join("'", doc.Split(new[] { "\"" }, StringSplitOptions.None));
+                    int chunkLength = 160 - (indent + 4);
+                    int currentIdx = 0;
+                    int docLength = doc.Length;
+
+                    while (currentIdx < docLength)
+                    {
+                        if (currentIdx + chunkLength > docLength) chunkLength = docLength - currentIdx;
+                        string chunk = doc.Substring(currentIdx, chunkLength);
+                        if (currentIdx == 0)
+                        {
+                            help.Add(padding + "        - \"" + chunk + ((docLength > chunkLength) ? "" : "\""));
+                        }
+                        else if (currentIdx + chunk.Length != docLength)
+                        {
+                            help.Add(padding + "           " + chunk);
+                        }
+                        else
+                        {
+                            help.Add(padding + "           " + chunk + "\"");
+                        }
+                        currentIdx += chunkLength;
+                    }
+                }
+
+                help.Add(padding + "    returned: " + field.Returned);
+                help.Add(padding + "    type: " + field.Type);
+                help.Add(padding + "    sample: " + field.SampleValue);
+
+                if (field.SubFields != null && field.SubFields.Length > 0)
+                {
+                    help.Add(padding + "    suboptions:");
+                    help.AddRange(GetHelpFromResponseFields(field.SubFields, padding + "        "));
                 }
             }
 
