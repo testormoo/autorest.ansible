@@ -1,0 +1,1695 @@
+{
+  "Modules": [
+    {
+      "ModuleName": "azure_rm_mysql_servers",
+      "ModuleNameAlt": "azure_rm_mysql_servers",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "{{ resource_group }}",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "test-mysql-server",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "parameters",
+          "NameAlt": "parameters",
+          "Disposition": "dictionary",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "dict()",
+          "Documentation": "The required parameters for creating or updating a server.",
+          "DefaultValueSample": "\"{{ parameters }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "sku",
+          "NameAlt": "sku",
+          "Disposition": "parameters",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The SKU (pricing tier) of the server.",
+          "DefaultValueSample": "\"{{ sku }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [
+            {
+              "Name": "name",
+              "NameAlt": "name",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "The name of the sku, typically, a letter + Number code, e.g. P3.",
+              "DefaultValueSample": "\"{{ name }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "tier",
+              "NameAlt": "tier",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "The tier of the particular SKU, e.g. Basic. Possible values include: 'Basic', 'Standard'",
+              "DefaultValueSample": "\"{{ tier }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "capacity",
+              "NameAlt": "capacity",
+              "Disposition": "default",
+              "Type": "int",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "The scale up/out capacity, representing server's compute units.",
+              "DefaultValueSample": "\"{{ capacity }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "size",
+              "NameAlt": "size",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "The size code, to be interpreted by resource as appropriate.",
+              "DefaultValueSample": "\"{{ size }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "family",
+              "NameAlt": "family",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "The family of hardware.",
+              "DefaultValueSample": "\"{{ family }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            }
+          ],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "properties",
+          "NameAlt": "properties",
+          "Disposition": "parameters",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "Properties of the server.",
+          "DefaultValueSample": "\"{{ properties }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [
+            {
+              "Name": "storage_mb",
+              "NameAlt": "storage_mb",
+              "Disposition": "default",
+              "Type": "long",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "The maximum storage allowed for a server.",
+              "DefaultValueSample": "\"{{ storage_mb }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "version",
+              "NameAlt": "version",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "Server version. Possible values include: '5.6', '5.7'",
+              "DefaultValueSample": "\"{{ version }}\"",
+              "DefaultValueTest": "5.6",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "ssl_enforcement",
+              "NameAlt": "ssl_enforcement",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "False",
+              "VariableValue": "None",
+              "Documentation": "Enable ssl enforcement or not when connect to server. Possible values include: 'Enabled', 'Disabled'",
+              "DefaultValueSample": "\"{{ ssl_enforcement }}\"",
+              "DefaultValueTest": "",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "create_mode",
+              "NameAlt": "create_mode",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "True",
+              "VariableValue": "None",
+              "Documentation": "Constant filled by server.",
+              "DefaultValueSample": "\"{{ create_mode }}\"",
+              "DefaultValueTest": "Default",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "administrator_login",
+              "NameAlt": "admin_username",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "True",
+              "VariableValue": "None",
+              "Documentation": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+              "DefaultValueSample": "\"{{ administrator_login }}\"",
+              "DefaultValueTest": "zimxyz",
+              "SubOptions": [],
+              "RequiredCount": 0
+            },
+            {
+              "Name": "administrator_login_password",
+              "NameAlt": "admin_password",
+              "Disposition": "default",
+              "Type": "str",
+              "IsList": false,
+              "Required": "True",
+              "VariableValue": "None",
+              "Documentation": "The password of the administrator login.",
+              "DefaultValueSample": "\"{{ administrator_login_password }}\"",
+              "DefaultValueTest": "Testpasswordxyz12!",
+              "SubOptions": [],
+              "RequiredCount": 0
+            }
+          ],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "location",
+          "NameAlt": "location",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The location the resource resides in.",
+          "DefaultValueSample": "\"{{ location }}\"",
+          "DefaultValueTest": "westus",
+          "SubOptions": [],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "tags",
+          "NameAlt": "tags",
+          "Disposition": "parameters",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "Application-specific metadata in the form of key-value pairs.",
+          "DefaultValueSample": "\"{{ tags }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        },
+        {
+          "Name": "create_or_update",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "parameters"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "parameters"
+          ]
+        },
+        {
+          "Name": "delete",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        }
+      ],
+      "ResponseFields": [
+        {
+          "Name": "id",
+          "NameAlt": "id",
+          "Description": "Resource ID",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "id",
+          "SubFields": []
+        },
+        {
+          "Name": "name",
+          "NameAlt": "name",
+          "Description": "Resource name.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "name",
+          "SubFields": []
+        },
+        {
+          "Name": "type",
+          "NameAlt": "type",
+          "Description": "Resource type.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "type",
+          "SubFields": []
+        },
+        {
+          "Name": "location",
+          "NameAlt": "location",
+          "Description": "The location the resource resides in.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "location",
+          "SubFields": []
+        },
+        {
+          "Name": "tags",
+          "NameAlt": "tags",
+          "Description": "Application-specific metadata in the form of key-value pairs.",
+          "Type": "complex",
+          "Returned": "always",
+          "SampleValue": "tags",
+          "SubFields": []
+        },
+        {
+          "Name": "sku",
+          "NameAlt": "sku",
+          "Description": "The SKU (pricing tier) of the server.",
+          "Type": "complex",
+          "Returned": "always",
+          "SampleValue": "sku",
+          "SubFields": [
+            {
+              "Name": "name",
+              "NameAlt": "name",
+              "Description": "The name of the sku, typically, a letter + Number code, e.g. P3.",
+              "Type": "str",
+              "Returned": "always",
+              "SampleValue": "name",
+              "SubFields": []
+            },
+            {
+              "Name": "tier",
+              "NameAlt": "tier",
+              "Description": "The tier of the particular SKU, e.g. Basic. Possible values include: 'Basic', 'Standard'",
+              "Type": "str",
+              "Returned": "always",
+              "SampleValue": "tier",
+              "SubFields": []
+            },
+            {
+              "Name": "capacity",
+              "NameAlt": "capacity",
+              "Description": "The scale up/out capacity, representing server's compute units.",
+              "Type": "int",
+              "Returned": "always",
+              "SampleValue": "capacity",
+              "SubFields": []
+            },
+            {
+              "Name": "size",
+              "NameAlt": "size",
+              "Description": "The size code, to be interpreted by resource as appropriate.",
+              "Type": "str",
+              "Returned": "always",
+              "SampleValue": "size",
+              "SubFields": []
+            },
+            {
+              "Name": "family",
+              "NameAlt": "family",
+              "Description": "The family of hardware.",
+              "Type": "str",
+              "Returned": "always",
+              "SampleValue": "family",
+              "SubFields": []
+            }
+          ]
+        },
+        {
+          "Name": "administrator_login",
+          "NameAlt": "administrator_login",
+          "Description": "The administrator's login name of a server. Can only be specified when the server is being created (and is required for creation).",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "administrator_login",
+          "SubFields": []
+        },
+        {
+          "Name": "storage_mb",
+          "NameAlt": "storage_mb",
+          "Description": "The maximum storage allowed for a server.",
+          "Type": "long",
+          "Returned": "always",
+          "SampleValue": "storage_mb",
+          "SubFields": []
+        },
+        {
+          "Name": "version",
+          "NameAlt": "version",
+          "Description": "Server version. Possible values include: '5.6', '5.7'",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "version",
+          "SubFields": []
+        },
+        {
+          "Name": "ssl_enforcement",
+          "NameAlt": "ssl_enforcement",
+          "Description": "Enable ssl enforcement or not when connect to server. Possible values include: 'Enabled', 'Disabled'",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "ssl_enforcement",
+          "SubFields": []
+        },
+        {
+          "Name": "user_visible_state",
+          "NameAlt": "user_visible_state",
+          "Description": "A state of a server that is visible to user. Possible values include: 'Ready', 'Dropping', 'Disabled'",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "user_visible_state",
+          "SubFields": []
+        },
+        {
+          "Name": "fully_qualified_domain_name",
+          "NameAlt": "fully_qualified_domain_name",
+          "Description": "The fully qualified domain name of a server.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "fully_qualified_domain_name",
+          "SubFields": []
+        }
+      ],
+      "TestPrerequisitesModule": "",
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "Servers",
+      "ModuleOperationName": "servers",
+      "ObjectName": "Servers"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_servers_facts",
+      "ModuleNameAlt": "azure_rm_mysql_servers_facts",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        },
+        {
+          "Name": "list_by_resource_group",
+          "Options": [
+            "resource_group_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name"
+          ]
+        }
+      ],
+      "ResponseFields": null,
+      "TestPrerequisitesModule": null,
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "Servers",
+      "ModuleOperationName": "servers",
+      "ObjectName": "Servers"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_firewallrules",
+      "ModuleNameAlt": "azure_rm_mysql_firewallrules",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "firewall_rule_name",
+          "NameAlt": "firewall_rule_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server firewall rule.",
+          "DefaultValueSample": "\"{{ firewall_rule_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "parameters",
+          "NameAlt": "parameters",
+          "Disposition": "dictionary",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "dict()",
+          "Documentation": "The required parameters for creating or updating a firewall rule.",
+          "DefaultValueSample": "\"{{ parameters }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "start_ip_address",
+          "NameAlt": "start_ip_address",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The start IP address of the server firewall rule. Must be IPv4 format.",
+          "DefaultValueSample": "\"{{ start_ip_address }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "end_ip_address",
+          "NameAlt": "end_ip_address",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The end IP address of the server firewall rule. Must be IPv4 format.",
+          "DefaultValueSample": "\"{{ end_ip_address }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name"
+          ]
+        },
+        {
+          "Name": "create_or_update",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name",
+            "parameters"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name",
+            "parameters"
+          ]
+        },
+        {
+          "Name": "delete",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name"
+          ]
+        }
+      ],
+      "ResponseFields": [
+        {
+          "Name": "id",
+          "NameAlt": "id",
+          "Description": "Resource ID",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "id",
+          "SubFields": []
+        },
+        {
+          "Name": "name",
+          "NameAlt": "name",
+          "Description": "Resource name.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "name",
+          "SubFields": []
+        },
+        {
+          "Name": "type",
+          "NameAlt": "type",
+          "Description": "Resource type.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "type",
+          "SubFields": []
+        },
+        {
+          "Name": "start_ip_address",
+          "NameAlt": "start_ip_address",
+          "Description": "The start IP address of the server firewall rule. Must be IPv4 format.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "start_ip_address",
+          "SubFields": []
+        },
+        {
+          "Name": "end_ip_address",
+          "NameAlt": "end_ip_address",
+          "Description": "The end IP address of the server firewall rule. Must be IPv4 format.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "end_ip_address",
+          "SubFields": []
+        }
+      ],
+      "TestPrerequisitesModule": "",
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "FirewallRules",
+      "ModuleOperationName": "firewall_rules",
+      "ObjectName": "FirewallRules"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_firewallrules_facts",
+      "ModuleNameAlt": "azure_rm_mysql_firewallrules_facts",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "firewall_rule_name",
+          "NameAlt": "firewall_rule_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The name of the server firewall rule.",
+          "DefaultValueSample": "\"{{ firewall_rule_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "firewall_rule_name"
+          ]
+        },
+        {
+          "Name": "list_by_server",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        }
+      ],
+      "ResponseFields": null,
+      "TestPrerequisitesModule": null,
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "FirewallRules",
+      "ModuleOperationName": "firewall_rules",
+      "ObjectName": "FirewallRules"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_virtualnetworkrules",
+      "ModuleNameAlt": "azure_rm_mysql_virtualnetworkrules",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "virtual_network_rule_name",
+          "NameAlt": "virtual_network_rule_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the virtual network rule.",
+          "DefaultValueSample": "\"{{ virtual_network_rule_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "parameters",
+          "NameAlt": "parameters",
+          "Disposition": "dictionary",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "dict()",
+          "Documentation": "The requested virtual Network Rule Resource state.",
+          "DefaultValueSample": "\"{{ parameters }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "virtual_network_subnet_id",
+          "NameAlt": "virtual_network_subnet_id",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The ARM resource id of the virtual network subnet.",
+          "DefaultValueSample": "\"{{ virtual_network_subnet_id }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "ignore_missing_vnet_service_endpoint",
+          "NameAlt": "ignore_missing_vnet_service_endpoint",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "Create firewall rule before the virtual network has vnet service endpoint enabled.",
+          "DefaultValueSample": "\"{{ ignore_missing_vnet_service_endpoint }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name"
+          ]
+        },
+        {
+          "Name": "create_or_update",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name",
+            "parameters"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name",
+            "parameters"
+          ]
+        },
+        {
+          "Name": "delete",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name"
+          ]
+        }
+      ],
+      "ResponseFields": [
+        {
+          "Name": "id",
+          "NameAlt": "id",
+          "Description": "Resource ID",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "id",
+          "SubFields": []
+        },
+        {
+          "Name": "name",
+          "NameAlt": "name",
+          "Description": "Resource name.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "name",
+          "SubFields": []
+        },
+        {
+          "Name": "type",
+          "NameAlt": "type",
+          "Description": "Resource type.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "type",
+          "SubFields": []
+        },
+        {
+          "Name": "virtual_network_subnet_id",
+          "NameAlt": "virtual_network_subnet_id",
+          "Description": "The ARM resource id of the virtual network subnet.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "virtual_network_subnet_id",
+          "SubFields": []
+        },
+        {
+          "Name": "ignore_missing_vnet_service_endpoint",
+          "NameAlt": "ignore_missing_vnet_service_endpoint",
+          "Description": "Create firewall rule before the virtual network has vnet service endpoint enabled.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "ignore_missing_vnet_service_endpoint",
+          "SubFields": []
+        },
+        {
+          "Name": "state",
+          "NameAlt": "state",
+          "Description": "Virtual Network Rule State. Possible values include: 'Initializing', 'InProgress', 'Ready', 'Deleting', 'Unknown'",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "state",
+          "SubFields": []
+        }
+      ],
+      "TestPrerequisitesModule": "",
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "VirtualNetworkRules",
+      "ModuleOperationName": "virtual_network_rules",
+      "ObjectName": "VirtualNetworkRules"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_virtualnetworkrules_facts",
+      "ModuleNameAlt": "azure_rm_mysql_virtualnetworkrules_facts",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "virtual_network_rule_name",
+          "NameAlt": "virtual_network_rule_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The name of the virtual network rule.",
+          "DefaultValueSample": "\"{{ virtual_network_rule_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "virtual_network_rule_name"
+          ]
+        },
+        {
+          "Name": "list_by_server",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        }
+      ],
+      "ResponseFields": null,
+      "TestPrerequisitesModule": null,
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "VirtualNetworkRules",
+      "ModuleOperationName": "virtual_network_rules",
+      "ObjectName": "VirtualNetworkRules"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_databases",
+      "ModuleNameAlt": "azure_rm_mysql_databases",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "database_name",
+          "NameAlt": "database_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the database.",
+          "DefaultValueSample": "\"{{ database_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "parameters",
+          "NameAlt": "parameters",
+          "Disposition": "dictionary",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "dict()",
+          "Documentation": "The required parameters for creating or updating a database.",
+          "DefaultValueSample": "\"{{ parameters }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "charset",
+          "NameAlt": "charset",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The charset of the database.",
+          "DefaultValueSample": "\"{{ charset }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "collation",
+          "NameAlt": "collation",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The collation of the database.",
+          "DefaultValueSample": "\"{{ collation }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "database_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "database_name"
+          ]
+        },
+        {
+          "Name": "create_or_update",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "database_name",
+            "parameters"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "database_name",
+            "parameters"
+          ]
+        },
+        {
+          "Name": "delete",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "database_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "database_name"
+          ]
+        }
+      ],
+      "ResponseFields": [
+        {
+          "Name": "id",
+          "NameAlt": "id",
+          "Description": "Resource ID",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "id",
+          "SubFields": []
+        },
+        {
+          "Name": "name",
+          "NameAlt": "name",
+          "Description": "Resource name.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "name",
+          "SubFields": []
+        },
+        {
+          "Name": "type",
+          "NameAlt": "type",
+          "Description": "Resource type.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "type",
+          "SubFields": []
+        },
+        {
+          "Name": "charset",
+          "NameAlt": "charset",
+          "Description": "The charset of the database.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "charset",
+          "SubFields": []
+        },
+        {
+          "Name": "collation",
+          "NameAlt": "collation",
+          "Description": "The collation of the database.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "collation",
+          "SubFields": []
+        }
+      ],
+      "TestPrerequisitesModule": "",
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "Databases",
+      "ModuleOperationName": "databases",
+      "ObjectName": "Databases"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_databases_facts",
+      "ModuleNameAlt": "azure_rm_mysql_databases_facts",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "database_name",
+          "NameAlt": "database_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The name of the database.",
+          "DefaultValueSample": "\"{{ database_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "database_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "database_name"
+          ]
+        },
+        {
+          "Name": "list_by_server",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        }
+      ],
+      "ResponseFields": null,
+      "TestPrerequisitesModule": null,
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "Databases",
+      "ModuleOperationName": "databases",
+      "ObjectName": "Databases"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_configurations",
+      "ModuleNameAlt": "azure_rm_mysql_configurations",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "configuration_name",
+          "NameAlt": "configuration_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server configuration.",
+          "DefaultValueSample": "\"{{ configuration_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "parameters",
+          "NameAlt": "parameters",
+          "Disposition": "dictionary",
+          "Type": "dict",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "dict()",
+          "Documentation": "The required parameters for updating a server configuration.",
+          "DefaultValueSample": "\"{{ parameters }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 0
+        },
+        {
+          "Name": "value",
+          "NameAlt": "value",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "Value of the configuration.",
+          "DefaultValueSample": "\"{{ value }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        },
+        {
+          "Name": "source",
+          "NameAlt": "source",
+          "Disposition": "parameters",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "Source of the configuration.",
+          "DefaultValueSample": "\"{{ source }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": [],
+          "RequiredCount": 0
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "configuration_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "configuration_name"
+          ]
+        },
+        {
+          "Name": "create_or_update",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "configuration_name",
+            "parameters"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "configuration_name",
+            "parameters"
+          ]
+        }
+      ],
+      "ResponseFields": [
+        {
+          "Name": "id",
+          "NameAlt": "id",
+          "Description": "Resource ID",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "id",
+          "SubFields": []
+        },
+        {
+          "Name": "name",
+          "NameAlt": "name",
+          "Description": "Resource name.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "name",
+          "SubFields": []
+        },
+        {
+          "Name": "type",
+          "NameAlt": "type",
+          "Description": "Resource type.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "type",
+          "SubFields": []
+        },
+        {
+          "Name": "value",
+          "NameAlt": "value",
+          "Description": "Value of the configuration.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "value",
+          "SubFields": []
+        },
+        {
+          "Name": "description",
+          "NameAlt": "description",
+          "Description": "Description of the configuration.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "description",
+          "SubFields": []
+        },
+        {
+          "Name": "default_value",
+          "NameAlt": "default_value",
+          "Description": "Default value of the configuration.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "default_value",
+          "SubFields": []
+        },
+        {
+          "Name": "data_type",
+          "NameAlt": "data_type",
+          "Description": "Data type of the configuration.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "data_type",
+          "SubFields": []
+        },
+        {
+          "Name": "allowed_values",
+          "NameAlt": "allowed_values",
+          "Description": "Allowed values of the configuration.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "allowed_values",
+          "SubFields": []
+        },
+        {
+          "Name": "source",
+          "NameAlt": "source",
+          "Description": "Source of the configuration.",
+          "Type": "str",
+          "Returned": "always",
+          "SampleValue": "source",
+          "SubFields": []
+        }
+      ],
+      "TestPrerequisitesModule": "",
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "Configurations",
+      "ModuleOperationName": "configurations",
+      "ObjectName": "Configurations"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_configurations_facts",
+      "ModuleNameAlt": "azure_rm_mysql_configurations_facts",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 2
+        },
+        {
+          "Name": "configuration_name",
+          "NameAlt": "configuration_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "False",
+          "VariableValue": "None",
+          "Documentation": "The name of the server configuration.",
+          "DefaultValueSample": "\"{{ configuration_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "get",
+          "Options": [
+            "resource_group_name",
+            "server_name",
+            "configuration_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name",
+            "configuration_name"
+          ]
+        },
+        {
+          "Name": "list_by_server",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        }
+      ],
+      "ResponseFields": null,
+      "TestPrerequisitesModule": null,
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "Configurations",
+      "ModuleOperationName": "configurations",
+      "ObjectName": "Configurations"
+    },
+    {
+      "ModuleName": "azure_rm_mysql_logfiles_facts",
+      "ModuleNameAlt": "azure_rm_mysql_logfiles_facts",
+      "Options": [
+        {
+          "Name": "resource_group_name",
+          "NameAlt": "resource_group_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+          "DefaultValueSample": "\"{{ resource_group_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        },
+        {
+          "Name": "server_name",
+          "NameAlt": "server_name",
+          "Disposition": "default",
+          "Type": "str",
+          "IsList": false,
+          "Required": "True",
+          "VariableValue": "None",
+          "Documentation": "The name of the server.",
+          "DefaultValueSample": "\"{{ server_name }}\"",
+          "DefaultValueTest": "",
+          "SubOptions": null,
+          "RequiredCount": 1
+        }
+      ],
+      "Methods": [
+        {
+          "Name": "list_by_server",
+          "Options": [
+            "resource_group_name",
+            "server_name"
+          ],
+          "RequiredOptions": [
+            "resource_group_name",
+            "server_name"
+          ]
+        }
+      ],
+      "ResponseFields": null,
+      "TestPrerequisitesModule": null,
+      "AssertStateVariable": "state",
+      "AssertStateExpectedValue": "Ready",
+      "ModuleOperationNameUpper": "LogFiles",
+      "ModuleOperationName": "log_files",
+      "ObjectName": "LogFiles"
+    }
+  ],
+  "Namespace": "mysql",
+  "NamespaceUpper": "Mysql",
+  "Name": "MySQLManagementClient",
+  "Operations": [
+    "Servers[ create_or_update update delete get list_by_resource_group list MAIN FACTS ]",
+    "FirewallRules[ create_or_update delete get list_by_server MAIN FACTS ]",
+    "VirtualNetworkRules[ get create_or_update delete list_by_server MAIN FACTS ]",
+    "Databases[ create_or_update delete get list_by_server MAIN FACTS ]",
+    "Configurations[ create_or_update get list_by_server MAIN FACTS ]",
+    "LogFiles[ list_by_server FACTS ]",
+    "PerformanceTiers[ list ]",
+    "LocationBasedPerformanceTier[ list ]",
+    "CheckNameAvailability[ execute ]",
+    "Operations[ list ]"
+  ]
+}

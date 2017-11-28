@@ -188,7 +188,7 @@ namespace AutoRest.Ansible.Model
                 switch (Name)
                 {
                     case "SqlManagementClient": return "azure.mgmt.sql";
-                    case "AzureSQLDatabase": return "azure.mgmt.sql";
+                    case "MySQLManagementClient": return "azure.mgmt.rdbms.mysql";
                     default: return "azure.mgmt." + Namespace;
                 }
             }
@@ -198,13 +198,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                // this is fixed at the memoment, let's see how we can get it dynamically
-                switch (Name)
-                {
-                    case "SqlManagementClient": return "SqlManagementClient";
-                    case "AzureSQLDatabase": return "SqlManagementClient";
-                    default: return Namespace;
-                }
+                return Name;
             }
         }
 

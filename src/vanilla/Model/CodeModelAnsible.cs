@@ -299,6 +299,10 @@ namespace AutoRest.Ansible.Model
 
         private ModuleOption[] GetModelOptions(string modelName)
         {
+            // [ZKK] this is a very bad hack for SQL Server
+            if (modelName == "ServerPropertiesForCreate")
+                modelName = "ServerPropertiesForDefaultCreate";
+
             CompositeTypePy model = GetModelTypeByName(modelName);
             var options = new List<ModuleOption>();
 
