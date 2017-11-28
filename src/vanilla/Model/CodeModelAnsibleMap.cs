@@ -560,6 +560,37 @@ namespace AutoRest.Ansible.Model
             return help.ToArray();
         }
 
+        public string[] DeleteResponseFieldStatements
+        {
+            get
+            {
+                return GetExcludedResponseFieldDeleteStatements(ModuleResponseFields, "self.results['state']");
+            }
+        }
+
+        private string[] GetExcludedResponseFieldDeleteStatements(ModuleResponseField[] fields, string responseDict)
+        {
+            List<string> statements = new List<string>();
+
+            foreach (var field in fields)
+            {
+                if (field.NameAlt == "" || field.NameAlt.ToLower() == "x")
+                {
+                    string statement = responseDict + ".pop('" + field.Name + "', None)";
+                    statements.Add(statement);
+                }
+                else
+                {
+                    if (field.SubFields != null)
+                    {
+                        statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
+                    }
+                }
+            }
+
+            return statements.ToArray();
+        }
+
         private string[] GetHelpFromResponseFields(ModuleResponseField[] fields, string padding)
         {
             List<string> help = new List<string>();

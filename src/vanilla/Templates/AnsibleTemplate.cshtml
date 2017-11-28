@@ -160,6 +160,19 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             else:
                 self.results['changed'] = (cmp(old_response, self.results['state']) != 0)
 @EmptyLine
+@{
+    var stmts = Model.DeleteResponseFieldStatements;
+
+    if (stmts.Length > 0)
+    {
+
+@:            # remove unnecessary fields from return state
+        foreach (var s in stmts)
+        {
+@:            @(s)
+        }
+    }
+}
             self.log("Creation / Update done")
 @EmptyLine
         return self.results
