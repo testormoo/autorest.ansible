@@ -153,12 +153,22 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] ModuleTest
+        public string[] ModuleTestCreate
         {
-            get { return GetModuleTest(0); }
+            get { return GetModuleTest(0, "Create instance of", ""); }
         }
 
-        private string[] GetModuleTest(int level)
+        public string[] ModuleTestUpdate
+        {
+            get { return GetModuleTest(0, "Update instance of", ""); }
+        }
+
+        public string[] ModuleTestDelete
+        {
+            get { return GetModuleTest(0, "Delete instance of", "delete"); }
+        }
+
+        private string[] GetModuleTest(int level, string testType, string methodType)
         {
             List<string> prePlaybook = new List<string>();
             string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
@@ -170,12 +180,12 @@ namespace AutoRest.Ansible.Model
                 {
                     if (level <= 1)
                     {
-                        prePlaybook.AddRange(GetModuleTest(level + 1));
+                        prePlaybook.AddRange(GetModuleTest(level + 1, "", ""));
                     }
                 }
                 _selectedMethod = old;
             }
-            prePlaybook.AddRange(GetPlaybook("Create instance of", ModuleOptions, "", true));
+            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true));
 
             return prePlaybook.ToArray();
         }
@@ -622,7 +632,7 @@ namespace AutoRest.Ansible.Model
 
                         if (subStatements.Length > 0)
                         {
-                            statements.Add("if " + dictPrefix + ".has_key('" + option.NameAlt + "'):");
+                            statements.Add("if " + dictPrefix + ".get('" + option.NameAlt + "', None) is not None:");
                             statements.AddRange(subStatements);
                         }
                     }

@@ -6,7 +6,7 @@
 @using AutoRest.Ansible.Model
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
 
-@foreach (var line in Model.ModuleTest)
+@foreach (var line in Model.ModuleTestCreate)
 {
 @:@(line)
 }
@@ -16,8 +16,8 @@
     that:
       - output.changed
       - output.state.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
-
-@foreach (var line in Model.ModuleTest)
+@EmptyLine
+@foreach (var line in Model.ModuleTestUpdate)
 {
 @:@(line)
 }
@@ -27,3 +27,14 @@
     that:
       - output.changed == false
       - output.state.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+@EmptyLine
+@foreach (var line in Model.ModuleTestDelete)
+{
+@:@(line)
+}
+    state: absent
+  register: output
+- name: Assert the state has changed
+  assert:
+    that:
+      - output.changed
