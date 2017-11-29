@@ -16,3 +16,14 @@
     that:
       - output.changed
       - output.state.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+
+@foreach (var line in Model.ModuleTest)
+{
+@:@(line)
+}
+  register: output
+- name: Assert the state has not changed
+  assert:
+    that:
+      - output.changed == false
+      - output.state.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
