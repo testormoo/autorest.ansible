@@ -43,10 +43,10 @@ namespace AutoRest.Ansible.Model
             _merged.NamespaceUpper = _new.NamespaceUpper;
             _merged.Operations = _new.Operations;
 
-            _merged.Modules = MergeModuleLists(_old.Modules, _new.Modules);
+            _merged.Modules = MergeModuleLists(_old.Modules, _new.Modules, "");
         }
 
-        private MapAnsibleModule[] MergeModuleLists(MapAnsibleModule[] o, MapAnsibleModule[] n)
+        private MapAnsibleModule[] MergeModuleLists(MapAnsibleModule[] o, MapAnsibleModule[] n, string prefix)
         {
             List<MapAnsibleModule> m = new List<MapAnsibleModule>();
 
@@ -55,12 +55,12 @@ namespace AutoRest.Ansible.Model
                 var newModule = Array.Find(n, e => (e.ModuleName == oldModule.ModuleName));
                 if (newModule != null)
                 {
-                    m.Add(MergeModules(oldModule, newModule));
+                    m.Add(MergeModules(oldModule, newModule, prefix + "Modules[" + oldModule.ModuleName + "]"));
                 }
                 else
                 {
-                    m.Add(oldModule);
-                    _output.Add("Module '" + oldModule.ModuleName + "' in old template only - KEEPING");
+                    //m.Add(oldModule);
+                    _output.Add("# missing module '" + oldModule.ModuleName + "'");
                 }
             }
 
@@ -71,13 +71,14 @@ namespace AutoRest.Ansible.Model
                 {
                     m.Add(newModule);
                     _output.Add("Module '" + newModule.ModuleName + "' in new template only - ADDING");
+                    _output.Add("# new module '" + oldModule.ModuleName + "'");
                 }
             }
 
             return m.ToArray();
         }
 
-        private MapAnsibleModule MergeModules(MapAnsibleModule o, MapAnsibleModule n)
+        private MapAnsibleModule MergeModules(MapAnsibleModule o, MapAnsibleModule n, string prefix)
         {
             MapAnsibleModule m = new MapAnsibleModule();
 
@@ -89,27 +90,27 @@ namespace AutoRest.Ansible.Model
             m.AssertStateVariable = o.AssertStateVariable;
             m.TestPrerequisitesModule = (o.TestPrerequisitesModule != null) ? o.TestPrerequisitesModule : n.TestPrerequisitesModule;
             m.AssertStateExpectedValue = o.AssertStateExpectedValue;
-            m.Options = MergeOptionLists(o.Options, n.Options);
+            m.Options = MergeOptionLists(o.Options, n.Options, prefix + ":Options");
             m.ResponseFields = MergeResponseFieldLists(o.ResponseFields, n.ResponseFields);
 
             // methods are not modifiable, so will always come from the new version
             m.Methods = n.Methods;
 
             if (o.ModuleNameAlt != n.ModuleNameAlt)
-                _output.Add("Option '" + o.ModuleName + "' ModuleNameAlt - KEEPING OLD");
+                _output.Add(prefix + ":ModuleNameAlt > " + n.ModuleNameAlt);
 
             if (o.ModuleOperationName != n.ModuleOperationName)
-                _output.Add("Option '" + o.ModuleName + "' ModuleOperationName - KEEPING OLD");
+                _output.Add(prefix + ":ModuleOperationName > " + o.ModuleOperationName);
 
             if (o.AssertStateVariable != n.AssertStateVariable)
-                _output.Add("Option '" + o.ModuleName + "' AssertStateVariable - KEEPING OLD");
+                _output.Add(prefix + ":AssertStateVariable > " + o.AssertStateVariable);
 
             if (o.AssertStateExpectedValue != n.AssertStateExpectedValue)
-                _output.Add("Option '" + o.ModuleName + "' AssertStateExpectedValue - KEEPING OLD");
+                _output.Add(prefix + ":AssertStateExpectedValue > " + o.AssertStateExpectedValue);
             return m;
         }
 
-        private ModuleOption[] MergeOptionLists(ModuleOption[] o, ModuleOption[] n)
+        private ModuleOption[] MergeOptionLists(ModuleOption[] o, ModuleOption[] n, string prefix)
         {
             if ((o == null) && (n == null))
                 return null;
@@ -123,12 +124,12 @@ namespace AutoRest.Ansible.Model
                     var newOption = (n != null) ? Array.Find(n, e => (e.Name == oldOption.Name)) : null;
                     if (newOption != null)
                     {
-                        m.Add(MergeOptions(oldOption, newOption));
+                        m.Add(MergeOptions(oldOption, newOption, prefix + "[" + newOption.Name + "]"));
                     }
                     else
                     {
                         m.Add(oldOption);
-                        _output.Add("Option '" + oldOption.Name + "' in old template only - KEEPING");
+                        //_output.Add("Option '" + oldOption.Name + "' in old template only - KEEPING");
                     }
                 }
             }
@@ -141,7 +142,7 @@ namespace AutoRest.Ansible.Model
                     if (oldOption == null)
                     {
                         m.Add(newOption);
-                        _output.Add("Option '" + newOption.Name + "' in new template only - ADDING");
+                        //_output.Add("Option '" + newOption.Name + "' in new template only - ADDING");
                     }
                 }
             }
@@ -149,7 +150,7 @@ namespace AutoRest.Ansible.Model
             return m.ToArray();
         }
 
-        private ModuleOption MergeOptions(ModuleOption o, ModuleOption n)
+        private ModuleOption MergeOptions(ModuleOption o, ModuleOption n, string prefix)
         {
             ModuleOption m = new ModuleOption(n.Name, n.Type, o.Required, o.VariableValue);
 
@@ -159,34 +160,34 @@ namespace AutoRest.Ansible.Model
             m.NameAlt = o.NameAlt;
             m.DefaultValueSample = o.DefaultValueSample;
             m.DefaultValueTest = o.DefaultValueTest;
-            m.SubOptions = MergeOptionLists(o.SubOptions, n.SubOptions);
+            m.SubOptions = MergeOptionLists(o.SubOptions, n.SubOptions, prefix + ":SubOptions");
 
-            if (o.Disposition != n.Disposition)
-                _output.Add("Option '" + o.Name + "' Disposition - KEEPING OLD");
+            if (n.Disposition != m.Disposition)
+                _output.Add(prefix + " > " + m.Disposition);
 
-            if (o.Documentation != n.Documentation)
-                _output.Add("Option '" + o.Name + "' Documentation - KEEPING OLD");
+            if (n.Documentation != m.Documentation)
+                _output.Add(prefix + " > " + m.Documentation);
 
-            if (o.NameAlt != n.NameAlt)
-                _output.Add("Option '" + o.Name + "' NameAlt - KEEPING OLD");
+            if (n.NameAlt != m.NameAlt)
+                _output.Add(prefix + " > " + m.NameAlt);
 
-            if (o.Required != n.Required)
-                _output.Add("Option '" + o.Name + "' Required - KEEPING OLD");
+            if (n.Required != m.Required)
+                _output.Add(prefix + " > " + m.Required);
 
-            if (o.IsList != n.IsList)
-                _output.Add("Option '" + o.Name + "' IsList - KEEPING OLD");
+            if (n.IsList != m.IsList)
+                _output.Add(prefix + " > " + m.IsList);
 
-            if (o.Type != n.Type)
-                _output.Add("Option '" + o.Name + "' Type - KEEPING OLD");
+            if (n.Type != m.Type)
+                _output.Add(prefix + " > " + m.Type);
 
-            if (o.VariableValue != n.VariableValue)
-                _output.Add("Option '" + o.Name + "' VariableValue - KEEPING OLD");
+            if (n.VariableValue != m.VariableValue)
+                _output.Add(prefix + " > " + m.VariableValue);
 
-            if (o.DefaultValueSample != n.DefaultValueSample)
-                _output.Add("Option '" + o.Name + "' DefaultValueSample - KEEPING OLD");
+            if (n.DefaultValueSample != m.DefaultValueSample)
+                _output.Add(prefix + " > " + m.DefaultValueSample);
 
-            if (o.DefaultValueTest != n.DefaultValueTest)
-                _output.Add("Option '" + o.Name + "' DefaultValueTest - KEEPING OLD");
+            if (n.DefaultValueTest != m.DefaultValueTest)
+                _output.Add(prefix + " > " + m.DefaultValueTest);
 
             return m;
         }
