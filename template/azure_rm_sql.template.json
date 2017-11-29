@@ -6055,7 +6055,7 @@
           "Disposition": "parameters",
           "Type": "str",
           "IsList": false,
-          "Required": "True",
+          "Required": "False",
           "VariableValue": "None",
           "Documentation": "Resource location.",
           "DefaultValueSample": "\"{{ location }}\"",
@@ -6307,7 +6307,7 @@
         },
         {
           "Name": "state",
-          "NameAlt": "x",
+          "NameAlt": "state",
           "Description": "The state of the server.",
           "Type": "str",
           "Returned": "always",
