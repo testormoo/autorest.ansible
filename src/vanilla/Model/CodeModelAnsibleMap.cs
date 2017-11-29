@@ -171,19 +171,24 @@ namespace AutoRest.Ansible.Model
         private string[] GetModuleTest(int level, string testType, string methodType)
         {
             List<string> prePlaybook = new List<string>();
-            string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
 
-            if ((prerequisites != null) && (prerequisites != ""))
+            // XXX - remove this hack
+            if (testType.StartsWith("Create"))
             {
-                int old = _selectedMethod;
-                if (SelectModuleByName(prerequisites))
+                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+
+                if ((prerequisites != null) && (prerequisites != ""))
                 {
-                    if (level <= 1)
+                    int old = _selectedMethod;
+                    if (SelectModuleByName(prerequisites))
                     {
-                        prePlaybook.AddRange(GetModuleTest(level + 1, "", ""));
+                        if (level <= 1)
+                        {
+                            prePlaybook.AddRange(GetModuleTest(level + 1, "Create", ""));
+                        }
                     }
+                    _selectedMethod = old;
                 }
-                _selectedMethod = old;
             }
             prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true));
 
@@ -502,7 +507,7 @@ namespace AutoRest.Ansible.Model
                 {
                     string predefined = test ? option.DefaultValueTest : option.DefaultValueSample;
 
-                    if (predefined != "" || !test)
+                    if (predefined != "")
                     {
                         help.Add(propertyLine + " " + ((predefined != "") ? predefined : " " + option.Name + ""));
                     }

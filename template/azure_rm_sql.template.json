@@ -6058,7 +6058,7 @@
           "Required": "False",
           "VariableValue": "None",
           "Documentation": "Resource location.",
-          "DefaultValueSample": "location",
+          "DefaultValueSample": "westus",
           "DefaultValueTest": "westus",
           "SubOptions": [],
           "RequiredCount": 0
@@ -6072,7 +6072,7 @@
           "Required": "False",
           "VariableValue": "None",
           "Documentation": "Resource tags.",
-          "DefaultValueSample": "tags",
+          "DefaultValueSample": "",
           "DefaultValueTest": "",
           "SubOptions": [],
           "RequiredCount": 0
@@ -6086,7 +6086,7 @@
           "Required": "False",
           "VariableValue": "None",
           "Documentation": "The Azure Active Directory identity of the server.",
-          "DefaultValueSample": "identity",
+          "DefaultValueSample": "",
           "DefaultValueTest": "",
           "SubOptions": [
             {
@@ -6098,7 +6098,7 @@
               "Required": "False",
               "VariableValue": "None",
               "Documentation": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'SystemAssigned'",
-              "DefaultValueSample": "type",
+              "DefaultValueSample": "",
               "DefaultValueTest": "",
               "SubOptions": [],
               "RequiredCount": 0
@@ -6115,7 +6115,7 @@
           "Required": "False",
           "VariableValue": "None",
           "Documentation": "Administrator username for the server. Once created it cannot be changed.",
-          "DefaultValueSample": "administrator_login",
+          "DefaultValueSample": "mylogin",
           "DefaultValueTest": "mylogin",
           "SubOptions": [],
           "RequiredCount": 0
@@ -6129,7 +6129,7 @@
           "Required": "False",
           "VariableValue": "None",
           "Documentation": "The administrator login password (required for server creation).",
-          "DefaultValueSample": "administrator_login_password",
+          "DefaultValueSample": "Testpasswordxyz12!",
           "DefaultValueTest": "Testpasswordxyz12!",
           "SubOptions": [],
           "RequiredCount": 0
@@ -6143,7 +6143,7 @@
           "Required": "False",
           "VariableValue": "None",
           "Documentation": "The version of the server.",
-          "DefaultValueSample": "version",
+          "DefaultValueSample": "",
           "DefaultValueTest": "",
           "SubOptions": [],
           "RequiredCount": 0
