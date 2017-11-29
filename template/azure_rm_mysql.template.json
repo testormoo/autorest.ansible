@@ -14,7 +14,7 @@
           "VariableValue": "None",
           "Documentation": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
           "DefaultValueSample": "\"{{ resource_group_name }}\"",
-          "DefaultValueTest": "{{ resource_group }}",
+          "DefaultValueTest": "\"{{ resource_group }}\"",
           "SubOptions": null,
           "RequiredCount": 0
         },

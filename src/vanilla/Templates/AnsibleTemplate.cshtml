@@ -119,6 +119,11 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @:                self.@(o.Disposition)["@(o.Name)"] = kwargs[key]
 }
 @EmptyLine
+@if (Model.FixParameterStatements.Length > 0)
+{
+@:        self.adjust_parameters()
+@EmptyLine
+}
         old_response = None
         results = dict()
 @EmptyLine
@@ -176,6 +181,21 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             self.log("Creation / Update done")
 @EmptyLine
         return self.results
+@if (Model.FixParameterStatements.Length > 0)
+{
+@EmptyLine
+@:    def adjust_parameters(self):
+    foreach (var s in Model.FixParameterStatements)
+    {
+@:        @(s)
+    }
+@EmptyLine
+@:    def rename_key(self, d, old_name, new_name):
+@:        old_value = d.get(old_name, None)
+@:        if old_value is not None:
+@:            d.pop(old_name, None)
+@:            d[new_name] = old_value;
+}
 @EmptyLine
     def create_update_@(Model.ObjectNamePythonized)(self):
         '''

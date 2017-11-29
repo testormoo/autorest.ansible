@@ -591,6 +591,47 @@ namespace AutoRest.Ansible.Model
             return statements.ToArray();
         }
 
+        public string[] FixParameterStatements
+        {
+            get
+            {
+                return GetFixParameterStatements(ModuleOptionsSecondLevel, 0, "", "self.parameters");
+            }
+        }
+
+        private string[] GetFixParameterStatements(ModuleOption[] options, int level, string statementPrefix, string dictPrefix)
+        {
+            List<string> statements = new List<string>();
+
+            foreach (var option in options)
+            {
+                if (option.NameAlt != option.Name)
+                {
+                    // ignore renaming at level 0 as these parameters are already flattened and treated differently
+                    if (level > 0)
+                    {
+                        string statement = statementPrefix + "self.rename_key(" + dictPrefix + ", '" + option.NameAlt + "', '" + option.Name + "')";
+                        statements.Add(statement);
+                    }
+                }
+                else
+                {
+                    if (option.SubOptions != null)
+                    {
+                        string[] subStatements = GetFixParameterStatements(option.SubOptions, level + 1, statementPrefix + "    ", dictPrefix + "['" + option.NameAlt + "']");
+
+                        if (subStatements.Length > 0)
+                        {
+                            statements.Add("if " + dictPrefix + ".has_key('" + option.NameAlt + "'):");
+                            statements.AddRange(subStatements);
+                        }
+                    }
+                }
+            }
+
+            return statements.ToArray();
+        }
+
         private string[] GetHelpFromResponseFields(ModuleResponseField[] fields, string padding)
         {
             List<string> help = new List<string>();
