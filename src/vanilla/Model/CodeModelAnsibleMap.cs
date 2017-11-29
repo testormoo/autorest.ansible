@@ -500,11 +500,11 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    string predefined = test ? option.DefaultValueTest : option.DefaultValueTest;
+                    string predefined = test ? option.DefaultValueTest : option.DefaultValueSample;
 
                     if (predefined != "" || !test)
                     {
-                        help.Add(propertyLine + " " + ((predefined != "") ? predefined : "\"{{ " + option.Name + " }}\""));
+                        help.Add(propertyLine + " " + ((predefined != "") ? predefined : " " + option.Name + ""));
                     }
                 }
             }
