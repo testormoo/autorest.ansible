@@ -22,6 +22,7 @@ namespace AutoRest.Ansible
             new Tweak_RenameModule("azure_rm_sql_servers_facts", "azure_rm_sql_server_facts"),
             new Tweak_RenameModule("azure_rm_sql_virtualnetworkrules", "azure_rm_sql_virtualnetworkrule"),
             new Tweak_RenameModule("azure_rm_sql_virtualnetworkrules_facts", "azure_rm_sql_virtualnetworkrule_facts"),
+            //new Tweak_RenameOption("azure_rm_sql_servers", "identity.type", "mukamuka"),
 
             // MySQL
             new Tweak_RenameModule("azure_rm_mysql_configurations", "azure_rm_mysql_configuration"),
