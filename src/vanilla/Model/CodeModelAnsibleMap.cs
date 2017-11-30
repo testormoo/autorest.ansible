@@ -449,7 +449,7 @@ namespace AutoRest.Ansible.Model
             return null;
         }
 
-        MapAnsible Map { get; set; } 
+        public MapAnsible Map { get; set; } 
 
         private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, bool test)
         {

@@ -64,6 +64,13 @@ namespace AutoRest.Ansible
                 codeModelPure = new CodeModelAnsibleMap(codeModel.Map, empty);
             }
 
+            // apply tweaks
+            foreach (var tweak in Tweaks.All)
+            {
+                tweak.Apply(codeModelPure.Map);
+            }
+
+
             do
             {
                 try

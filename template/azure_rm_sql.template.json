@@ -1,8 +1,8 @@
-{
+﻿{
   "Modules": [
     {
       "ModuleName": "azure_rm_sql_databases",
-      "ModuleNameAlt": "azure_rm_sql_database",
+      "ModuleNameAlt": "azure_rm_sql_databases",
       "Options": [
         {
           "Name": "resource_group_name",
@@ -1305,7 +1305,7 @@
     },
     {
       "ModuleName": "azure_rm_sql_elasticpools",
-      "ModuleNameAlt": "azure_rm_sql_elasticpool",
+      "ModuleNameAlt": "azure_rm_sql_elasticpools",
       "Options": [
         {
           "Name": "resource_group_name",
@@ -6005,7 +6005,7 @@
     },
     {
       "ModuleName": "azure_rm_sql_servers",
-      "ModuleNameAlt": "azure_rm_sql_server",
+      "ModuleNameAlt": "azure_rm_sql_servers",
       "Options": [
         {
           "Name": "resource_group_name",
