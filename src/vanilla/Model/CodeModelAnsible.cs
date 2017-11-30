@@ -8,6 +8,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Ansible.Model
 {
@@ -155,6 +156,20 @@ namespace AutoRest.Ansible.Model
             Map.Namespace = Namespace;
             Map.NamespaceUpper = NamespaceUpper;
             Map.Name = Name;
+
+            foreach (var group in Operations)
+            {
+                foreach (var method in group.Methods)
+                {
+                    var examplesRaw = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
+                    var examples = AutoRest.Core.Model.XmsExtensions.Examples.FromJObject(examplesRaw);
+                    foreach (var example in examples)
+                    {
+                        operations.Add("EXAMPLE -- " + example.Key);
+                    }
+                }
+            }
+
             Map.Operations = operations.ToArray();
         }
 
