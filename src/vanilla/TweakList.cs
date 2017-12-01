@@ -8,7 +8,7 @@ namespace AutoRest.Ansible
     {
         public static Tweak[] All =
         {
-            // SQL
+            // SQL Server
             new Tweak_RenameModule("azure_rm_sql_servers", "azure_rm_sql_server"),
             new Tweak_ModuleObjectName("azure_rm_sql_servers", "SQL Server"),
             new Tweak_RenameOption("azure_rm_sql_servers", "resource_group_name", "resource_group"),
@@ -41,6 +41,7 @@ namespace AutoRest.Ansible
             new Tweak_ChangeOptionDefaultValueTest("azure_rm_sql_servers", "resource_group_name", "\"{{ resource_group }}\""),
             new Tweak_ChangeOptionDefaultValueTest("azure_rm_sql_servers", "server_name", "zims-server"),
 
+            // SQL Database
             new Tweak_RenameModule("azure_rm_sql_databases", "azure_rm_sql_database"),
             new Tweak_ModuleObjectName("azure_rm_sql_databases", "Database"),
             new Tweak_RenameOption("azure_rm_sql_databases", "resource_group_name", "resource_group"),
@@ -53,6 +54,7 @@ namespace AutoRest.Ansible
             new Tweak_ModuleAssertStateVariable("azure_rm_sql_databases", "status"),
             new Tweak_ModuleAssertStateExpectedValue("azure_rm_sql_databases", "Online"),
 
+            // SQL Elastic Pool
             new Tweak_RenameModule("azure_rm_sql_elasticpools", "azure_rm_sql_elasticpool"),
             new Tweak_ModuleObjectName("azure_rm_sql_elasticpools", "ElasticPool"),
             new Tweak_RenameOption("azure_rm_sql_elasticpools", "resource_group_name", "resource_group"),
@@ -63,6 +65,7 @@ namespace AutoRest.Ansible
             new Tweak_ChangeOptionDefaultValueTest("azure_rm_sql_elasticpools", "elastic_pool_name", "test-elastic-pool"),
             new Tweak_ChangeOptionDefaultValueTest("azure_rm_sql_elasticpools", "location", "westus"),
 
+            // SQL - ....
             new Tweak_RenameModule("azure_rm_sql_configurations", "azure_rm_sql_configuration"),
             new Tweak_RenameModule("azure_rm_sql_configurations_facts", "azure_rm_sql_configuration_facts"),
             new Tweak_RenameModule("azure_rm_sql_databases_facts", "azure_rm_sql_database_facts"),
