@@ -10,6 +10,7 @@ namespace AutoRest.Ansible
         {
             new Tweak_Option_Rename("*", "resource_group_name", "resource_group"),
             new Tweak_Option_DefaultValueTest("*", "resource_group_name", "\"{{ resource_group }}\""),
+            new Tweak_Option_Required("*", "location", false),
 
             // SQL Server
             new Tweak_Module_Rename("azure_rm_sql_servers", "azure_rm_sql_server"),
@@ -25,7 +26,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("azure_rm_sql_servers", "identity", ""),
             new Tweak_Option_DefaultValueSample("azure_rm_sql_servers", "identity.type", ""), // XXX - this is a bug
             new Tweak_Option_DefaultValueSample("azure_rm_sql_servers", "version", ""),
-            new Tweak_Option_Required("azure_rm_sql_servers", "location", false),
             new Tweak_Response_RemoveField("azure_rm_sql_servers", "tags"),
             new Tweak_Response_RemoveField("azure_rm_sql_servers", "identity"),
             new Tweak_Response_RemoveField("azure_rm_sql_servers", "name"),
@@ -45,9 +45,7 @@ namespace AutoRest.Ansible
             // SQL Database
             new Tweak_Module_Rename("azure_rm_sql_databases", "azure_rm_sql_database"),
             new Tweak_Module_ObjectName("azure_rm_sql_databases", "Database"),
-            new Tweak_Option_Rename("azure_rm_sql_databases", "resource_group_name", "resource_group"),
             new Tweak_Option_Rename("azure_rm_sql_databases", "database_name", "name"),
-            new Tweak_Option_Required("azure_rm_sql_databases", "location", false),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sql_databases", "azure_rm_sql_servers"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "server_name", "sql-test-server-dauih"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "database_name", "test-database"),
@@ -58,7 +56,6 @@ namespace AutoRest.Ansible
             // SQL Elastic Pool
             new Tweak_Module_Rename("azure_rm_sql_elasticpools", "azure_rm_sql_elasticpool"),
             new Tweak_Module_ObjectName("azure_rm_sql_elasticpools", "ElasticPool"),
-            new Tweak_Option_Rename("azure_rm_sql_elasticpools", "resource_group_name", "resource_group"),
             new Tweak_Option_Rename("azure_rm_sql_elasticpools", "elastic_pool_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sql_elasticpools", "azure_rm_sql_servers"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_elasticpools", "server_name", "zims-server"),
@@ -80,12 +77,10 @@ namespace AutoRest.Ansible
 
             // MySQL Server
             new Tweak_Module_Rename("azure_rm_mysql_servers", "azure_rm_mysql_server"),
-            new Tweak_Option_Rename("azure_rm_mysql_servers", "resource_group_name", "resource_group"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "server_name", "name"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_Required("azure_rm_mysql_servers", "properties", false),
-            new Tweak_Option_Required("azure_rm_mysql_servers", "location", false),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_servers", "server_name", "test-mysql-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_servers", "properties.version", "5.6"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_servers", "properties.create_mode", "Default"),
