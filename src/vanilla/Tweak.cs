@@ -8,27 +8,47 @@ namespace AutoRest.Ansible
     public abstract class Tweak
     {
         public abstract void Apply(Model.MapAnsible map);
+
+        public abstract void ApplyOnModule(Model.MapAnsibleModule m);
     }
 
-    public abstract class TweakModule : Tweak
+    public abstract class Tweak_Module : Tweak
     {
-        protected Model.MapAnsibleModule GetModule(Model.MapAnsible map, string name)
+        public override void Apply(Model.MapAnsible map)
         {
-            foreach (var m in map.Modules)
+            var modules = new List<Model.MapAnsibleModule>();
+
+            if (_module == "*")
             {
-                if (m.ModuleName == name)
-                    return m;
+                modules.AddRange(map.Modules); ;
+            }
+            else
+            {
+                foreach (var m in map.Modules)
+                {
+                    if (m.ModuleName == _module)
+                    {
+                        modules.Add(m);
+                    }
+                }
             }
 
-            return null;
+            _map = map;
+
+            foreach (var m in modules)
+            {
+                ApplyOnModule(m);
+            }
         }
+
+        protected Model.MapAnsible _map;
+        protected string _module;
     }
 
-    public abstract class TweakOption : TweakModule
+    public abstract class TweakOption : Tweak_Module
     {
-        protected Model.ModuleOption GetOption(Model.MapAnsible map, string module, string[] path)
+        protected Model.ModuleOption GetOption(Model.MapAnsibleModule m, string[] path)
         {
-            Model.MapAnsibleModule m = GetModule(map, module);
             Model.ModuleOption option = null;
 
             if (m != null)
@@ -65,11 +85,10 @@ namespace AutoRest.Ansible
         }
     }
 
-    public abstract class TweakResult : TweakModule
+    public abstract class TweakResult : Tweak_Module
     {
-        protected Model.ModuleResponseField GetResultField(Model.MapAnsible map, string module, string[] path)
+        protected Model.ModuleResponseField GetResultField(Model.MapAnsibleModule m, Model.MapAnsible map, string[] path)
         {
-            Model.MapAnsibleModule m = GetModule(map, module);
             Model.ModuleResponseField field = null;
 
             if (m != null)
@@ -101,7 +120,7 @@ namespace AutoRest.Ansible
         }
     }
 
-    class Tweak_RenameModule : TweakModule
+    class Tweak_RenameModule : Tweak_Module
     {
         public Tweak_RenameModule(string originalName, string newName)
         {
@@ -109,17 +128,15 @@ namespace AutoRest.Ansible
             _newName = newName;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.MapAnsibleModule m = GetModule(map, _module);
-            if (m != null) m.ModuleNameAlt = _newName;
+            m.ModuleNameAlt = _newName;
         }
 
-        protected string _module;
         private string _newName;
     }
 
-    class Tweak_ModuleAssertStateVariable : TweakModule
+    class Tweak_ModuleAssertStateVariable : Tweak_Module
     {
         public Tweak_ModuleAssertStateVariable(string module, string newValue)
         {
@@ -127,17 +144,15 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.MapAnsibleModule m = GetModule(map, _module);
-            if (m != null) m.AssertStateVariable = _newValue;
+            m.AssertStateVariable = _newValue;
         }
 
-        protected string _module;
         private string _newValue;
     }
 
-    class Tweak_ModuleAssertStateExpectedValue : TweakModule
+    class Tweak_ModuleAssertStateExpectedValue : Tweak_Module
     {
         public Tweak_ModuleAssertStateExpectedValue(string module, string newValue)
         {
@@ -145,17 +160,15 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.MapAnsibleModule m = GetModule(map, _module);
-            if (m != null) m.AssertStateExpectedValue = _newValue;
+            m.AssertStateExpectedValue = _newValue;
         }
 
-        protected string _module;
         private string _newValue;
     }
 
-    class Tweak_ModuleObjectName : TweakModule
+    class Tweak_ModuleObjectName : Tweak_Module
     {
         public Tweak_ModuleObjectName(string module, string newValue)
         {
@@ -163,17 +176,15 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.MapAnsibleModule m = GetModule(map, _module);
-            if (m != null) m.ObjectName = _newValue;
+            m.ObjectName = _newValue;
         }
 
-        protected string _module;
         private string _newValue;
     }
 
-    class Tweak_Module_TestPrerequisitesModule : TweakModule
+    class Tweak_Module_TestPrerequisitesModule : Tweak_Module
     {
         public Tweak_Module_TestPrerequisitesModule(string module, string value)
         {
@@ -181,13 +192,11 @@ namespace AutoRest.Ansible
             _newValue = value;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.MapAnsibleModule m = GetModule(map, _module);
-            if (m != null) m.TestPrerequisitesModule = _newValue;
+            m.TestPrerequisitesModule = _newValue;
         }
 
-        protected string _module;
         private string _newValue;
     }
 
@@ -201,14 +210,13 @@ namespace AutoRest.Ansible
             _levelChange = levelChange;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.ModuleOption option = GetOption(map, _module, _path);
+            Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.NameAlt = _newName;
             // XXX - level change
         }
 
-        private string _module;
         private string[] _path;
         private string _newName;
         private int _levelChange;
@@ -223,14 +231,13 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.ModuleOption option = GetOption(map, _module, _path);
+            Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.Required = _newValue ? "True" : "False";
             // XXX - level change
         }
 
-        private string _module;
         private string[] _path;
         private bool _newValue;
     }
@@ -243,14 +250,13 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.ModuleOption option = GetOption(map, _module, _path);
+            Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.DefaultValueTest = _newValue;
             // XXX - level change
         }
 
-        private string _module;
         private string[] _path;
         private string _newValue;
     }
@@ -264,14 +270,13 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.ModuleOption option = GetOption(map, _module, _path);
+            Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.DefaultValueSample = _newValue;
             // XXX - level change
         }
 
-        private string _module;
         private string[] _path;
         private string _newValue;
     }
@@ -285,14 +290,13 @@ namespace AutoRest.Ansible
             _levelChange = levelChange;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.ModuleResponseField field = GetResultField(map, _module, _path);
+            Model.ModuleResponseField field = GetResultField(m, _map, _path);
             if (field != null) field.NameAlt = _newName;
             // XXX - level change
         }
 
-        private string _module;
         private string[] _path;
         private string _newName;
         private int _levelChange;
@@ -315,14 +319,13 @@ namespace AutoRest.Ansible
             _levelChange = levelChange;
         }
 
-        public override void Apply(Model.MapAnsible map)
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            Model.ModuleResponseField field = GetResultField(map, _module, _path);
+            Model.ModuleResponseField field = GetResultField(m, _map, _path);
             if (field != null) field.SampleValue = _newValue;
             // XXX - level change
         }
 
-        private string _module;
         private string[] _path;
         private string _newValue;
         private int _levelChange;

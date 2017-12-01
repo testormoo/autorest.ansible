@@ -65,7 +65,7 @@ namespace AutoRest.Ansible
             new Tweak_ChangeOptionDefaultValueTest("azure_rm_sql_elasticpools", "elastic_pool_name", "test-elastic-pool"),
             new Tweak_ChangeOptionDefaultValueTest("azure_rm_sql_elasticpools", "location", "westus"),
 
-            // SQL - ....
+            // SQL ...
             new Tweak_RenameModule("azure_rm_sql_configurations", "azure_rm_sql_configuration"),
             new Tweak_RenameModule("azure_rm_sql_configurations_facts", "azure_rm_sql_configuration_facts"),
             new Tweak_RenameModule("azure_rm_sql_databases_facts", "azure_rm_sql_database_facts"),
