@@ -45,7 +45,7 @@ namespace AutoRest.Ansible
         protected string _module;
     }
 
-    public abstract class TweakOption : Tweak_Module
+    public abstract class Tweak_Option : Tweak_Module
     {
         protected Model.ModuleOption GetOption(Model.MapAnsibleModule m, string[] path)
         {
@@ -85,7 +85,7 @@ namespace AutoRest.Ansible
         }
     }
 
-    public abstract class TweakResult : Tweak_Module
+    public abstract class Tweak_Response : Tweak_Module
     {
         protected Model.ModuleResponseField GetResultField(Model.MapAnsibleModule m, Model.MapAnsible map, string[] path)
         {
@@ -120,9 +120,9 @@ namespace AutoRest.Ansible
         }
     }
 
-    class Tweak_RenameModule : Tweak_Module
+    class Tweak_Module_Rename : Tweak_Module
     {
-        public Tweak_RenameModule(string originalName, string newName)
+        public Tweak_Module_Rename(string originalName, string newName)
         {
             _module = originalName;
             _newName = newName;
@@ -136,9 +136,9 @@ namespace AutoRest.Ansible
         private string _newName;
     }
 
-    class Tweak_ModuleAssertStateVariable : Tweak_Module
+    class Tweak_Module_AssertStateVariable : Tweak_Module
     {
-        public Tweak_ModuleAssertStateVariable(string module, string newValue)
+        public Tweak_Module_AssertStateVariable(string module, string newValue)
         {
             _module = module;
             _newValue = newValue;
@@ -152,9 +152,9 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
-    class Tweak_ModuleAssertStateExpectedValue : Tweak_Module
+    class Tweak_Module_AssertStateExpectedValue : Tweak_Module
     {
-        public Tweak_ModuleAssertStateExpectedValue(string module, string newValue)
+        public Tweak_Module_AssertStateExpectedValue(string module, string newValue)
         {
             _module = module;
             _newValue = newValue;
@@ -168,9 +168,9 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
-    class Tweak_ModuleObjectName : Tweak_Module
+    class Tweak_Module_ObjectName : Tweak_Module
     {
-        public Tweak_ModuleObjectName(string module, string newValue)
+        public Tweak_Module_ObjectName(string module, string newValue)
         {
             _module = module;
             _newValue = newValue;
@@ -200,9 +200,9 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
-    class Tweak_RenameOption : TweakOption
+    class Tweak_Option_Rename : Tweak_Option
     {
-        public Tweak_RenameOption(string module, string path, string newName, int levelChange = 0)
+        public Tweak_Option_Rename(string module, string path, string newName, int levelChange = 0)
         {
             _module = module;
             _path = path.Split(".");
@@ -222,9 +222,9 @@ namespace AutoRest.Ansible
         private int _levelChange;
     }
 
-    class Tweak_ChangeOptionRequired : TweakOption
+    class Tweak_Option_Required : Tweak_Option
     {
-        public Tweak_ChangeOptionRequired(string module, string path, bool newValue)
+        public Tweak_Option_Required(string module, string path, bool newValue)
         {
             _module = module;
             _path = path.Split(".");
@@ -241,9 +241,9 @@ namespace AutoRest.Ansible
         private string[] _path;
         private bool _newValue;
     }
-    class Tweak_ChangeOptionDefaultValueTest : TweakOption
+    class Tweak_Option_DefaultValueTest : Tweak_Option
     {
-        public Tweak_ChangeOptionDefaultValueTest(string module, string path, string newValue)
+        public Tweak_Option_DefaultValueTest(string module, string path, string newValue)
         {
             _module = module;
             _path = path.Split(".");
@@ -261,9 +261,9 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
-    class Tweak_ChangeOptionDefaultValueSample : TweakOption
+    class Tweak_Option_DefaultValueSample : Tweak_Option
     {
-        public Tweak_ChangeOptionDefaultValueSample(string module, string path, string newValue)
+        public Tweak_Option_DefaultValueSample(string module, string path, string newValue)
         {
             _module = module;
             _path = path.Split(".");
@@ -280,9 +280,9 @@ namespace AutoRest.Ansible
         private string[] _path;
         private string _newValue;
     }
-    class Tweak_RenameResultField : TweakResult
+    class Tweak_Response_RenameField : Tweak_Response
     {
-        public Tweak_RenameResultField(string module, string path, string newName, int levelChange = 0)
+        public Tweak_Response_RenameField(string module, string path, string newName, int levelChange = 0)
         {
             _module = module;
             _path = path.Split(".");
@@ -302,16 +302,16 @@ namespace AutoRest.Ansible
         private int _levelChange;
     }
 
-    class Tweak_RemoveResultField : Tweak_RenameResultField
+    class Tweak_Response_RemoveField : Tweak_Response_RenameField
     {
-        public Tweak_RemoveResultField(string module, string path) : base(module, path, "x", 0)
+        public Tweak_Response_RemoveField(string module, string path) : base(module, path, "x", 0)
         {
         }
     }
 
-    class Tweak_ResultField_UpdateSampleValue : TweakResult
+    class Tweak_Response_FieldSampleValue : Tweak_Response
     {
-        public Tweak_ResultField_UpdateSampleValue(string module, string path, string newValue, int levelChange = 0)
+        public Tweak_Response_FieldSampleValue(string module, string path, string newValue, int levelChange = 0)
         {
             _module = module;
             _path = path.Split(".");
