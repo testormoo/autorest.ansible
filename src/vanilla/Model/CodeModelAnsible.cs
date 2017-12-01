@@ -443,23 +443,6 @@ namespace AutoRest.Ansible.Model
             return arr;
         }
 
-        // this is just for temporary experimentation, later shoudl be moved outside
-        private string GetDefaultAttributeValue(string attr)
-        {
-            switch (attr)
-            {
-                case "resource_group_name": return "ansible-demo-rg";
-                case "server_name": return "zims-server";
-                case "database_name": return "zims-database";
-                case "location": return "westus";
-                case "administrator_login": return "mylogin";
-                case "administrator_login_password": return "Testpasswordxyz12!";
-                case "elastic_pool_name": return "zims-elastic-pool";
-            }
-
-            return "";
-        }
-
         private Method ModuleFindMethod(string name)
         {
             foreach (var m in ModuleOperation.Methods)

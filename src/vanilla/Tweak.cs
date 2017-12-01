@@ -29,7 +29,39 @@ namespace AutoRest.Ansible
         protected Model.ModuleOption GetOption(Model.MapAnsible map, string module, string[] path)
         {
             Model.MapAnsibleModule m = GetModule(map, module);
-            return (m != null ) ? (from option in m.Options where option.Name == path[0] select option).First() : null;
+            Model.ModuleOption option = null;
+
+            if (m != null)
+            {
+                foreach (var o in m.Options)
+                    if (o.Name == path[0])
+                        option = o;
+
+                if (option != null)
+                {
+                    for (int i = 1; i < path.Length; i++)
+                    {
+                        var subOptions = option.SubOptions;
+                        option = null;
+
+                        if (subOptions != null)
+                        {
+                            foreach (var o in subOptions)
+                            {
+                                if (o.Name == path[i])
+                                {
+                                    option = o;
+                                    break;
+                                }
+                            }
+                        }
+                        if (option == null)
+                            break;
+                    }
+                }
+            }
+
+            return option;
         }
     }
 
@@ -49,6 +81,60 @@ namespace AutoRest.Ansible
 
         protected string _module;
         private string _newName;
+    }
+
+    class Tweak_ModuleAssertStateVariable : TweakModule
+    {
+        public Tweak_ModuleAssertStateVariable(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override void Apply(Model.MapAnsible map)
+        {
+            Model.MapAnsibleModule m = GetModule(map, _module);
+            if (m != null) m.AssertStateVariable = _newValue;
+        }
+
+        protected string _module;
+        private string _newValue;
+    }
+
+    class Tweak_ModuleAssertStateExpectedValue : TweakModule
+    {
+        public Tweak_ModuleAssertStateExpectedValue(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override void Apply(Model.MapAnsible map)
+        {
+            Model.MapAnsibleModule m = GetModule(map, _module);
+            if (m != null) m.AssertStateExpectedValue = _newValue;
+        }
+
+        protected string _module;
+        private string _newValue;
+    }
+
+    class Tweak_ModuleObjectName : TweakModule
+    {
+        public Tweak_ModuleObjectName(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override void Apply(Model.MapAnsible map)
+        {
+            Model.MapAnsibleModule m = GetModule(map, _module);
+            if (m != null) m.ObjectName = _newValue;
+        }
+
+        protected string _module;
+        private string _newValue;
     }
 
     class Tweak_RenameOption : TweakOption
@@ -74,4 +160,65 @@ namespace AutoRest.Ansible
         private int _levelChange;
     }
 
+    class Tweak_ChangeOptionRequired : TweakOption
+    {
+        public Tweak_ChangeOptionRequired(string module, string path, bool newValue)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _newValue = newValue;
+        }
+
+        public override void Apply(Model.MapAnsible map)
+        {
+            Model.ModuleOption option = GetOption(map, _module, _path);
+            if (option != null) option.Required = _newValue ? "True" : "False";
+            // XXX - level change
+        }
+
+        private string _module;
+        private string[] _path;
+        private bool _newValue;
+    }
+    class Tweak_ChangeOptionDefaultValueTest : TweakOption
+    {
+        public Tweak_ChangeOptionDefaultValueTest(string module, string path, string newValue)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _newValue = newValue;
+        }
+
+        public override void Apply(Model.MapAnsible map)
+        {
+            Model.ModuleOption option = GetOption(map, _module, _path);
+            if (option != null) option.DefaultValueTest = _newValue;
+            // XXX - level change
+        }
+
+        private string _module;
+        private string[] _path;
+        private string _newValue;
+    }
+
+    class Tweak_ChangeOptionDefaultValueSample : TweakOption
+    {
+        public Tweak_ChangeOptionDefaultValueSample(string module, string path, string newValue)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _newValue = newValue;
+        }
+
+        public override void Apply(Model.MapAnsible map)
+        {
+            Model.ModuleOption option = GetOption(map, _module, _path);
+            if (option != null) option.DefaultValueSample = _newValue;
+            // XXX - level change
+        }
+
+        private string _module;
+        private string[] _path;
+        private string _newValue;
+    }
 }

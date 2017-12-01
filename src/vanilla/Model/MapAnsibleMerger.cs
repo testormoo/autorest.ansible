@@ -163,31 +163,31 @@ namespace AutoRest.Ansible.Model
             m.SubOptions = MergeOptionLists(o.SubOptions, n.SubOptions, prefix + ":SubOptions");
 
             if (n.Disposition != m.Disposition)
-                _output.Add(prefix + " > " + m.Disposition);
+                _output.Add(prefix + " > DISPOSITION " + m.Disposition);
 
             if (n.Documentation != m.Documentation)
-                _output.Add(prefix + " > " + m.Documentation);
+                _output.Add(prefix + " > DOCUMENTATION " + m.Documentation);
 
             if (n.NameAlt != m.NameAlt)
-                _output.Add(prefix + " > " + m.NameAlt);
+                _output.Add(prefix + " > NAME ALT " + m.NameAlt + ":" + n.NameAlt);
 
             if (n.Required != m.Required)
-                _output.Add(prefix + " > " + m.Required);
+                _output.Add(prefix + " > REQUIRED" + m.Required);
 
             if (n.IsList != m.IsList)
-                _output.Add(prefix + " > " + m.IsList);
+                _output.Add(prefix + " IS LIST > " + m.IsList);
 
             if (n.Type != m.Type)
-                _output.Add(prefix + " > " + m.Type);
+                _output.Add(prefix + " TYPE > " + m.Type);
 
             if (n.VariableValue != m.VariableValue)
-                _output.Add(prefix + " > " + m.VariableValue);
+                _output.Add(prefix + " VARIABLE VALUE > " + m.VariableValue);
 
             if (n.DefaultValueSample != m.DefaultValueSample)
-                _output.Add(prefix + " > " + m.DefaultValueSample);
+                _output.Add(prefix + " > DEVAULT VALUE SAMPLE " + m.DefaultValueSample);
 
             if (n.DefaultValueTest != m.DefaultValueTest)
-                _output.Add(prefix + " > " + m.DefaultValueTest);
+                _output.Add(prefix + " > DEFAULT VALUE TEST " + m.DefaultValueTest);
 
             return m;
         }

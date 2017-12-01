@@ -22,7 +22,7 @@ namespace AutoRest.Ansible.Model
             SubOptions = null;
             IsList = false;
             Disposition = "default";
-            DefaultValueSample = "\"{{ " + NameAlt + " }}\"";
+            DefaultValueSample = NameAlt;
             DefaultValueTest = "";
         }
 
