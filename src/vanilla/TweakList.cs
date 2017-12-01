@@ -39,19 +39,20 @@ namespace AutoRest.Ansible
             new Tweak_Response_FieldSampleValue("azure_rm_sql_servers", "fully_qualified_domain_name", "sqlcrudtest-4645.database.windows.net"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_servers", "administrator_login", "mylogin"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_servers", "administrator_login_password", "Testpasswordxyz12!"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sql_servers", "location", "westus"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sql_servers", "server_name", "zims-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sql_servers", "location", "eastus"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sql_servers", "server_name", "sql-test-server-dauih"),
 
             // SQL Database
             new Tweak_Module_Rename("azure_rm_sql_databases", "azure_rm_sql_database"),
             new Tweak_Module_ObjectName("azure_rm_sql_databases", "Database"),
             new Tweak_Option_Rename("azure_rm_sql_databases", "resource_group_name", "resource_group"),
             new Tweak_Option_Rename("azure_rm_sql_databases", "database_name", "name"),
+            new Tweak_Option_Required("azure_rm_sql_databases", "location", false),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sql_databases", "azure_rm_sql_servers"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "resource_group_name", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "server_name", "zims-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "server_name", "sql-test-server-dauih"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "database_name", "test-database"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "location", "westus"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "location", "eastus"),
             new Tweak_Module_AssertStateVariable("azure_rm_sql_databases", "status"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sql_databases", "Online"),
 
@@ -79,21 +80,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_sql_virtualnetworkrules", "azure_rm_sql_virtualnetworkrule"),
             new Tweak_Module_Rename("azure_rm_sql_virtualnetworkrules_facts", "azure_rm_sql_virtualnetworkrule_facts"),
 
-            // MySQL
-            new Tweak_Module_Rename("azure_rm_mysql_configurations", "azure_rm_mysql_configuration"),
-            new Tweak_Module_Rename("azure_rm_mysql_configurations_facts", "azure_rm_mysql_configuration_facts"),
-            new Tweak_Module_Rename("azure_rm_mysql_databases", "azure_rm_mysql_database"),
-            new Tweak_Module_Rename("azure_rm_mysql_databases_facts", "azure_rm_mysql_database_facts"),
-            new Tweak_Module_Rename("azure_rm_mysql_databases", "azure_rm_mysql_database"),
-            new Tweak_Module_Rename("azure_rm_mysql_databases_facts", "azure_rm_mysql_database_facts"),
-            new Tweak_Module_Rename("azure_rm_mysql_firewallrules", "azure_rm_mysql_firewallrule"),
-            new Tweak_Module_Rename("azure_rm_mysql_firewallrules_facts", "azure_rm_mysql_firewallrule_facts"),
+            // MySQL Server
             new Tweak_Module_Rename("azure_rm_mysql_servers", "azure_rm_mysql_server"),
-            new Tweak_Module_Rename("azure_rm_mysql_servers_facts", "azure_rm_mysql_server_facts"),
-            new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules", "azure_rm_mysql_virtualnetworkrule"),
-            new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules_facts", "azure_rm_mysql_virtualnetworkrule_facts"),
-            new Tweak_Module_AssertStateVariable("azure_rm_mysql_servers", "user_visible_state"),
-            new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_servers", "Ready"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "resource_group_name", "resource_group"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "server_name", "name"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "properties.administrator_login", "admin_username"),
@@ -107,9 +95,26 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_servers", "properties.administrator_login", "zimxyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_servers", "properties.administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_servers", "location", "westus"),
+            new Tweak_Module_AssertStateVariable("azure_rm_mysql_servers", "user_visible_state"),
+            new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_servers", "Ready"),
 
+            // MySQL Database
+            new Tweak_Module_Rename("azure_rm_mysql_databases", "azure_rm_mysql_database"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysql_databases", "azure_rm_mysql_servers"),
+            new Tweak_Option_Rename("azure_rm_mysql_databases", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_databases", "resource_group_name", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_databases", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_databases", "database_name", "testdatabase"),
+
+            new Tweak_Module_Rename("azure_rm_mysql_servers_facts", "azure_rm_mysql_server_facts"),
+            new Tweak_Module_Rename("azure_rm_mysql_configurations", "azure_rm_mysql_configuration"),
+            new Tweak_Module_Rename("azure_rm_mysql_configurations_facts", "azure_rm_mysql_configuration_facts"),
+            new Tweak_Module_Rename("azure_rm_mysql_databases_facts", "azure_rm_mysql_database_facts"),
+            new Tweak_Module_Rename("azure_rm_mysql_firewallrules", "azure_rm_mysql_firewallrule"),
+            new Tweak_Module_Rename("azure_rm_mysql_firewallrules_facts", "azure_rm_mysql_firewallrule_facts"),
+            new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules", "azure_rm_mysql_virtualnetworkrule"),
+            new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules_facts", "azure_rm_mysql_virtualnetworkrule_facts"),
+
 
             // PostgreSQL
             new Tweak_Module_Rename("azure_rm_postgresql_configurations", "azure_rm_postgresql_configuration"),
