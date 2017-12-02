@@ -153,9 +153,9 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] ModuleTestCreate
+        public string[] GetModuleTestCreate()
         {
-            get { return GetModuleTest(0, "Create instance of", ""); }
+           return GetModuleTest(0, "Create instance of", "");
         }
 
         public string[] ModuleTestUpdate
@@ -241,6 +241,19 @@ namespace AutoRest.Ansible.Model
             }
 
             return null;
+        }
+
+        public bool CanDelete()
+        {
+            var m = GetModuleMap(ModuleName);
+
+            foreach (var method in m.Methods)
+            {
+                if (method.Name == "delete")
+                    return true;
+            }
+
+            return false;
         }
 
         public string[] GetMethodRequiredOptionNames(string methodName)

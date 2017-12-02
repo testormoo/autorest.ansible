@@ -85,15 +85,6 @@ namespace AutoRest.Ansible
                         var ansibleTemplate = new AnsibleFactsTemplate { Model = codeModelPure };
                         await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
                     }
-
-                    var aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
-                    await WriteWithLf(aliasesTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
-
-                    var metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
-                    await WriteWithLf(metaMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
-
-                    var tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
-                    await WriteWithLf(tasksMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
                 } catch (Exception e)
                 {
 
@@ -102,6 +93,14 @@ namespace AutoRest.Ansible
                     updated.Add("EXCEPTION WHILE GENERATING: " + codeModelPure.ModuleName);
                     codeModelPure.MergeReport = updated.ToArray();
                 }
+                var aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
+                await WriteWithLf(aliasesTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
+
+                var metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
+                await WriteWithLf(metaMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+
+                var tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
+                await WriteWithLf(tasksMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
             } while (codeModelPure.SelectNextMethod());
 
             var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };

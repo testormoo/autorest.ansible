@@ -99,13 +99,35 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_mysql_databases", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_databases", "testdatabase"),
 
-            new Tweak_Module_Rename("azure_rm_mysql_servers_facts", "azure_rm_mysql_server_facts"),
+            // MySQL Server Firewall Rule
+            new Tweak_Module_Rename("azure_rm_mysql_firewallrules", "azure_rm_mysql_firewallrule"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysql_firewallrules", "azure_rm_mysql_servers"),
+            new Tweak_Option_Rename("azure_rm_mysql_firewallrules", "firewall_rule_name", "name"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "firewall_rule_name", "test-firewall-rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "start_ip_address", "172.28.10.136"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "end_ip_address", "172.28.10.138"),
+
+            // MySQL Server Configuration
             new Tweak_Module_Rename("azure_rm_mysql_configurations", "azure_rm_mysql_configuration"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysql_configurations", "azure_rm_mysql_servers"),
+            new Tweak_Option_Rename("azure_rm_mysql_configurations", "configuration_name", "name"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "configuration_name", "event_scheduler"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "value", "ON"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "source", "user-override"),
+
+            // MySQL Server Virtual Network Rule
+            new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules", "azure_rm_mysql_virtualnetworkrule"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysql_virtualnetworkrules", "azure_rm_mysql_servers"),
+            new Tweak_Option_Rename("azure_rm_mysql_virtualnetworkrules", "virtual_network_rule_name", "name"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_virtualnetworkrules", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_virtualnetworkrules", "virtual_network_rule_name", "test-virtual-network-rule"),
+
+            new Tweak_Module_Rename("azure_rm_mysql_servers_facts", "azure_rm_mysql_server_facts"),
             new Tweak_Module_Rename("azure_rm_mysql_configurations_facts", "azure_rm_mysql_configuration_facts"),
             new Tweak_Module_Rename("azure_rm_mysql_databases_facts", "azure_rm_mysql_database_facts"),
-            new Tweak_Module_Rename("azure_rm_mysql_firewallrules", "azure_rm_mysql_firewallrule"),
             new Tweak_Module_Rename("azure_rm_mysql_firewallrules_facts", "azure_rm_mysql_firewallrule_facts"),
-            new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules", "azure_rm_mysql_virtualnetworkrule"),
             new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules_facts", "azure_rm_mysql_virtualnetworkrule_facts"),
 
 
