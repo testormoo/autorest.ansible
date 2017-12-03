@@ -135,6 +135,15 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         except CloudError:
             self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
 @EmptyLine
+@{
+    string locationDisposition = Model.LocationDisposition;
+    if (null != locationDisposition)
+    {
+@:        if not @(locationDisposition).has_key("location"):
+@:            @(locationDisposition)["location"] = resource_group.location
+@EmptyLine
+    }
+}
         old_response = self.get_@(Model.ObjectNamePythonized)()
 @EmptyLine
         if not old_response:
@@ -152,7 +161,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             elif self.state == 'present':
                 self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
 @if (Model.NeedsDeleteBeforeUpdate)
-{
+    {
 @:                self.delete_@(Model.ObjectNamePythonized)()
 }
 @EmptyLine

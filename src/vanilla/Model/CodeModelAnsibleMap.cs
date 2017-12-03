@@ -61,6 +61,22 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string LocationDisposition
+        {
+            get
+            {
+                var location = Array.Find(ModuleOptions, e => (e.Name == "location"));
+                if (location != null)
+                {
+                    return location.Disposition;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public bool SelectNextMethod()
         {
             _selectedMethod++;
