@@ -98,6 +98,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_databases", "database_name", "testdatabase"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysql_databases", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_databases", "testdatabase"),
+            new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_mysql_databases"),
 
             // MySQL Server Firewall Rule
             new Tweak_Module_Rename("azure_rm_mysql_firewallrules", "azure_rm_mysql_firewallrule"),
@@ -107,6 +108,9 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "firewall_rule_name", "test-firewall-rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "start_ip_address", "172.28.10.136"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "end_ip_address", "172.28.10.138"),
+            new Tweak_Module_FlattenParametersDictionary("azure_rm_mysql_firewallrules"),
+            new Tweak_Module_AssertStateVariable("azure_rm_mysql_firewallrules", "name"),
+            new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_firewallrules", "test-firewall-rule"),
 
             // MySQL Server Configuration
             new Tweak_Module_Rename("azure_rm_mysql_configurations", "azure_rm_mysql_configuration"),
@@ -114,8 +118,11 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_mysql_configurations", "configuration_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "server_name", "test-mysql-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "configuration_name", "event_scheduler"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "value", "ON"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "value", "\"ON\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_configurations", "source", "user-override"),
+            new Tweak_Module_FlattenParametersDictionary("azure_rm_mysql_configurations"),
+            new Tweak_Module_AssertStateVariable("azure_rm_mysql_configurations", "value"),
+            new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_configurations", "ON"),
 
             // MySQL Server Virtual Network Rule
             new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules", "azure_rm_mysql_virtualnetworkrule"),

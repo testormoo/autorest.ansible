@@ -76,6 +76,11 @@ namespace AutoRest.Ansible.Model
 
     public class MapAnsibleModule
     {
+        public MapAnsibleModule()
+        {
+            NeedsDeleteBeforeUpdate = false;
+        }
+
         public string ModuleName { get; set; }
         public string ModuleNameAlt { get; set; }
         public ModuleOption[] Options { get; set; }
@@ -87,6 +92,8 @@ namespace AutoRest.Ansible.Model
         public string ModuleOperationNameUpper { get; set; }
         public string ModuleOperationName { get; set; }
         public string ObjectName { get; set; }
+
+        public bool NeedsDeleteBeforeUpdate { get; set; }
     }
 
     public class MapAnsible

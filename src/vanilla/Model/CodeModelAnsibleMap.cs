@@ -53,6 +53,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public bool NeedsDeleteBeforeUpdate
+        {
+            get
+            {
+                return Map.Modules[_selectedMethod].NeedsDeleteBeforeUpdate;
+            }
+        }
+
         public bool SelectNextMethod()
         {
             _selectedMethod++;
@@ -106,7 +114,7 @@ namespace AutoRest.Ansible.Model
             get
             {
                 var m = GetModuleMap(ModuleName);
-                IEnumerable<ModuleOption> options = from option in m.Options where (option.Disposition != "dictionary") && (option.Disposition != "default") select option;
+                IEnumerable<ModuleOption> options = from option in m.Options where (option.Disposition != "dictionary") && (option.Disposition != "default") && (option.Disposition != "none") select option;
                 return options.ToArray();
             }
         }

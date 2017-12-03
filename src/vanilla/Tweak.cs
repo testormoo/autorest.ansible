@@ -136,6 +136,62 @@ namespace AutoRest.Ansible
         private string _newName;
     }
 
+    class Tweak_Module_FlattenParametersDictionary : Tweak_Module
+    {
+        public Tweak_Module_FlattenParametersDictionary(string module)
+        {
+            _module = module;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleMethod method = null;
+            List<string> methodOptions = null;
+            string dictionaryName = "";
+
+            foreach (var mth in m.Methods)
+            {
+                if (mth.Name == "create_or_update")
+                {
+                    method = mth;
+                    methodOptions = method.RequiredOptions.ToList();
+                }
+            }
+
+
+            foreach (var o in m.Options)
+            {
+                if (o.Disposition == "dictionary")
+                {
+                    o.Disposition = "none";
+                    dictionaryName = o.Name;
+                    // remove from create_or_update function method list
+                    methodOptions.Remove(dictionaryName);
+                }
+                else if (o.Disposition == dictionaryName)
+                {
+                    o.Disposition = "default";
+                    methodOptions.Add(o.Name);
+                }
+            }
+
+            method.RequiredOptions = methodOptions.ToArray();
+        }
+    }
+
+    class Tweak_Module_NeedsDeleteBeforeUpdate : Tweak_Module
+    {
+        public Tweak_Module_NeedsDeleteBeforeUpdate(string module)
+        {
+            _module = module;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.NeedsDeleteBeforeUpdate = true;
+        }
+    }
+
     class Tweak_Module_AssertStateVariable : Tweak_Module
     {
         public Tweak_Module_AssertStateVariable(string module, string newValue)
@@ -280,6 +336,7 @@ namespace AutoRest.Ansible
         private string[] _path;
         private string _newValue;
     }
+
     class Tweak_Response_RenameField : Tweak_Response
     {
         public Tweak_Response_RenameField(string module, string path, string newName, int levelChange = 0)

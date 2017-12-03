@@ -151,6 +151,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
                 self.log("@(Model.ObjectName) instance deleted")
             elif self.state == 'present':
                 self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
+@if (Model.NeedsDeleteBeforeUpdate)
+{
+@:                self.delete_@(Model.ObjectNamePythonized)()
+}
 @EmptyLine
         if self.state == 'present':
 @EmptyLine
