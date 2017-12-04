@@ -192,6 +192,29 @@ namespace AutoRest.Ansible.Model
             get { return GetModuleTest(0, "Delete instance of", "delete"); }
         }
 
+        public string[] ModuleTestDeleteClearPrerequisites
+        {
+            get
+            {
+                List<string> prePlaybook = new List<string>();
+
+                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+
+                if ((prerequisites != null) && (prerequisites != ""))
+                {
+                    int old = _selectedMethod;
+                    if (SelectModuleByName(prerequisites))
+                    {
+                        prePlaybook.AddRange(ModuleTestDelete);
+       
+                        prePlaybook.AddRange(ModuleTestDeleteClearPrerequisites);
+                    }
+                    _selectedMethod = old;
+                }
+                return prePlaybook.ToArray();
+            }
+        }
+
         private string[] GetModuleTest(int level, string testType, string methodType)
         {
             List<string> prePlaybook = new List<string>();

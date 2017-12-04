@@ -41,3 +41,11 @@
 @:    that:
 @:      - output.changed
 }
+@if (Model.ModuleTestDeleteClearPrerequisites.Length > 0)
+{
+@EmptyLine
+    foreach (var line in Model.ModuleTestDeleteClearPrerequisites)
+    {
+@:@(line)
+    }
+}
