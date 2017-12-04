@@ -744,6 +744,27 @@ namespace AutoRest.Ansible.Model
             return help.ToArray();
         }
 
+        public string[] GetUpdateCheckRules()
+        {
+            List<string> rules = new List<string>();
+            MapAnsibleModule map = GetModuleMap(ModuleName);
+
+            if (null != map.UpdateComparisonRules)
+            {
+                foreach (var rule in map.UpdateComparisonRules)
+                {
+                    rules.Add("if (self." + rule.Option[0] + " is not None) and (self." + rule.Option[0] + " != old_response['" + rule.ReturnField[0] + "']):");
+                    rules.Add("    self.to_do = Actions.Update");
+                }
+            }
+            else
+            {
+                rules.Add("self.to_do = Actions.Update");
+            }
+
+            return rules.ToArray();
+        }
+
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         // HELPERS
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
