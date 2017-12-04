@@ -74,6 +74,17 @@ namespace AutoRest.Ansible.Model
         public string[] RequiredOptions { get; set; }
     }
 
+    public class UpdateComparisonRule
+    {
+        public UpdateComparisonRule(string[] optionPath, string[] returnPath)
+        {
+            Option = optionPath;
+            ReturnField = returnPath;
+        }
+        public string[] Option { get; set; }
+        public string[] ReturnField { get; set; }
+    }
+
     public class MapAnsibleModule
     {
         public MapAnsibleModule()
@@ -94,6 +105,8 @@ namespace AutoRest.Ansible.Model
         public string ObjectName { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
+
+        public UpdateComparisonRule[] UpdateComparisonRules { get; set; }
     }
 
     public class MapAnsible

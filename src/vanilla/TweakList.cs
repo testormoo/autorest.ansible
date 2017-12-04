@@ -104,6 +104,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_mysql_firewallrules", "azure_rm_mysql_firewallrule"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysql_firewallrules", "azure_rm_mysql_servers"),
             new Tweak_Option_Rename("azure_rm_mysql_firewallrules", "firewall_rule_name", "name"),
+            new Tweak_Option_Required("azure_rm_mysql_firewallrules", "start_ip_address", false),
+            new Tweak_Option_Required("azure_rm_mysql_firewallrules", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "server_name", "test-mysql-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "firewall_rule_name", "test-firewall-rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_firewallrules", "start_ip_address", "172.28.10.136"),
@@ -111,6 +113,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_FlattenParametersDictionary("azure_rm_mysql_firewallrules"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysql_firewallrules", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysql_firewallrules", "test-firewall-rule"),
+            new Tweak_Module_AddUpdateRule("azure_rm_mysql_firewallrules", "start_ip_address", "start_ip_address"),
+            new Tweak_Module_AddUpdateRule("azure_rm_mysql_firewallrules", "end_ip_address", "end_ip_address"),
 
             // MySQL Server Configuration
             new Tweak_Module_Rename("azure_rm_mysql_configurations", "azure_rm_mysql_configuration"),

@@ -256,6 +256,26 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
+    class Tweak_Module_AddUpdateRule : Tweak_Module
+    {
+        public Tweak_Module_AddUpdateRule(string module, string parameterPath, string responsePath)
+        {
+            _module = module;
+            _parameterPath = parameterPath.Split(":");
+            _responsePath = responsePath.Split(":");
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            List<Model.UpdateComparisonRule> rules = (m.UpdateComparisonRules != null) ? m.UpdateComparisonRules.ToList() : new List<Model.UpdateComparisonRule>();
+            rules.Add(new Model.UpdateComparisonRule(_parameterPath, _responsePath));
+            m.UpdateComparisonRules = rules.ToArray();
+        }
+
+        private string[] _parameterPath;
+        private string[] _responsePath;
+    }
+
     class Tweak_Option_Rename : Tweak_Option
     {
         public Tweak_Option_Rename(string module, string path, string newName, int levelChange = 0)
