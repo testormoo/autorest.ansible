@@ -237,9 +237,25 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         self.log("Creating / Updating the @(Model.ObjectName) instance {0}".format(self.@(Model.ModuleResourceName)))
 @EmptyLine
         try:
-@foreach (var line in Model.ModuleGenerateApiCall("            ", "create_or_update"))
+@if (Model.HasCreateOrUpdate())
 {
+    foreach (var line in Model.ModuleGenerateApiCall("            ", "create_or_update"))
+    {
 @:@line
+    }
+}
+else
+{
+@:            if self.to_do == Actions.Create:
+    foreach (var line in Model.ModuleGenerateApiCall("            ", "create"))
+    {
+@:    @line
+    }
+@:            else:
+    foreach (var line in Model.ModuleGenerateApiCall("            ", "update"))
+    {
+@:    @line
+    }
 }
             if isinstance(response, AzureOperationPoller):
                 response = self.get_poller_result(response)

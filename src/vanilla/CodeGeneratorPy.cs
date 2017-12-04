@@ -73,8 +73,8 @@ namespace AutoRest.Ansible
 
             do
             {
-                try
-                {
+                //try
+                //{
                     if (!codeModelPure.ModuleName.EndsWith("_facts"))
                     {
                         var ansibleTemplate = new AnsibleTemplate { Model = codeModelPure };
@@ -85,14 +85,14 @@ namespace AutoRest.Ansible
                         var ansibleTemplate = new AnsibleFactsTemplate { Model = codeModelPure };
                         await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
                     }
-                } catch (Exception e)
-                {
-
-                    List<string> updated = new List<string>();
-                    updated.AddRange(codeModelPure.MergeReport);
-                    updated.Add("EXCEPTION WHILE GENERATING: " + codeModelPure.ModuleName);
-                    codeModelPure.MergeReport = updated.ToArray();
-                }
+                //} catch (Exception e)
+                //{
+                //
+                //    List<string> updated = new List<string>();
+                //    updated.AddRange(codeModelPure.MergeReport);
+                //    updated.Add("EXCEPTION WHILE GENERATING: " + codeModelPure.ModuleName);
+                //    codeModelPure.MergeReport = updated.ToArray();
+                //}
                 var aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
                 await WriteWithLf(aliasesTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
 

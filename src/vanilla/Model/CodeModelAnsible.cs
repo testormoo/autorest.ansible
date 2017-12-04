@@ -64,12 +64,12 @@ namespace AutoRest.Ansible.Model
 
                 var module = new MapAnsibleModule();
 
-                if (ModuleCreateOrUpdateMethod != null)
+                if ((ModuleCreateOrUpdateMethod != null) || (ModuleCreateMethod != null))
                 {
                     op += " MAIN";
                     module.ModuleName = AnsibleModuleName;
                     module.ModuleNameAlt = module.ModuleName;
-                    module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name, true) : new List<ModuleOption>().ToArray();
+                    module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name, true) : CreateMethodOptions(ModuleCreateMethod.Name, true);
 
                     var methods = new List<ModuleMethod>();
 
@@ -89,6 +89,30 @@ namespace AutoRest.Ansible.Model
                         method.Name = ModuleCreateOrUpdateMethod.Name;
                         method.Options = GetMethodOptionNames(ModuleCreateOrUpdateMethod.Name, false);
                         method.RequiredOptions = GetMethodOptionNames(ModuleCreateOrUpdateMethod.Name);
+                        methods.Add(method);
+
+                        // XXX - make sure this should be here
+                        module.ResponseFields = CreateMethodResponseFields(method.Name);
+                    }
+
+                    if (ModuleCreateMethod != null)
+                    {
+                        var method = new ModuleMethod();
+                        method.Name = ModuleCreateMethod.Name;
+                        method.Options = GetMethodOptionNames(ModuleCreateMethod.Name, false);
+                        method.RequiredOptions = GetMethodOptionNames(ModuleCreateMethod.Name);
+                        methods.Add(method);
+
+                        // XXX - make sure this should be here
+                        module.ResponseFields = CreateMethodResponseFields(method.Name);
+                    }
+
+                    if (ModuleUpdateMethod != null)
+                    {
+                        var method = new ModuleMethod();
+                        method.Name = ModuleUpdateMethod.Name;
+                        method.Options = GetMethodOptionNames(ModuleUpdateMethod.Name, false);
+                        method.RequiredOptions = GetMethodOptionNames(ModuleUpdateMethod.Name);
                         methods.Add(method);
 
                         // XXX - make sure this should be here
@@ -214,6 +238,22 @@ namespace AutoRest.Ansible.Model
             get
             {
                 return ModuleFindMethod("create_or_update");
+            }
+        }
+
+        public Method ModuleCreateMethod
+        {
+            get
+            {
+                return ModuleFindMethod("create");
+            }
+        }
+
+        public Method ModuleUpdateMethod
+        {
+            get
+            {
+                return ModuleFindMethod("update");
             }
         }
 

@@ -254,6 +254,11 @@ namespace AutoRest.Ansible.Model
             return null;
         }
 
+        public bool HasCreateOrUpdate()
+        {
+            return GetMethod("create_or_update") != null;
+        }
+
         public string[] GetMethodOptionNames(string methodName)
         {
             var m = GetModuleMap(ModuleName);
