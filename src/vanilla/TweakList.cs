@@ -11,6 +11,12 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("*", "resource_group_name", "resource_group"),
             new Tweak_Option_DefaultValueTest("*", "resource_group_name", "\"{{ resource_group }}\""),
             new Tweak_Option_Required("*", "location", false),
+            new Tweak_Response_AddField("*", "id"),
+            new Tweak_Response_AddField("*", "status"),
+            new Tweak_Response_AddField("*", "fully_qualified_domain_name"),
+            new Tweak_Response_AddField("*", "version"),
+            new Tweak_Response_AddField("*", "state"),
+            new Tweak_Response_AddField("*", "user_visible_state"),
 
             // SQL Server
             new Tweak_Module_Rename("azure_rm_sql_servers", "azure_rm_sqlserver"),
@@ -26,14 +32,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("azure_rm_sql_servers", "identity", ""),
             new Tweak_Option_DefaultValueSample("azure_rm_sql_servers", "identity.type", ""), // XXX - this is a bug
             new Tweak_Option_DefaultValueSample("azure_rm_sql_servers", "version", ""),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "tags"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "identity"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "name"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "type"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "location"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "kind"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "administrator_login"),
-            new Tweak_Response_RemoveField("azure_rm_sql_servers", "administrator_login_password"),
             new Tweak_Response_FieldSampleValue("azure_rm_sql_servers", "id", "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645"),
             new Tweak_Response_FieldSampleValue("azure_rm_sql_servers", "version", "12.0"),
             new Tweak_Response_FieldSampleValue("azure_rm_sql_servers", "fully_qualified_domain_name", "sqlcrudtest-4645.database.windows.net"),
@@ -44,12 +42,13 @@ namespace AutoRest.Ansible
 
             // SQL Database
             new Tweak_Module_Rename("azure_rm_sql_databases", "azure_rm_sqldatabase"),
-            new Tweak_Module_ObjectName("azure_rm_sql_databases", "Database"),
+            new Tweak_Module_ObjectName("azure_rm_sql_databases", "SQL Database"),
             new Tweak_Option_Rename("azure_rm_sql_databases", "database_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sql_databases", "azure_rm_sql_servers"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "server_name", "sql-test-server-dauih"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "database_name", "test-database"),
             new Tweak_Option_DefaultValueTest("azure_rm_sql_databases", "location", "eastus"),
+            new Tweak_Response_AddField("azure_rm_sql_databases", "database_id"),
             new Tweak_Module_AssertStateVariable("azure_rm_sql_databases", "status"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sql_databases", "Online"),
 
@@ -77,6 +76,7 @@ namespace AutoRest.Ansible
 
             // MySQL Server
             new Tweak_Module_Rename("azure_rm_mysql_servers", "azure_rm_mysqlserver"),
+            new Tweak_Module_ObjectName("azure_rm_mysql_servers", "MySQL Server"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "server_name", "name"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_mysql_servers", "properties.administrator_login_password", "admin_password"),
@@ -92,6 +92,7 @@ namespace AutoRest.Ansible
 
             // MySQL Database
             new Tweak_Module_Rename("azure_rm_mysql_databases", "azure_rm_mysqldatabase"),
+            new Tweak_Module_ObjectName("azure_rm_mysql_databases", "MySQL Database"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysql_databases", "azure_rm_mysql_servers"),
             new Tweak_Option_Rename("azure_rm_mysql_databases", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysql_databases", "server_name", "test-mysql-server"),
@@ -144,8 +145,10 @@ namespace AutoRest.Ansible
 
             // PostgreSQL
             new Tweak_Module_Rename("azure_rm_postgresql_configurations", "azure_rm_postgresqlconfiguration"),
+            new Tweak_Module_ObjectName("azure_rm_postgresql_servers", "PostgreSQL Server"),
             new Tweak_Module_Rename("azure_rm_postgresql_configurations_facts", "azure_rm_postgresqlconfiguration_facts"),
             new Tweak_Module_Rename("azure_rm_postgresql_databases", "azure_rm_postgresqldatabase"),
+            new Tweak_Module_ObjectName("azure_rm_postgresql_databases", "PostgreSQL Database"),
             new Tweak_Module_Rename("azure_rm_postgresql_databases_facts", "azure_rm_postgresqldatabase_facts"),
             new Tweak_Module_Rename("azure_rm_postgresql_databases", "azure_rm_postgresqldatabase"),
             new Tweak_Module_Rename("azure_rm_postgresql_databases_facts", "azure_rm_postgresqldatabase_facts"),

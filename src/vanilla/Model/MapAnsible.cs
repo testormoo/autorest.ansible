@@ -49,7 +49,7 @@ namespace AutoRest.Ansible.Model
     {
         public ModuleResponseField(string name, string type, string description, string sampleValue)
         {
-            Name = name; NameAlt = name; Type = type;
+            Name = name; NameAlt = "x"; Type = type;
             SubFields = null; // if dictionary or list of dictionaries
             Description = description;
             SampleValue = sampleValue;

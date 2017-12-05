@@ -386,6 +386,23 @@ namespace AutoRest.Ansible
         }
     }
 
+    class Tweak_Response_AddField : Tweak_Response
+    {
+        public Tweak_Response_AddField(string module, string path)
+        {
+            _module = module;
+            _path = path.Split(".");
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleResponseField field = GetResultField(m, _map, _path);
+            if (field != null) field.NameAlt = field.Name;
+        }
+
+        private string[] _path;
+    }
+
     class Tweak_Response_FieldSampleValue : Tweak_Response
     {
         public Tweak_Response_FieldSampleValue(string module, string path, string newValue, int levelChange = 0)
