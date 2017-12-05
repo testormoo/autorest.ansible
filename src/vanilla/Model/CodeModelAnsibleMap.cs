@@ -251,6 +251,7 @@ namespace AutoRest.Ansible.Model
                 {
                     case "SqlManagementClient": return "azure.mgmt.sql";
                     case "MySQLManagementClient": return "azure.mgmt.rdbms.mysql";
+                    case "PostgreSQLManagementClient": return "azure.mgmt.rdbms.postgresql";
                     default: return "azure.mgmt." + Namespace;
                 }
             }

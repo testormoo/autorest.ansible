@@ -149,10 +149,14 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_postgresql_servers", "server_name", "name"),
             new Tweak_Option_Rename("azure_rm_postgresql_servers", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_postgresql_servers", "properties.administrator_login_password", "admin_password"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "location", "westus"),
             new Tweak_Option_Required("azure_rm_postgresql_servers", "properties", false),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "server_name", "test-postgresql-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "properties.administrator_login", "zimxyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "properties.administrator_login_password", "Testpasswordxyz12!"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "properties.create_mode", "Default"),
+            new Tweak_Module_AssertStateVariable("azure_rm_postgresql_servers", "user_visible_state"),
+            new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresql_servers", "Ready"),
 
             // PostgreSQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresql_databases", "azure_rm_postgresql_servers"),
