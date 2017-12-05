@@ -225,7 +225,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @:        old_value = d.get(old_name, None)
 @:        if old_value is not None:
 @:            d.pop(old_name, None)
-@:            d[new_name] = old_value;
+@:            d[new_name] = old_value
 }
 @EmptyLine
     def create_update_@(Model.ObjectNamePythonized)(self):
