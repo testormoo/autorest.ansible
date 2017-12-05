@@ -143,9 +143,27 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_mysql_virtualnetworkrules_facts", "azure_rm_mysqlvirtualnetworkrule_facts"),
 
 
-            // PostgreSQL
-            new Tweak_Module_Rename("azure_rm_postgresql_configurations", "azure_rm_postgresqlconfiguration"),
+            // PostgreSQL Server
+            new Tweak_Module_Rename("azure_rm_postgresql_servers", "azure_rm_postgresqlserver"),
             new Tweak_Module_ObjectName("azure_rm_postgresql_servers", "PostgreSQL Server"),
+            new Tweak_Option_Rename("azure_rm_postgresql_servers", "server_name", "name"),
+            new Tweak_Option_Rename("azure_rm_postgresql_servers", "properties.administrator_login", "admin_username"),
+            new Tweak_Option_Rename("azure_rm_postgresql_servers", "properties.administrator_login_password", "admin_password"),
+            new Tweak_Option_Required("azure_rm_postgresql_servers", "properties", false),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "server_name", "test-postgresql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "properties.administrator_login", "zimxyz"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_servers", "properties.administrator_login_password", "Testpasswordxyz12!"),
+
+            // PostgreSQL Database
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresql_databases", "azure_rm_postgresql_servers"),
+            new Tweak_Option_Rename("azure_rm_postgresql_databases", "database_name", "name"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_databases", "server_name", "test-postgresql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresql_databases", "database_name", "testdatabase"),
+            new Tweak_Module_AssertStateVariable("azure_rm_postgresql_databases", "name"),
+            new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresql_databases", "testdatabase"),
+//            new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_postgresql_databases"),
+
+            new Tweak_Module_Rename("azure_rm_postgresql_configurations", "azure_rm_postgresqlconfiguration"),
             new Tweak_Module_Rename("azure_rm_postgresql_configurations_facts", "azure_rm_postgresqlconfiguration_facts"),
             new Tweak_Module_Rename("azure_rm_postgresql_databases", "azure_rm_postgresqldatabase"),
             new Tweak_Module_ObjectName("azure_rm_postgresql_databases", "PostgreSQL Database"),
@@ -154,7 +172,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_postgresql_databases_facts", "azure_rm_postgresqldatabase_facts"),
             new Tweak_Module_Rename("azure_rm_postgresql_firewallrules", "azure_rm_postgresqlfirewallrule"),
             new Tweak_Module_Rename("azure_rm_postgresql_firewallrules_facts", "azure_rm_postgresqlfirewallrule_facts"),
-            new Tweak_Module_Rename("azure_rm_postgresql_servers", "azure_rm_postgresqlserver"),
             new Tweak_Module_Rename("azure_rm_postgresql_servers_facts", "azure_rm_postgresqlserver_facts"),
             new Tweak_Module_Rename("azure_rm_postgresql_virtualnetworkrules", "azure_rm_postgresqlvirtualnetworkrule"),
             new Tweak_Module_Rename("azure_rm_postgresql_virtualnetworkrules_facts", "azure_rm_postgresqlvirtualnetworkrule_facts"),
