@@ -144,7 +144,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
     string locationDisposition = Model.LocationDisposition;
     if (null != locationDisposition)
     {
-@:        if not self.@(locationDisposition).has_key("location"):
+@:        if not ("location" in self.@(locationDisposition)):
 @:            self.@(locationDisposition)["location"] = resource_group.location
 @EmptyLine
     }
