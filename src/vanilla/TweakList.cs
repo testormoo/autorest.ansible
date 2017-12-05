@@ -182,6 +182,14 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_postgresql_virtualnetworkrules", "azure_rm_postgresqlvirtualnetworkrule"),
             new Tweak_Module_Rename("azure_rm_postgresql_virtualnetworkrules_facts", "azure_rm_postgresqlvirtualnetworkrule_facts"),
 
+            // Authorization
+            new Tweak_Module_Rename("azure_rm_authorization_roledefinitions", "azure_rm_authorizationroledefinition"),
+            new Tweak_Module_Rename("azure_rm_authorization_roleassignments", "azure_rm_authorizationroleassignment"),
+            new Tweak_Module_Rename("azure_rm_authorization_roledefinitions_facts", "azure_rm_authorizationroledefinition_facts"),
+            new Tweak_Module_Rename("azure_rm_authorization_roleassignments_facts", "azure_rm_authorizationroleassignment_facts"),
+            new Tweak_Module_Rename("azure_rm_authorization_permissions_facts", "azure_rm_authorizationpermissions_facts"),
+            new Tweak_Module_Rename("azure_rm_authorization_provideroperationsmetadata_facts", "azure_rm_authorizationprovideroperationsmetadata_facts"),
+
         };
     }
 }
