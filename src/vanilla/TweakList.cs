@@ -194,6 +194,14 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_authorization_permissions_facts", "azure_rm_authorizationpermissions_facts"),
             new Tweak_Module_Rename("azure_rm_authorization_provideroperationsmetadata_facts", "azure_rm_authorizationprovideroperationsmetadata_facts"),
 
+
+            // RELEASE STATUS FOR VARIOUS MODULES
+            new Tweak_Module_ReleaseStatus("azure_rm_sql_servers", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysql_servers", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresql_servers", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sql_databases", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysql_databases", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresql_databases", "RP"),
         };
     }
 }

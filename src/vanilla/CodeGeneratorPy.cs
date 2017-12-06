@@ -73,34 +73,35 @@ namespace AutoRest.Ansible
 
             do
             {
-                //try
-                //{
-                    if (!codeModelPure.ModuleName.EndsWith("_facts"))
-                    {
-                        var ansibleTemplate = new AnsibleTemplate { Model = codeModelPure };
-                        await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
-                    }
-                    else
-                    {
-                        var ansibleTemplate = new AnsibleFactsTemplate { Model = codeModelPure };
-                        await Write(ansibleTemplate, Path.Combine("lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
-                    }
-                //} catch (Exception e)
-                //{
-                //
-                //    List<string> updated = new List<string>();
-                //    updated.AddRange(codeModelPure.MergeReport);
-                //    updated.Add("EXCEPTION WHILE GENERATING: " + codeModelPure.ModuleName);
-                //    codeModelPure.MergeReport = updated.ToArray();
-                //}
-                var aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
-                await WriteWithLf(aliasesTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
+                bool isFacts = codeModelPure.ModuleName.EndsWith("_facts");
+                ITemplate ansibleTemplate = new AnsibleTemplate { Model = codeModelPure };
+                ITemplate ansibleTemplateFacts = new AnsibleFactsTemplate { Model = codeModelPure };
+                ITemplate aliasesTemplate = new AliasesTemplate { Model = codeModelPure };
+                ITemplate metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
+                ITemplate tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
 
-                var metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
-                await WriteWithLf(metaMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+                await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("all", "lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
+                await WriteWithLf(aliasesTemplate, Path.Combine("all", "test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
+                await WriteWithLf(metaMainYmlTemplate, Path.Combine("all", "test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+                await WriteWithLf(tasksMainYmlTemplate, Path.Combine("all", "test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
 
-                var tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
-                await WriteWithLf(tasksMainYmlTemplate, Path.Combine("test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
+                string status = codeModelPure.GetModuleReleaseStatus();
+
+                if (status.Contains('R'))
+                {
+                    await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("role", "modules", codeModelPure.ModuleNameAlt + ".py"));
+                    await WriteWithLf(aliasesTemplate, Path.Combine("role", "tests", codeModelPure.ModuleNameAlt, "aliases"));
+                    await WriteWithLf(metaMainYmlTemplate, Path.Combine("role", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+                    await WriteWithLf(tasksMainYmlTemplate, Path.Combine("role", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
+                }
+
+                if (status.Contains('P'))
+                {
+                    await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("prs", "modules", codeModelPure.ModuleNameAlt + ".py"));
+                    await WriteWithLf(aliasesTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "aliases"));
+                    await WriteWithLf(metaMainYmlTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+                    await WriteWithLf(tasksMainYmlTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
+                }
             } while (codeModelPure.SelectNextMethod());
 
             var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };

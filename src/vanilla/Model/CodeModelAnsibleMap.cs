@@ -38,6 +38,11 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string GetModuleReleaseStatus()
+        {
+            return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].ReleaseStatus : "";
+        }
+
         public string ModuleNameAlt
         {
             get

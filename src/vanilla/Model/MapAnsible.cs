@@ -90,6 +90,7 @@ namespace AutoRest.Ansible.Model
         public MapAnsibleModule()
         {
             NeedsDeleteBeforeUpdate = false;
+            ReleaseStatus = "";
         }
 
         public string ModuleName { get; set; }
@@ -103,6 +104,11 @@ namespace AutoRest.Ansible.Model
         public string ModuleOperationNameUpper { get; set; }
         public string ModuleOperationName { get; set; }
         public string ObjectName { get; set; }
+
+        // Release status may contain:
+        // 'R' : add to role
+        // 'P' : pull request to ansible 
+        public string ReleaseStatus { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
 
