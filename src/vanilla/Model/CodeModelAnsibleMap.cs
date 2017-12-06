@@ -71,6 +71,12 @@ namespace AutoRest.Ansible.Model
             return (Array.Find(ModuleOptions, element => (element.Name == "resource_group_name")) != null);
         }
 
+        public bool HasPrerequisites()
+        {
+            string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+            return ((prerequisites != null) && (prerequisites != ""));
+        }
+
         public string LocationDisposition
         {
             get

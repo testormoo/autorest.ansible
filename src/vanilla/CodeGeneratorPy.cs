@@ -80,10 +80,10 @@ namespace AutoRest.Ansible
                 ITemplate metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
                 ITemplate tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
 
-                await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("all", "lib", "ansible", "modules", "cloud", "azure", codeModelPure.ModuleNameAlt + ".py"));
-                await WriteWithLf(aliasesTemplate, Path.Combine("all", "test", "integration", "targets", codeModelPure.ModuleNameAlt, "aliases"));
-                await WriteWithLf(metaMainYmlTemplate, Path.Combine("all", "test", "integration", "targets", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
-                await WriteWithLf(tasksMainYmlTemplate, Path.Combine("all", "test", "integration", "targets", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
+                await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("all", "modules", codeModelPure.ModuleNameAlt + ".py"));
+                await WriteWithLf(aliasesTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "aliases"));
+                await WriteWithLf(metaMainYmlTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
+                await WriteWithLf(tasksMainYmlTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
 
                 string status = codeModelPure.GetModuleReleaseStatus();
 
