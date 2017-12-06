@@ -373,6 +373,35 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
+    class Tweak_Option_Flatten : Tweak_Option
+    {
+        public Tweak_Option_Flatten(string module, string path, string namePrefix)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _namePrefix = namePrefix;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+
+            if (option == null)
+                return;
+
+            if (option.IsList)
+                return;
+
+            if (option.Type != "dict")
+                return;
+
+            // XXX - move all the necessary options
+        }
+
+        private string[] _path;
+        private string _namePrefix;
+    }
+
     class Tweak_Response_RenameField : Tweak_Response
     {
         public Tweak_Response_RenameField(string module, string path, string newName, int levelChange = 0)
