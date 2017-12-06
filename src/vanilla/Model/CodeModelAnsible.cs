@@ -327,7 +327,9 @@ namespace AutoRest.Ansible.Model
                             if (flatten)
                             {
                                 // add hidden dictionary option here anyway to store all flattened values
+                               
                                 var suboption = new ModuleOption(p.Name, "dict", "False", "dict()");
+                                suboption.IsList = (p.ModelTypeName == "list");
                                 suboption.Disposition = "dictionary";
                                 suboption.Documentation = p.Documentation;
                                 suboption.IsList = false;

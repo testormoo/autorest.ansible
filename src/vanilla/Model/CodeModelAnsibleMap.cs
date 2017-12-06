@@ -552,7 +552,29 @@ namespace AutoRest.Ansible.Model
 
                 //CompositeTypePy submodel = GetModelTypeByName(option.ModelTypeName);
 
-                if (option.SubOptions != null && option.SubOptions.Length > 0)
+                if (option.IsList)
+                {
+                    help.Add(propertyLine);
+
+                    if (option.Type == "dict")
+                    {
+                        bool first = true;
+                        foreach (var line in GetPlaybookFromOptions(option.SubOptions, "", test))
+                        {
+                            help.Add((first ? padding + "  - " : padding + "    ") + line);
+                            first = false;
+                        }
+                    }
+                    else if (option.Type == "list")
+                    {
+                        help.Add(padding + "  - " + "XXXX - list of lists -- not implemented " + option.Type);
+                    }
+                    else
+                    {
+                        help.Add(padding + "  - " + "XXXX - list of values -- not implemented " + option.Type);
+                    }
+                }
+                else if (option.SubOptions != null && option.SubOptions.Length > 0)
                 {
                     string[] sub = GetPlaybookFromOptions(option.SubOptions, padding + "  ", test);
 
@@ -560,29 +582,6 @@ namespace AutoRest.Ansible.Model
                     {
                         help.Add(propertyLine);
                         help.AddRange(sub);
-                    }
-                }
-                else if (option.IsList)
-                {
-                    help.Add(propertyLine);
-
-                    if (option.Type == "dict")
-                    {
-                        help.Add(padding + "  - " + "XXXX - list of dicts -- implemented" + option.Type);
-                        bool first = true;
-                        foreach (var line in GetPlaybookFromOptions(option.SubOptions, "", test))
-                        {
-                            help.Add((first ? padding + "  - " : padding + "X   ") + line);
-                            first = false;
-                        }
-                    }
-                    if (option.Type == "list")
-                    {
-                        help.Add(padding + "  - " + "XXXX - list of lists -- not implemented " + option.Type);
-                    }
-                    else
-                    {
-                        help.Add(padding + "  - " + "XXXX - list of values -- not implemented " + option.Type);
                     }
                 }
                 else
