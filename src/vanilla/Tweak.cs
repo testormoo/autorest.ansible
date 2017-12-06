@@ -395,7 +395,27 @@ namespace AutoRest.Ansible
             if (option.Type != "dict")
                 return;
 
-            // XXX - move all the necessary options
+            Model.ModuleOption[] options = option.SubOptions;
+            option.SubOptions = null;
+            
+            foreach (var suboption in options)
+            {
+                suboption.Disposition = ((option.Disposition != "default") ? option.Disposition : "") + ":" + option.Name;
+                suboption.NameAlt = _namePrefix + suboption.NameAlt;
+            }
+
+            option.Disposition += ":dictionary";
+
+            if (_path.Length == 1)
+            {
+                List<Model.ModuleOption> o = m.Options.ToList();
+                o.AddRange(options);
+                m.Options = o.ToArray();
+            }
+            else
+            {
+                // XXX - to be implemented
+            }
         }
 
         private string[] _path;

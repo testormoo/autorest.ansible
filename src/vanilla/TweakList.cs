@@ -186,7 +186,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_authorization_roledefinitions", "azure_rm_authorizationroledefinition"),
             new Tweak_Option_DefaultValueTest("azure_rm_authorization_roledefinitions", "role_definition_id", "rolexyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_authorization_roledefinitions", "scope", "\"/subscriptions/{{ azure_subscription_id }}\""),
-
+            new Tweak_Option_Flatten("azure_rm_authorization_roledefinitions", "properties", "properties_"),
 
 
 
