@@ -172,12 +172,48 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string[] ModuleSecondLevelOptionsMapStatements
+        {
+            get
+            {
+                var variables = new List<string>();
+                var m = GetModuleMap(ModuleName);
+                ModuleOption[] options = ModuleOptionsSecondLevel;
+
+                foreach (var option in options)
+                {
+                    string[] path = option.Disposition.Split(":");
+                    string variable = "self." + path[0];
+
+                    if (path.Length > 1)
+                    {
+                        for (int i = 1; i < path.Length; i++)
+                            variable += "['" + path[i] + "']";
+                    }
+
+                    variable += "[\"" + option.Name + "\"] = kwargs[key]";
+
+                    variables.Add("elif key == \"" + option.NameAlt + "\":");
+                    variables.Add("    " + variable);
+                }
+
+                return variables.ToArray();
+            }
+        }
+
+
         public ModuleOption[] ModuleOptionsSecondLevel
         {
             get
             {
                 var m = GetModuleMap(ModuleName);
-                IEnumerable<ModuleOption> options = from option in m.Options where (option.Disposition != "dictionary") && (option.Disposition != "default") && (option.Disposition != "none") select option;
+                IEnumerable<ModuleOption> options = from option
+                                                    in m.Options
+                                                    where (option.Disposition != "dictionary") &&
+                                                          (option.Disposition != "default") &&
+                                                          (option.Disposition != "none") &&
+                                                          (!option.Disposition.EndsWith(":dictionary"))
+                                                    select option;
                 return options.ToArray();
             }
         }

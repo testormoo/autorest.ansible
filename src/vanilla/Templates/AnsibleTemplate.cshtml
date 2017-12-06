@@ -118,10 +118,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         for key in list(self.module_arg_spec.keys()) + ['tags']:
             if hasattr(self, key):
                 setattr(self, key, kwargs[key])
-@foreach (var o in Model.ModuleOptionsSecondLevel)
+@foreach (var o in Model.ModuleSecondLevelOptionsMapStatements)
 {
-@:            elif key == "@(o.NameAlt)":
-@:                self.@(o.Disposition)["@(o.Name)"] = kwargs[key]
+@:            @(o)
 }
 @EmptyLine
 @if (Model.FixParameterStatements.Length > 0)
