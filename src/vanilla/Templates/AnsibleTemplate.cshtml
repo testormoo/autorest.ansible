@@ -51,11 +51,6 @@ EXAMPLES = '''
 '''
 @EmptyLine
 RETURN = '''
-state:
-    description: Current state of @(Model.ObjectName)
-    returned: always
-    type: complex
-    contains:
 @foreach (var line in Model.ModuleReturnResponseFields)
 {
 @:@(line)
@@ -184,11 +179,12 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             if self.check_mode:
                 return self.results
 @EmptyLine
-            self.results['state'] = self.create_update_@(Model.ObjectNamePythonized)()
+            response = self.create_update_@(Model.ObjectNamePythonized)()
             if not old_response:
                 self.results['changed'] = True
             else:
-                self.results['changed'] = old_response.__ne__(self.results['state'])
+                self.results['changed'] = old_response.__ne__(response)
+            self.results.update(response)
 @EmptyLine
 @{
     var stmts = Model.DeleteResponseFieldStatements;

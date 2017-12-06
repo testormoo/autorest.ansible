@@ -333,6 +333,26 @@ namespace AutoRest.Ansible
         private string[] _path;
         private bool _newValue;
     }
+
+    class Tweak_Option_DefaultValue : Tweak_Option
+    {
+        public Tweak_Option_DefaultValue(string module, string path, string value)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _value = value;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null) option.DefaultValue = _value;
+        }
+
+        private string[] _path;
+        private string _value;
+    }
+
     class Tweak_Option_DefaultValueTest : Tweak_Option
     {
         public Tweak_Option_DefaultValueTest(string module, string path, string newValue)

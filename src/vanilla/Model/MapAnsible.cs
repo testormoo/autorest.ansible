@@ -22,6 +22,7 @@ namespace AutoRest.Ansible.Model
             SubOptions = null;
             IsList = false;
             Disposition = "default";
+            DefaultValue = null;
             DefaultValueSample = NameAlt;
             DefaultValueTest = "";
         }
@@ -39,6 +40,7 @@ namespace AutoRest.Ansible.Model
         public string Required { get; set; }
         public string VariableValue { get; set; }
         public string Documentation { get; set; }
+        public string DefaultValue { get; set; }
         public string DefaultValueSample { get; set; }
         public string DefaultValueTest { get; set; }
         public ModuleOption[] SubOptions { get; set; }

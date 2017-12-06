@@ -230,7 +230,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetHelpFromResponseFields(ModuleResponseFields, "        ");
+                return GetHelpFromResponseFields(ModuleResponseFields, "");
             }
         }
 
@@ -727,7 +727,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetExcludedResponseFieldDeleteStatements(ModuleResponseFields, "self.results['state']");
+                return GetExcludedResponseFieldDeleteStatements(ModuleResponseFields, "self.results");
             }
         }
 
