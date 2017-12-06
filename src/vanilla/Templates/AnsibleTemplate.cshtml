@@ -98,9 +98,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
             )
         )
 @EmptyLine
-@foreach (var v in Model.ModuleOptionsUnflattened)
+@foreach (var v in Model.ModuleTopLevelOptionsVariables)
 {
-@:        self.@(v.NameAlt) = @(v.VariableValue)
+@:        @(v)
 }
 @EmptyLine
         self.results = dict(changed=False, state=dict())

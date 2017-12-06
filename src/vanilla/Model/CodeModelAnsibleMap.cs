@@ -141,6 +141,37 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string[] ModuleTopLevelOptionsVariables
+        {
+            get
+            {
+                var variables = new List<string>();
+                var m = GetModuleMap(ModuleName);
+                IEnumerable<ModuleOption> options = from option
+                                                    in m.Options
+                                                    where option.Disposition == "dictionary" ||
+                                                          option.Disposition.EndsWith(":dictionary") ||
+                                                          option.Disposition == "default"
+                                                    select option;
+                foreach (var option in options)
+                {
+                    if (option.Disposition == "default" || option.Disposition == "dictionary")
+                    {
+                        variables.Add("self." + option.NameAlt + " = " + option.VariableValue);
+                    }
+                    else
+                    {
+                        // XXX - right now just supporting 2 levels
+                        string[] path = option.Disposition.Split(":");
+                        string variable = "self." + path[0] + "['" + option.NameAlt + "'] = dict()";
+                        variables.Add(variable);
+                    }
+                }
+
+                return variables.ToArray();
+            }
+        }
+
         public ModuleOption[] ModuleOptionsSecondLevel
         {
             get
