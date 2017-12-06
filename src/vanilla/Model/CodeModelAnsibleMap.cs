@@ -61,6 +61,11 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public bool HasResourceGroup()
+        {
+            return (Array.Find(ModuleOptions, element => (element.Name == "resource_group_name")) != null);
+        }
+
         public string LocationDisposition
         {
             get

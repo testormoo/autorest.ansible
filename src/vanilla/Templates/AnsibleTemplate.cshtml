@@ -134,11 +134,14 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @EmptyLine
         self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
                                                     base_url=self._cloud_environment.endpoints.resource_manager)
+@if (Model.HasResourceGroup())
+{
 @EmptyLine
-        try:
-            resource_group = self.get_resource_group(self.@(Model.ModuleResourceGroupName))
-        except CloudError:
-            self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
+@:        try:
+@:            resource_group = self.get_resource_group(self.@(Model.ModuleResourceGroupName))
+@:        except CloudError:
+@:            self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
+}
 @EmptyLine
 @{
     string locationDisposition = Model.LocationDisposition;
