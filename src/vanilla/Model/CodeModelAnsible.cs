@@ -32,8 +32,20 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string multi = (Operations.Count > 1) ? Namespace + "_" : "";
-                return "azure_rm_" + multi + Operations[CurrentOperationIndex].Name.ToLower();
+                string multi = (Operations.Count > 1) ? Namespace : "";
+                string name = "azure_rm_" + multi + Operations[CurrentOperationIndex].Name.ToLower();
+
+                // let's try to be smart here, as all operation names are plural so let's try to make it singular
+                if (name.EndsWith("cies"))
+                {
+                    name = name.Substring(0, name.Length - 3) + "y";
+                }
+                else if (name.EndsWith('s'))
+                {
+                    name = name.Substring(0, name.Length - 1);
+                }
+
+                return name;
             }
         }
 
