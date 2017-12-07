@@ -165,7 +165,7 @@ namespace AutoRest.Ansible
 
             // Authorization
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "role_definition_id", "rolexyz"),
-            new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "scope", "\"/subscriptions/{{ azure_subscription_id }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "scope", "\"/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a\""),
             new Tweak_Option_Flatten("azure_rm_authorizationroledefinition", "properties", "properties_"),
 
             // RELEASE STATUS FOR VARIOUS MODULES

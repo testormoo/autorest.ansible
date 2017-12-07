@@ -81,7 +81,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @foreach (var param in Model.ModuleOptions)
 {
 @:            @(param.NameAlt)=dict(
-@:                type='@(param.Type)',
+@:                type='@(param.IsList ? "list" : param.Type)',
 @:                required=@(param.Required)
 @:            ),
 }
