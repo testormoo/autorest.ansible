@@ -5,6 +5,10 @@
 @using AutoRest.Ansible
 @using AutoRest.Ansible.Model
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
+- name: Prepare random number
+  set_fact:
+    random_postfix: "{{ 100 | random }}"
+  run_once: yes
 
 @foreach (var line in Model.GetModuleTestCreate())
 {
