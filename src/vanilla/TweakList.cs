@@ -37,13 +37,13 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "administrator_login", "mylogin"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "location", "eastus"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "server_name", "sql-test-server-dauih"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "server_name", "\"sqlsrv{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
 
             // SQL Database
             new Tweak_Module_ObjectName("azure_rm_sqldatabase", "SQL Database"),
             new Tweak_Option_Rename("azure_rm_sqldatabase", "database_name", "name"),
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "sql-test-server-dauih"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", "sqlsrv", "sqlsrvdb"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "\"sqlsrv{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "database_name", "test-database"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "location", "eastus"),
             new Tweak_Response_AddField("azure_rm_sqldatabase", "database_id"),
@@ -53,7 +53,7 @@ namespace AutoRest.Ansible
             // SQL Elastic Pool
             new Tweak_Module_ObjectName("azure_rm_sqlelasticpool", "ElasticPool"),
             new Tweak_Option_Rename("azure_rm_sqlelasticpool", "elastic_pool_name", "name"),
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool", "azure_rm_sqlserver"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool", "azure_rm_sqlserver", "sqlsrv", "sqlsrvep"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "server_name", "zims-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "elastic_pool_name", "test-elastic-pool"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "location", "westus"),
@@ -76,7 +76,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_Required("azure_rm_mysqlserver", "properties", false),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "server_name", "\"mysqlsrv{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.version", "5.6"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.create_mode", "Default"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login", "zimxyz"),
@@ -87,9 +87,9 @@ namespace AutoRest.Ansible
 
             // MySQL Database
             new Tweak_Module_ObjectName("azure_rm_mysqldatabase", "MySQL Database"),
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", "sqlsrv", "sqlsrvdb"),
             new Tweak_Option_Rename("azure_rm_mysqldatabase", "database_name", "name"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "\"mysqlsrv{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "database_name", "testdatabase"),
             new Tweak_Response_AddField("azure_rm_mysqldatabase", "name"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqldatabase", "name"),
@@ -97,7 +97,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_mysqldatabase"),
 
             // MySQL Server Firewall Rule
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver", "sqlsrv", "sqlsrvfr"),
             new Tweak_Option_Rename("azure_rm_mysqlfirewallrule", "firewall_rule_name", "name"),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "end_ip_address", false),
@@ -113,7 +113,7 @@ namespace AutoRest.Ansible
 
             // MySQL Server Configuration
             new Tweak_Module_Rename("azure_rm_mysqlconfiguration", "azure_rm_mysqlconfiguration"),
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", "sqlsrv", "sqlsrvcfg"),
             new Tweak_Option_Rename("azure_rm_mysqlconfiguration", "configuration_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "server_name", "test-mysql-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "configuration_name", "event_scheduler"),
@@ -124,7 +124,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlconfiguration", "ON"),
 
             // MySQL Server Virtual Network Rule
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver", "sqlsrv", "sqlsrvvn"),
             new Tweak_Option_Rename("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "server_name", "test-mysql-server"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "test-virtual-network-rule"),
@@ -143,7 +143,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "location", "westus"),
             new Tweak_Option_Required("azure_rm_postgresqlserver", "properties", false),
-            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "server_name", "test-postgresql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "server_name", "\"postgresqlsrv{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.administrator_login", "zimxyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.create_mode", "Default"),
@@ -151,9 +151,9 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlserver", "Ready"),
 
             // PostgreSQL Database
-            new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase", "azure_rm_postgresqlserver"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase", "azure_rm_postgresqlserver", "sqlsrv", "sqlsrvdb"),
             new Tweak_Option_Rename("azure_rm_postgresqldatabase", "database_name", "name"),
-            new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "server_name", "test-postgresql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "server_name", "\"postgresqlsrv{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "database_name", "testdatabase"),
             new Tweak_Response_AddField("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqldatabase", "name"),
@@ -168,6 +168,13 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "scope", "\"/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a\""),
             new Tweak_Option_Flatten("azure_rm_authorizationroledefinition", "properties", "properties_"),
 
+            new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "scope", "\"/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "role_assignment_name", "\"d3881f73-7777-8888-8283-e981cbba0404\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "properties.role_definition_id", "\"/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "properties.principal_id", "\"98b422c6-7bea-4706-b6f3-920a782746d4\""),
+            new Tweak_Module_FlattenParametersDictionary("azure_rm_authorizationroleassignment"),
+            //new Tweak_Option_Flatten("azure_rm_authorizationroleassignment", "properties", "properties_"),
+
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver", "RP"),
@@ -175,6 +182,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
         };
     }
 }

@@ -151,7 +151,7 @@ namespace AutoRest.Ansible
 
             foreach (var mth in m.Methods)
             {
-                if (mth.Name == "create_or_update")
+                if (mth.Name == "create_or_update" || mth.Name == "create")
                 {
                     method = mth;
                     methodOptions = method.RequiredOptions.ToList();
@@ -242,18 +242,24 @@ namespace AutoRest.Ansible
 
     class Tweak_Module_TestPrerequisitesModule : Tweak_Module
     {
-        public Tweak_Module_TestPrerequisitesModule(string module, string value)
+        public Tweak_Module_TestPrerequisitesModule(string module, string value, string replaceFrom, string replaceTo)
         {
             _module = module;
             _newValue = value;
+            _replaceFrom = replaceFrom;
+            _replaceTo = replaceTo;
         }
 
         public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.TestPrerequisitesModule = _newValue;
+            m.TestReplaceStringFrom = _replaceFrom;
+            m.TestReplaceStringTo = _replaceTo;
         }
 
         private string _newValue;
+        private string _replaceFrom;
+        private string _replaceTo;
     }
 
     class Tweak_Module_AddUpdateRule : Tweak_Module

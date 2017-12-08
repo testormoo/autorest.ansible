@@ -115,6 +115,9 @@ namespace AutoRest.Ansible.Model
         public bool NeedsDeleteBeforeUpdate { get; set; }
 
         public UpdateComparisonRule[] UpdateComparisonRules { get; set; }
+        
+        public string TestReplaceStringFrom { get; set; }
+        public string TestReplaceStringTo { get; set; }
     }
 
     public class MapAnsible

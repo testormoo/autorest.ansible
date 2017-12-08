@@ -294,7 +294,18 @@ namespace AutoRest.Ansible.Model
                     }
                     _selectedMethod = old;
                 }
-                return prePlaybook.ToArray();
+
+                string[] arr = prePlaybook.ToArray();
+
+                if (Map.Modules[_selectedMethod].TestReplaceStringFrom != null)
+                {
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        arr[i] = arr[i].Replace(Map.Modules[_selectedMethod].TestReplaceStringFrom, Map.Modules[_selectedMethod].TestReplaceStringTo);
+                    }
+                }
+
+                return arr;
             }
         }
 
@@ -322,7 +333,17 @@ namespace AutoRest.Ansible.Model
             }
             prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true));
 
-            return prePlaybook.ToArray();
+            string[] arr = prePlaybook.ToArray();
+
+            if (Map.Modules[_selectedMethod].TestReplaceStringFrom != null)
+            {
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    arr[i] = arr[i].Replace(Map.Modules[_selectedMethod].TestReplaceStringFrom, Map.Modules[_selectedMethod].TestReplaceStringTo);
+                }
+            }
+
+            return arr;
         }
 
         public string MgmtClientImportPath
