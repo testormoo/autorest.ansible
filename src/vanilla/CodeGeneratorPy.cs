@@ -37,8 +37,10 @@ namespace AutoRest.Ansible
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
+            MapAnsible map = null;
+            string[] report = null;
+
             var codeModel = cm as CodeModelAnsible;
-            CodeModelAnsibleMap codeModelPure = null;
             if (codeModel == null)
             {
                 throw new Exception("Code model is not a Python Code Model");
@@ -55,24 +57,29 @@ namespace AutoRest.Ansible
                     var oldMap = JsonConvert.DeserializeObject<MapAnsible>(text);
 
                     var merger = new MapAnsibleMerger(oldMap, codeModel.Map);
-                    codeModelPure = new CodeModelAnsibleMap(merger.MergedMap, merger.Report);
+                    map = merger.MergedMap;
+                    report = merger.Report;
                 }
             }
             else
             {
                 string[] empty = { "NOT SOURCE TEMPLATE" };
-                codeModelPure = new CodeModelAnsibleMap(codeModel.Map, empty);
+                map = codeModel.Map;
+                report = empty;
             }
 
             // apply tweaks
             foreach (var tweak in Tweaks.All)
             {
-                tweak.Apply(codeModelPure.Map);
+                tweak.Apply(map);
             }
 
+            CodeModelAnsibleMap codeModelPure = null;
 
-            do
+            for (int idx = 0; idx < codeModel.Map.Modules.Length; idx++)
             {
+                codeModelPure = new CodeModelAnsibleMap(map, report, idx);
+
                 bool isFacts = codeModelPure.ModuleName.EndsWith("_facts");
                 ITemplate ansibleTemplate = new AnsibleTemplate { Model = codeModelPure };
                 ITemplate ansibleTemplateFacts = new AnsibleFactsTemplate { Model = codeModelPure };
@@ -102,13 +109,16 @@ namespace AutoRest.Ansible
                     await WriteWithLf(metaMainYmlTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
                     await WriteWithLf(tasksMainYmlTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
                 }
-            } while (codeModelPure.SelectNextMethod());
+            }
 
-            var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };
-            await WriteWithLf(ansibleInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".template.json"));
+            if (codeModelPure != null)
+            {
+                var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };
+                await WriteWithLf(ansibleInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".template.json"));
 
-            var ansibleMergeInfo = new AnsibleMergeReportTemplate { Model = codeModelPure };
-            await WriteWithLf(ansibleMergeInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".merge.txt"));
+                var ansibleMergeInfo = new AnsibleMergeReportTemplate { Model = codeModelPure };
+                await WriteWithLf(ansibleMergeInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".merge.txt"));
+            }
         }
 
         public static string BuildSummaryAndDescriptionString(string summary, string description)

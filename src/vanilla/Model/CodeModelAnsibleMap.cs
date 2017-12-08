@@ -15,12 +15,25 @@ namespace AutoRest.Ansible.Model
 {
     public class CodeModelAnsibleMap
     {
-        public CodeModelAnsibleMap(MapAnsible map, string[] mergeReport)
+        public CodeModelAnsibleMap(MapAnsible map, string[] mergeReport, int method)
         {
             Map = map;
             MergeReport = mergeReport;
+
+            _selectedMethod = method;
         }
 
+        public CodeModelAnsibleMap(MapAnsible map, string[] mergeReport, string module)
+        {
+            Map = map;
+            MergeReport = mergeReport;
+
+            for (_selectedMethod = 0; _selectedMethod < Map.Modules.Length; _selectedMethod++)
+            {
+                if (Map.Modules[_selectedMethod].ModuleName == module)
+                    break;
+            }
+        }
         public string[] MergeReport { get; set; }
 
         public string ModuleName
@@ -91,23 +104,6 @@ namespace AutoRest.Ansible.Model
                     return null;
                 }
             }
-        }
-
-        public bool SelectNextMethod()
-        {
-            _selectedMethod++;
-            return (_selectedMethod < Map.Modules.Length);
-        }
-
-        private bool SelectModuleByName(string name)
-        {
-            for (_selectedMethod = 0; _selectedMethod < Map.Modules.Length; _selectedMethod++)
-            {
-                if (Map.Modules[_selectedMethod].ModuleName == name)
-                    return true;
-            }
-
-            return false;
         }
 
         private int _selectedMethod = 0;
@@ -285,14 +281,9 @@ namespace AutoRest.Ansible.Model
 
                 if ((prerequisites != null) && (prerequisites != ""))
                 {
-                    int old = _selectedMethod;
-                    if (SelectModuleByName(prerequisites))
-                    {
-                        prePlaybook.AddRange(ModuleTestDelete);
-       
-                        prePlaybook.AddRange(ModuleTestDeleteClearPrerequisites);
-                    }
-                    _selectedMethod = old;
+                    var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+                    prePlaybook.AddRange(subModel.ModuleTestDelete);       
+                    prePlaybook.AddRange(subModel.ModuleTestDeleteClearPrerequisites);
                 }
 
                 string[] arr = prePlaybook.ToArray();
@@ -320,15 +311,11 @@ namespace AutoRest.Ansible.Model
 
                 if ((prerequisites != null) && (prerequisites != ""))
                 {
-                    int old = _selectedMethod;
-                    if (SelectModuleByName(prerequisites))
+                    if (level <= 1)
                     {
-                        if (level <= 1)
-                        {
-                            prePlaybook.AddRange(GetModuleTest(level + 1, "Create", ""));
-                        }
+                        var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+                        prePlaybook.AddRange(subModel.GetModuleTest(level + 1, "Create", ""));
                     }
-                    _selectedMethod = old;
                 }
             }
             prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true));
