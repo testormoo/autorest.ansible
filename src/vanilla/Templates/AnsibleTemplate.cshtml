@@ -115,10 +115,11 @@ if (param.NoLog)
         """Main module execution method"""
 @EmptyLine
         for key in list(self.module_arg_spec.keys()) + ['tags']:
-            if not hasattr(self, key):
+            if hasattr(self, key):
+                setattr(self, key, kwargs[key])
 @foreach (var o in Model.ModuleSecondLevelOptionsMapStatements)
 {
-@:                @(o)
+@:            @(o)
 }
 @EmptyLine
 @if (Model.FixParameterStatements.Length > 0)
@@ -141,8 +142,8 @@ if (param.NoLog)
     string locationDisposition = Model.LocationDisposition;
     if (null != locationDisposition)
     {
-@:        if self.location is None:
-@:            self.location = resource_group.location
+@:        if "location" not in self.parameters:
+@:            self.parameters["location"] = resource_group.location
 @EmptyLine
     }
 }
@@ -180,20 +181,33 @@ if (param.NoLog)
                 return self.results
 @EmptyLine
             response = self.create_update_@(Model.ObjectNamePythonized)()
+@{
+    var stmts = Model.DeleteResponseNoLogFields;
+
+    if (stmts.Length > 0)
+    {
+        foreach (var s in stmts)
+        {
+@:            @(s)
+        }
+    }
+}
+@EmptyLine
             if not old_response:
                 self.results['changed'] = True
             else:
                 self.results['changed'] = old_response.__ne__(response)
+@EmptyLine
             self.results.update(response)
 @EmptyLine
 @{
-    var stmts = Model.DeleteResponseFieldStatements;
+    var stmtsx = Model.DeleteResponseFieldStatements;
 
-    if (stmts.Length > 0)
+    if (stmtsx.Length > 0)
     {
 
 @:            # remove unnecessary fields from return state
-        foreach (var s in stmts)
+        foreach (var s in stmtsx)
         {
 @:            @(s)
         }

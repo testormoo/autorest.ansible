@@ -36,6 +36,7 @@ namespace AutoRest.Ansible
             new Tweak_Response_FieldSampleValue("azure_rm_sqlserver", "id", "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645"),
             new Tweak_Response_FieldSampleValue("azure_rm_sqlserver", "version", "12.0"),
             new Tweak_Response_FieldSampleValue("azure_rm_sqlserver", "fully_qualified_domain_name", "sqlcrudtest-4645.database.windows.net"),
+            new Tweak_Response_SetFieldNoLog("azure_rm_sqlserver", "administrator_login_password"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "administrator_login", "mylogin"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "location", "eastus"),

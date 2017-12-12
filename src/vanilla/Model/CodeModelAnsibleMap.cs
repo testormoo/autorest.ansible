@@ -172,7 +172,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string prefix = "if";
+                string prefix = "elif";
                 var variables = new List<string>();
                 var m = GetModuleMap(ModuleName);
                 ModuleOption[] options = ModuleOptionsSecondLevel;
@@ -198,7 +198,7 @@ namespace AutoRest.Ansible.Model
 
                     variable += ")";
 
-                    variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
+                    variables.Add(prefix + " key == \"" + option.NameAlt + "\" and kwargs[key] is not None:");
                     variables.Add("    " + variable);
                     prefix = "elif";
                 }
@@ -741,6 +741,38 @@ namespace AutoRest.Ansible.Model
             return help.ToArray();
         }
 
+        public string[] DeleteResponseNoLogFields
+        {
+            get
+            {
+                return GetDeleteResponseNoLogFields(ModuleResponseFields, "response");
+            }
+        }
+
+        private string[] GetDeleteResponseNoLogFields(ModuleResponseField[] fields, string responseDict)
+        {
+            List<string> statements = new List<string>();
+
+            foreach (var field in fields)
+            {
+                if (field.NameAlt == "nl")
+                {
+                    string statement = responseDict + ".pop('" + field.Name + "', None)";
+                    statements.Add(statement);
+                }
+                else
+                {
+                    // XXX - not for now
+                    //if (field.SubFields != null)
+                    //{
+                    //    statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
+                    //}
+                }
+            }
+
+            return statements.ToArray();
+        }
+
         public string[] DeleteResponseFieldStatements
         {
             get
@@ -819,7 +851,7 @@ namespace AutoRest.Ansible.Model
             foreach (var field in fields)
             {
                 // setting nameAlt to empty or "x" will remove the field
-                if (field.NameAlt == "" || field.NameAlt.ToLower() == "x")
+                if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
                     continue;
 
                 string doc = NormalizeString(field.Description);
