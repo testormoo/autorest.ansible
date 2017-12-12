@@ -185,7 +185,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
+            //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
         };
     }
 }

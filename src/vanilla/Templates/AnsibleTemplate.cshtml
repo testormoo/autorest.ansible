@@ -102,7 +102,7 @@ if (param.NoLog)
 @:        @(v)
 }
 @EmptyLine
-        self.results = dict(changed=False, state=dict())
+        self.results = dict(changed=False)
         self.mgmt_client = None
         self.state = None
         self.to_do = Actions.NoAction
@@ -115,11 +115,10 @@ if (param.NoLog)
         """Main module execution method"""
 @EmptyLine
         for key in list(self.module_arg_spec.keys()) + ['tags']:
-            if hasattr(self, key):
-                setattr(self, key, kwargs[key])
+            if not hasattr(self, key):
 @foreach (var o in Model.ModuleSecondLevelOptionsMapStatements)
 {
-@:            @(o)
+@:                @(o)
 }
 @EmptyLine
 @if (Model.FixParameterStatements.Length > 0)
@@ -135,18 +134,15 @@ if (param.NoLog)
 @if (Model.HasResourceGroup())
 {
 @EmptyLine
-@:        try:
-@:            resource_group = self.get_resource_group(self.@(Model.ModuleResourceGroupName))
-@:        except CloudError:
-@:            self.fail('resource group {0} not found'.format(self.@(Model.ModuleResourceGroupName)))
+@:        resource_group = self.get_resource_group(self.@(Model.ModuleResourceGroupName))
 }
 @EmptyLine
 @{
     string locationDisposition = Model.LocationDisposition;
     if (null != locationDisposition)
     {
-@:        if not ("location" in self.@(locationDisposition)):
-@:            self.@(locationDisposition)["location"] = resource_group.location
+@:        if self.location is None:
+@:            self.location = resource_group.location
 @EmptyLine
     }
 }

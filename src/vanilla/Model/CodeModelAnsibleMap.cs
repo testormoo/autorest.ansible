@@ -158,9 +158,9 @@ namespace AutoRest.Ansible.Model
                     else
                     {
                         // XXX - right now just supporting 2 levels
-                        string[] path = option.Disposition.Split(":");
-                        string variable = "self." + path[0] + "['" + option.NameAlt + "'] = dict()";
-                        variables.Add(variable);
+                        //string[] path = option.Disposition.Split(":");
+                        //string variable = "self." + path[0] + "['" + option.NameAlt + "'] = dict()";
+                        //variables.Add(variable);
                     }
                 }
 
@@ -172,6 +172,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
+                string prefix = "if";
                 var variables = new List<string>();
                 var m = GetModuleMap(ModuleName);
                 ModuleOption[] options = ModuleOptionsSecondLevel;
@@ -179,20 +180,29 @@ namespace AutoRest.Ansible.Model
                 foreach (var option in options)
                 {
                     string[] path = option.Disposition.Split(":");
-                    string variable = "self." + path[0];
+                    string variable = "self." + path[0] + ".update(";
 
                     if (path.Length > 1)
                     {
                         for (int i = 1; i < path.Length; i++)
-                            variable += "['" + path[i] + "']";
+                            variable += "{\"" + path[i] + "\": ";
                     }
 
-                    variable += "[\"" + option.Name + "\"] = kwargs[key]";
+                    variable += "{\"" + option.Name + "\": kwargs[key]}";
 
-                    variables.Add("elif key == \"" + option.NameAlt + "\":");
+                    if (path.Length > 1)
+                    {
+                        for (int i = 1; i < path.Length; i++)
+                            variable += "}";
+                    }
+
+                    variable += ")";
+
+                    variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
                     variables.Add("    " + variable);
+                    prefix = "elif";
                 }
-
+                    
                 return variables.ToArray();
             }
         }
