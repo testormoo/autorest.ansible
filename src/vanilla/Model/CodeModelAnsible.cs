@@ -322,7 +322,7 @@ namespace AutoRest.Ansible.Model
             {
                 foreach (var p in method.Parameters)
                 {
-                    if (p.Name != "self.config.subscription_id" && p.Name != "api_version")
+                    if (p.Name != "self.config.subscription_id" && p.Name != "api_version" && p.Name != "tags")
                     {
                         string type = ModelTypeNameToYamlTypeName(p.ModelType);
 
@@ -380,7 +380,7 @@ namespace AutoRest.Ansible.Model
             {
                 foreach (var attr in model.ComposedProperties)
                 {
-                    if (!attr.IsReadOnly)
+                    if (attr.Name != "tags" && !attr.IsReadOnly)
                     {
                         string type = ModelTypeNameToYamlTypeName(attr.ModelType);
                         string modelTypeName = attr.ModelTypeName;
