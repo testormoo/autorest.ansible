@@ -113,7 +113,7 @@ namespace AutoRest.Ansible.Model
             get
             {
                 var m = GetModuleMap(ModuleName);
-                IEnumerable<ModuleOption> options = from option in m.Options where option.Disposition != "dictionary" select option;
+                IEnumerable<ModuleOption> options = from option in m.Options where !option.Disposition.EndsWith("dictionary") select option;
                 return options.ToArray();
             }
         }

@@ -25,6 +25,7 @@ namespace AutoRest.Ansible.Model
             DefaultValue = null;
             DefaultValueSample = NameAlt;
             DefaultValueTest = "";
+            NoLog = false;
         }
 
         public string Name { get; set; }
@@ -45,6 +46,7 @@ namespace AutoRest.Ansible.Model
         public string DefaultValueTest { get; set; }
         public ModuleOption[] SubOptions { get; set; }
         public int RequiredCount { get; set; }
+        public bool NoLog { get; set; }
     }
 
     public class ModuleResponseField

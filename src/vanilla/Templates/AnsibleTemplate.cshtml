@@ -82,6 +82,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 {
 @:            @(param.NameAlt)=dict(
 @:                type='@(param.IsList ? "list" : param.Type)',
+if (param.NoLog)
+{
+@:                no_log=True,
+}
 @:                required=@(param.Required)
 @:            ),
 }

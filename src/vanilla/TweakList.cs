@@ -23,6 +23,8 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_sqlserver", "server_name", "name"),
             new Tweak_Option_Rename("azure_rm_sqlserver", "administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_sqlserver", "administrator_login_password", "admin_password"),
+            new Tweak_Option_Rename("azure_rm_sqlserver", "identity.type", "identity"),
+            new Tweak_Option_DocumentationAppend("azure_rm_sqlserver", "version", " For example '12.0'."),
             new Tweak_Option_DefaultValueSample("azure_rm_sqlserver", "resource_group_name", "resource_group"),
             new Tweak_Option_DefaultValueSample("azure_rm_sqlserver", "location", "westus"),
             new Tweak_Option_DefaultValueSample("azure_rm_sqlserver", "administrator_login", "mylogin"),
@@ -38,6 +40,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "location", "eastus"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "server_name", "\"sqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            new Tweak_Option_Flatten("azure_rm_sqlserver", "identity", ""),
 
             // SQL Database
             new Tweak_Module_ObjectName("azure_rm_sqldatabase", "SQL Database"),

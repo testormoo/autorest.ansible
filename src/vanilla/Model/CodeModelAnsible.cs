@@ -332,6 +332,7 @@ namespace AutoRest.Ansible.Model
 
                             newParam.IsList = (p.ModelTypeName == "list");
                             newParam.Documentation = p.Documentation;
+                            newParam.NoLog = p.Name.Contains("password");
                             option.Add(newParam);
                         }
                         else
@@ -398,6 +399,7 @@ namespace AutoRest.Ansible.Model
                             modelTypeName = attr.ModelTypeName;
                         }
                         option.Documentation = attr.Documentation;
+                        option.NoLog = attr.Name.Contains("password");
                         option.SubOptions = GetModelOptions(modelTypeName);
                         options.Add(option);
                     }
