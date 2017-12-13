@@ -39,11 +39,34 @@
 @:@(line)
     }
 @:    state: absent
+@:  check_mode: yes
 @:  register: output
 @:- name: Assert the state has changed
 @:  assert:
 @:    that:
 @:      - output.changed
+@EmptyLine
+    foreach (var line in Model.ModuleTestDelete)
+    {
+@:@(line)
+    }
+@:    state: absent
+@:  register: output
+@:- name: Assert the state has changed
+@:  assert:
+@:    that:
+@:      - output.changed
+@EmptyLine
+    foreach (var line in Model.ModuleTestDelete)
+    {
+@:@(line)
+    }
+@:    state: absent
+@:  register: output
+@:- name: Assert the state has changed
+@:  assert:
+@:    that:
+@:      - output.changed == false
 }
 @if (Model.HasPrerequisites())
 {
