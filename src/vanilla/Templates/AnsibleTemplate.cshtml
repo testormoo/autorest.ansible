@@ -57,6 +57,7 @@ RETURN = '''
 }
 '''
 @EmptyLine
+import time
 from ansible.module_utils.azure_rm_common import AzureRMModuleBase
 @EmptyLine
 try:
@@ -209,6 +210,11 @@ if (param.NoLog)
                 return self.results
 @EmptyLine
             self.delete_@(Model.ObjectNamePythonized)()
+
+            # make sure instance is actually deleted, for some Azure resources, instance is hanging around
+            # for some time after deletion -- this should be really fixed in Azure
+            while self.get_@(Model.ObjectNamePythonized)():
+                time.sleep(20)
         else:
             self.log("@(Model.ObjectName) instance unchanged")
             self.results['changed'] = False
