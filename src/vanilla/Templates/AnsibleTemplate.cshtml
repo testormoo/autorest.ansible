@@ -117,9 +117,10 @@ if (param.NoLog)
         for key in list(self.module_arg_spec.keys()) + ['tags']:
             if hasattr(self, key):
                 setattr(self, key, kwargs[key])
+            elif kwargs[key] is not None:
 @foreach (var o in Model.ModuleSecondLevelOptionsMapStatements)
 {
-@:            @(o)
+@:                @(o)
 }
 @EmptyLine
 @if (Model.FixParameterStatements.Length > 0)
@@ -128,6 +129,7 @@ if (param.NoLog)
 @EmptyLine
 }
         old_response = None
+        response = None
         results = dict()
 @EmptyLine
         self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
@@ -197,31 +199,32 @@ if (param.NoLog)
                 self.results['changed'] = True
             else:
                 self.results['changed'] = old_response.__ne__(response)
+            self.log("Creation / Update done")
+        elif self.to_do == Actions.Delete:
+            self.log("@(Model.ObjectName) instance deleted")
 @EmptyLine
-            self.results.update(response)
+            if self.check_mode:
+                return self.results
+@EmptyLine
+            self.delete_@(Model.ObjectNamePythonized)()
+            self.results['changed'] = True
+        else:
+            self.log("@(Model.ObjectName) instance unchanged")
+            self.results['changed'] = False
+            response = old_response
 @EmptyLine
 @{
-    var stmtsx = Model.DeleteResponseFieldStatements;
+    var stmtsx = Model.ResponseFieldStatements;
 
     if (stmtsx.Length > 0)
     {
-
-@:            # remove unnecessary fields from return state
+@:        if response is not None:
         foreach (var s in stmtsx)
         {
 @:            @(s)
         }
     }
 }
-            self.log("Creation / Update done")
-        elif self.to_do == Actions.Delete:
-            self.log("@(Model.ObjectName) instance deleted")
-            self.delete_@(Model.ObjectNamePythonized)()
-            self.results['changed'] = True
-        else:
-            self.log("@(Model.ObjectName) instance unchanged")
-            self.results['state'] = old_response
-            self.results['changed'] = False
 @EmptyLine
         return self.results
 @if (Model.FixParameterStatements.Length > 0)

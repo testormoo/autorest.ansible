@@ -172,7 +172,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string prefix = "elif";
+                string prefix = "if";
                 var variables = new List<string>();
                 var m = GetModuleMap(ModuleName);
                 ModuleOption[] options = ModuleOptionsSecondLevel;
@@ -198,7 +198,7 @@ namespace AutoRest.Ansible.Model
 
                     variable += ")";
 
-                    variables.Add(prefix + " key == \"" + option.NameAlt + "\" and kwargs[key] is not None:");
+                    variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
                     variables.Add("    " + variable);
                     prefix = "elif";
                 }
@@ -798,6 +798,38 @@ namespace AutoRest.Ansible.Model
                     {
                         statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
                     }
+                }
+            }
+
+            return statements.ToArray();
+        }
+
+        public string[] ResponseFieldStatements
+        {
+            get
+            {
+                return GetResponseFieldStatements(ModuleResponseFields, "self.results");
+            }
+        }
+
+        private string[] GetResponseFieldStatements(ModuleResponseField[] fields, string responseDict)
+        {
+            List<string> statements = new List<string>();
+
+            foreach (var field in fields)
+            {
+                if (field.NameAlt != "" && field.NameAlt.ToLower() != "x" && field.NameAlt.ToLower() != "nl")
+                {
+                    string statement = responseDict + "[\"" + field.Name + "\"] = response[\"" + field.Name + "\"]";
+                    statements.Add(statement);
+                }
+                else
+                {
+                    // XXX - no need now
+                    //if (field.SubFields != null)
+                    //{
+                    //    statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
+                    //}
                 }
             }
 
