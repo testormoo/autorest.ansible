@@ -202,12 +202,12 @@ if (param.NoLog)
             self.log("Creation / Update done")
         elif self.to_do == Actions.Delete:
             self.log("@(Model.ObjectName) instance deleted")
+            self.results['changed'] = True
 @EmptyLine
             if self.check_mode:
                 return self.results
 @EmptyLine
             self.delete_@(Model.ObjectNamePythonized)()
-            self.results['changed'] = True
         else:
             self.log("@(Model.ObjectName) instance unchanged")
             self.results['changed'] = False
@@ -218,7 +218,7 @@ if (param.NoLog)
 
     if (stmtsx.Length > 0)
     {
-@:        if response is not None:
+@:        if response:
         foreach (var s in stmtsx)
         {
 @:            @(s)

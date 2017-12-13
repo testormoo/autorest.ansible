@@ -268,17 +268,27 @@ namespace AutoRest.Ansible.Model
 
         public string[] GetModuleTestCreate()
         {
-           return GetModuleTest(0, "Create instance of", "");
+           return GetModuleTest(0, "Create instance of", "", false);
         }
 
         public string[] ModuleTestUpdate
         {
-            get { return GetModuleTest(0, "Update instance of", ""); }
+            get { return GetModuleTest(0, "Update instance of", "", false); }
         }
 
         public string[] ModuleTestDelete
         {
-            get { return GetModuleTest(0, "Delete instance of", "delete"); }
+            get { return GetModuleTest(0, "Delete instance of", "delete", false); }
+        }
+
+        public string[] ModuleTestDeleteCheckMode
+        {
+            get { return GetModuleTest(0, "Delete instance of", "delete", true); }
+        }
+
+        public string[] ModuleTestDeleteUnexisting
+        {
+            get { return GetModuleTest(0, "Delete unexisting instance of", "delete", false); }
         }
 
         public string[] ModuleTestDeleteClearPrerequisites
@@ -310,9 +320,10 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        private string[] GetModuleTest(int level, string testType, string methodType)
+        private string[] GetModuleTest(int level, string testType, string methodType, bool isCheckMode)
         {
             List<string> prePlaybook = new List<string>();
+            string postfix = isCheckMode ? " -- check mode" : "";
 
             // XXX - remove this hack
             if (testType.StartsWith("Create"))
@@ -324,11 +335,11 @@ namespace AutoRest.Ansible.Model
                     if (level <= 1)
                     {
                         var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
-                        prePlaybook.AddRange(subModel.GetModuleTest(level + 1, "Create", ""));
+                        prePlaybook.AddRange(subModel.GetModuleTest(level + 1, "Create", "", isCheckMode));
                     }
                 }
             }
-            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true));
+            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true, postfix));
 
             string[] arr = prePlaybook.ToArray();
 
@@ -618,11 +629,11 @@ namespace AutoRest.Ansible.Model
 
         public MapAnsible Map { get; set; } 
 
-        private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, bool test)
+        private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, bool test, string operationPostfix = "")
         {
             List<string> help = new List<string>();
 
-            help.Add(padding + "- name: " + operation + " " + ObjectName);
+            help.Add(padding + "- name: " + operation + " " + ObjectName + operationPostfix);
             help.Add(padding + "  " + ModuleNameAlt + ":");
             help.AddRange(GetPlaybookFromOptions(options, padding + "    ", test));
             return help.ToArray();

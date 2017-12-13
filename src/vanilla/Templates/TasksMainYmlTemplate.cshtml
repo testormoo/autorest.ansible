@@ -34,7 +34,7 @@
 @if (Model.CanDelete())
 {
 @EmptyLine
-    foreach (var line in Model.ModuleTestDelete)
+    foreach (var line in Model.ModuleTestDeleteCheckMode)
     {
 @:@(line)
     }
@@ -57,7 +57,7 @@
 @:    that:
 @:      - output.changed
 @EmptyLine
-    foreach (var line in Model.ModuleTestDelete)
+    foreach (var line in Model.ModuleTestDeleteUnexisting)
     {
 @:@(line)
     }
