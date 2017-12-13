@@ -273,7 +273,18 @@ namespace AutoRest.Ansible.Model
 
         public string[] ModuleTestUpdate
         {
-            get { return GetModuleTest(0, "Update instance of", "", false); }
+            get { return GetModuleTest(0, "Create again instance of", "", false); }
+        }
+
+        public string[] ModuleTestUpdateCheckMode
+        {
+            get { return GetModuleTest(0, "Create again instance of", "", true); }
+        }
+
+        public string[] GetModuleTestDelete(bool isUnexistingInstance, bool isCheckMode)
+        {
+            string prefix = isUnexistingInstance ? "Delete unexisting instance of" : "Delete instance of";
+            return GetModuleTest(0, prefix, "delete", isCheckMode);
         }
 
         public string[] ModuleTestDelete

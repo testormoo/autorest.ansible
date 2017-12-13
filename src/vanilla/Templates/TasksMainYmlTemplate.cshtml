@@ -12,7 +12,19 @@
 @if (Model.CanDelete())
 {
 @EmptyLine
-    foreach (var line in Model.ModuleTestDeleteUnexisting)
+    foreach (var line in Model.GetModuleTestDelete(true, true))
+    {
+@:@(line)
+    }
+@:    state: absent
+@:  check_only: yes
+@:  register: output
+@:- name: Assert the state has changed
+@:  assert:
+@:    that:
+@:      - output.changed == false
+@EmptyLine
+    foreach (var line in Model.GetModuleTestDelete(true, false))
     {
 @:@(line)
     }
@@ -45,6 +57,16 @@
     that:
       - output.changed
       - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+@EmptyLine
+@foreach (var line in Model.ModuleTestUpdateCheckMode)
+{
+@:@(line)
+}
+  register: output
+- name: Assert the state has not changed
+  assert:
+    that:
+      - output.changed == false
 @EmptyLine
 @foreach (var line in Model.ModuleTestUpdate)
 {
