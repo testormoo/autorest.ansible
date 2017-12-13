@@ -32,16 +32,6 @@
       - output.changed
       - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
 @EmptyLine
-@foreach (var line in Model.ModuleTestUpdateCheckMode)
-{
-@:@(line)
-}
-  register: output
-- name: Assert the state has not changed
-  assert:
-    that:
-      - output.changed == false
-@EmptyLine
 @foreach (var line in Model.ModuleTestUpdate)
 {
 @:@(line)

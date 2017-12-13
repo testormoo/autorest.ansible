@@ -306,7 +306,7 @@ namespace AutoRest.Ansible.Model
             {
                 string responseModel = method.ReturnType.Body.ClassName;
 
-                var suboptions = GetModelFields(responseModel);
+                var suboptions = GetModelFields(responseModel, 0);
                 fields.AddRange(suboptions);
             }
 
@@ -347,7 +347,7 @@ namespace AutoRest.Ansible.Model
                                 suboption.Documentation = p.Documentation;
                                 suboption.IsList = false;
                                 option.Add(suboption);
-                                var suboptions = GetModelOptions(p.ModelTypeName);
+                                var suboptions = GetModelOptions(p.ModelTypeName, 0);
                                 foreach (var o in suboptions) o.Disposition = p.Name;
                                 option.AddRange(suboptions);
                             }
@@ -356,7 +356,7 @@ namespace AutoRest.Ansible.Model
                                 var suboption = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "dict()");
                                 suboption.IsList = (p.ModelTypeName == "list");
                                 suboption.Documentation = p.Documentation;
-                                suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName);
+                                suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0);
                                 option.Add(suboption);
                             }
                         }
@@ -367,7 +367,7 @@ namespace AutoRest.Ansible.Model
             return option.ToArray();
         }
 
-        private ModuleOption[] GetModelOptions(string modelName)
+        private ModuleOption[] GetModelOptions(string modelName, int level)
         {
             // [ZKK] this is a very bad hack for SQL Server
             if (modelName == "ServerPropertiesForCreate")
@@ -376,32 +376,35 @@ namespace AutoRest.Ansible.Model
             CompositeTypePy model = GetModelTypeByName(modelName);
             var options = new List<ModuleOption>();
 
-            if (model != null)
+            if (level < 5)
             {
-                foreach (var attr in model.ComposedProperties)
+                if (model != null)
                 {
-                    if (attr.Name != "tags" && !attr.IsReadOnly)
+                    foreach (var attr in model.ComposedProperties)
                     {
-                        string type = ModelTypeNameToYamlTypeName(attr.ModelType);
-                        string modelTypeName = attr.ModelTypeName;
-                        var option = new ModuleOption(attr.Name, type, attr.IsRequired ? "True" : "False", "None");
-                        if (attr.ModelTypeName == "list")
+                        if (attr.Name != "tags" && !attr.IsReadOnly)
                         {
-                            string subtype = ModelTypeNameToYamlTypeName(attr.ModelType);
-                            option.IsList = true;
-                           
-                            SequenceType list = attr.ModelType as SequenceType;
+                            string type = ModelTypeNameToYamlTypeName(attr.ModelType);
+                            string modelTypeName = attr.ModelTypeName;
+                            var option = new ModuleOption(attr.Name, type, attr.IsRequired ? "True" : "False", "None");
+                            if (attr.ModelTypeName == "list")
+                            {
+                                string subtype = ModelTypeNameToYamlTypeName(attr.ModelType);
+                                option.IsList = true;
 
-                            modelTypeName = list.ElementType.Name;
+                                SequenceType list = attr.ModelType as SequenceType;
+
+                                modelTypeName = list.ElementType.Name;
+                            }
+                            else
+                            {
+                                modelTypeName = attr.ModelTypeName;
+                            }
+                            option.Documentation = attr.Documentation;
+                            option.NoLog = attr.Name.Contains("password");
+                            option.SubOptions = GetModelOptions(modelTypeName, level + 1);
+                            options.Add(option);
                         }
-                        else
-                        {
-                            modelTypeName = attr.ModelTypeName;
-                        }
-                        option.Documentation = attr.Documentation;
-                        option.NoLog = attr.Name.Contains("password");
-                        option.SubOptions = GetModelOptions(modelTypeName);
-                        options.Add(option);
                     }
                 }
             }
@@ -409,12 +412,12 @@ namespace AutoRest.Ansible.Model
             return options.ToArray();
         }
 
-        private ModuleResponseField[] GetModelFields(string modelName)
+        private ModuleResponseField[] GetModelFields(string modelName, int level)
         {
             CompositeTypePy model = GetModelTypeByName(modelName);
             var fields = new List<ModuleResponseField>();
 
-            if (model != null)
+            if (model != null && level < 5)
             {
                 foreach (var attr in model.ComposedProperties)
                 {
@@ -437,7 +440,7 @@ namespace AutoRest.Ansible.Model
                         modelTypeName = attr.ModelTypeName;
                     }
                     field.Description = attr.Documentation;
-                    field.SubFields = GetModelFields(modelTypeName);
+                    field.SubFields = GetModelFields(modelTypeName, level + 1);
                     fields.Add(field);
                 }
             }

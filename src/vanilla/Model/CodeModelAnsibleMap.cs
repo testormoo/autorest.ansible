@@ -655,6 +655,10 @@ namespace AutoRest.Ansible.Model
             List<string> help = new List<string>();
             foreach (var option in options)
             {
+                // XXX - this should not be necessary
+                if (option == null)
+                    continue;
+
                 string propertyLine = padding + option.NameAlt + ":";
 
                 //CompositeTypePy submodel = GetModelTypeByName(option.ModelTypeName);
