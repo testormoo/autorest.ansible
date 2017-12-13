@@ -9,7 +9,32 @@
   set_fact:
     random_postfix: "{{ 1000 | random }}"
   run_once: yes
-
+@if (Model.CanDelete())
+{
+@EmptyLine
+    foreach (var line in Model.ModuleTestDeleteUnexisting)
+    {
+@:@(line)
+    }
+@:    state: absent
+@:  register: output
+@:- name: Assert the state has changed
+@:  assert:
+@:    that:
+@:      - output.changed == false
+}
+@EmptyLine
+@foreach (var line in Model.GetModuleTestCreate(true))
+{
+@:@(line)
+}
+  check_mode: yes
+  register: output
+- name: Assert the resource instance is well created
+  assert:
+    that:
+      - output.changed
+@EmptyLine
 @foreach (var line in Model.GetModuleTestCreate())
 {
 @:@(line)
@@ -56,17 +81,6 @@
 @:  assert:
 @:    that:
 @:      - output.changed
-@EmptyLine
-    foreach (var line in Model.ModuleTestDeleteUnexisting)
-    {
-@:@(line)
-    }
-@:    state: absent
-@:  register: output
-@:- name: Assert the state has changed
-@:  assert:
-@:    that:
-@:      - output.changed == false
 }
 @if (Model.HasPrerequisites())
 {

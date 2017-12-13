@@ -266,9 +266,9 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] GetModuleTestCreate()
+        public string[] GetModuleTestCreate(bool isCheckMode = false)
         {
-           return GetModuleTest(0, "Create instance of", "", false);
+           return GetModuleTest(0, "Create instance of", "", isCheckMode);
         }
 
         public string[] ModuleTestUpdate

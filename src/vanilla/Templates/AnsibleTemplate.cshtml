@@ -180,6 +180,7 @@ if (param.NoLog)
             self.log("Need to Create / Update the @(Model.ObjectName) instance")
 @EmptyLine
             if self.check_mode:
+                self.results['changed'] = True
                 return self.results
 @EmptyLine
             response = self.create_update_@(Model.ObjectNamePythonized)()
