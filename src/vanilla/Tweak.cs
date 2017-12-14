@@ -468,6 +468,9 @@ namespace AutoRest.Ansible
             {
                 suboption.Disposition = ((option.Disposition != "default") ? option.Disposition : "") + ":" + option.Name;
                 suboption.NameAlt = _namePrefix + suboption.NameAlt;
+
+                // XXX - setting required to false, as it may go to level 0
+                suboption.Required = "False";
             }
 
             option.Disposition += ":dictionary";
