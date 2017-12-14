@@ -399,6 +399,26 @@ namespace AutoRest.Ansible
         private string _newValue;
     }
 
+    class Tweak_Option_Documentation : Tweak_Option
+    {
+        public Tweak_Option_Documentation(string module, string path, string newText)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _newText = newText;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null) option.Documentation = _newText;
+            // XXX - level change
+        }
+
+        private string[] _path;
+        private string _newText;
+    }
+
     class Tweak_Option_DocumentationAppend : Tweak_Option
     {
         public Tweak_Option_DocumentationAppend(string module, string path, string appendedText)

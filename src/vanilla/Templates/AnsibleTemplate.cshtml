@@ -87,7 +87,14 @@ if (param.NoLog)
 {
 @:                no_log=True,
 }
+    if (param.DefaultValue != null)
+    {
+@:                default=@(param.DefaultValue)
+    }
+    else
+    {
 @:                required=@(param.Required)
+    }
 @:            ),
 }
             state=dict(

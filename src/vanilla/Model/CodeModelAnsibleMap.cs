@@ -180,23 +180,15 @@ namespace AutoRest.Ansible.Model
                 foreach (var option in options)
                 {
                     string[] path = option.Disposition.Split(":");
-                    string variable = "self." + path[0] + ".update(";
+                    string variable = "self." + path[0];
 
                     if (path.Length > 1)
                     {
                         for (int i = 1; i < path.Length; i++)
-                            variable += "{\"" + path[i] + "\": ";
+                            variable += ".setdefault(\"" + path[i] + "\", {})";
                     }
 
-                    variable += "{\"" + option.Name + "\": kwargs[key]}";
-
-                    if (path.Length > 1)
-                    {
-                        for (int i = 1; i < path.Length; i++)
-                            variable += "}";
-                    }
-
-                    variable += ")";
+                    variable += "[\"" + option.Name + "\"] = kwargs[key]";
 
                     variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
                     variables.Add("    " + variable);
@@ -878,6 +870,13 @@ namespace AutoRest.Ansible.Model
             {
                 if (option.NameAlt != option.Name)
                 {
+                    if (level == 0)
+                        continue;
+
+                    // if it's level 1 parameter flattened to level 0
+                    if (level == 1 && option.Disposition.Contains(":"))
+                        continue;
+
                     // ignore renaming at level 0 as these parameters are already flattened and treated differently
                     if (level > 0)
                     {
