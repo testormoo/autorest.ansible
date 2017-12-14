@@ -202,6 +202,7 @@ namespace AutoRest.Ansible.Model
                     foreach (var example in examples)
                     {
                         operations.Add("EXAMPLE -- " + example.Key);
+                        operations.Add("EXAMPLE OBJECT -- " + JsonConvert.SerializeObject(examplesRaw));
                     }
                 }
             }
@@ -317,6 +318,11 @@ namespace AutoRest.Ansible.Model
         {
             var option = new List<ModuleOption>();
             var method = ModuleFindMethod(methodName);
+            var examples = ModuleFindMethodSamples(methodName);
+            Newtonsoft.Json.Linq.JToken v = null;
+
+            // XXX - for now get first example
+            var example = examples.IsNullOrEmpty() ? null : examples.First().Value;
 
             if (method != null)
             {
@@ -325,6 +331,7 @@ namespace AutoRest.Ansible.Model
                     if (p.Name != "self.config.subscription_id" && p.Name != "api_version" && p.Name != "tags")
                     {
                         string type = ModelTypeNameToYamlTypeName(p.ModelType);
+                        if (example != null) example.Parameters.TryGetValue(p.SerializedName, out v);
 
                         if (type != "dict")
                         {
@@ -333,6 +340,7 @@ namespace AutoRest.Ansible.Model
                             newParam.IsList = (p.ModelTypeName == "list");
                             newParam.Documentation = p.Documentation;
                             newParam.NoLog = p.Name.Contains("password");
+                            newParam.DefaultValueSample = (v != null) ? v.ToString() : "NOT FOUND";
                             option.Add(newParam);
                         }
                         else
@@ -347,7 +355,25 @@ namespace AutoRest.Ansible.Model
                                 suboption.Documentation = p.Documentation;
                                 suboption.IsList = false;
                                 option.Add(suboption);
-                                var suboptions = GetModelOptions(p.ModelTypeName, 0);
+
+                                // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                                //Newtonsoft.Json.Linq.JToken subSampleValue = null;
+                                //Newtonsoft.Json.Linq.JObject sampleValueObject = v as Newtonsoft.Json.Linq.JObject;
+
+                                //if (sampleValueObject != null)
+                                //{
+                                //    foreach (var pp in sampleValueObject.Properties())
+                                //    {
+                                //        if (pp.Name == p.Name)
+                                //        {
+                                //            subSampleValue = pp.Value;
+                                //        }
+                                //    }
+                                //}
+                                // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+                                var suboptions = GetModelOptions(p.ModelTypeName, 0, v);
                                 foreach (var o in suboptions) o.Disposition = p.Name;
                                 option.AddRange(suboptions);
                             }
@@ -356,7 +382,25 @@ namespace AutoRest.Ansible.Model
                                 var suboption = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "dict()");
                                 suboption.IsList = (p.ModelTypeName == "list");
                                 suboption.Documentation = p.Documentation;
-                                suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0);
+
+                                // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                                //Newtonsoft.Json.Linq.JToken subSampleValue = null;
+                                //Newtonsoft.Json.Linq.JObject sampleValueObject = v as Newtonsoft.Json.Linq.JObject;
+                                //
+                                //if (sampleValueObject != null)
+                                //{
+                                //    foreach (var pp in sampleValueObject.Properties())
+                                //    {
+                                //        if (pp.Name == p.Name)
+                                //        {
+                                //            subSampleValue = pp.Value;
+                                //        }
+                                //    }
+                                //}
+                                // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+                                suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
                                 option.Add(suboption);
                             }
                         }
@@ -367,7 +411,7 @@ namespace AutoRest.Ansible.Model
             return option.ToArray();
         }
 
-        private ModuleOption[] GetModelOptions(string modelName, int level)
+        private ModuleOption[] GetModelOptions(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleValue)
         {
             // [ZKK] this is a very bad hack for SQL Server
             if (modelName == "ServerPropertiesForCreate")
@@ -375,15 +419,35 @@ namespace AutoRest.Ansible.Model
 
             CompositeTypePy model = GetModelTypeByName(modelName);
             var options = new List<ModuleOption>();
+            AutoRest.Core.Model.Parameter p;
 
             if (level < 5)
             {
                 if (model != null)
                 {
-                    foreach (var attr in model.ComposedProperties)
+                    foreach (Property attr in model.ComposedProperties)
                     {
                         if (attr.Name != "tags" && !attr.IsReadOnly)
                         {
+                            string attrName = attr.Name;
+                            try { attrName = attr.XmlName; } catch (Exception e) { }
+
+                            Newtonsoft.Json.Linq.JToken subSampleValue = null;
+                            Newtonsoft.Json.Linq.JObject sampleValueObject = sampleValue as Newtonsoft.Json.Linq.JObject;
+                            //string look = "SEARCH B -- " + attrName + " --";
+
+                            if (sampleValueObject != null)
+                            {
+                                foreach (var pp in sampleValueObject.Properties())
+                                {
+                                    //look += " " + pp.Name; 
+                                    if (pp.Name == attrName)
+                                    {
+                                        subSampleValue = pp.Value;
+                                    }
+                                }
+                            }
+
                             string type = ModelTypeNameToYamlTypeName(attr.ModelType);
                             string modelTypeName = attr.ModelTypeName;
                             var option = new ModuleOption(attr.Name, type, attr.IsRequired ? "True" : "False", "None");
@@ -402,7 +466,11 @@ namespace AutoRest.Ansible.Model
                             }
                             option.Documentation = attr.Documentation;
                             option.NoLog = attr.Name.Contains("password");
-                            option.SubOptions = GetModelOptions(modelTypeName, level + 1);
+
+                            option.DefaultValueSample = (subSampleValue != null) ? subSampleValue.ToString() : "";
+
+                            // XXX - get next level of sample value
+                            option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
                             options.Add(option);
                         }
                     }
@@ -511,6 +579,13 @@ namespace AutoRest.Ansible.Model
             }
 
             return null;
+        }
+
+        private Dictionary<string, Core.Model.XmsExtensions.Example> ModuleFindMethodSamples(string name)
+        {
+            var method = ModuleFindMethod(name);
+            var examplesRaw = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
+            return AutoRest.Core.Model.XmsExtensions.Examples.FromJObject(examplesRaw);
         }
 
 
