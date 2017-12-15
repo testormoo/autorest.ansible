@@ -107,7 +107,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_mysqlfirewallrule", "firewall_rule_name", "name"),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "end_ip_address", false),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "firewall_rule_name", "test-firewall-rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "start_ip_address", "172.28.10.136"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "end_ip_address", "172.28.10.138"),
@@ -121,7 +121,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_mysqlconfiguration", "azure_rm_mysqlconfiguration"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_mysqlconfiguration", "configuration_name", "name"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "configuration_name", "event_scheduler"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "value", "\"ON\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "source", "user-override"),
@@ -132,7 +132,7 @@ namespace AutoRest.Ansible
             // MySQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "name"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "server_name", "test-mysql-server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "test-virtual-network-rule"),
 
             new Tweak_Module_Rename("azure_rm_mysqlserver_facts", "azure_rm_mysqlserver_facts"),

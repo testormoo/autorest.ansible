@@ -125,10 +125,17 @@ if (param.NoLog)
         for key in list(self.module_arg_spec.keys()) + ['tags']:
             if hasattr(self, key):
                 setattr(self, key, kwargs[key])
-            elif kwargs[key] is not None:
-@foreach (var o in Model.ModuleSecondLevelOptionsMapStatements)
-{
+@{
+    var secondLevelStmts = Model.ModuleSecondLevelOptionsMapStatements;
+
+    if (secondLevelStmts.Length > 0)
+    {
+@:            elif kwargs[key] is not None:
+        foreach (var o in secondLevelStmts)
+        {
 @:                @(o)
+        }
+    }
 }
 @EmptyLine
 @if (Model.FixParameterStatements.Length > 0)
