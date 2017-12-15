@@ -356,23 +356,6 @@ namespace AutoRest.Ansible.Model
                                 suboption.IsList = false;
                                 option.Add(suboption);
 
-                                // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                                //Newtonsoft.Json.Linq.JToken subSampleValue = null;
-                                //Newtonsoft.Json.Linq.JObject sampleValueObject = v as Newtonsoft.Json.Linq.JObject;
-
-                                //if (sampleValueObject != null)
-                                //{
-                                //    foreach (var pp in sampleValueObject.Properties())
-                                //    {
-                                //        if (pp.Name == p.Name)
-                                //        {
-                                //            subSampleValue = pp.Value;
-                                //        }
-                                //    }
-                                //}
-                                // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
                                 var suboptions = GetModelOptions(p.ModelTypeName, 0, v);
                                 foreach (var o in suboptions) o.Disposition = p.Name;
                                 option.AddRange(suboptions);
@@ -382,23 +365,6 @@ namespace AutoRest.Ansible.Model
                                 var suboption = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "dict()");
                                 suboption.IsList = (p.ModelTypeName == "list");
                                 suboption.Documentation = p.Documentation;
-
-                                // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                                //Newtonsoft.Json.Linq.JToken subSampleValue = null;
-                                //Newtonsoft.Json.Linq.JObject sampleValueObject = v as Newtonsoft.Json.Linq.JObject;
-                                //
-                                //if (sampleValueObject != null)
-                                //{
-                                //    foreach (var pp in sampleValueObject.Properties())
-                                //    {
-                                //        if (pp.Name == p.Name)
-                                //        {
-                                //            subSampleValue = pp.Value;
-                                //        }
-                                //    }
-                                //}
-                                // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
                                 suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
                                 option.Add(suboption);
@@ -434,7 +400,6 @@ namespace AutoRest.Ansible.Model
 
                             Newtonsoft.Json.Linq.JToken subSampleValue = null;
                             Newtonsoft.Json.Linq.JObject sampleValueObject = sampleValue as Newtonsoft.Json.Linq.JObject;
-                            //string look = "SEARCH B -- " + attrName + " --";
 
                             if (sampleValueObject != null)
                             {
