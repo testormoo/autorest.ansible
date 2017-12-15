@@ -183,6 +183,12 @@ namespace AutoRest.Ansible
             new Tweak_Module_FlattenParametersDictionary("azure_rm_authorizationroleassignment"),
             //new Tweak_Option_Flatten("azure_rm_authorizationroleassignment", "properties", "properties_"),
 
+            // Application Gateway
+            new Tweak_Module_Rename("azure_rm_applicationgatewayapplicationgateway", "azure_rm_applicationgateway"),
+            new Tweak_Module_ObjectName("azure_rm_applicationgatewayapplicationgateway", "Application Gateway"),
+            new Tweak_Option_Rename("azure_rm_applicationgatewayapplicationgateway", "application_gateway_name", "name"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "application_gateway_name", "\"appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver", "RP"),
