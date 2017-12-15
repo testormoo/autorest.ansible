@@ -23,7 +23,8 @@ namespace AutoRest.Ansible.Model
             IsList = false;
             Disposition = "default";
             DefaultValue = null;
-            DefaultValueSample = NameAlt;
+            DefaultValueSample = new Dictionary<string, string>();
+            DefaultValueSample["default"] = NameAlt;
             DefaultValueTest = "";
             NoLog = false;
         }
@@ -42,7 +43,7 @@ namespace AutoRest.Ansible.Model
         public string VariableValue { get; set; }
         public string Documentation { get; set; }
         public string DefaultValue { get; set; }
-        public string DefaultValueSample { get; set; }
+        public Dictionary<string, string> DefaultValueSample { get; set; }
         public string DefaultValueTest { get; set; }
         public ModuleOption[] SubOptions { get; set; }
         public int RequiredCount { get; set; }

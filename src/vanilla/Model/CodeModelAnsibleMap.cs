@@ -689,7 +689,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    string predefined = test ? option.DefaultValueTest : option.DefaultValueSample;
+                    string predefined = test ? option.DefaultValueTest : option.DefaultValueSample.GetValueOrDefault("default", null);
 
                     if (predefined != "")
                     {

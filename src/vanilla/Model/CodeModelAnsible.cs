@@ -340,7 +340,7 @@ namespace AutoRest.Ansible.Model
                             newParam.IsList = (p.ModelTypeName == "list");
                             newParam.Documentation = p.Documentation;
                             newParam.NoLog = p.Name.Contains("password");
-                            newParam.DefaultValueSample = (v != null) ? v.ToString() : "NOT FOUND";
+                            newParam.DefaultValueSample["default"] = (v != null) ? v.ToString() : "NOT FOUND";
                             option.Add(newParam);
                         }
                         else
@@ -432,7 +432,7 @@ namespace AutoRest.Ansible.Model
                             option.Documentation = attr.Documentation;
                             option.NoLog = attr.Name.Contains("password");
 
-                            option.DefaultValueSample = (subSampleValue != null) ? subSampleValue.ToString() : "";
+                            option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
 
                             // XXX - get next level of sample value
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
