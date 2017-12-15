@@ -294,6 +294,23 @@ namespace AutoRest.Ansible.Model
             get { return GetModuleTest(0, "Delete unexisting instance of", "delete", false); }
         }
 
+        public string[] ModuleTestPrerequisites
+        {
+            get
+            {
+                List<string> prePlaybook = new List<string>();
+                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+
+                if ((prerequisites != null) && (prerequisites != ""))
+                {
+                    var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+                    prePlaybook.AddRange(subModel.GetModuleTest(1, "Create", "", false));
+                    prePlaybook.AddRange(subModel.ModuleTestPrerequisites);
+                }
+
+                return prePlaybook.ToArray();
+            }
+        }
         public string[] ModuleTestDeleteClearPrerequisites
         {
             get
@@ -328,20 +345,6 @@ namespace AutoRest.Ansible.Model
             List<string> prePlaybook = new List<string>();
             string postfix = isCheckMode ? " -- check mode" : "";
 
-            // XXX - remove this hack
-            if (testType.StartsWith("Create"))
-            {
-                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
-
-                if ((prerequisites != null) && (prerequisites != ""))
-                {
-                    if (level <= 1)
-                    {
-                        var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
-                        prePlaybook.AddRange(subModel.GetModuleTest(level + 1, "Create", "", isCheckMode));
-                    }
-                }
-            }
             prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true, postfix));
 
             string[] arr = prePlaybook.ToArray();
