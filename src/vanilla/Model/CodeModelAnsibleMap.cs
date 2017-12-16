@@ -316,8 +316,8 @@ namespace AutoRest.Ansible.Model
                 if ((prerequisites != null) && (prerequisites != ""))
                 {
                     var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
-                    prePlaybook.AddRange(subModel.GetModuleTest(1, "Create", "", false));
                     prePlaybook.AddRange(subModel.ModuleTestPrerequisites);
+                    prePlaybook.AddRange(subModel.GetModuleTest(1, "Create", "", false));
                 }
 
                 return prePlaybook.ToArray();

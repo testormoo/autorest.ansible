@@ -107,6 +107,12 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqldatabase", "testdatabase"),
             new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_mysqldatabase"),
 
+            // MySQL Database Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase_facts", "azure_rm_mysqldatabase", null, null),
+            new Tweak_Module_ObjectName("azure_rm_mysqldatabase_facts", "MySQL Database"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase_facts", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase_facts", "database_name", "testdatabase"),
+
             // MySQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_mysqlfirewallrule", "firewall_rule_name", "name"),
