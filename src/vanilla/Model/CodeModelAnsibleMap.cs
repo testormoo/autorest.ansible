@@ -334,7 +334,12 @@ namespace AutoRest.Ansible.Model
                 if ((prerequisites != null) && (prerequisites != ""))
                 {
                     var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
-                    prePlaybook.AddRange(subModel.ModuleTestDelete);       
+
+                    if (subModel.CanDelete())
+                    {
+                        prePlaybook.AddRange(subModel.ModuleTestDelete);
+                    }
+
                     prePlaybook.AddRange(subModel.ModuleTestDeleteClearPrerequisites);
                 }
 
