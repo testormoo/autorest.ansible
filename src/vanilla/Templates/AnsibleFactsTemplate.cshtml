@@ -87,7 +87,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         # store the results of the module operation
         self.results = dict(
             changed=False,
-            ansible_facts=dict(azure_dnsrecordset=[])
+            ansible_facts=dict()
         )
 
 @foreach (var v in Model.ModuleOptions)
@@ -127,7 +127,6 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 @EmptyLine
 @:        :return: deserialized @(Model.ObjectName)instance state dictionary
 @:        '''
-@:        self.log("Checking if the @(Model.ObjectName) instance {0} is present".format(self.@(Model.ModuleResourceName)))
 @:        found = False
 @:        try:
 foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))

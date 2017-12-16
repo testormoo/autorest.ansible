@@ -279,6 +279,18 @@ namespace AutoRest.Ansible.Model
             return GetModuleTest(0, prefix, "delete", isCheckMode);
         }
 
+        public int GetModuleFactTestCount()
+        {
+            var m = GetModuleMap(ModuleName);
+            return m.Methods.Length;
+        }
+
+        public string[] GetModuleFactTest(int idx)
+        {
+            var m = GetModuleMap(ModuleName);
+            return GetModuleTest(0, "Gather facts", m.Methods[idx].Name, false);
+        }
+
         public string[] ModuleTestDelete
         {
             get { return GetModuleTest(0, "Delete instance of", "delete", false); }

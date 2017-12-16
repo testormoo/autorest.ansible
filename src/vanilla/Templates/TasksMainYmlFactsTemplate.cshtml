@@ -1,0 +1,33 @@
+@using AutoRest.Ansible.vanilla.Templates
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Ansible
+@using AutoRest.Ansible.Model
+@inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
+- name: Prepare random number
+  set_fact:
+    random_postfix: "{{ 1000 | random }}"
+  run_once: yes
+@for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
+{
+@EmptyLine
+foreach (var line in Model.GetModuleFactTest(testIdx))
+{
+@:@(line)
+}
+@:  register: output
+@:- name: Assert that facts are returned
+@:  assert:
+@:    that:
+@:      - output.changed == False
+}
+@if (Model.HasPrerequisites())
+{
+@EmptyLine
+    foreach (var line in Model.ModuleTestDeleteClearPrerequisites)
+    {
+@:@(line)
+    }
+@:    state: absent
+}

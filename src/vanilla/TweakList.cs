@@ -141,6 +141,9 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_mysqlfirewallrule_facts", "azure_rm_mysqlfirewallrule_facts"),
             new Tweak_Module_Rename("azure_rm_mysqlvirtualnetworkrule_facts", "azure_rm_mysqlvirtualnetworkrule_facts"),
 
+            // MySQL Server LogFile Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqllogfile_facts", "azure_rm_mysqlserver", null, null),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqllogfile_facts", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
 
             // PostgreSQL Server
             new Tweak_Module_ObjectName("azure_rm_postgresqlserver", "PostgreSQL Server"),

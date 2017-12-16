@@ -9,14 +9,6 @@
   set_fact:
     random_postfix: "{{ 1000 | random }}"
   run_once: yes
-@if (Model.HasPrerequisites())
-{
-@EmptyLine
-    foreach (var line in Model.ModuleTestPrerequisites)
-    {
-@:@(line)
-    }
-}
 @EmptyLine
 @foreach (var line in Model.GetModuleTestCreate(true))
 {
