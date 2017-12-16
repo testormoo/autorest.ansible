@@ -43,6 +43,11 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "server_name", "\"sqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_Flatten("azure_rm_sqlserver", "identity", ""),
 
+            // SQL Server Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlserver_facts", "azure_rm_sqlserver", null, null),
+            new Tweak_Module_ObjectName("azure_rm_sqlserver_facts", "SQL Server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlserver_facts", "server_name", "\"sqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+
             // SQL Database
             new Tweak_Module_ObjectName("azure_rm_sqldatabase", "SQL Database"),
             new Tweak_Option_Rename("azure_rm_sqldatabase", "database_name", "name"),
@@ -53,6 +58,12 @@ namespace AutoRest.Ansible
             new Tweak_Response_AddField("azure_rm_sqldatabase", "database_id"),
             new Tweak_Module_AssertStateVariable("azure_rm_sqldatabase", "status"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqldatabase", "Online"),
+
+            // SQL Database Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase_facts", "azure_rm_sqldatabase", null, null),
+            new Tweak_Module_ObjectName("azure_rm_sqldatabase_facts", "SQL Database"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "server_name", "\"sqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "database_name", "test-database"),
 
             // SQL Elastic Pool
             new Tweak_Module_ObjectName("azure_rm_sqlelasticpool", "ElasticPool"),
@@ -172,6 +183,11 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqlserver", "user_visible_state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlserver", "Ready"),
 
+            // PostgreSQL Server Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlserver_facts", "azure_rm_postgresqlserver", null, null),
+            new Tweak_Module_ObjectName("azure_rm_postgresqlserver_facts", "MySQL Server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver_facts", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+
             // PostgreSQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase", "azure_rm_postgresqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_postgresqldatabase", "database_name", "name"),
@@ -181,6 +197,12 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqldatabase", "testdatabase"),
             new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_postgresqldatabase"),
+
+            // PostgreSQL Database Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase_facts", "azure_rm_postgresqldatabase", null, null),
+            new Tweak_Module_ObjectName("azure_rm_postgresqldatabase_facts", "PostgreSQL Database"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase_facts", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase_facts", "database_name", "testdatabase"),
 
             new Tweak_Module_Rename("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration_facts"),
             new Tweak_Module_ObjectName("azure_rm_postgresqldatabase", "PostgreSQL Database"),
@@ -210,6 +232,12 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlserver_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlserver_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase_facts", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
         };
     }
