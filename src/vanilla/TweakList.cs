@@ -91,6 +91,11 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "user_visible_state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlserver", "Ready"),
 
+            // MySQL Server Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlserver_facts", "azure_rm_mysqlserver", null, null),
+            new Tweak_Module_ObjectName("azure_rm_mysqlserver_facts", "MySQL Server"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver_facts", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+
             // MySQL Database
             new Tweak_Module_ObjectName("azure_rm_mysqldatabase", "MySQL Database"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", null, null),

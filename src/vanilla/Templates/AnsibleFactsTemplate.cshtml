@@ -89,7 +89,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
             changed=False,
             ansible_facts=dict()
         )
-
+        self.mgmt_client = None
 @foreach (var v in Model.ModuleOptions)
 {
 @:        self.@(v.NameAlt) = None
@@ -101,6 +101,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         for key in self.module_arg_spec:
             setattr(self, key, kwargs[key])
+        
+        self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
+                                                    base_url=self._cloud_environment.endpoints.resource_manager)
 @EmptyLine
 @{
     string ifStatement = "if (";
@@ -110,7 +113,8 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         string[] ps = Model.GetMethodRequiredOptionNames(f.Name);
         for (int idx = 0; idx < ps.Length; idx++)
         {
-@:        @((idx == 0) ? ifStatement : ifPadding)self.@(ps[idx]) is not None@((idx != ps.Length - 1) ? " and" : "):")
+            string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
+@:        @((idx == 0) ? ifStatement : ifPadding)self.@(optionName) is not None@((idx != ps.Length - 1) ? " and" : "):")
         }
 @:            self.results['ansible_facts']['@(f.Name)'] = self.@(f.Name)()
         ifStatement = "elif (";
@@ -135,9 +139,8 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 }
 @:            found = True
 @:            self.log("Response : {0}".format(response))
-@:            self.log("@(Model.ObjectName) instance : {0} found".format(response.name))
 @:        except CloudError as e:
-@:            self.log('Did not find the @(Model.ModuleOperationNameUpper) instance.')
+@:            self.log('Could not get facts for @(Model.ModuleOperationNameUpper).')
 @:        if found is True:
 @:            return response.as_dict()
 @EmptyLine
@@ -146,7 +149,7 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 @EmptyLine
 @EmptyLine
 def main():
-    AzureRM@(Model.ObjectName)Facts()
+    AzureRM@(Model.ModuleOperationNameUpper)Facts()
 
 if __name__ == '__main__':
     main()
