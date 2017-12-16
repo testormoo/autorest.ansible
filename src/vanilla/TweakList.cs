@@ -324,8 +324,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlvirtualnetworkrule_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlvirtualnetworkrule_facts", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_sqlconfiguration_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration_facts", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
         };
     }
