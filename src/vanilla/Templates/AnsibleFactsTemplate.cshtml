@@ -131,20 +131,30 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 @EmptyLine
 @:        :return: deserialized @(Model.ObjectName)instance state dictionary
 @:        '''
-@:        found = False
+@:        response = None
+@:        results = False
 @:        try:
 foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 {
 @:@line
 }
-@:            found = True
 @:            self.log("Response : {0}".format(response))
 @:        except CloudError as e:
 @:            self.log('Could not get facts for @(Model.ModuleOperationNameUpper).')
-@:        if found is True:
-@:            return response.as_dict()
 @EmptyLine
-@:        return False
+@:        if response is not None:
+if (m.Name.Contains("list"))
+{
+@:            results = []
+@:            for item in response:
+@:                results.append(item.as_dict())
+}
+else
+{
+@:            results = response.as_dict()
+}
+@EmptyLine
+@:        return results
 }
 @EmptyLine
 @EmptyLine

@@ -9,6 +9,15 @@
   set_fact:
     random_postfix: "{{ 1000 | random }}"
   run_once: yes
+@if (Model.HasPrerequisites())
+{
+@EmptyLine
+    foreach (var line in Model.ModuleTestPrerequisites)
+    {
+@:@(line)
+    }
+@:    state: absent
+}
 @for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
 {
 @EmptyLine
