@@ -139,6 +139,12 @@ namespace AutoRest.Ansible
             new Tweak_Module_AddUpdateRule("azure_rm_mysqlfirewallrule", "start_ip_address", "start_ip_address"),
             new Tweak_Module_AddUpdateRule("azure_rm_mysqlfirewallrule", "end_ip_address", "end_ip_address"),
 
+            // MySQL Firewall Rule Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule_facts", "azure_rm_mysqlfirewallrule", null, null),
+            new Tweak_Module_ObjectName("azure_rm_mysqlfirewallrule_facts", "MySQL Firewall Rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "firewallrule_name", "test-firewall-rule"),
+
             // MySQL Server Configuration
             new Tweak_Module_Rename("azure_rm_mysqlconfiguration", "azure_rm_mysqlconfiguration"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", null, null),
@@ -151,11 +157,23 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlconfiguration", "value"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlconfiguration", "ON"),
 
+            // MySQL Configuration Facts
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration_facts", "azure_rm_mysqlconfiguration", null, null),
+            //new Tweak_Module_ObjectName("azure_rm_mysqlconfiguration_facts", "MySQL Configuration"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration_facts", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration_facts", "configuration_name", "event_scheduler"),
+
             // MySQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "test-virtual-network-rule"),
+
+            // MySQL Virtual Network Rule Facts
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule_facts", "azure_rm_mysqlvirtualnetworkrule", null, null),
+            //new Tweak_Module_ObjectName("azure_rm_mysqlvirtualnetworkrule_facts", "MySQL Virtual Network Rule"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule_facts", "server_name", "\"mysqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule_facts", "virtualnetworkrule_name", "test-virtual-network-rule"),
 
             new Tweak_Module_Rename("azure_rm_mysqlserver_facts", "azure_rm_mysqlserver_facts"),
             new Tweak_Module_Rename("azure_rm_mysqlconfiguration_facts", "azure_rm_mysqlconfiguration_facts"),
@@ -207,6 +225,57 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration_facts"),
             new Tweak_Module_ObjectName("azure_rm_postgresqldatabase", "PostgreSQL Database"),
 
+            // PostgreSQL Server Firewall Rule
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule", "azure_rm_postgresqlserver", null, null),
+            //new Tweak_Option_Rename("azure_rm_postgresqlfirewallrule", "firewall_rule_name", "name"),
+            //new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "start_ip_address", false),
+            //new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "end_ip_address", false),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "firewall_rule_name", "test-firewall-rule"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "start_ip_address", "172.28.10.136"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "end_ip_address", "172.28.10.138"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlfirewallrule"),
+            //new Tweak_Module_AssertStateVariable("azure_rm_postgresqlfirewallrule", "name"),
+            //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlfirewallrule", "test-firewall-rule"),
+            //new Tweak_Module_AddUpdateRule("azure_rm_postgresqlfirewallrule", "start_ip_address", "start_ip_address"),
+            //new Tweak_Module_AddUpdateRule("azure_rm_postgresqlfirewallrule", "end_ip_address", "end_ip_address"),
+
+            // PostgreSQL Firewall Rule Facts
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule_facts", "azure_rm_postgresqlfirewallrule", null, null),
+            //new Tweak_Module_ObjectName("azure_rm_postgresqlfirewallrule_facts", "PostgreSQL Firewall Rule"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "firewallrule_name", "test-firewall-rule"),
+
+            // PostgreSQL Server Configuration
+            //new Tweak_Module_Rename("azure_rm_postgresqlconfiguration", "azure_rm_postgresqlconfiguration"),
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration", "azure_rm_postgresqlserver", null, null),
+            //new Tweak_Option_Rename("azure_rm_postgresqlconfiguration", "configuration_name", "name"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "configuration_name", "event_scheduler"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "value", "\"ON\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "source", "user-override"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlconfiguration"),
+            //new Tweak_Module_AssertStateVariable("azure_rm_postgresqlconfiguration", "value"),
+            //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlconfiguration", "ON"),
+
+            // PostgreSQL Configuration Facts
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration", null, null),
+            //new Tweak_Module_ObjectName("azure_rm_postgresqlconfiguration_facts", "PostgreSQL Configuration"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "configuration_name", "event_scheduler"),
+
+            // PostgreSQL Server Virtual Network Rule
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlvirtualnetworkrule", "azure_rm_postgresqlserver", null, null),
+            //new Tweak_Option_Rename("azure_rm_postgresqlvirtualnetworkrule", "virtual_network_rule_name", "name"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule", "virtual_network_rule_name", "test-virtual-network-rule"),
+
+            // PostgreSQL Virtual Network Rule Facts
+            //new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlvirtualnetworkrule_facts", "azure_rm_postgresqlvirtualnetworkrule", null, null),
+            //new Tweak_Module_ObjectName("azure_rm_postgresqlvirtualnetworkrule_facts", "PostgreSQL Virtual Network Rule"),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule_facts", "server_name", "\"postgresqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            //new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule_facts", "virtualnetworkrule_name", "test-virtual-network-rule"),
+
             // Authorization
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "role_definition_id", "rolexyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "scope", "\"/subscriptions/{{ azure_subscription_id }}\""),
@@ -232,12 +301,31 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlfirewallrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlfirewallrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlvirtualnetworkrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlvirtualnetworkrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlvirtualnetworkrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlconfiguration", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration", "RP"),
+
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlserver_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlfirewallrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlfirewallrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlvirtualnetworkrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlvirtualnetworkrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlvirtualnetworkrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlconfiguration_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration_facts", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
         };
     }
