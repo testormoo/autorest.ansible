@@ -42,6 +42,8 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "location", "eastus"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "server_name", "\"sqlsrv{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
             new Tweak_Option_Flatten("azure_rm_sqlserver", "identity", ""),
+            new Tweak_Module_AssertStateVariable("azure_rm_sqlserver", "state"),
+            new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlserver", "Ready"),
 
             // SQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlserver_facts", "azure_rm_sqlserver", null, null),

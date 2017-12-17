@@ -596,7 +596,7 @@ namespace AutoRest.Ansible.Model
                     case "databases": return "status";
                 }
 
-                return "state";
+                return "";
             }
         }
 

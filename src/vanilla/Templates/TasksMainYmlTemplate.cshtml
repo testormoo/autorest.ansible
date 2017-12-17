@@ -38,7 +38,10 @@
   assert:
     that:
       - output.changed
-      - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+@if (Model.AssertStateVariable != "")
+{
+@:      - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+}
 @EmptyLine
 @foreach (var line in Model.ModuleTestUpdate)
 {
@@ -49,7 +52,10 @@
   assert:
     that:
       - output.changed == false
-      - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+@if (Model.AssertStateVariable != "")
+{
+@:      - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
+}
 @if (Model.CanDelete())
 {
 @EmptyLine
