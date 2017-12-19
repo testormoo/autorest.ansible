@@ -387,6 +387,7 @@ namespace AutoRest.Ansible.Model
                     case "SqlManagementClient": return "azure.mgmt.sql";
                     case "MySQLManagementClient": return "azure.mgmt.rdbms.mysql";
                     case "PostgreSQLManagementClient": return "azure.mgmt.rdbms.postgresql";
+                    case "NetworkManagementClient": return "azure.mgmt.network";
                     default: return "azure.mgmt." + Namespace;
                 }
             }
@@ -677,24 +678,29 @@ namespace AutoRest.Ansible.Model
 
                 if (option.IsList)
                 {
-                    help.Add(propertyLine);
-
                     if (option.Type == "dict")
                     {
-                        bool first = true;
-                        foreach (var line in GetPlaybookFromOptions(option.SubOptions, "", test))
+                        string[] sub = GetPlaybookFromOptions(option.SubOptions, "", test);
+
+                        if (sub.Length > 0)
                         {
-                            help.Add((first ? padding + "  - " : padding + "    ") + line);
-                            first = false;
+                            help.Add(propertyLine);
+
+                            bool first = true;
+                            foreach (var line in sub)
+                            {
+                                help.Add((first ? padding + "  - " : padding + "    ") + line);
+                                first = false;
+                            }
                         }
                     }
                     else if (option.Type == "list")
                     {
-                        help.Add(padding + "  - " + "XXXX - list of lists -- not implemented " + option.Type);
+                        //help.Add(padding + "  - " + "XXXX - list of lists -- not implemented " + option.Type);
                     }
                     else
                     {
-                        help.Add(padding + "  - " + "XXXX - list of values -- not implemented " + option.Type);
+                        //help.Add(padding + "  - " + "XXXX - list of values -- not implemented " + option.Type);
                     }
                 }
                 else if (option.SubOptions != null && option.SubOptions.Length > 0)

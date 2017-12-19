@@ -276,6 +276,32 @@ namespace AutoRest.Ansible
             new Tweak_Module_ObjectName("azure_rm_applicationgatewayapplicationgateway", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgatewayapplicationgateway", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "application_gateway_name", "\"appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "sku.name", "Standard_Small"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "sku.tier", "Standard"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "sku.capacity", "2"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "gateway_ip_configurations.name", "app_gateway_ip_config"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "gateway_ip_configurations.subnet.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/virtualNetworks/sample-vnet/subnets/sample-subnet"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "frontend_ip_configurations.name", "sample_gateway_frontend_ip_config"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "frontend_ip_configurations.subnet.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/virtualNetworks/sample-vnet/subnets/sample-subnet"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "frontend_ports.name", "ag_frontend_port"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "frontend_ports.port", "90"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "backend_address_pools.name", "test_backend_address_pool"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "backend_address_pools.backend_addresses.ip_address", "10.0.0.4"),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "backend_http_settings_collection.name", "sample_appgateway_http_settings"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "backend_http_settings_collection.port", "80"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "backend_http_settings_collection.protocol", "Http"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "backend_http_settings_collection.cookie_based_affinity", "Enabled"),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "http_listeners.name", "sample_http_listener"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "http_listeners.frontend_ip_configuration.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/applicationGateways/appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}/frontendIPConfigurations/sample_gateway_frontend_ip_config"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "http_listeners.frontend_port.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/applicationGateways/appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}/frontendPorts/ag_frontend_port"),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "request_routing_rules.name", "rule1"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "request_routing_rules.rule_type", "Basic"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "request_routing_rules.http_listener.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/applicationGateways/appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}/httpListeners/sample_http_listener"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "request_routing_rules.backend_address_pool.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/applicationGateways/appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}/backendAddressPools/test_backend_address_pool"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway", "request_routing_rules.backend_http_settings.id", "/subscriptions/685ba005-af8d-4b04-8f16-a7bf38b2eb5a/resourceGroups/zims-rg1/providers/Microsoft.Network/applicationGateways/appgateway{{ random_postfix }}{{ resource_group | hash('md5') | truncate(7, True, '') }}/backendHttpSettingsCollection/sample_appgateway_http_settings"),
 
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
