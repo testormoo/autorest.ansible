@@ -192,6 +192,19 @@ namespace AutoRest.Ansible
         }
     }
 
+    class Tweak_Module_CannotTestUpdate : Tweak_Module
+    {
+        public Tweak_Module_CannotTestUpdate(string module)
+        {
+            _module = module;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.CannotTestUpdate = false;
+        }
+    }
+
     class Tweak_Module_AssertStateVariable : Tweak_Module
     {
         public Tweak_Module_AssertStateVariable(string module, string newValue)
@@ -260,6 +273,25 @@ namespace AutoRest.Ansible
         private string _newValue;
         private string _replaceFrom;
         private string _replaceTo;
+    }
+
+    class Tweak_Module_TestPrerequisites : Tweak_Module
+    {
+        public Tweak_Module_TestPrerequisites(string module, string[] pre, string[] post)
+        {
+            _module = module;
+            _pre = pre;
+            _post = post;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.TestPrerequisites = _pre;
+            m.TestPostrequisites = _post;
+        }
+
+        private string[] _pre;
+        private string[] _post;
     }
 
     class Tweak_Module_AddUpdateRule : Tweak_Module

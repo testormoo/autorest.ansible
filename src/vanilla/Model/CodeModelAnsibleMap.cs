@@ -86,8 +86,15 @@ namespace AutoRest.Ansible.Model
 
         public bool HasPrerequisites()
         {
+            bool hasPrerequisites = false;
             string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
-            return ((prerequisites != null) && (prerequisites != ""));
+            if ((prerequisites != null) && (prerequisites != ""))
+                hasPrerequisites = true;
+
+            if ((Map.Modules[_selectedMethod].TestPrerequisites != null) || (Map.Modules[_selectedMethod].TestPostrequisites != null))
+                hasPrerequisites = true;
+
+            return hasPrerequisites;
         }
 
         public string LocationDisposition
@@ -320,6 +327,9 @@ namespace AutoRest.Ansible.Model
                     prePlaybook.AddRange(subModel.GetModuleTest(1, "Create", "", false));
                 }
 
+                if (Map.Modules[_selectedMethod].TestPrerequisites != null)
+                    prePlaybook.AddRange(Map.Modules[_selectedMethod].TestPrerequisites);
+
                 return prePlaybook.ToArray();
             }
         }
@@ -343,6 +353,9 @@ namespace AutoRest.Ansible.Model
                     prePlaybook.AddRange(subModel.ModuleTestDeleteClearPrerequisites);
                 }
 
+                if (Map.Modules[_selectedMethod].TestPostrequisites != null)
+                    prePlaybook.AddRange(Map.Modules[_selectedMethod].TestPostrequisites);
+
                 string[] arr = prePlaybook.ToArray();
 
                 if (Map.Modules[_selectedMethod].TestReplaceStringFrom != null)
@@ -363,6 +376,9 @@ namespace AutoRest.Ansible.Model
             string postfix = isCheckMode ? " -- check mode" : "";
 
             prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true, postfix));
+
+            if (methodType == "delete")
+                prePlaybook.Add("    state: absent");
 
             string[] arr = prePlaybook.ToArray();
 
@@ -443,6 +459,13 @@ namespace AutoRest.Ansible.Model
             }
 
             return false;
+        }
+
+        public bool CanTestUpdate()
+        {
+            var m = GetModuleMap(ModuleName);
+
+            return m.CannotTestUpdate;
         }
 
         public string[] GetMethodRequiredOptionNames(string methodName)

@@ -95,6 +95,7 @@ namespace AutoRest.Ansible.Model
         public MapAnsibleModule()
         {
             NeedsDeleteBeforeUpdate = false;
+            CannotTestUpdate = true;
             ReleaseStatus = "";
         }
 
@@ -104,6 +105,8 @@ namespace AutoRest.Ansible.Model
         public ModuleMethod[] Methods { get; set; }
         public ModuleResponseField[] ResponseFields { get; set; }
         public string TestPrerequisitesModule { get; set; }
+        public string[] TestPrerequisites { get; set; }
+        public string[] TestPostrequisites { get; set; }
         public string AssertStateVariable { get; set; }
         public string AssertStateExpectedValue { get; set; }
         public string ModuleOperationNameUpper { get; set; }
@@ -116,6 +119,8 @@ namespace AutoRest.Ansible.Model
         public string ReleaseStatus { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
+
+        public bool CannotTestUpdate { get; set; }
 
         public UpdateComparisonRule[] UpdateComparisonRules { get; set; }
         

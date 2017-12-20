@@ -42,20 +42,23 @@
 {
 @:      - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
 }
+@if (Model.CanTestUpdate())
+{
 @EmptyLine
-@foreach (var line in Model.ModuleTestUpdate)
+foreach (var line in Model.ModuleTestUpdate)
 {
 @:@(line)
 }
-  register: output
-- name: Assert the state has not changed
-  assert:
-    that:
-      - output.changed == false
-@if (Model.AssertStateVariable != "")
-{
+@:  register: output
+@:- name: Assert the state has not changed
+@:  assert:
+@:    that:
+@:      - output.changed == false
+    if(Model.AssertStateVariable != "")
+    {
 @:      - output.@(Model.AssertStateVariable) == '@(Model.AssertStateExpectedValue)'
-}
+    }
+    }
 @if (Model.CanDelete())
 {
 @EmptyLine
@@ -63,7 +66,6 @@
     {
 @:@(line)
     }
-@:    state: absent
 @:  check_mode: yes
 @:  register: output
 @:- name: Assert the state has changed
@@ -75,7 +77,6 @@
     {
 @:@(line)
     }
-@:    state: absent
 @:  register: output
 @:- name: Assert the state has changed
 @:  assert:
@@ -86,7 +87,6 @@
     {
 @:@(line)
     }
-@:    state: absent
 @:  register: output
 @:- name: Assert the state has changed
 @:  assert:
@@ -100,5 +100,4 @@
     {
 @:@(line)
     }
-@:    state: absent
 }
