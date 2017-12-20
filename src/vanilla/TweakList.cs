@@ -309,7 +309,7 @@ namespace AutoRest.Ansible
                                                     "- name: Create a virtual network",
                                                     "  azure_rm_virtualnetwork:",
                                                     "    name: sample-vnet",
-                                                    "    resource_group: {{ resource_group }}",
+                                                    "    resource_group: \"{{ resource_group }}\"",
                                                     "    address_prefixes_cidr:",
                                                     "        - 10.1.0.0/16",
                                                     "        - 172.100.0.0/16",
@@ -321,13 +321,13 @@ namespace AutoRest.Ansible
                                                     "  azure_rm_subnet:",
                                                     "    name: sample-subnet",
                                                     "    virtual_network_name: sample-vnet",
-                                                    "    resource_group: {{ resource_group }}",
+                                                    "    resource_group: \"{{ resource_group }}\"",
                                                     "    address_prefix_cidr: 10.1.0.0/24" },
                                                 new string[] {
                                                     "- name: Remove virtual network",
                                                     "  azure_rm_virtualnetwork:",
                                                     "    name: sample-vnet",
-                                                    "    resource_group: {{ resource_group }}",
+                                                    "    resource_group: \"{{ resource_group }}\"",
                                                     "    state: absent" }),
 
             // RELEASE STATUS FOR VARIOUS MODULES
