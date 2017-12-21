@@ -1,11 +1,9 @@
-﻿@using AutoRest.Ansible.vanilla.Templates
+@using AutoRest.Ansible.Templates
 @using System.Linq
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.Ansible
 @using AutoRest.Ansible.Model
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
-@foreach (var line in Model.MergeReport)
-{
-@:@(line)
-}
+dependencies:
+  - setup_azure

@@ -12,7 +12,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Ansible;
 using AutoRest.Ansible.Model;
-using AutoRest.Ansible.vanilla.Templates;
+using AutoRest.Ansible.Templates;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
