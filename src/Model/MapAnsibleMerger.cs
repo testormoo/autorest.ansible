@@ -159,7 +159,7 @@ namespace AutoRest.Ansible.Model
             m.IsList = o.IsList;
             m.NameAlt = o.NameAlt;
             m.DefaultValueSample = o.DefaultValueSample;
-            m.DefaultValueTest = o.DefaultValueTest;
+            //m.DefaultValueTest = o.DefaultValueTest;
             m.SubOptions = MergeOptionLists(o.SubOptions, n.SubOptions, prefix + ":SubOptions");
 
             if (n.Disposition != m.Disposition)
@@ -186,8 +186,8 @@ namespace AutoRest.Ansible.Model
             if (n.DefaultValueSample != m.DefaultValueSample)
                 _output.Add(prefix + " > DEVAULT VALUE SAMPLE " + m.DefaultValueSample);
 
-            if (n.DefaultValueTest != m.DefaultValueTest)
-                _output.Add(prefix + " > DEFAULT VALUE TEST " + m.DefaultValueTest);
+            //if (n.DefaultValueTest != m.DefaultValueTest)
+            //    _output.Add(prefix + " > DEFAULT VALUE TEST " + m.DefaultValueTest);
 
             return m;
         }

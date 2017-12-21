@@ -7,7 +7,7 @@
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
 - name: Prepare random number
   set_fact:
-    random_postfix: "{{ 1000 | random }}"
+    rpfx: "{{ resource_group | hash('md5') | truncate(7, True, '') }}{{ 1000 | random }}"
   run_once: yes
 @if (Model.HasPrerequisites())
 {

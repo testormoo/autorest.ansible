@@ -403,7 +403,7 @@ namespace AutoRest.Ansible
         public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
-            if (option != null) option.DefaultValueTest = _newValue;
+            if (option != null) option.DefaultValueSample["test:default"] = _newValue;
             // XXX - level change
         }
 

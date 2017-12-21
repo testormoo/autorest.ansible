@@ -674,8 +674,15 @@ namespace AutoRest.Ansible.Model
             return null;
         }
 
-        public MapAnsible Map { get; set; } 
+        public MapAnsible Map { get; set; }
 
+        //---------------------------------------------------------------------------------------------------------------------------------
+        // PLAYBOOK RELATED FUNCTIONALITY
+        //---------------------------------------------------------------------------------------------------------------------------------
+        // Used for:
+        //  - sample generation
+        //  - test generation
+        //---------------------------------------------------------------------------------------------------------------------------------
         private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, bool test, string operationPostfix = "")
         {
             List<string> help = new List<string>();
@@ -738,7 +745,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    string predefined = test ? option.DefaultValueTest : option.DefaultValueSample.GetValueOrDefault("default", null);
+                    string predefined = test ? option.DefaultValueSample.GetValueOrDefault("test:default", null) : option.DefaultValueSample.GetValueOrDefault("default", null);
 
                     if (predefined != "")
                     {
@@ -750,6 +757,11 @@ namespace AutoRest.Ansible.Model
             return help.ToArray();
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------------
+        // DOCUMENTATION GENERATION FUNCTIONALITY
+        //---------------------------------------------------------------------------------------------------------------------------------
+        // Use it to generate module documentation
+        //---------------------------------------------------------------------------------------------------------------------------------
         private string[] GetHelpFromOptions(ModuleOption[] options, string padding)
         {
             List<string> help = new List<string>();
