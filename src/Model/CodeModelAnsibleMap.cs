@@ -243,7 +243,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetPlaybook("Create (or update)", ModuleOptions, "  ", false);
+                return GetPlaybook("Create (or update)", ModuleOptions, "  ", "default");
             }
         }
 
@@ -258,7 +258,7 @@ namespace AutoRest.Ansible.Model
                     // get parameters of method
                     ModuleOption[] options = GetMethodOptions(method.Name);
 
-                    help.AddRange(GetPlaybook(method.Name == "get" ? "Get instance of" : "List instances of", options, "  ", false));
+                    help.AddRange(GetPlaybook(method.Name == "get" ? "Get instance of" : "List instances of", options, "  ", "default"));
                 }
 
                 return help.ToArray();
@@ -375,7 +375,7 @@ namespace AutoRest.Ansible.Model
             List<string> prePlaybook = new List<string>();
             string postfix = isCheckMode ? " -- check mode" : "";
 
-            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", true, postfix));
+            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", "test:default", postfix));
 
             if (methodType == "delete")
                 prePlaybook.Add("    state: absent");
@@ -683,17 +683,17 @@ namespace AutoRest.Ansible.Model
         //  - sample generation
         //  - test generation
         //---------------------------------------------------------------------------------------------------------------------------------
-        private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, bool test, string operationPostfix = "")
+        private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, string playbookType, string operationPostfix = "")
         {
             List<string> help = new List<string>();
 
             help.Add(padding + "- name: " + operation + " " + ObjectName + operationPostfix);
             help.Add(padding + "  " + ModuleNameAlt + ":");
-            help.AddRange(GetPlaybookFromOptions(options, padding + "    ", test));
+            help.AddRange(GetPlaybookFromOptions(options, padding + "    ", playbookType));
             return help.ToArray();
         }
 
-        private string[] GetPlaybookFromOptions(ModuleOption[] options, string padding, bool test)
+        private string[] GetPlaybookFromOptions(ModuleOption[] options, string padding, string playbookType)
         {
             List<string> help = new List<string>();
             foreach (var option in options)
@@ -710,7 +710,7 @@ namespace AutoRest.Ansible.Model
                 {
                     if (option.Type == "dict")
                     {
-                        string[] sub = GetPlaybookFromOptions(option.SubOptions, "", test);
+                        string[] sub = GetPlaybookFromOptions(option.SubOptions, "", playbookType);
 
                         if (sub.Length > 0)
                         {
@@ -735,7 +735,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else if (option.SubOptions != null && option.SubOptions.Length > 0)
                 {
-                    string[] sub = GetPlaybookFromOptions(option.SubOptions, padding + "  ", test);
+                    string[] sub = GetPlaybookFromOptions(option.SubOptions, padding + "  ", playbookType);
 
                     if (sub.Length > 0)
                     {
@@ -745,7 +745,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    string predefined = test ? option.DefaultValueSample.GetValueOrDefault("test:default", null) : option.DefaultValueSample.GetValueOrDefault("default", null);
+                    string predefined = option.DefaultValueSample.GetValueOrDefault(playbookType, null);
 
                     if (predefined != "")
                     {
