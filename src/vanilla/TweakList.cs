@@ -324,6 +324,13 @@ namespace AutoRest.Ansible
                                                     "    resource_group: \"{{ resource_group }}\"",
                                                     "    address_prefix_cidr: 10.1.0.0/24" },
                                                 new string[] {
+                                                    "- name: Remove subnet",
+                                                    "  azure_rm_subnet:",
+                                                    "    name: sample-subnet",
+                                                    "    virtual_network_name: sample-vnet",
+                                                    "    resource_group: \"{{ resource_group }}\"",
+                                                    "    state: absent",
+                                                    "",
                                                     "- name: Remove virtual network",
                                                     "  azure_rm_virtualnetwork:",
                                                     "    name: sample-vnet",
@@ -363,6 +370,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration_facts", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
+
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgateway", "RP"),
         };
     }
 }
