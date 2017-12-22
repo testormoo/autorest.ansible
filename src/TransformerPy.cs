@@ -41,16 +41,16 @@ namespace AutoRest.Ansible
             foreach (var methodGroup in codeModel.MethodGroupModels)
             {
                 // isClientProperty + ApiVersion will not select anything in Composite mode
-                //var apiVersionParameters = methodGroup.MethodTemplateModels.SelectMany(x => x.Parameters)
-                //    .Where(p => p.IsClientProperty && p.SerializedName == "api-version");
+                var apiVersionParameters = methodGroup.MethodTemplateModels.SelectMany(x => x.Parameters)
+                    .Where(p => p.IsClientProperty && p.SerializedName == "api-version");
 
-                //foreach (var apiVersionParameter in apiVersionParameters)
-                //{
-                //    apiVersionParameter.Name = "api_version";
-                //    apiVersionParameter.ClientProperty = null;
-                //    apiVersionParameter.IsConstant = true;
-                //    apiVersionParameter.DefaultValue = codeModel.ApiVersion;
-                //}
+                foreach (var apiVersionParameter in apiVersionParameters)
+                {
+                    apiVersionParameter.Name = "api_version";
+                    apiVersionParameter.ClientProperty = null;
+                    apiVersionParameter.IsConstant = true;
+                    apiVersionParameter.DefaultValue = codeModel.ApiVersion;
+                }
             }
         }
 
@@ -83,37 +83,37 @@ namespace AutoRest.Ansible
         {
             foreach (var methodGroup in codeModel.MethodGroupModels)
             {
-                //var allParameters = methodGroup.MethodTemplateModels.SelectMany(x => x.Parameters)
-                //    .Where(p => p.IsConstant && !p.IsClientProperty).ToArray();
+                var allParameters = methodGroup.MethodTemplateModels.SelectMany(x => x.Parameters)
+                    .Where(p => p.IsConstant && !p.IsClientProperty).ToArray();
 
-                var constantProperties = new List<Property>();
+                var constantProperties = new List<PropertyPy>();
 
 
-                //foreach (var parameter in allParameters)
-                //{
-                //    if (allParameters.Any(p => p.Name == parameter.Name && p.DefaultValue != parameter.DefaultValue))
-                //    {
-                //        continue;
-                //    }
+                foreach (var parameter in allParameters)
+                {
+                    if (allParameters.Any(p => p.Name == parameter.Name && p.DefaultValue != parameter.DefaultValue))
+                    {
+                        continue;
+                    }
 
-                //    if (constantProperties.All(each => each.Name.RawValue != parameter.Name.RawValue))
-                //    {
+                    if (constantProperties.All(each => each.Name.RawValue != parameter.Name.RawValue))
+                    {
                         
-                //        constantProperties.Add(New<Property>(new
-                //        {
-                //            Name = parameter.Name.RawValue,
-                //            DefaultValue = parameter.DefaultValue.RawValue,
-                //            IsConstant = true,
-                //            IsRequired = parameter.IsRequired,
-                //            Documentation = parameter.Documentation,
-                //            SerializedName = parameter.SerializedName,
-                //            ModelType = parameter.ModelType,
-                //            IsSpecialConstant = true
-                //        }));
-                //    }
-                //}
+                        constantProperties.Add(New<PropertyPy>(new
+                        {
+                            Name = parameter.Name.RawValue,
+                            DefaultValue = parameter.DefaultValue.RawValue,
+                            IsConstant = true,
+                            IsRequired = parameter.IsRequired,
+                            Documentation = parameter.Documentation,
+                            SerializedName = parameter.SerializedName,
+                            ModelType = parameter.ModelType,
+                            IsSpecialConstant = true
+                        }));
+                    }
+                }
 
-                //methodGroup.ConstantProperties = constantProperties.Any() ? constantProperties : Enumerable.Empty<Property>();
+                methodGroup.ConstantProperties = constantProperties.Any() ? constantProperties : Enumerable.Empty<PropertyPy>();
             }
         }
 

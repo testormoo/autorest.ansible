@@ -22,15 +22,15 @@ namespace AutoRest.Ansible
 
                 // set code model implementations our own implementations 
                 new Factory<CodeModel, CodeModelAnsible>(),
-                //new Factory<Method, MethodPy>(),
+                new Factory<Method, MethodPy>(),
                 new Factory<CompositeType, CompositeTypePy>(),
-                //new Factory<Property, PropertyPy>(),
-                //new Factory<Parameter, ParameterPy>(),
+                new Factory<Property, PropertyPy>(),
+                new Factory<Parameter, ParameterPy>(),
                 new Factory<DictionaryType, DictionaryTypePy>(),
-                //new Factory<SequenceType, SequenceTypePy>(),
-                //new Factory<MethodGroup, MethodGroupPy>(),
+                new Factory<SequenceType, SequenceTypePy>(),
+                new Factory<MethodGroup, MethodGroupPy>(),
                 new Factory<EnumType, EnumTypePy>(),
-                //new Factory<PrimaryType, PrimaryTypePy>()
+                new Factory<PrimaryType, PrimaryTypePy>()
             };
         }
     }
