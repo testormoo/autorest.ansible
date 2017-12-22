@@ -29,13 +29,13 @@ namespace AutoRest.Ansible.Model
         public IEnumerable<Property> ConstantProperties => Properties.Where(p => p.IsConstant);
 
         [JsonIgnore]
-        public IEnumerable<MethodPy> MethodTemplateModels => Methods.Cast<MethodPy>();
+        public IEnumerable<Method> MethodTemplateModels => Methods.Cast<Method>();
 
         [JsonIgnore]
         public IEnumerable<CompositeTypePy> ModelTemplateModels => ModelTypes.Cast<CompositeTypePy>();
 
         [JsonIgnore]
-        public virtual IEnumerable<MethodGroupPy> MethodGroupModels => Operations.Cast<MethodGroupPy>().Where( each => !each.IsCodeModelMethodGroup);
+        public virtual IEnumerable<MethodGroup> MethodGroupModels => Operations.Cast<MethodGroup>().Where( each => !each.IsCodeModelMethodGroup);
         
 
         public string PolymorphicDictionary
