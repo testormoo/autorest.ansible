@@ -36,7 +36,7 @@ namespace AutoRest.Ansible.Model
 
         public string OperationName { get; set; }
 
-        public IEnumerable<ParameterPy> ParameterTemplateModels => Parameters.Cast<ParameterPy>();
+        public IEnumerable<Parameter> ParameterTemplateModels => Parameters.Cast<Parameter>();
 
         public bool IsStreamResponse => this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream);
 
@@ -482,7 +482,7 @@ namespace AutoRest.Ansible.Model
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
-        public IEnumerable<ParameterPy> LocalParameters
+        public IEnumerable<Parameter> LocalParameters
         {
             get
             {
@@ -492,7 +492,7 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public IEnumerable<ParameterPy> DocumentationParameters
+        public IEnumerable<Parameter> DocumentationParameters
         {
             get
             {
@@ -500,7 +500,7 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public IEnumerable<ParameterPy> ConstantParameters
+        public IEnumerable<Parameter> ConstantParameters
         {
             get
             {
@@ -587,7 +587,7 @@ namespace AutoRest.Ansible.Model
         /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
-        public ParameterPy RequestBody => Body as ParameterPy;
+        public Parameter RequestBody => Body as Parameter;
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
