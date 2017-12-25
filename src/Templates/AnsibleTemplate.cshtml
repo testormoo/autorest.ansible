@@ -79,30 +79,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @EmptyLine
     def __init__(self):
         self.module_arg_spec = dict(
-@foreach (var param in Model.ModuleOptions)
+@foreach (var v in Model.GetModuleArgSpec(true))
 {
-@:            @(param.NameAlt)=dict(
-@:                type='@(param.IsList ? "list" : param.Type)',
-if (param.NoLog)
-{
-@:                no_log=True,
+@:            @(v)
 }
-    if (param.DefaultValue != null)
-    {
-@:                default=@(param.DefaultValue)
-    }
-    else
-    {
-@:                required=@(param.Required)
-    }
-@:            ),
-}
-            state=dict(
-                type='str',
-                required=False,
-                default='present',
-                choices=['present', 'absent']
-            )
         )
 @EmptyLine
 @foreach (var v in Model.ModuleTopLevelOptionsVariables)

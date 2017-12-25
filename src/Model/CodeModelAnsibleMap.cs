@@ -125,6 +125,52 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        // Return module options as module_arg_spec
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        public string[] GetModuleArgSpec(bool appendState)
+        {
+            var argSpec = new List<string>();
+
+            for (int i = 0; i < ModuleOptions.Length; i++)
+            {
+                var option = ModuleOptions[i];
+                bool defaultOrRequired = (option.DefaultValue != null) || (option.Required == "True");
+                argSpec.Add(option.NameAlt + "=dict(");
+                argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired) ? "," : ""));
+
+                if (option.NoLog)
+                {
+                    argSpec.Add("    no_log=True" + (defaultOrRequired ? "," : ""));
+                }
+
+                if (defaultOrRequired)
+                {
+                    if (option.DefaultValue != null)
+                    {
+                        argSpec.Add("    default=" + option.DefaultValue);
+                    }
+                    else
+                    {
+                        argSpec.Add("    required=" + option.Required);
+                    }
+                }
+
+                argSpec.Add(")" + ((i < ModuleOptions.Length - 1 || appendState) ? "," : ""));
+            }
+
+            if (appendState)
+            {
+                argSpec.Add("state=dict(");
+                argSpec.Add("    type='str',");
+                argSpec.Add("    default='present',");
+                argSpec.Add("    choices=['present', 'absent']");
+                argSpec.Add(")");
+            }
+
+            return argSpec.ToArray();
+        }
+
         public ModuleResponseField[] ModuleResponseFields
         {
             get
