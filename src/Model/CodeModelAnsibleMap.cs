@@ -598,13 +598,13 @@ namespace AutoRest.Ansible.Model
 
                     if (line.EndsWith("("))
                     {
-                        line += "self." + optionName;
+                        line += p + "=self." + optionName;
                     }
                     else
                     {
                         line += ",";
                         response.Add(line);
-                        line = indent + "self." + optionName;
+                        line = indent + p + "=self." + optionName;
                     }
                 }
             }
