@@ -69,7 +69,7 @@ namespace AutoRest.Ansible.Model
                         return "int";
 
                     case KnownPrimaryType.Long:
-                        return "long";
+                        return "int";
 
                     case KnownPrimaryType.Stream: // Revisit here
                         return "object";
