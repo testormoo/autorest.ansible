@@ -342,6 +342,17 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_applicationgatewayapplicationgateway_facts", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
 
+            // Application Gateway Route Table
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable", "route_table_name", "routetablename{{ rpfx }}"),
+
+            // Application Gateway Route
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute", "azure_rm_applicationgatewayroutetable", null, null),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "next_hop_type", "\"None\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_name", "testroute{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_table_name", "routetablename{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "address_prefix", "208.128.0.0/11"),
+
+
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver", "RP"),
@@ -377,6 +388,8 @@ namespace AutoRest.Ansible
             //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
 
             new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgateway", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgatewayroutetable", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgatewayroute", "RP"),
         };
     }
 }
