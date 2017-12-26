@@ -342,6 +342,13 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_applicationgatewayapplicationgateway_facts", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
 
+            // Application Gateway Application Security Group
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationsecuritygroup", "application_security_group_name", "appgwsg{{ rpfx }}"),
+
+            // Application Gateway Application Security Group Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "azure_rm_applicationgatewayapplicationsecuritygroup", null, null),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "application_security_group_name", "appgwsg{{ rpfx }}"),
+
             // Application Gateway Route Table
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable", "route_table_name", "routetablename{{ rpfx }}"),
 

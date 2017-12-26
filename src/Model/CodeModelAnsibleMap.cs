@@ -1113,7 +1113,26 @@ namespace AutoRest.Ansible.Model
                 }
             }
 
-            return new string(a);
+            // also replace '' with C()
+            string normalized = new string(a);
+
+            string[] ss = normalized.Split('\'');
+
+            normalized = ss[0];
+            // now merge and replace
+            for (int i = 1; i < ss.Length; i += 2)
+            {
+                if (ss.Length > i + 1)
+                {
+                    normalized += "C(" + ss[i] + ")" + ss[i + 1];
+                }
+                else
+                {
+                    normalized += "'" + ss[i];
+                }
+            }
+
+            return normalized;
         }
 
         public static string Indent(string original)
