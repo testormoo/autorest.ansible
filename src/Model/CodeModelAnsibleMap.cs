@@ -241,7 +241,16 @@ namespace AutoRest.Ansible.Model
                             variable += ".setdefault(\"" + path[i] + "\", {})";
                     }
 
-                    variable += "[\"" + option.Name + "\"] = kwargs[key]";
+                    variable += "[\"" + option.Name + "\"] = ";
+
+                    if (option.ValueIfFalse != null && option.ValueIfTrue != null)
+                    {
+                        variable += "'" + option.ValueIfTrue + "' if kwargs[key] else '" + option.ValueIfFalse + "'";
+                    }
+                    else
+                    {
+                        variable += "kwargs[key]";
+                    }
 
                     variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
                     variables.Add("    " + variable);

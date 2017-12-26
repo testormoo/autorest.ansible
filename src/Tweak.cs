@@ -372,6 +372,32 @@ namespace AutoRest.Ansible
         private bool _newValue;
     }
 
+    class Tweak_Option_MakeBoolean : Tweak_Option
+    {
+        public Tweak_Option_MakeBoolean(string module, string path, string valueIfTrue, string valueIfFalse)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _valueIfTrue = valueIfTrue;
+            _valueIfFalse = valueIfFalse;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                option.ValueIfFalse = _valueIfFalse;
+                option.ValueIfTrue = _valueIfTrue;
+                option.Type = "bool";
+            }
+        }
+
+        private string[] _path;
+        private string _valueIfTrue;
+        private string _valueIfFalse;
+    }
+
     class Tweak_Option_DefaultValue : Tweak_Option
     {
         public Tweak_Option_DefaultValue(string module, string path, string value)

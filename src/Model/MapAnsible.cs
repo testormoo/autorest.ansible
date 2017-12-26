@@ -27,6 +27,8 @@ namespace AutoRest.Ansible.Model
             DefaultValueSample["default"] = NameAlt;
             DefaultValueSample["test:default"] = "";
             NoLog = false;
+            ValueIfFalse = null;
+            ValueIfTrue = null;
         }
 
         public string Name { get; set; }
@@ -38,6 +40,8 @@ namespace AutoRest.Ansible.Model
         //  [dictionary name] - option is flattened from second level and should be stored in [dictionary name]
         public string Disposition { get; set; }
         public string Type { get; set; }
+        public string ValueIfFalse { get; set; }
+        public string ValueIfTrue { get; set; }
         public bool IsList { get; set; }
         public string Required { get; set; }
         public string VariableValue { get; set; }
