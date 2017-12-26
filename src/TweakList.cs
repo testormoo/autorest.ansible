@@ -345,13 +345,52 @@ namespace AutoRest.Ansible
             // Application Gateway Route Table
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable", "route_table_name", "routetablename{{ rpfx }}"),
 
+            // Application Gateway Route Table Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroutetable_facts", "azure_rm_applicationgatewayroutetable", null, null),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable_facts", "route_table_name", "routetablename{{ rpfx }}"),
+
             // Application Gateway Route
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute", "azure_rm_applicationgatewayroutetable", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "next_hop_type", "\"None\""),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_name", "testroute{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_table_name", "routetablename{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "address_prefix", "208.128.0.0/11"),
+            new Tweak_Module_CannotTestUpdate("azure_rm_applicationgatewayroute"),
+            new Tweak_Option_Required("azure_rm_applicationgatewayroute", "next_hop_type", false),
 
+            // Application Gateway Route Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute_facts", "azure_rm_applicationgatewayroute", null, null),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute_facts", "route_name", "testroute{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute_facts", "route_table_name", "routetablename{{ rpfx }}"),
+
+            // Application Inbound NAT Rule
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayinboundnatrule", "load_balancer_name", "lb{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayinboundnatrule", "inbound_nat_rule_name", "rule{{ rpfx }}"),
+
+            new Tweak_Module_TestPrerequisites("azure_rm_applicationgatewayinboundnatrule",
+                                                new string[] {
+                                                    "- name: create public ip",
+                                                    "  azure_rm_publicipaddress:",
+                                                    "    name: ansiblepip{{ rpfx }}",
+                                                    "    resource_group: '{{ resource_group }}'",
+                                                    "",
+                                                    "- name: create load balancer",
+                                                    "  azure_rm_loadbalancer:",
+                                                    "    resource_group: '{{ resource_group }}'",
+                                                    "    name: lb{{ rpfx }}",
+                                                    "    public_ip: ansiblepip{{ rpfx }}" },
+                                                new string[] {
+                                                    "- name: delete load balancer",
+                                                    "  azure_rm_loadbalancer:",
+                                                    "    resource_group: '{{ resource_group }}'",
+                                                    "    name: lb{{ rpfx }}",
+                                                    "    state: absent",
+                                                    "",
+                                                    "- name: cleanup public ip",
+                                                    "  azure_rm_publicipaddress:",
+                                                    "    name: ansiblepip{{ rpfx }}",
+                                                    "    resource_group: '{{ resource_group }}'",
+                                                    "    state: absent" }), 
 
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
@@ -388,8 +427,11 @@ namespace AutoRest.Ansible
             //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
 
             new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgateway", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgatewayroutetable", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgatewayroute", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroutetable", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroute", "RP"),
+            //new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgateway_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroutetable_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroute_facts", "RP"),
         };
     }
 }
