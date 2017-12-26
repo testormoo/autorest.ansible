@@ -75,12 +75,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         # define user inputs into argument
         self.module_arg_spec = dict(
-@foreach (var param in Model.ModuleOptions)
+@foreach (var v in Model.GetModuleArgSpec(false))
 {
-@:            @(param.NameAlt)=dict(
-@:                type='@(param.Type)',
-@:                required=@(param.Required)
-@:            ),
+@:            @(v)
 }
         )
 
