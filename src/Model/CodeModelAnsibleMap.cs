@@ -962,7 +962,7 @@ namespace AutoRest.Ansible.Model
             {
                 if (field.NameAlt != "" && field.NameAlt.ToLower() != "x" && field.NameAlt.ToLower() != "nl")
                 {
-                    string statement = responseDict + "[\"" + field.Name + "\"] = response[\"" + field.Name + "\"]";
+                    string statement = responseDict + "[\"" + field.NameAlt + "\"] = response[\"" + field.Name + "\"]";
                     statements.Add(statement);
                 }
                 else

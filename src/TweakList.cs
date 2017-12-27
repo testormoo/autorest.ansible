@@ -86,7 +86,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.ssl_enforcement", "enforce_ssl"),
-            new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled"),
+            new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
             new Tweak_Option_Required("azure_rm_mysqlserver", "properties", false),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "server_name", "\"mysqlsrv{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.version", "5.6"),
@@ -96,7 +96,8 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "location", "westus"),
             new Tweak_Option_Flatten("azure_rm_mysqlserver", "properties", ""),
-            new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "user_visible_state"),
+            new Tweak_Response_RenameField("azure_rm_mysqlserver", "user_visible_state", "state"),
+            new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlserver", "Ready"),
 
             // MySQL Server Facts
@@ -181,7 +182,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.ssl_enforcement", "enforce_ssl"),
-            new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled"),
+            new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "location", "westus"),
             new Tweak_Option_Required("azure_rm_postgresqlserver", "properties", false),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "server_name", "\"postgresqlsrv{{ rpfx }}\""),
@@ -190,9 +191,9 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValue("azure_rm_postgresqlserver", "properties.create_mode", "'Default'"),
             new Tweak_Option_Documentation("azure_rm_postgresqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
             new Tweak_Option_Flatten("azure_rm_postgresqlserver", "properties", ""),
-            new Tweak_Module_AssertStateVariable("azure_rm_postgresqlserver", "user_visible_state"),
+            new Tweak_Response_RenameField("azure_rm_postgresqlserver", "user_visible_state", "state"),
+            new Tweak_Module_AssertStateVariable("azure_rm_postgresqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlserver", "Ready"),
-            new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled"),
 
             // PostgreSQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlserver_facts", "azure_rm_postgresqlserver", null, null),

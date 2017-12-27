@@ -374,12 +374,19 @@ namespace AutoRest.Ansible
 
     class Tweak_Option_MakeBoolean : Tweak_Option
     {
-        public Tweak_Option_MakeBoolean(string module, string path, string valueIfTrue, string valueIfFalse)
+        public Tweak_Option_MakeBoolean(string module,
+                                        string path,
+                                        string valueIfTrue,
+                                        string valueIfFalse,
+                                        bool defaultValue = false,
+                                        string newDescription = null)
         {
             _module = module;
             _path = path.Split(".");
             _valueIfTrue = valueIfTrue;
             _valueIfFalse = valueIfFalse;
+            _defaultValue = defaultValue;
+            _newDescription = newDescription;
         }
 
         public override void ApplyOnModule(Model.MapAnsibleModule m)
@@ -390,12 +397,16 @@ namespace AutoRest.Ansible
                 option.ValueIfFalse = _valueIfFalse;
                 option.ValueIfTrue = _valueIfTrue;
                 option.Type = "bool";
+                option.DefaultValue = _defaultValue ? "True" : "False";
+                if (_newDescription != null) option.Documentation = _newDescription;
             }
         }
 
         private string[] _path;
         private string _valueIfTrue;
         private string _valueIfFalse;
+        private bool _defaultValue;
+        private string _newDescription;
     }
 
     class Tweak_Option_DefaultValue : Tweak_Option
