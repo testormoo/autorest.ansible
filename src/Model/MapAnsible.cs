@@ -29,6 +29,7 @@ namespace AutoRest.Ansible.Model
             NoLog = false;
             ValueIfFalse = null;
             ValueIfTrue = null;
+            AdditionalInfo = null;
         }
 
         public string Name { get; set; }
@@ -51,6 +52,8 @@ namespace AutoRest.Ansible.Model
         public ModuleOption[] SubOptions { get; set; }
         public int RequiredCount { get; set; }
         public bool NoLog { get; set; }
+        public string[] EnumValues { get; set; }
+        public string AdditionalInfo { get; set; }
     }
 
     public class ModuleResponseField

@@ -144,12 +144,27 @@ namespace AutoRest.Ansible.Model
             {
                 var option = ModuleOptions[i];
                 bool defaultOrRequired = (option.DefaultValue != null) || (option.Required == "True");
+                bool choices = (option.EnumValues != null) && option.EnumValues.Length > 0;
                 argSpec.Add(option.NameAlt + "=dict(");
-                argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired) ? "," : ""));
+                argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired || choices) ? "," : ""));
 
                 if (option.NoLog)
                 {
-                    argSpec.Add("    no_log=True" + (defaultOrRequired ? "," : ""));
+                    argSpec.Add("    no_log=True" + ((defaultOrRequired || choices) ? "," : ""));
+                }
+
+                if (choices)
+                {
+                    string choicesList = "    choices=[";
+
+                    for (int ci = 0; ci < option.EnumValues.Length; ci++)
+                    {
+                        choicesList += "'" + option.EnumValues[ci] + "'" + ((ci < option.EnumValues.Length - 1) ? ", " : "]");
+                    }
+
+                    if (defaultOrRequired) choicesList += ",";
+
+                    argSpec.Add(choicesList);
                 }
 
                 if (defaultOrRequired)
@@ -871,6 +886,16 @@ namespace AutoRest.Ansible.Model
                 if (option.Required != "False")
                 {
                     help.Add(padding + "    required: " + option.Required);
+                }
+
+                if (option.EnumValues != null && option.EnumValues.Length > 0)
+                {
+                    string line = padding + "    choices: [";
+                    for (int i = 0; i < option.EnumValues.Length; i++)
+                    {
+                        line += "'" + option.EnumValues[i] + "'" + ((i < option.EnumValues.Length - 1) ? ", " : "]");
+                    }
+                    help.Add(line);
                 }
 
                 if (option.SubOptions != null && option.SubOptions.Length > 0)

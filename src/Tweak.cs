@@ -399,6 +399,7 @@ namespace AutoRest.Ansible
                 option.Type = "bool";
                 option.DefaultValue = _defaultValue ? "True" : "False";
                 if (_newDescription != null) option.Documentation = _newDescription;
+                option.EnumValues = null;
             }
         }
 

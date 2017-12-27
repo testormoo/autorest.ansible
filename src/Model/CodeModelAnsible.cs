@@ -271,6 +271,18 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        private string[] ModelTypeEnumValues(IModelType type)
+        {
+            List<string> list = new List<string>();
+            if (type.Qualifier == "Enum")
+            {
+                foreach (var v in (type as EnumType).Values)
+                {
+                    list.Add(v.Name);
+                }
+            }
+            return list.ToArray();
+        }
         private string ModelTypeNameToYamlTypeName(IModelType type)
         {
             string name = type.Name;
@@ -280,7 +292,12 @@ namespace AutoRest.Ansible.Model
                 name = list.ElementType.Name;
             }
 
-            if (name != "str" && name != "int" && name != "float" && name != "list" && name != "dict" && name != "long" && name != "datetime" && name != "long")
+            //if (type.Qualifier == "Enum")
+            //{
+            //    name = "enum";
+            //}
+
+            if (name != "str" && /*name != "enum" &&*/ name != "int" && name != "float" && name != "list" && name != "dict" && name != "long" && name != "datetime" && name != "long")
             {
                 // if it's in the list of models we'll return dictionary, otherwise string
                 foreach (var mt in ModelTypes)
@@ -293,7 +310,6 @@ namespace AutoRest.Ansible.Model
                 }
 
                 if (name != "dict") name = "str";
-
             }
 
             return name;
@@ -342,6 +358,9 @@ namespace AutoRest.Ansible.Model
                             newParam.Documentation = p.Documentation;
                             newParam.NoLog = p.Name.Contains("password");
                             newParam.DefaultValueSample["default"] = (v != null) ? v.ToString() : "NOT FOUND";
+                            newParam.EnumValues = ModelTypeEnumValues(p.ModelType);
+
+                            newParam.AdditionalInfo = ((p.ModelType.XmlProperties != null) ? p.ModelType.XmlProperties.ToString() : "NO XML PROPERTIES") + " --- " + p.ModelType.Qualifier;
                             option.Add(newParam);
                         }
                         else
@@ -432,6 +451,8 @@ namespace AutoRest.Ansible.Model
                             }
                             option.Documentation = attr.Documentation;
                             option.NoLog = attr.Name.Contains("password");
+                            option.AdditionalInfo = ((attr.ModelType.XmlProperties != null) ? attr.ModelType.XmlProperties.ToString() : "NO XML PROPERTIES") + " --- " + attr.ModelType.Qualifier;
+                            option.EnumValues = ModelTypeEnumValues(attr.ModelType);
 
                             option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
 
