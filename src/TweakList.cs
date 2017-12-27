@@ -83,6 +83,7 @@ namespace AutoRest.Ansible
             // MySQL Server
             new Tweak_Module_ObjectName("azure_rm_mysqlserver", "MySQL Server"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "server_name", "name"),
+            new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.ssl_enforcement", "enforce_ssl"),
@@ -179,6 +180,7 @@ namespace AutoRest.Ansible
             // PostgreSQL Server
             new Tweak_Module_ObjectName("azure_rm_postgresqlserver", "PostgreSQL Server"),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "server_name", "name"),
+            new Tweak_Option_Exclude("azure_rm_postgresqlserver", "properties.create_mode", true, false),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login_password", "admin_password"),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.ssl_enforcement", "enforce_ssl"),

@@ -845,6 +845,10 @@ namespace AutoRest.Ansible.Model
             List<string> help = new List<string>();
             foreach (var option in options)
             {
+                // check if option should be included in documentation
+                if (!option.IncludeInDocumentation)
+                    continue;
+
                 string doc = NormalizeString(option.Documentation);
                 help.Add(padding + option.NameAlt + ":");
                 help.Add(padding + "    description:");

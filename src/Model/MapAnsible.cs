@@ -30,6 +30,8 @@ namespace AutoRest.Ansible.Model
             ValueIfFalse = null;
             ValueIfTrue = null;
             AdditionalInfo = null;
+            IncludeInDocumentation = true;
+            IncludeInArgSpec = true;
         }
 
         public string Name { get; set; }
@@ -53,6 +55,8 @@ namespace AutoRest.Ansible.Model
         public int RequiredCount { get; set; }
         public bool NoLog { get; set; }
         public string[] EnumValues { get; set; }
+        public bool IncludeInDocumentation { get; set; }
+        public bool IncludeInArgSpec { get; set; }
         public string AdditionalInfo { get; set; }
     }
 

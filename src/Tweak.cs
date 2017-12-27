@@ -410,6 +410,34 @@ namespace AutoRest.Ansible
         private string _newDescription;
     }
 
+    class Tweak_Option_Exclude : Tweak_Option
+    {
+        public Tweak_Option_Exclude(string module,
+                                        string path,
+                                        bool excludeFromDocumentation,
+                                        bool excludeFromArgSpec)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _excludeFromDocumentation = excludeFromDocumentation;
+            _excludeFromArgSpec = excludeFromArgSpec;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                option.IncludeInDocumentation = !_excludeFromDocumentation;
+                option.IncludeInArgSpec = !_excludeFromArgSpec;
+            }
+        }
+
+        private string[] _path;
+        private bool _excludeFromDocumentation;
+        private bool _excludeFromArgSpec;
+    }
+
     class Tweak_Option_DefaultValue : Tweak_Option
     {
         public Tweak_Option_DefaultValue(string module, string path, string value)
