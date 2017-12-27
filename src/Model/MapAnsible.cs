@@ -138,6 +138,7 @@ namespace AutoRest.Ansible.Model
         public string Namespace { get; set; }
         public string NamespaceUpper { get; set; }
         public string Name { get; set; }
+        public string ApiVersion { get; set; }
         public string[] Operations { get; set; }
     }
 }

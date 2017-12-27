@@ -71,6 +71,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string ApiVersion
+        {
+            get
+            {
+                return Map.ApiVersion;
+            }
+        }
+
         public bool NeedsDeleteBeforeUpdate
         {
             get

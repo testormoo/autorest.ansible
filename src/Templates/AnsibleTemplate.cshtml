@@ -127,7 +127,15 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         response = None
 @EmptyLine
         self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
-                                                    base_url=self._cloud_environment.endpoints.resource_manager)
+@if (Model.ApiVersion != null && Model.ApiVersion != "")
+{
+@:                                                    base_url=self._cloud_environment.endpoints.resource_manager,
+@:                                                    api_version='@(Model.ApiVersion)')
+}
+else
+{
+@:                                                    base_url=self._cloud_environment.endpoints.resource_manager)
+}
 @if (Model.HasResourceGroup())
 {
 @EmptyLine

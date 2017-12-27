@@ -208,6 +208,7 @@ namespace AutoRest.Ansible.Model
             }
 
             Map.Operations = operations.ToArray();
+            Map.ApiVersion = "";// ApiVersion;
         }
 
         public override string Namespace
