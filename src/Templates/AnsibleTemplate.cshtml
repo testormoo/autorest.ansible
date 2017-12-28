@@ -97,7 +97,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 @EmptyLine
         super(AzureRM@(Model.ModuleOperationNameUpper), self).__init__(derived_arg_spec=self.module_arg_spec,
                                       @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_check_mode=True,
-                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=True)
+                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=False)
 @EmptyLine
     def exec_module(self, **kwargs):
         """Main module execution method"""
