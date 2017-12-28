@@ -277,9 +277,9 @@ namespace AutoRest.Ansible.Model
                         var valueTranslation = new List<string>();
                         string valueTranslationPrefix = "if";
 
-                        // first check if we have to do any translation
                         if (option.EnumValues != null && option.EnumValues.Length > 0)
                         {
+                            // if option contains enum value, check if it has to be translated
                             valueTranslation.Add("    ev = kwargs[key]");
                             foreach (var enumValue in option.EnumValues)
                             {
@@ -290,6 +290,41 @@ namespace AutoRest.Ansible.Model
                                     valueTranslationPrefix = "elif";
                                 }
                             }
+                        }
+                        else if (option.SubOptions != null)
+                        {
+                            bool evDeclarationAdded = false;
+                            foreach (var suboption in option.SubOptions)
+                            {
+                                if (suboption.EnumValues != null && suboption.EnumValues.Length > 0)
+                                {
+                                    bool ifStatementAdded = false;
+                                    valueTranslationPrefix = "if";
+
+                                    foreach (var enumValue in suboption.EnumValues)
+                                    {
+                                        if (enumValue.Key != enumValue.Value)
+                                        {
+                                            if (!evDeclarationAdded)
+                                            {
+                                                valueTranslation.Add("    ev = kwargs[key]");
+                                                evDeclarationAdded = true;
+                                            }
+
+                                            if (!ifStatementAdded)
+                                            {
+                                                valueTranslation.Add("    if '" + suboption.NameAlt + "' in ev:");
+                                                ifStatementAdded = true;
+                                            }
+                                            valueTranslation.Add("        " + valueTranslationPrefix + " ev['" + suboption.NameAlt + "'] == '" + enumValue.Key + "':");
+                                            valueTranslation.Add("            ev['" + suboption.NameAlt + "'] = '" + enumValue.Value + "'");
+                                            valueTranslationPrefix = "elif";
+                                        }
+                                    }
+                                }
+                            }
+                            // XXX - not handling lists yet
+                            // check 
                         }
 
                         if (valueTranslation.Count > 1)

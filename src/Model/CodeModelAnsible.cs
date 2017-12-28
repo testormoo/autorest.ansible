@@ -360,6 +360,11 @@ namespace AutoRest.Ansible.Model
                             newParam.DefaultValueSample["default"] = (v != null) ? v.ToString() : "NOT FOUND";
                             newParam.EnumValues = ModelTypeEnumValues(p.ModelType);
 
+                            if (newParam.EnumValues.Length > 0)
+                            {
+                                newParam.Documentation = newParam.Documentation.Split(" Possible values include:")[0];
+                            }
+
                             newParam.AdditionalInfo = ((p.ModelType.XmlProperties != null) ? p.ModelType.XmlProperties.ToString() : "NO XML PROPERTIES") + " --- " + p.ModelType.Qualifier;
                             option.Add(newParam);
                         }
@@ -453,6 +458,11 @@ namespace AutoRest.Ansible.Model
                             option.NoLog = attr.Name.Contains("password");
                             option.AdditionalInfo = ((attr.ModelType.XmlProperties != null) ? attr.ModelType.XmlProperties.ToString() : "NO XML PROPERTIES") + " --- " + attr.ModelType.Qualifier;
                             option.EnumValues = ModelTypeEnumValues(attr.ModelType);
+
+                            if (option.EnumValues.Length > 0)
+                            {
+                                option.Documentation = option.Documentation.Split(" Possible values include:")[0];
+                            }
 
                             option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
 

@@ -96,6 +96,8 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login", "zimxyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "location", "westus"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.name", "SkuName"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.tier", "basic"),
             new Tweak_Option_Flatten("azure_rm_mysqlserver", "properties", ""),
             new Tweak_Response_RenameField("azure_rm_mysqlserver", "user_visible_state", "state"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "state"),
