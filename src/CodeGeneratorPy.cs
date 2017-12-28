@@ -46,27 +46,9 @@ namespace AutoRest.Ansible
                 throw new Exception("Code model is not a Python Code Model");
             }
 
-            string oldMapPath = Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".template.json");
-
-            if (File.Exists(oldMapPath))
-            {
-                using (var streamReader = new StreamReader(oldMapPath, Encoding.UTF8))
-                {
-                    string text = streamReader.ReadToEnd();
-
-                    var oldMap = JsonConvert.DeserializeObject<MapAnsible>(text);
-
-                    var merger = new MapAnsibleMerger(oldMap, codeModel.Map);
-                    map = merger.MergedMap;
-                    report = merger.Report;
-                }
-            }
-            else
-            {
-                string[] empty = { "NOT SOURCE TEMPLATE" };
-                map = codeModel.Map;
-                report = empty;
-            }
+            string[] empty = { "NOT SOURCE TEMPLATE" };
+            map = codeModel.Map;
+            report = empty;
 
             // apply tweaks
             foreach (var tweak in Tweaks.All)
