@@ -54,7 +54,7 @@ namespace AutoRest.Ansible.Model
         public ModuleOption[] SubOptions { get; set; }
         public int RequiredCount { get; set; }
         public bool NoLog { get; set; }
-        public string[] EnumValues { get; set; }
+        public KeyValuePair<string,string>[] EnumValues { get; set; }
         public bool IncludeInDocumentation { get; set; }
         public bool IncludeInArgSpec { get; set; }
         public string AdditionalInfo { get; set; }

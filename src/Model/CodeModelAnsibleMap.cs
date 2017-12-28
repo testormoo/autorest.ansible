@@ -159,7 +159,7 @@ namespace AutoRest.Ansible.Model
 
                     for (int ci = 0; ci < option.EnumValues.Length; ci++)
                     {
-                        choicesList += "'" + option.EnumValues[ci] + "'" + ((ci < option.EnumValues.Length - 1) ? ", " : "]");
+                        choicesList += "'" + option.EnumValues[ci].Key + "'" + ((ci < option.EnumValues.Length - 1) ? ", " : "]");
                     }
 
                     if (defaultOrRequired) choicesList += ",";
@@ -255,6 +255,8 @@ namespace AutoRest.Ansible.Model
 
                 foreach (var option in options)
                 {
+                    variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
+
                     string[] path = option.Disposition.Split(":");
                     string variable = "self." + path[0];
 
@@ -272,10 +274,35 @@ namespace AutoRest.Ansible.Model
                     }
                     else
                     {
-                        variable += "kwargs[key]";
+                        var valueTranslation = new List<string>();
+                        string valueTranslationPrefix = "if";
+
+                        // first check if we have to do any translation
+                        if (option.EnumValues != null && option.EnumValues.Length > 0)
+                        {
+                            valueTranslation.Add("    ev = kwargs[key]");
+                            foreach (var enumValue in option.EnumValues)
+                            {
+                                if (enumValue.Key != enumValue.Value)
+                                {
+                                    valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
+                                    valueTranslation.Add("        ev = '" + enumValue.Value + "'");
+                                    valueTranslationPrefix = "elif";
+                                }
+                            }
+                        }
+
+                        if (valueTranslation.Count > 1)
+                        {
+                            variables.AddRange(valueTranslation);
+                            variable += "ev";
+                        }
+                        else
+                        {
+                            variable += "kwargs[key]";
+                        }
                     }
 
-                    variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
                     variables.Add("    " + variable);
                     prefix = "elif";
                 }
@@ -897,7 +924,7 @@ namespace AutoRest.Ansible.Model
                     string line = padding + "    choices: [";
                     for (int i = 0; i < option.EnumValues.Length; i++)
                     {
-                        line += "'" + option.EnumValues[i] + "'" + ((i < option.EnumValues.Length - 1) ? ", " : "]");
+                        line += "'" + option.EnumValues[i].Key + "'" + ((i < option.EnumValues.Length - 1) ? ", " : "]");
                     }
                     help.Add(line);
                 }

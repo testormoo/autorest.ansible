@@ -271,14 +271,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        private string[] ModelTypeEnumValues(IModelType type)
+        private KeyValuePair<string,string>[] ModelTypeEnumValues(IModelType type)
         {
-            List<string> list = new List<string>();
+            List<KeyValuePair<string,string>> list = new List<KeyValuePair<string,string>>();
             if (type.Qualifier == "Enum")
             {
                 foreach (var v in (type as EnumType).Values)
                 {
-                    list.Add(v.Name);
+                    list.Add(new KeyValuePair<string,string>(v.Name.ToPythonCase(), v.Name));
                 }
             }
             return list.ToArray();
