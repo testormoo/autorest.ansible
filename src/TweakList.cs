@@ -74,9 +74,25 @@ namespace AutoRest.Ansible
             new Tweak_Module_ObjectName("azure_rm_sqlelasticpool", "ElasticPool"),
             new Tweak_Option_Rename("azure_rm_sqlelasticpool", "elastic_pool_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "server_name", "zims-server"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "elastic_pool_name", "test-elastic-pool"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "location", "westus"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "server_name", "\"sqlsrv{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "elastic_pool_name", "\"elasticpool{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "location", "eastus"),
+
+            // SQL Server Firewall Rule
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
+            new Tweak_Option_Rename("azure_rm_sqlfirewallrule", "firewall_rule_name", "name"),
+            new Tweak_Option_Required("azure_rm_sqlfirewallrule", "start_ip_address", false),
+            new Tweak_Option_Required("azure_rm_sqlfirewallrule", "end_ip_address", false),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "server_name", "\"sqlsrv{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "start_ip_address", "172.28.10.136"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "end_ip_address", "172.28.10.138"),
+            new Tweak_Module_FlattenParametersDictionary("azure_rm_sqlfirewallrule"),
+            //new Tweak_Module_AssertStateVariable("azure_rm_sqlfirewallrule", "firewall_rule_name"),
+            //new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlfirewallrule", "test-firewall-rule"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "start_ip_address", "start_ip_address"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "end_ip_address", "end_ip_address"),
+
 
             new Tweak_Module_ObjectName("azure_rm_sqlserver_facts", "SQL Server"),
 
@@ -455,7 +471,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlfirewallrule", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlfirewallrule", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_sqlvirtualnetworkrule", "RP"),
@@ -464,6 +480,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqlconfiguration", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration", "RP"),
+
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlelasticpool", "RP"),
 
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver_facts", "RP"),
