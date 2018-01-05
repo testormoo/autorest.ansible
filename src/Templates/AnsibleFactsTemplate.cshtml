@@ -36,14 +36,17 @@ options:
 @EmptyLine
 extends_documentation_fragment:
     - azure
-    - azure_tags
+@if (false)
+{
+@:    -azure_tags
+}
 @EmptyLine
 author:
     - "Zim Kalinowski (@@zikalino)"
 @EmptyLine
 '''
 @EmptyLine
-EXAMPLES = '''
+EXAMPLES = if'
 @foreach (var line in Model.ModuleFactsExamples)
 {
     if (line != "")
