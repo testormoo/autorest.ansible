@@ -151,31 +151,38 @@ namespace AutoRest.Ansible
 
             foreach (var mth in m.Methods)
             {
-                if (mth.Name == "create_or_update" || mth.Name == "create")
+                if (mth.Name == "create_or_update" || mth.Name == "create" || mth.Name == "update")
                 {
                     method = mth;
                     methodOptions = method.RequiredOptions.ToList();
+
+                    foreach (var o in m.Options)
+                    {
+                        if (o.Disposition == "dictionary" || o.Disposition == "__none")
+                        {
+                            o.Disposition = "__none";
+                            dictionaryName = o.Name;
+                            // remove from create_or_update function method list
+                             
+                            methodOptions.Remove(o.Name);
+                        }
+                        else if (o.Disposition == dictionaryName || o.Disposition == "__default")
+                        {
+                            o.Disposition = "__default";
+                            methodOptions.Add(o.Name);
+                        }
+                    }
+                    
+                    // XXX - this is a terrible, terrible hack
+                    methodOptions.RemoveAll(element => element.EndsWith("_parameters"));
+                    method.RequiredOptions = methodOptions.ToArray();
                 }
             }
-
-
             foreach (var o in m.Options)
             {
-                if (o.Disposition == "dictionary")
-                {
-                    o.Disposition = "none";
-                    dictionaryName = o.Name;
-                    // remove from create_or_update function method list
-                    methodOptions.Remove(dictionaryName);
-                }
-                else if (o.Disposition == dictionaryName)
-                {
-                    o.Disposition = "default";
-                    methodOptions.Add(o.Name);
-                }
+                if (o.Disposition == "__none") o.Disposition = "none";
+                else if (o.Disposition == "__default") o.Disposition = "default";
             }
-
-            method.RequiredOptions = methodOptions.ToArray();
         }
     }
 

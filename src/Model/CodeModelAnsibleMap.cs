@@ -258,7 +258,7 @@ namespace AutoRest.Ansible.Model
                     variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
 
                     string[] path = option.Disposition.Split(":");
-                    string variable = "self." + path[0];
+                    string variable = "self." + (path[0].EndsWith("_parameters") ? "parameters" : path[0]);
 
                     if (path.Length > 1)
                     {
@@ -690,6 +690,10 @@ namespace AutoRest.Ansible.Model
                     var o = Array.Find(ModuleOptions, e => (e.Name == p));
                     string optionName = (o != null) ? o.NameAlt : p;
 
+                    // XXX - this is a hack, can we unhack it?
+                    if (optionName.EndsWith("_parameters"))
+                        optionName = "parameters";
+
                     if (line.EndsWith("("))
                     {
                         line += p + "=self." + optionName;
@@ -871,6 +875,14 @@ namespace AutoRest.Ansible.Model
                     else
                     {
                         //help.Add(padding + "  - " + "XXXX - list of values -- not implemented " + option.Type);
+                        string predefined = option.DefaultValueSample.GetValueOrDefault(playbookType, null);
+
+                        if (predefined != "")
+                        {
+                            bool first = true;
+                            help.Add(propertyLine);
+                            help.Add((first ? padding + "  - " : padding + "    ") + predefined);
+                        }
                     }
                 }
                 else if (option.SubOptions != null && option.SubOptions.Length > 0)

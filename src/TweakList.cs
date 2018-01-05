@@ -78,6 +78,12 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "elastic_pool_name", "\"elasticpool{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "location", "eastus"),
 
+            // SQL Elastic Pool Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool_facts", "azure_rm_sqlelasticpool", null, null),
+            new Tweak_Module_ObjectName("azure_rm_sqlelasticpool_facts", "SQL Elastic Pool"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "server_name", "\"sqlsrv{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "elastic_pool_name", "elasticpool{{ rpfx }}"),
+
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_sqlfirewallrule", "firewall_rule_name", "name"),
@@ -93,8 +99,27 @@ namespace AutoRest.Ansible
             new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "start_ip_address", "start_ip_address"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "end_ip_address", "end_ip_address"),
 
+            // SQL Firewall Rule Facts
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule_facts", "azure_rm_sqlfirewallrule", null, null),
+            new Tweak_Module_ObjectName("azure_rm_sqlfirewallrule_facts", "SQL Firewall Rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "server_name", "\"sqlsrv{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "firewallrule_name", "firewallrule{{ rpfx }}"),
 
             new Tweak_Module_ObjectName("azure_rm_sqlserver_facts", "SQL Server"),
+
+            // SQL Geo Backup Policy
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy", "azure_rm_sqldatabase", null, null),
+            new Tweak_Option_Rename("azure_rm_sqlgeobackuppolicy", "state", "policy_state"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "server_name", "\"sqlsrv{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "database_name", "\"test-database\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "geo_backup_policy_name", "\"geo-policy-name\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "state", "\"enabled\""),
+
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy_facts", "azure_rm_sqlgeobackuppolicy", null, null),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "server_name", "\"sqlsrv{{ rpfx }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "database_name", "\"test-database\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "geo_backup_policy_name", "\"geo-policy-name\""),
+
 
             // MySQL Server
             new Tweak_Module_ObjectName("azure_rm_mysqlserver", "MySQL Server"),
@@ -462,7 +487,144 @@ namespace AutoRest.Ansible
                                                     "  azure_rm_publicipaddress:",
                                                     "    name: ansiblepip{{ rpfx }}",
                                                     "    resource_group: '{{ resource_group }}'",
-                                                    "    state: absent" }), 
+                                                    "    state: absent" }),
+
+            new Tweak_Module_Rename("azure_rm_containerinstancecontainergroup", "azure_rm_containerinstancexx"),
+            new Tweak_Module_Rename("azure_rm_containerinstancecontainergroup_facts", "azure_rm_containerinstance_facts"),
+
+            // XXX - test pre and postrequisites
+            new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "name", "aci{{ rpfx }}"),
+            new Tweak_Module_TestPrerequisites("azure_rm_containerinstancecontainergroup_facts",
+                                                new string[] {
+                                                    "- name: Create sample container instance",
+                                                    "  azure_rm_containerinstance:",
+                                                    "    resource_group: \"{{ resource_group }}\"",
+                                                    "    name: aci{{ rpfx }}",
+                                                    "    os_type: linux",
+                                                    "    ip_address: public",
+                                                    "    location: eastus",
+                                                    "    ports:",
+                                                    "      - 80",
+                                                    "    containers:",
+                                                    "      - name: mycontainer1",
+                                                    "        image: httpd",
+                                                    "        memory: 1.5",
+                                                    "        ports:",
+                                                    "          - 80",
+                                                    "          - 81",
+                                                    "      - name: mycontainer2",
+                                                    "        image: httpd",
+                                                    "        memory: 1.5" },
+                                                new string[] {
+                                                    "    resource_group: \"{{ resource_group }}\"",
+                                                    "    name: aci{{ rpfx }}",
+                                                    "    os_type: linux",
+                                                    "    ip_address: public",
+                                                    "    location: eastus",
+                                                    "    ports:",
+                                                    "      - 80",
+                                                    "    containers:",
+                                                    "      - name: mycontainer1",
+                                                    "        image: httpd",
+                                                    "        memory: 1.5",
+                                                    "        ports:",
+                                                    "          - 80",
+                                                    "          - 81",
+                                                    "      - name: mycontainer2",
+                                                    "        image: httpd",
+                                                    "        memory: 1.5",
+                                                    "    state: absent" }),
+
+            new Tweak_Module_Rename("azure_rm_containerregistryregistrie", "azure_rm_containerregistryxx"),
+
+
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistrie_facts", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistrie_facts", "name", "acr{{ rpfx }}"),
+            new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistrie_facts",
+                                                new string[] {
+                                                     "- name: Create an container registry",
+                                                     "  azure_rm_containerregistry:",
+                                                     "    name: acr{{ rpfx }}",
+                                                     "    resource_group: \"{{ resource_group }}\"",
+                                                     "    location: eastus2",
+                                                     "    state: present",
+                                                     "    admin_user_enabled: true",
+                                                     "    sku: Premium",
+                                                     "    tags:",
+                                                     "        Release: beta1",
+                                                     "        Environment: Production" },
+                                                new string[] {
+                                                     "- name: Delete container registry",
+                                                     "  azure_rm_containerregistry:",
+                                                     "    name: acr{{ rpfx }}",
+                                                     "    resource_group: \"{{ resource_group }}\"",
+                                                     "    state: absent" }),
+
+            new Tweak_Module_Rename("azure_rm_containerregistryregistrie_facts", "azure_rm_containerregistry_facts"),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "registry_name", "acr{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "replication_name", "replication{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "location", "westus"),
+            new Tweak_Module_TestPrerequisites("azure_rm_containerregistryreplication",
+                                                new string[] {
+                                                     "- name: Create an container registry",
+                                                     "  azure_rm_containerregistry:",
+                                                     "    name: acr{{ rpfx }}",
+                                                     "    resource_group: \"{{ resource_group }}\"",
+                                                     "    location: eastus2",
+                                                     "    state: present",
+                                                     "    admin_user_enabled: true",
+                                                     "    sku: Premium",
+                                                     "    tags:",
+                                                     "        Release: beta1",
+                                                     "        Environment: Production" },
+                                                new string[] {
+                                                     "- name: Delete container registry",
+                                                     "  azure_rm_containerregistry:",
+                                                     "    name: acr{{ rpfx }}",
+                                                     "    resource_group: \"{{ resource_group }}\"",
+                                                     "    state: absent" }),
+            new Tweak_Module_FlattenParametersDictionary("azure_rm_containerregistryreplication"),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "registry_name", "acr{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "replication_name", "replication{{ rpfx }}"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistryreplication_facts", "azure_rm_containerregistryreplication", null, null),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "registry_name", "acr{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "webhook_name", "webhook{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "location", "eastus2"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "service_uri", "http://serviceuri.com"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "actions", "push"),
+            new Tweak_Option_Required("azure_rm_containerregistrywebhook", "service_uri", false),
+            new Tweak_Option_Required("azure_rm_containerregistrywebhook", "actions", false),
+            new Tweak_Module_TestPrerequisites("azure_rm_containerregistrywebhook",
+                                                new string[] {
+                                                     "- name: Create an container registry",
+                                                     "  azure_rm_containerregistry:",
+                                                     "    name: acr{{ rpfx }}",
+                                                     "    resource_group: \"{{ resource_group }}\"",
+                                                     "    location: eastus2",
+                                                     "    state: present",
+                                                     "    admin_user_enabled: true",
+                                                     "    sku: Premium",
+                                                     "    tags:",
+                                                     "        Release: beta1",
+                                                     "        Environment: Production" },
+                                                new string[] {
+                                                     "- name: Delete container registry",
+                                                     "  azure_rm_containerregistry:",
+                                                     "    name: acr{{ rpfx }}",
+                                                     "    resource_group: \"{{ resource_group }}\"",
+                                                     "    state: absent" }),
+
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "registry_name", "acr{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "webhook_name", "webhook{{ rpfx }}"),
+            new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
@@ -482,6 +644,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration", "RP"),
 
             new Tweak_Module_ReleaseStatus("azure_rm_sqlelasticpool", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlelasticpool_facts", "RP"),
 
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver_facts", "RP"),
@@ -489,7 +652,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlfirewallrule_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_postgresqlfirewallrule_facts", "RP"),
             //new Tweak_Module_ReleaseStatus("azure_rm_sqlvirtualnetworkrule_facts", "RP"),
@@ -506,6 +669,13 @@ namespace AutoRest.Ansible
             //new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayapplicationgateway_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroutetable_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroute_facts", "RP"),
+
+            new Tweak_Module_ReleaseStatus("azure_rm_containerinstancecontainergroup_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryregistrie_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook_facts", "RP"),
         };
     }
 }

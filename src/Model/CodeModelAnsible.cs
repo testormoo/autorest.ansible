@@ -381,6 +381,9 @@ namespace AutoRest.Ansible.Model
                                 suboption.IsList = false;
                                 option.Add(suboption);
 
+                                if (suboption.Name.EndsWith("_parameters"))
+                                    suboption.NameAlt = "parameters";
+
                                 var suboptions = GetModelOptions(p.ModelTypeName, 0, v);
                                 foreach (var o in suboptions) o.Disposition = p.Name;
                                 option.AddRange(suboptions);
