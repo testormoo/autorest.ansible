@@ -966,6 +966,17 @@ namespace AutoRest.Ansible.Model
                     help.Add(padding + "    required: " + option.Required);
                 }
 
+                // right now just add type if option is a list or bool
+                if (option.IsList || option.Type == "bool")
+                {
+                    help.Add(padding + "    type: " + (option.IsList ? "list" : option.Type));
+                }
+
+                if (option.DefaultValue != null)
+                {
+                    help.Add(padding + "    default: " + option.DefaultValue);
+                }
+
                 if (option.EnumValues != null && option.EnumValues.Length > 0)
                 {
                     string line = padding + "    choices: [";
