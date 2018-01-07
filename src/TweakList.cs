@@ -138,10 +138,17 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login", "zimxyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "location", "westus"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.name", "SkuName"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.name", "MYSQLB50"),
+            new Tweak_Option_DefaultValueSample("azure_rm_mysqlserver", "sku.name", "MYSQLB50"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.tier", "basic"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
+            new Tweak_Option_DefaultValueSample("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_Flatten("azure_rm_mysqlserver", "properties", ""),
             new Tweak_Response_RenameField("azure_rm_mysqlserver", "user_visible_state", "state"),
+            new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "fully_qualified_domain_name", "mysqlsrv1b6dd89593.mysql.database.azure.com"),
+            new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "id", "/subscriptions/12345678-1234-1234-1234-123412341234/testrg/providers/Microsoft.DBforMySQL/servers/mysqlsrv1b6dd89593"),
+            new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "user_visible_state", "Ready"),
+            new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "version", "5.6"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlserver", "Ready"),
 
@@ -270,9 +277,18 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.administrator_login", "zimxyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValue("azure_rm_postgresqlserver", "properties.create_mode", "'Default'"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "sku.name", "PGSQLS100"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "sku.tier", "basic"),
+            new Tweak_Option_DefaultValueSample("azure_rm_postgresqlserver", "sku.name", "PGSQLS100"),
+            new Tweak_Option_DefaultValueSample("azure_rm_postgresqlserver", "properties.ssl_enforcement", "True"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_Documentation("azure_rm_postgresqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
             new Tweak_Option_Flatten("azure_rm_postgresqlserver", "properties", ""),
             new Tweak_Response_RenameField("azure_rm_postgresqlserver", "user_visible_state", "state"),
+            new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "fully_qualified_domain_name", "postgresqlsrv1b6dd89593.postgresql.database.azure.com"),
+            new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "id", "/subscriptions/12345678-1234-1234-1234-123412341234/resourceGroups/samplerg/providers/Microsoft.DBforPostgreSQL/servers/mysqlsrv1b6dd89593"),
+            new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "user_visible_state", "Ready"),
+            new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "version", "9.6"),
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlserver", "Ready"),
 
@@ -536,12 +552,12 @@ namespace AutoRest.Ansible
                                                     "        memory: 1.5",
                                                     "    state: absent" }),
 
-            new Tweak_Module_Rename("azure_rm_containerregistryregistrie", "azure_rm_containerregistryxx"),
+            new Tweak_Module_Rename("azure_rm_containerregistryregistry", "azure_rm_containerregistryxx"),
 
 
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistrie_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistrie_facts", "name", "acr{{ rpfx }}"),
-            new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistrie_facts",
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "resource_group", "\"{{ resource_group }}\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "name", "acr{{ rpfx }}"),
+            new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistry_facts",
                                                 new string[] {
                                                      "- name: Create an container registry",
                                                      "  azure_rm_containerregistry:",
@@ -561,7 +577,7 @@ namespace AutoRest.Ansible
                                                      "    resource_group: \"{{ resource_group }}\"",
                                                      "    state: absent" }),
 
-            new Tweak_Module_Rename("azure_rm_containerregistryregistrie_facts", "azure_rm_containerregistry_facts"),
+            new Tweak_Module_Rename("azure_rm_containerregistryregistry_facts", "azure_rm_containerregistry_facts"),
 
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "registry_name", "acr{{ rpfx }}"),
@@ -671,7 +687,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroute_facts", "RP"),
 
             new Tweak_Module_ReleaseStatus("azure_rm_containerinstancecontainergroup_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryregistrie_facts", "RP"),
+            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryregistry_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook", "RP"),

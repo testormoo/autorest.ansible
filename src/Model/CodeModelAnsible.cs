@@ -36,7 +36,7 @@ namespace AutoRest.Ansible.Model
                 string name = "azure_rm_" + multi + Operations[CurrentOperationIndex].Name.ToLower();
 
                 // let's try to be smart here, as all operation names are plural so let's try to make it singular
-                if (name.EndsWith("cies"))
+                if (name.EndsWith("ies"))
                 {
                     name = name.Substring(0, name.Length - 3) + "y";
                 }
