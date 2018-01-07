@@ -33,7 +33,7 @@ namespace AutoRest.Ansible.Model
             get
             {
                 string multi = (Operations.Count > 1) ? Namespace : "";
-                string sub = Operations[CurrentOperationIndex].Name.ToLower();
+                string sub = ModuleOperationNameUpper.ToLower();
                 if (sub.StartsWith(multi)) multi = "";
                 string name = "azure_rm_" + multi + sub;
 
@@ -56,6 +56,32 @@ namespace AutoRest.Ansible.Model
             get
             {
                 return AnsibleModuleName + "_facts";
+            }
+        }
+
+        private string ObjectName
+        {
+            get
+            {
+                // XXX - handle following rules
+                // Nat --> NAT
+                // I P --> IP
+                // Sql --> SQL
+
+                string name = ModuleOperationNameUpper;
+
+                if (name.EndsWith("ies"))
+                {
+                    name = name.Substring(0, name.Length - 3) + "y";
+                }
+                else if (name.EndsWith('s'))
+                {
+                    name = name.Substring(0, name.Length - 1);
+                }
+
+                name = System.Text.RegularExpressions.Regex.Replace(name, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
+
+                return name;
             }
         }
 
@@ -106,7 +132,7 @@ namespace AutoRest.Ansible.Model
                         methods.Add(method);
 
                         // XXX - make sure this should be here
-                        module.ResponseFields = CreateMethodResponseFields(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
                     }
 
                     if (ModuleCreateMethod != null)
@@ -118,7 +144,7 @@ namespace AutoRest.Ansible.Model
                         methods.Add(method);
 
                         // XXX - make sure this should be here
-                        module.ResponseFields = CreateMethodResponseFields(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
                     }
 
                     if (ModuleUpdateMethod != null)
@@ -130,7 +156,7 @@ namespace AutoRest.Ansible.Model
                         methods.Add(method);
 
                         // XXX - make sure this should be here
-                        module.ResponseFields = CreateMethodResponseFields(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
                     }
 
                     if (ModuleDeleteMethod != null)
@@ -180,7 +206,7 @@ namespace AutoRest.Ansible.Model
                     module.AssertStateExpectedValue = AssertStateExpectedValue;
                     module.ModuleOperationName = ModuleOperationName;
                     module.ModuleOperationNameUpper = ModuleOperationNameUpper;
-                    module.ObjectName = ModuleOperationNameUpper;
+                    module.ObjectName = ObjectName;
 
                     modules.Add(module);
                 }
@@ -317,16 +343,32 @@ namespace AutoRest.Ansible.Model
             return name;
         }
 
-        private ModuleResponseField[] CreateMethodResponseFields(string methodName)
+        private ModuleResponseField[] GetResponseFieldsForMethod(string methodName)
         {
             var fields = new List<ModuleResponseField>();
             var method = ModuleFindMethod(methodName);
 
+            // just get first example for this method
+            var examples = ModuleFindMethodSamples(methodName);
+            Newtonsoft.Json.Linq.JToken v = null;
+            var example = examples.IsNullOrEmpty() ? null : examples.First().Value;
+            if (example != null)
+            {
+                AutoRest.Core.Model.XmsExtensions.ExampleResponse r = null;
+                example.Responses.TryGetValue("200", out r);
+
+                if (r != null)
+                {
+                    v = r.Body;
+                }
+            }
+
+            // QQQQQQQQQQ
             if (method != null)
             {
                 string responseModel = method.ReturnType.Body.ClassName;
 
-                var suboptions = GetModelFields(responseModel, 0);
+                var suboptions = GetResponseFieldsForModel(responseModel, 0, v);
                 fields.AddRange(suboptions);
             }
 
@@ -349,6 +391,7 @@ namespace AutoRest.Ansible.Model
                 {
                     if (p.Name != "self.config.subscription_id" && p.Name != "api_version" && p.Name != "tags")
                     {
+                        // QQQQQQQQQQ
                         string type = ModelTypeNameToYamlTypeName(p.ModelType);
                         if (example != null) example.Parameters.TryGetValue(p.SerializedName, out v);
 
@@ -482,18 +525,43 @@ namespace AutoRest.Ansible.Model
             return options.ToArray();
         }
 
-        private ModuleResponseField[] GetModelFields(string modelName, int level)
+        private ModuleResponseField[] GetResponseFieldsForModel(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleResponse)
         {
             CompositeTypePy model = GetModelTypeByName(modelName);
             var fields = new List<ModuleResponseField>();
 
             if (model != null && level < 5)
             {
+                Newtonsoft.Json.Linq.JToken sampleSubResponse = null;
+
+
                 foreach (var attr in model.ComposedProperties)
                 {
                     string type = ModelTypeNameToYamlTypeName(attr.ModelType);
                     type = (type == "dict") ? "complex" : type;
                     string modelTypeName = attr.ModelTypeName;
+
+                    //-------------------------------------------------------------
+                    Newtonsoft.Json.Linq.JToken sampleResponseField = null;
+                    if (sampleResponse != null)
+                    {
+                        Newtonsoft.Json.Linq.JObject sampleResponseObject = sampleResponse as Newtonsoft.Json.Linq.JObject;
+
+                        if (sampleResponseObject != null)
+                        {
+                            foreach (var pp in sampleResponseObject.Properties())
+                            {
+                                if (pp.Name == attr.Name)
+                                {
+                                    sampleResponseField = pp.Value;
+                                }
+                            }
+                        }
+                    }
+
+                    //-------------------------------------------------------------
+
+
                     var field = new ModuleResponseField(attr.Name, type, attr.Documentation, attr.Name);
                     field.Returned = "always";
                     if (attr.ModelTypeName == "list")
@@ -509,8 +577,15 @@ namespace AutoRest.Ansible.Model
                     {
                         modelTypeName = attr.ModelTypeName;
                     }
+
                     field.Description = attr.Documentation;
-                    field.SubFields = GetModelFields(modelTypeName, level + 1);
+                    field.SubFields = GetResponseFieldsForModel(modelTypeName, level + 1, sampleResponseField);
+
+                    if (field.SubFields.Length == 0 && sampleResponseField != null && sampleResponseField.ToString() != "")
+                    {
+                        field.SampleValue = sampleResponseField.ToString();
+                    }
+
                     fields.Add(field);
                 }
             }
