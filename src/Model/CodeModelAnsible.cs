@@ -33,7 +33,9 @@ namespace AutoRest.Ansible.Model
             get
             {
                 string multi = (Operations.Count > 1) ? Namespace : "";
-                string name = "azure_rm_" + multi + Operations[CurrentOperationIndex].Name.ToLower();
+                string sub = Operations[CurrentOperationIndex].Name.ToLower();
+                if (sub.StartsWith(multi)) multi = "";
+                string name = "azure_rm_" + multi + sub;
 
                 // let's try to be smart here, as all operation names are plural so let's try to make it singular
                 if (name.EndsWith("ies"))
