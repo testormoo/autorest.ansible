@@ -378,7 +378,6 @@ namespace AutoRest.Ansible
             //new Tweak_Option_Flatten("azure_rm_authorizationroleassignment", "properties", "properties_"),
 
             // Application Gateway
-            new Tweak_Module_Rename("azure_rm_applicationgateway", "azure_rm_applicationgateway"),
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
             new Tweak_Module_ObjectName("azure_rm_applicationgateway", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgateway", "application_gateway_name", "name"),
@@ -443,7 +442,6 @@ namespace AutoRest.Ansible
                                                     //"    resource_group: \"{{ resource_group }}\"",
                                                     //"    state: absent" }),
 
-            new Tweak_Module_Rename("azure_rm_applicationgateway_facts", "azure_rm_applicationgateway_facts"),
             new Tweak_Module_ObjectName("azure_rm_applicationgateway_facts", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgateway_facts", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
