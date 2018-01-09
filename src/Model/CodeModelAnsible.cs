@@ -174,7 +174,7 @@ namespace AutoRest.Ansible.Model
                     module.TestPrerequisitesModule = "";
                     module.ModuleOperationName = ModuleOperationName;
                     module.ModuleOperationNameUpper = ModuleOperationNameUpper;
-                    module.ObjectName = ModuleOperationNameUpper;
+                    module.ObjectName = ObjectName;
 
                     modules.Add(module);
                 }
