@@ -90,22 +90,25 @@ namespace AutoRest.Ansible.Model
             _map = new MapAnsible();
 
             var modules = new List<MapAnsibleModule>();
-            var operations = new List<string>();
 
             var oldIndex = CurrentOperationIndex;
             for (int idx = 0; idx < Operations.Count; idx++)
             {
+                Map.Info.Add("------------------------------- " + this.ObjectName);
+
                 CurrentOperationIndex = idx;
                 string op = Operations[CurrentOperationIndex].Name + "[";
                 foreach (var m in Operations[CurrentOperationIndex].Methods)
                 {
                     op += " " + m.Name;
+                    Map.Info.Add("  " + m.Name);
                 }
 
                 var module = new MapAnsibleModule();
 
                 if ((ModuleCreateOrUpdateMethod != null) || (ModuleCreateMethod != null))
                 {
+                    Map.Info.Add("  ** CREATING MAIN MODULE");
                     op += " MAIN";
                     module.ModuleName = AnsibleModuleName;
                     module.ModuleNameAlt = module.ModuleName;
@@ -122,7 +125,7 @@ namespace AutoRest.Ansible.Model
                         method.RequiredOptions = GetMethodOptionNames(ModuleGetMethod.Name);
                         methods.Add(method);
 
-                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name, true);
                     }
 
                     if (ModuleCreateOrUpdateMethod != null)
@@ -134,7 +137,7 @@ namespace AutoRest.Ansible.Model
                         methods.Add(method);
 
                         // XXX - make sure this should be here
-                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name, false);
                     }
 
                     if (ModuleCreateMethod != null)
@@ -146,7 +149,7 @@ namespace AutoRest.Ansible.Model
                         methods.Add(method);
 
                         // XXX - make sure this should be here
-                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name, false);
                     }
 
                     if (ModuleUpdateMethod != null)
@@ -158,7 +161,7 @@ namespace AutoRest.Ansible.Model
                         methods.Add(method);
 
                         // XXX - make sure this should be here
-                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name, false);
                     }
 
                     if (ModuleDeleteMethod != null)
@@ -185,7 +188,7 @@ namespace AutoRest.Ansible.Model
 
                 if (factMethods.Length > 0)
                 {
-                    op += " FACTS";
+                    Map.Info.Add("  ** CREATING FACT MODULE");
                     module = new MapAnsibleModule();
                     module.ModuleName = AnsibleModuleNameFacts;
                     module.ModuleNameAlt = module.ModuleName;
@@ -204,7 +207,7 @@ namespace AutoRest.Ansible.Model
 
                     if (ModuleGetMethod != null)
                     {
-                        module.ResponseFields = GetResponseFieldsForMethod(ModuleGetMethod.Name);
+                        module.ResponseFields = GetResponseFieldsForMethod(ModuleGetMethod.Name, true);
                     }
 
                     module.Methods = methods.ToArray();
@@ -217,7 +220,6 @@ namespace AutoRest.Ansible.Model
 
                     modules.Add(module);
                 }
-                operations.Add(op += " ]");
             }
 
             CurrentOperationIndex = oldIndex;
@@ -228,21 +230,6 @@ namespace AutoRest.Ansible.Model
             Map.NamespaceUpper = NamespaceUpper;
             Map.Name = Name;
 
-            foreach (var group in Operations)
-            {
-                foreach (var method in group.Methods)
-                {
-                    var examplesRaw = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
-                    var examples = AutoRest.Core.Model.XmsExtensions.Examples.FromJObject(examplesRaw);
-                    foreach (var example in examples)
-                    {
-                        operations.Add("EXAMPLE -- " + example.Key);
-                        operations.Add("EXAMPLE OBJECT -- " + JsonConvert.SerializeObject(examplesRaw));
-                    }
-                }
-            }
-
-            Map.Operations = operations.ToArray();
             Map.ApiVersion = "";// ApiVersion;
         }
 
@@ -350,7 +337,7 @@ namespace AutoRest.Ansible.Model
             return name;
         }
 
-        private ModuleResponseField[] GetResponseFieldsForMethod(string methodName)
+        private ModuleResponseField[] GetResponseFieldsForMethod(string methodName, bool alwaysInclude)
         {
             var fields = new List<ModuleResponseField>();
             var method = ModuleFindMethod(methodName);
@@ -417,7 +404,7 @@ namespace AutoRest.Ansible.Model
             {
                 string responseModel = method.ReturnType.Body.ClassName;
 
-                var suboptions = GetResponseFieldsForModel(responseModel, 0, v);
+                var suboptions = GetResponseFieldsForModel(responseModel, 0, v, alwaysInclude);
                 fields.AddRange(suboptions);
             }
 
@@ -574,7 +561,7 @@ namespace AutoRest.Ansible.Model
             return options.ToArray();
         }
 
-        private ModuleResponseField[] GetResponseFieldsForModel(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleResponse)
+        private ModuleResponseField[] GetResponseFieldsForModel(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleResponse, bool alwaysInclude)
         {
             CompositeTypePy model = GetModelTypeByName(modelName);
             var fields = new List<ModuleResponseField>();
@@ -609,6 +596,12 @@ namespace AutoRest.Ansible.Model
 
 
                     var field = new ModuleResponseField(attr.Name, type, attr.Documentation, attr.Name);
+
+                    if (alwaysInclude && sampleResponseField != null)
+                    {
+                        field.NameAlt = attr.Name;
+                    }
+
                     field.Returned = "always";
                     if (attr.ModelTypeName == "list")
                     {
@@ -625,7 +618,7 @@ namespace AutoRest.Ansible.Model
                     }
 
                     field.Description = attr.Documentation;
-                    field.SubFields = GetResponseFieldsForModel(modelTypeName, level + 1, sampleResponseField);
+                    field.SubFields = GetResponseFieldsForModel(modelTypeName, level + 1, sampleResponseField, alwaysInclude);
                     field.Info = (sampleResponseField != null) ? sampleResponseField.ToString() : "NO SAMPLE DATA";
 
                     if (field.SubFields.Length == 0 && sampleResponseField != null && sampleResponseField.ToString() != "")
