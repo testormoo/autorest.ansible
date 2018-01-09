@@ -60,6 +60,13 @@ EXAMPLES = '''
 }
 '''
 @EmptyLine
+RETURN = '''
+@foreach (var line in Model.ModuleReturnResponseFields)
+{
+    @:@(line)
+}
+'''
+@EmptyLine
 from ansible.module_utils.azure_rm_common import AzureRMModuleBase
 @EmptyLine
 try:

@@ -121,6 +121,8 @@ namespace AutoRest.Ansible.Model
 
                         method.RequiredOptions = GetMethodOptionNames(ModuleGetMethod.Name);
                         methods.Add(method);
+
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name);
                     }
 
                     if (ModuleCreateOrUpdateMethod != null)
@@ -198,6 +200,11 @@ namespace AutoRest.Ansible.Model
                         method.Options = GetMethodOptionNames(m.Name, false);
                         method.RequiredOptions = GetMethodOptionNames(m.Name);
                         methods.Add(method);
+                    }
+
+                    if (ModuleGetMethod != null)
+                    {
+                        module.ResponseFields = GetResponseFieldsForMethod(ModuleGetMethod.Name);
                     }
 
                     module.Methods = methods.ToArray();
@@ -397,8 +404,11 @@ namespace AutoRest.Ansible.Model
                         }
                     }
 
-                    this.Map.Info.Add("Sample after properties copied ---");
-                    this.Map.Info.Add(v.ToString());
+                    if (v != null)
+                    {
+                        this.Map.Info.Add("Sample after properties copied ---");
+                        this.Map.Info.Add(v.ToString());
+                    }
                 }
             }
 
