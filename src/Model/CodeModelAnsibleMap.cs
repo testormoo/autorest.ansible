@@ -1165,7 +1165,17 @@ namespace AutoRest.Ansible.Model
 
                     help.Add(padding + "    returned: " + field.Returned);
                     help.Add(padding + "    type: " + field.Type);
-                    help.Add(padding + "    sample: " + field.SampleValue);
+
+                    if ((padding + "    sample: " + field.SampleValue).Length <= 160)
+                    {
+                        help.Add(padding + "    sample: " + field.SampleValue);
+                    }
+                    else
+                    {
+                        string sample = padding + "    sample: \"" + field.SampleValue + "\"";
+                        help.Add(sample.Substring(0, 160));
+                        help.Add(padding + "             " + sample.Substring(160));
+                    }
 
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
