@@ -79,6 +79,8 @@ namespace AutoRest.Ansible.Model
         public string Returned { get; set; }
         public string SampleValue { get; set; }
         public ModuleResponseField[] SubFields { get; set; }
+
+        public string Info { get; set; }
     }
 
     public class ModuleMethod
@@ -140,6 +142,11 @@ namespace AutoRest.Ansible.Model
 
     public class MapAnsible
     {
+        public MapAnsible()
+        {
+            Info = new List<string>();
+        }
+
         public MapAnsibleModule[] Modules { get; set; }
 
         public string Namespace { get; set; }
@@ -147,5 +154,7 @@ namespace AutoRest.Ansible.Model
         public string Name { get; set; }
         public string ApiVersion { get; set; }
         public string[] Operations { get; set; }
+
+        public List<string> Info { get; set; }
     }
 }

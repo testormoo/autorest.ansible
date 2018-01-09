@@ -5,7 +5,7 @@
 @using AutoRest.Ansible
 @using AutoRest.Ansible.Model
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
-@foreach (var line in Model.MergeReport)
+@foreach (var line in Model.Map.Info)
 {
 @:@(line)
 }

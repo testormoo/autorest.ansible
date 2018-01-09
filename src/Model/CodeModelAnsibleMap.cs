@@ -636,33 +636,7 @@ namespace AutoRest.Ansible.Model
             {
                 List<string> info = new List<string>();
 
-                //foreach (var operation in Operations)
-                //{
-                //    info.Add("OPERATIONS: " + operation.Name);
-                //    foreach (var method in operation.Methods)
-                //    {
-                //        info.Add("  METHOD: " + method.Name);
-
-                //        foreach (var param in method.Parameters)
-                //        {
-                //            info.Add("    PARAMETER: " + param.Name);
-                //        }
-                //    }
-                //}
-
-                //info.Add("QUALIFIER: " + Qualifier);
-                //info.Add("PACKAGE NAME: " + PackageName);
-                //info.Add("NAME: " + Name);
-                //info.Add("NAMESPACE: " + Namespace);
-                //info.Add("NAMESPACE UPPER: " + NamespaceUpper);
-                //info.Add("MODEL NAME: " + ModelsName);
-                //info.Add("URL: " + BaseUrl);
-
-                // just generate here for now
-                //CreateMap();
-
                 info.AddRange(JsonConvert.SerializeObject(Map, Formatting.Indented).Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None));
-
                 return info.ToArray();
             }
         }

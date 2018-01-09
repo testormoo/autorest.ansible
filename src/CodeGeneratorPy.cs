@@ -96,11 +96,13 @@ namespace AutoRest.Ansible
 
             if (codeModelPure != null)
             {
+                var ansibleMergeInfo = new AnsibleMergeReportTemplate { Model = codeModelPure };
+                await WriteWithLf(ansibleMergeInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".log"));
+
+                codeModelPure.Map.Info = null;
+
                 var ansibleInfo = new AnsibleInfoTemplate { Model = codeModelPure };
                 await WriteWithLf(ansibleInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".template.json"));
-
-                var ansibleMergeInfo = new AnsibleMergeReportTemplate { Model = codeModelPure };
-                await WriteWithLf(ansibleMergeInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".merge.txt"));
             }
         }
 

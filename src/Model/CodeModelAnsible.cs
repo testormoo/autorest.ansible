@@ -348,18 +348,57 @@ namespace AutoRest.Ansible.Model
             var fields = new List<ModuleResponseField>();
             var method = ModuleFindMethod(methodName);
 
+            this.Map.Info.Add("Getting example for: " + methodName);
+
             // just get first example for this method
             var examples = ModuleFindMethodSamples(methodName);
             Newtonsoft.Json.Linq.JToken v = null;
             var example = examples.IsNullOrEmpty() ? null : examples.First().Value;
             if (example != null)
             {
+                this.Map.Info.Add("Found example for: " + methodName);
                 AutoRest.Core.Model.XmsExtensions.ExampleResponse r = null;
                 example.Responses.TryGetValue("200", out r);
 
                 if (r != null)
                 {
+                    this.Map.Info.Add("Found response for: " + methodName);
                     v = r.Body;
+
+                    // XXX - this is a hack
+                    // XXX - if bodu contains "properties" -- flatten them
+                    Newtonsoft.Json.Linq.JObject propertiesAttr = null;
+                    Newtonsoft.Json.Linq.JObject vo = v as Newtonsoft.Json.Linq.JObject;
+
+                    if (vo != null)
+                    {
+                        foreach (var pp in vo.Properties())
+                        {
+                            if (pp.Name == "properties")
+                            {
+                                propertiesAttr = pp.Value as Newtonsoft.Json.Linq.JObject;
+                                this.Map.Info.Add("Found properties");
+                            }
+                        }
+                    }
+
+                    if (propertiesAttr != null)
+                    {
+                        foreach (var pp in propertiesAttr.Properties())
+                        {
+                            try
+                            {
+                                vo.Add(pp);
+                            }
+                            catch (Exception e)
+                            {
+                                Map.Info.Add("Error copying property --- " + pp.Name);
+                            }
+                        }
+                    }
+
+                    this.Map.Info.Add("Sample after properties copied ---");
+                    this.Map.Info.Add(v.ToString());
                 }
             }
 
@@ -532,9 +571,6 @@ namespace AutoRest.Ansible.Model
 
             if (model != null && level < 5)
             {
-                Newtonsoft.Json.Linq.JToken sampleSubResponse = null;
-
-
                 foreach (var attr in model.ComposedProperties)
                 {
                     string type = ModelTypeNameToYamlTypeName(attr.ModelType);
@@ -580,6 +616,7 @@ namespace AutoRest.Ansible.Model
 
                     field.Description = attr.Documentation;
                     field.SubFields = GetResponseFieldsForModel(modelTypeName, level + 1, sampleResponseField);
+                    field.Info = (sampleResponseField != null) ? sampleResponseField.ToString() : "NO SAMPLE DATA";
 
                     if (field.SubFields.Length == 0 && sampleResponseField != null && sampleResponseField.ToString() != "")
                     {
