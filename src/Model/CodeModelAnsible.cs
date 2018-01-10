@@ -597,7 +597,8 @@ namespace AutoRest.Ansible.Model
 
                     var field = new ModuleResponseField(attr.Name, type, attr.Documentation, attr.Name);
 
-                    if (alwaysInclude && sampleResponseField != null)
+                    // XXX - currently there's a problem with tags
+                    if (alwaysInclude && sampleResponseField != null && attr.Name != "tags")
                     {
                         field.NameAlt = attr.Name;
                     }

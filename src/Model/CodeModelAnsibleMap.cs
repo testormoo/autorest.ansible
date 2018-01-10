@@ -902,7 +902,7 @@ namespace AutoRest.Ansible.Model
                 help.Add(padding + "    description:");
                 int indent = (padding + "        - ").Length;
 
-                if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n".ToCharArray()) == -1))
+                if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n:".ToCharArray()) == -1))
                 {
                     help.Add(padding + "        - " + doc);
                 }
@@ -1131,7 +1131,7 @@ namespace AutoRest.Ansible.Model
                     help.Add(padding + "    description:");
                     int indent = (padding + "        - ").Length;
 
-                    if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n".ToCharArray()) == -1))
+                    if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n:".ToCharArray()) == -1))
                     {
                         help.Add(padding + "        - " + doc);
                     }
@@ -1179,7 +1179,7 @@ namespace AutoRest.Ansible.Model
 
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
-                        help.Add(padding + "    suboptions:");
+                        help.Add(padding + "    contains:");
                         help.AddRange(GetHelpFromResponseFields(field.SubFields, padding + "        "));
                     }
                 }
