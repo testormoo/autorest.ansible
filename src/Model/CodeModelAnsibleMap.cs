@@ -159,12 +159,19 @@ namespace AutoRest.Ansible.Model
 
                     for (int ci = 0; ci < option.EnumValues.Length; ci++)
                     {
-                        choicesList += "'" + option.EnumValues[ci].Key + "'" + ((ci < option.EnumValues.Length - 1) ? ", " : "]");
+                        choicesList += "'" + option.EnumValues[ci].Key + "'";
+
+                        if (ci < option.EnumValues.Length - 1)
+                        {
+                            choicesList += ",";
+                        }
+                        else
+                        {
+                            choicesList += "]" + (defaultOrRequired ? "," : "");
+                        }
+                        argSpec.Add(choicesList);
+                        choicesList = "             ";
                     }
-
-                    if (defaultOrRequired) choicesList += ",";
-
-                    argSpec.Add(choicesList);
                 }
 
                 if (defaultOrRequired)
@@ -900,39 +907,8 @@ namespace AutoRest.Ansible.Model
                 string doc = NormalizeString(option.Documentation);
                 help.Add(padding + option.NameAlt + ":");
                 help.Add(padding + "    description:");
-                int indent = (padding + "        - ").Length;
 
-                if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n:".ToCharArray()) == -1))
-                {
-                    help.Add(padding + "        - " + doc);
-                }
-                else
-                {
-                    doc = String.Join("\\n", doc.Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None));
-                    doc = String.Join("'", doc.Split(new[] { "\"" }, StringSplitOptions.None));
-                    int chunkLength = 160 - (indent + 4);
-                    int currentIdx = 0;
-                    int docLength = doc.Length;
-
-                    while (currentIdx < docLength)
-                    {
-                        if (currentIdx + chunkLength > docLength) chunkLength = docLength - currentIdx;
-                        string chunk = doc.Substring(currentIdx, chunkLength);
-                        if (currentIdx == 0)
-                        {
-                            help.Add(padding + "        - \"" + chunk + ((docLength > chunkLength) ? "" : "\""));
-                        }
-                        else if (currentIdx + chunk.Length != docLength)
-                        {
-                            help.Add(padding + "           " + chunk);
-                        }
-                        else
-                        {
-                            help.Add(padding + "           " + chunk + "\"");
-                        }
-                        currentIdx += chunkLength;
-                    }
-                }
+                help.AddRange(WrapString(padding + "        - ", doc));
 
                 // write only if true
                 if (option.Required != "False")
@@ -953,12 +929,16 @@ namespace AutoRest.Ansible.Model
 
                 if (option.EnumValues != null && option.EnumValues.Length > 0)
                 {
-                    string line = padding + "    choices: [";
+                    //string line = padding + "    choices: [";
+                    string line = padding + "    choices:";
+                    help.Add(line);
                     for (int i = 0; i < option.EnumValues.Length; i++)
                     {
-                        line += "'" + option.EnumValues[i].Key + "'" + ((i < option.EnumValues.Length - 1) ? ", " : "]");
+                        line = padding + "        - '" + option.EnumValues[i].Key + "'";
+                        help.Add(line);
+                        //line += "'" + option.EnumValues[i].Key + "'" + ((i < option.EnumValues.Length - 1) ? ", " : "]");
                     }
-                    help.Add(line);
+                    //help.Add(line);
                 }
 
                 if (option.SubOptions != null && option.SubOptions.Length > 0)
@@ -1129,53 +1109,12 @@ namespace AutoRest.Ansible.Model
                     string doc = NormalizeString(field.Description);
                     help.Add(padding + field.NameAlt + ":");
                     help.Add(padding + "    description:");
-                    int indent = (padding + "        - ").Length;
-
-                    if ((indent + doc.Length <= 160) && (doc.LastIndexOfAny("'\"\r\n:".ToCharArray()) == -1))
-                    {
-                        help.Add(padding + "        - " + doc);
-                    }
-                    else
-                    {
-                        doc = String.Join("\\n", doc.Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None));
-                        doc = String.Join("'", doc.Split(new[] { "\"" }, StringSplitOptions.None));
-                        int chunkLength = 160 - (indent + 4);
-                        int currentIdx = 0;
-                        int docLength = doc.Length;
-
-                        while (currentIdx < docLength)
-                        {
-                            if (currentIdx + chunkLength > docLength) chunkLength = docLength - currentIdx;
-                            string chunk = doc.Substring(currentIdx, chunkLength);
-                            if (currentIdx == 0)
-                            {
-                                help.Add(padding + "        - \"" + chunk + ((docLength > chunkLength) ? "" : "\""));
-                            }
-                            else if (currentIdx + chunk.Length != docLength)
-                            {
-                                help.Add(padding + "           " + chunk);
-                            }
-                            else
-                            {
-                                help.Add(padding + "           " + chunk + "\"");
-                            }
-                            currentIdx += chunkLength;
-                        }
-                    }
+                    help.AddRange(WrapString(padding + "        - ", doc));
 
                     help.Add(padding + "    returned: " + field.Returned);
                     help.Add(padding + "    type: " + field.Type);
 
-                    if ((padding + "    sample: " + field.SampleValue).Length <= 160)
-                    {
-                        help.Add(padding + "    sample: " + field.SampleValue);
-                    }
-                    else
-                    {
-                        string sample = padding + "    sample: \"" + field.SampleValue + "\"";
-                        help.Add(sample.Substring(0, 160));
-                        help.Add(padding + "             " + sample.Substring(160));
-                    }
+                    help.AddRange(WrapString(padding + "    sample: ", field.SampleValue));
 
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
@@ -1212,6 +1151,46 @@ namespace AutoRest.Ansible.Model
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         // HELPERS
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        private static string[] WrapString(string prefix, string content)
+        {
+            List<string> output = new List<string>();
+
+            if ((prefix.Length + content.Length <= 160) && (content.LastIndexOfAny("'\"\r\n:".ToCharArray()) == -1))
+            {
+                output.Add(prefix + content);
+            }
+            else
+            {
+                content = String.Join("\\n", content.Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None));
+                content = String.Join("'", content.Split(new[] { "\"" }, StringSplitOptions.None));
+                int chunkLength = 160 - (prefix.Length + 4);
+                int currentIdx = 0;
+                int docLength = content.Length;
+
+                while (currentIdx < docLength)
+                {
+                    if (currentIdx + chunkLength > docLength) chunkLength = docLength - currentIdx;
+                    string chunk = content.Substring(currentIdx, chunkLength);
+                    if (currentIdx == 0)
+                    {
+                        output.Add(prefix + "\"" + chunk + ((docLength > chunkLength) ? "" : "\""));
+                        prefix = new String(prefix.Select(r => ' ').ToArray());
+                    }
+                    else if (currentIdx + chunk.Length != docLength)
+                    {
+                        output.Add(prefix + chunk);
+                    }
+                    else
+                    {
+                        output.Add(prefix + chunk + "\"");
+                    }
+                    currentIdx += chunkLength;
+                }
+            }
+
+            return output.ToArray();
+        }
 
         private static string NormalizeString(string s)
         {
