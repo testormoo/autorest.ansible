@@ -54,6 +54,10 @@ namespace AutoRest.Ansible
             foreach (var tweak in Tweaks.All)
             {
                 tweak.Apply(map);
+                if (tweak.log != null)
+                {
+                    map.Info.Add("TWEAK: " + tweak.log);
+                }
             }
 
             CodeModelAnsibleMap codeModelPure = null;

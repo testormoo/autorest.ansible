@@ -640,6 +640,16 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "webhook_name", "webhook{{ rpfx }}"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
+            // Key Vault
+            new Tweak_Module_Rename("azure_rm_vault", "azure_rm_keyvault"),
+            new Tweak_Module_ObjectName("azure_rm_vault", "Key Vault"),
+
+            //new Tweak_Option_Rename("azure_rm_vault", "properties.access_policies", "moo"),
+            //new Tweak_Option_Rename("azure_rm_vault", "properties", "kfiii"),
+
+            new Tweak_Option_Flatten("azure_rm_vault", "properties.access_policies.permissions", ""),
+            new Tweak_Option_Flatten("azure_rm_vault", "properties", ""),
+
             // RELEASE STATUS FOR VARIOUS MODULES
             new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver", "RP"),

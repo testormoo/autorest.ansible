@@ -10,6 +10,8 @@ namespace AutoRest.Ansible
         public abstract void Apply(Model.MapAnsible map);
 
         public abstract void ApplyOnModule(Model.MapAnsibleModule m);
+
+        public string log = null;
     }
 
     public abstract class Tweak_Module : Tweak
@@ -349,8 +351,13 @@ namespace AutoRest.Ansible
 
         public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
+            log = "RENAMING " + string.Join(".", _path) + " -- ";
             Model.ModuleOption option = GetOption(m, _path);
-            if (option != null) option.NameAlt = _newName;
+            if (option != null)
+            {
+                log += "A";
+                option.NameAlt = _newName;
+            }
             // XXX - level change
         }
 
@@ -556,21 +563,31 @@ namespace AutoRest.Ansible
 
         public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
+            log = "FLATTENING " + string.Join(".", _path) + " -- ";
+
             Model.ModuleOption option = GetOption(m, _path);
 
             if (option == null)
                 return;
 
+            log += "A";
+
             if (option.IsList)
                 return;
+
+            log += "B";
 
             if (option.Type != "dict")
                 return;
 
-            Model.ModuleOption[] options = option.SubOptions;
+            log += "C";
+
+            // remove suboptions from options
+            Model.ModuleOption[] suboptions = option.SubOptions;
             option.SubOptions = null;
             
-            foreach (var suboption in options)
+            // update suboptions disposition, so code generator knows that they needs to be stucked into dictionary
+            foreach (var suboption in suboptions)
             {
                 suboption.Disposition = ((option.Disposition != "default") ? option.Disposition : "") + ":" + option.Name;
                 suboption.NameAlt = _namePrefix + suboption.NameAlt;
@@ -579,17 +596,26 @@ namespace AutoRest.Ansible
                 suboption.Required = "False";
             }
 
+            log += "D";
+            // flattened option becomes just hidden dictionary for its suboptions
             option.Disposition += ":dictionary";
+            log += "E";
 
             if (_path.Length == 1)
             {
                 List<Model.ModuleOption> o = m.Options.ToList();
-                o.AddRange(options);
+                o.AddRange(suboptions);
                 m.Options = o.ToArray();
             }
             else
             {
-                // XXX - to be implemented
+                string[] subPath = new string[_path.Length - 1];
+                Array.Copy(_path, subPath, _path.Length - 1);
+                Model.ModuleOption parent = GetOption(m, subPath);
+
+                List<Model.ModuleOption> o = parent.SubOptions.ToList();
+                o.AddRange(suboptions);
+                parent.SubOptions = o.ToArray();
             }
         }
 
