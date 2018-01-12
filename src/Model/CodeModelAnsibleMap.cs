@@ -391,7 +391,7 @@ namespace AutoRest.Ansible.Model
             get
             {
                 List<string> help = new List<string>();
-                help.Add("servers:");
+                help.Add(ModuleOperationName + ":");
                 help.Add("    description: A list of dict results where the key is the name of the " + ObjectName + " and the values are the facts for that " + ObjectName + ".");
                 help.Add("    returned: always");
                 help.Add("    type: complex");

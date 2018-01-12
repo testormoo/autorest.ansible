@@ -131,7 +131,7 @@ else
             string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
 @:        @((idx == 0) ? ifStatement : ifPadding)self.@(optionName) is not None@((idx != ps.Length - 1) ? " and" : "):")
         }
-@:            self.results['sqlservers'] = self.@(f.Name)()
+@:            self.results['@(Model.ModuleOperationName)'] = self.@(f.Name)()
         ifStatement = "elif (";
         ifPadding = "      ";
     }
@@ -162,11 +162,11 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 if (m.Name.Contains("list"))
     {
 @:            for item in response:
-@:                results[item.server_name] = item.as_dict()
+@:                results[item.name] = item.as_dict()
 }
 else
 {
-@:            results = results[response.server_name] = response.as_dict()
+@:            results[response.name] = response.as_dict()
 }
 @EmptyLine
 @:        return results
