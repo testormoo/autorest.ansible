@@ -163,6 +163,10 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_mysqldatabase", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "\"mysqlsrv{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "database_name", "testdatabase"),
+            new Tweak_Module_AddUpdateRule("azure_rm_mysqldatabase", "collation", "collation"),
+            new Tweak_Module_AddUpdateRule("azure_rm_mysqldatabase", "charset", "charset"),
+            new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "collation", " Check MySQL documentation for possible values."),
+            new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "charset", " Check MySQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_mysqldatabase", "name"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqldatabase", "testdatabase"),
@@ -302,6 +306,10 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_postgresqldatabase", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "server_name", "\"postgresqlsrv{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "database_name", "testdatabase"),
+            new Tweak_Module_AddUpdateRule("azure_rm_postgresqldatabase", "collation", "collation"),
+            new Tweak_Module_AddUpdateRule("azure_rm_postgresqldatabase", "charset", "charset"),
+            new Tweak_Option_DocumentationAppend("azure_rm_postgresqldatabase", "collation", " Check PostgreSQL documentation for possible values."),
+            new Tweak_Option_DocumentationAppend("azure_rm_postgresqldatabase", "charset", " Check PostgreSQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqldatabase", "testdatabase"),
@@ -700,6 +708,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication_facts", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook_facts", "RP"),
+
+            new Tweak_Module_ReleaseStatus("azure_rm_vault", "RP"),
         };
     }
 }

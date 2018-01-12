@@ -61,7 +61,7 @@ EXAMPLES = '''
 '''
 @EmptyLine
 RETURN = '''
-@foreach (var line in Model.ModuleReturnResponseFields)
+@foreach (var line in Model.ModuleFactsReturnResponseFields)
 {
 @:@(line)
 }
@@ -131,7 +131,7 @@ else
             string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
 @:        @((idx == 0) ? ifStatement : ifPadding)self.@(optionName) is not None@((idx != ps.Length - 1) ? " and" : "):")
         }
-@:            self.results['ansible_facts']['@(f.Name)'] = self.@(f.Name)()
+@:            self.results['sqlservers'] = self.@(f.Name)()
         ifStatement = "elif (";
         ifPadding = "      ";
     }
@@ -158,15 +158,15 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 @:            self.log('Could not get facts for @(Model.ModuleOperationNameUpper).')
 @EmptyLine
 @:        if response is not None:
+@:            results = {}
 if (m.Name.Contains("list"))
-{
-@:            results = []
+    {
 @:            for item in response:
-@:                results.append(item.as_dict())
+@:                results[item.server_name] = item.as_dict()
 }
 else
 {
-@:            results = response.as_dict()
+@:            results = results[response.server_name] = response.as_dict()
 }
 @EmptyLine
 @:        return results

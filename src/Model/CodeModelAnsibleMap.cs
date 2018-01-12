@@ -386,6 +386,25 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string[] ModuleFactsReturnResponseFields
+        {
+            get
+            {
+                List<string> help = new List<string>();
+                help.Add("servers:");
+                help.Add("    description: A list of dict results where the key is the name of the " + ObjectName + " and the values are the facts for that " + ObjectName + ".");
+                help.Add("    returned: always");
+                help.Add("    type: complex");
+                help.Add("    contains:");
+                help.Add("        " + ObjectNamePythonized + "_name:");
+                help.Add("            description: The key is the name of the server that the values relate to.");
+                help.Add("            type: complex");
+                help.Add("            contains:");
+                help.AddRange(GetHelpFromResponseFields(ModuleResponseFields, "                "));
+                return help.ToArray();
+            }
+        }
+
         public string[] ModuleExamples
         {
             get
@@ -1078,7 +1097,12 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    if (option.SubOptions != null)
+                    // XXX - if option disposition starts with ":" it should be placed in a dictionary with such name
+                    if (option.Disposition.StartsWith(":"))
+                    {
+                        statements.Add("# option " + option.NameAlt + " must go to dictionary " + option.Disposition + " as " + option.Name);
+                    }
+                    else if (option.SubOptions != null)
                     {
                         string[] subStatements = GetFixParameterStatements(option.SubOptions, level + 1, statementPrefix + "    ", dictPrefix + "['" + option.NameAlt + "']");
 
