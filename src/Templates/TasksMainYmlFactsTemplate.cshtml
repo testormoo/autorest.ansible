@@ -29,6 +29,7 @@ foreach (var line in Model.GetModuleFactTest(testIdx))
 @:  assert:
 @:    that:
 @:      - output.changed == False
+@:      - output.@(Model.ModuleOperationName).sqlsrv{{ rpfx }}.id != None
 }
 @if (Model.HasPrerequisites())
 {
