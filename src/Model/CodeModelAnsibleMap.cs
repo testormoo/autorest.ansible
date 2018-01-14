@@ -536,6 +536,31 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string FindResourceNameInTest()
+        {
+            var m = GetModuleMap(ModuleName);
+
+            string fieldName = m.ResourceNameFieldInRequest;
+            
+            foreach (var o in ModuleOptions)
+            {
+                if (o.Name == fieldName)
+                {
+                    string name = o.DefaultValueSample.GetValueOrDefault("test:default", "");
+
+                    if (name != "")
+                    {
+                        if (name.StartsWith("\""))
+                            name = name.Substring(1, name.Length - 2);
+
+                        return name;
+                    }
+                }
+            }
+
+            return "xxxunknownxxx";
+        }
+
         private string[] GetModuleTest(int level, string testType, string methodType, bool isCheckMode)
         {
             List<string> prePlaybook = new List<string>();

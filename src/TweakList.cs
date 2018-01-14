@@ -58,7 +58,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_Rename("azure_rm_sqldatabase", "database_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "\"sqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "database_name", "test-database"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "database_name", "database{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "location", "eastus"),
             new Tweak_Response_AddField("azure_rm_sqldatabase", "database_id"),
             new Tweak_Module_AssertStateVariable("azure_rm_sqldatabase", "status"),
@@ -68,7 +68,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase_facts", "azure_rm_sqldatabase", null, null),
             new Tweak_Module_ObjectName("azure_rm_sqldatabase_facts", "SQL Database"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "server_name", "\"sqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "database_name", "test-database"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "database_name", "database{{ rpfx }}"),
 
             // SQL Elastic Pool
             new Tweak_Module_ObjectName("azure_rm_sqlelasticpool", "ElasticPool"),
@@ -95,7 +95,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "end_ip_address", "172.28.10.138"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_sqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_sqlfirewallrule", "firewall_rule_name"),
-            //new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlfirewallrule", "test-firewall-rule"),
+            //new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlfirewallrule", "firewallrule{{ rpfx }}"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "start_ip_address", "start_ip_address"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "end_ip_address", "end_ip_address"),
 
@@ -103,7 +103,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule_facts", "azure_rm_sqlfirewallrule", null, null),
             new Tweak_Module_ObjectName("azure_rm_sqlfirewallrule_facts", "SQL Firewall Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "server_name", "\"sqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "firewallrule_name", "firewallrule{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
             new Tweak_Module_ObjectName("azure_rm_sqlserver_facts", "SQL Server"),
 
@@ -111,13 +111,13 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy", "azure_rm_sqldatabase", null, null),
             new Tweak_Option_Rename("azure_rm_sqlgeobackuppolicy", "state", "policy_state"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "server_name", "\"sqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "database_name", "\"test-database\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "database_name", "\"database{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "geo_backup_policy_name", "\"geo-policy-name\""),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "state", "\"enabled\""),
 
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy_facts", "azure_rm_sqlgeobackuppolicy", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "server_name", "\"sqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "database_name", "\"test-database\""),
+            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "database_name", "\"database{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "geo_backup_policy_name", "\"geo-policy-name\""),
 
 
@@ -184,12 +184,12 @@ namespace AutoRest.Ansible
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "server_name", "\"mysqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "firewall_rule_name", "test-firewall-rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "start_ip_address", "172.28.10.136"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "end_ip_address", "172.28.10.138"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_mysqlfirewallrule", "firewall_rule_name"),
-            //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlfirewallrule", "test-firewall-rule"),
+            //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlfirewallrule", "firewallrule{{ rpfx }}"),
             new Tweak_Module_AddUpdateRule("azure_rm_mysqlfirewallrule", "start_ip_address", "start_ip_address"),
             new Tweak_Module_AddUpdateRule("azure_rm_mysqlfirewallrule", "end_ip_address", "end_ip_address"),
 
@@ -197,7 +197,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule_facts", "azure_rm_mysqlfirewallrule", null, null),
             new Tweak_Module_ObjectName("azure_rm_mysqlfirewallrule_facts", "MySQL Firewall Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "server_name", "\"mysqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "firewallrule_name", "test-firewall-rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
             // MySQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", null, null),
@@ -329,12 +329,12 @@ namespace AutoRest.Ansible
             new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "server_name", "\"postgresqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "firewall_rule_name", "test-firewall-rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "start_ip_address", "172.28.10.136"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "end_ip_address", "172.28.10.138"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_postgresqlfirewallrule", "firewall_rule_name"),
-            //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlfirewallrule", "test-firewall-rule"),
+            //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlfirewallrule", "firewallrule{{ rpfx }}"),
             new Tweak_Module_AddUpdateRule("azure_rm_postgresqlfirewallrule", "start_ip_address", "start_ip_address"),
             new Tweak_Module_AddUpdateRule("azure_rm_postgresqlfirewallrule", "end_ip_address", "end_ip_address"),
 
@@ -342,7 +342,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule_facts", "azure_rm_postgresqlfirewallrule", null, null),
             new Tweak_Module_ObjectName("azure_rm_postgresqlfirewallrule_facts", "PostgreSQL Firewall Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "server_name", "\"postgresqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "firewallrule_name", "test-firewall-rule"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
             // PostgreSQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration", "azure_rm_postgresqlserver", null, null),
@@ -359,7 +359,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration", null, null),
             new Tweak_Module_ObjectName("azure_rm_postgresqlconfiguration_facts", "PostgreSQL Configuration"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "server_name", "\"postgresqlsrv{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "configuration_name", "event_scheduler"),
+            new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "configuration_name", "deadlock_timeout"),
 
             // PostgreSQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlvirtualnetworkrule", "azure_rm_postgresqlserver", null, null),
@@ -516,7 +516,7 @@ namespace AutoRest.Ansible
 
             // XXX - test pre and postrequisites
             new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "name", "aci{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "container_group_name", "aci{{ rpfx }}"),
             new Tweak_Module_TestPrerequisites("azure_rm_containerinstancecontainergroup_facts",
                                                 new string[] {
                                                     "- name: Create sample container instance",
@@ -562,7 +562,7 @@ namespace AutoRest.Ansible
 
 
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "name", "acr{{ rpfx }}"),
+            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "registry_name", "acr{{ rpfx }}"),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistry_facts",
                                                 new string[] {
                                                      "- name: Create an container registry",
@@ -709,7 +709,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook", "RP"),
             new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook_facts", "RP"),
 
-            new Tweak_Module_ReleaseStatus("azure_rm_vault", "RP"),
+            //new Tweak_Module_ReleaseStatus("azure_rm_vault", "RP"),
         };
     }
 }

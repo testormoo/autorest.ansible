@@ -218,6 +218,8 @@ namespace AutoRest.Ansible.Model
                     module.ModuleOperationNameUpper = ModuleOperationNameUpper;
                     module.ObjectName = ObjectName;
 
+                    UpdateResourceNameFields(module);
+
                     modules.Add(module);
                 }
             }
@@ -231,6 +233,47 @@ namespace AutoRest.Ansible.Model
             Map.Name = Name;
 
             Map.ApiVersion = "";// ApiVersion;
+        }
+
+        private void UpdateResourceNameFields(MapAnsibleModule m)
+        {
+            // try to set default resource name fields
+            string firstSuggestedName = ModuleOperationNameSingular + "_name";
+            m.ResourceNameFieldInRequest = firstSuggestedName;
+            m.ResourceNameFieldInResponse = firstSuggestedName;
+
+
+            // Verify that field exists in options, if not, we will find last field ending with "_name"
+            if (m.Options != null)
+            {
+                bool found = false;
+                string lastNameField = null;
+
+                foreach (var o in m.Options)
+                {
+                    if (o.Name.EndsWith("_name"))
+                        lastNameField = o.Name;
+                    
+                    if (o.Name == m.ResourceNameFieldInRequest)
+                        found = true;
+                }
+
+                if (!found)
+                {
+                    m.ResourceNameFieldInRequest = lastNameField;
+                    m.ResourceNameFieldInResponse = lastNameField;
+                }
+            }
+
+            // Check if response fields contains "name". If it does that will be our resource field name in response
+            if (m.ResponseFields != null)
+            {
+                foreach (var rf in m.ResponseFields)
+                    if (rf.Name == "name")
+                        m.ResourceNameFieldInResponse = "name";
+            }
+
+            Map.Info.Add("  resource name fields: " +  firstSuggestedName + " " + m.ResourceNameFieldInRequest + " " + m.ResourceNameFieldInResponse);
         }
 
         public override string Namespace
@@ -252,6 +295,24 @@ namespace AutoRest.Ansible.Model
         public string ModuleOperationName
         {
             get { return ModuleOperation.Name.ToPythonCase(); }
+        }
+
+        public string ModuleOperationNameSingular
+        {
+            get
+            {
+                string name = ModuleOperation.Name.ToPythonCase();
+                if (name.EndsWith("ies"))
+                {
+                    name = name.Substring(0, name.Length - 3) + "y";
+                }
+                else if (name.EndsWith('s'))
+                {
+                    name = name.Substring(0, name.Length - 1);
+                }
+
+                return name;
+            }
         }
 
         public string ModuleOperationNameUpper
