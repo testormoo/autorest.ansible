@@ -1185,8 +1185,20 @@ namespace AutoRest.Ansible.Model
             {
                 foreach (var rule in map.UpdateComparisonRules)
                 {
-                    rules.Add("if (self." + rule.Option[0] + " is not None) and (self." + rule.Option[0] + " != old_response['" + rule.ReturnField[0] + "']):");
-                    rules.Add("    self.to_do = Actions.Update");
+                    if (!rule.Option[0].EndsWith("]"))
+                    {
+                        rules.Add("if (self." + rule.Option[0] + " is not None) and (self." + rule.Option[0] + " != old_response['" + rule.ReturnField[0] + "']):");
+                        rules.Add("    self.to_do = Actions.Update");
+                    }
+                    else
+                    {
+                        string[] temp = rule.Option[0].Split("['");
+                        string prefix = temp[0];
+                        temp = temp[1].Split("']");
+                        string param = temp[0];
+                        rules.Add("if ('" + param + "' in self." + prefix + ") and (self." + prefix + "['" + param + "'] != old_response['" + rule.ReturnField[0] + "']):");
+                        rules.Add("    self.to_do = Actions.Update");
+                    }
                 }
             }
             else

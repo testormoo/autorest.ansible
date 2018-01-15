@@ -790,7 +790,7 @@ namespace AutoRest.Ansible.Model
 
             foreach (var m in ModuleOperation.Methods)
             {
-                if (m.Name.StartsWith("list_") || m.Name == "get")
+                if ((m.Name.StartsWith("list_") || m.Name == "get") && (m.Name != "list_metric_definitions") && (m.Name != "list_all"))
                 {
                     l.Add(m);
                 }
