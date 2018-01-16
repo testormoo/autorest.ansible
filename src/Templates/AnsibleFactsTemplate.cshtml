@@ -147,7 +147,7 @@ else
 @:        :return: deserialized @(Model.ObjectName)instance state dictionary
 @:        '''
 @:        response = None
-@:        results = False
+@:        results = {}
 @:        try:
 foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 {
@@ -158,7 +158,6 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 @:            self.log('Could not get facts for @(Model.ModuleOperationNameUpper).')
 @EmptyLine
 @:        if response is not None:
-@:            results = {}
 if (m.Name.Contains("list"))
     {
 @:            for item in response:
