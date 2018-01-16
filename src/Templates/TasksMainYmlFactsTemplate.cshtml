@@ -9,28 +9,19 @@
   set_fact:
     rpfx: "{{ 1000 | random }}{{ resource_group | hash('md5') | truncate(7, True, '') }}"
   run_once: yes
-@for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
-{
-@EmptyLine
-    foreach (var line in Model.GetModuleFactTest(testIdx))
-    {
-@:@(line)
-    }
-@:  register: output
-@:- name: Assert that empty dictionary was returned
-@:  assert:
-@:    that:
-@:      - output.changed == False
-@:      - output.@(Model.ModuleOperationName) == {}
-}
-
-
 @if (Model.HasPrerequisites())
 {
 @EmptyLine
-    foreach (var line in Model.ModuleTestPrerequisites)
+    foreach (var line in Model.GetModuleTestPrerequisites(true, true))
     {
 @:@(line)
+    }
+    if (Model.GetModuleCanDeletePrerequisites())
+    {
+        foreach (var line in Model.GetModuleTestPrerequisites(true, false, "second"))
+        {
+@:@(line)
+        }
     }
 }
 @for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
@@ -46,11 +37,42 @@ foreach (var line in Model.GetModuleFactTest(testIdx))
 @:    that:
 @:      - output.changed == False
 @:      - output.@(Model.ModuleOperationName + "." + Model.FindResourceNameInTest()).id != None
+    if (Model.IsModuleFactsTestMulti(testIdx) && Model.GetModuleCanDeletePrerequisites())
+    {
+@:      - output.@(Model.ModuleOperationName + "." + Model.FindResourceNameInTest())second.id != None
+    }
 }
-@if (Model.HasPrerequisites())
+@if (Model.HasPrerequisites() && Model.GetModuleCanDeletePrerequisites())
 {
 @EmptyLine
-    foreach (var line in Model.ModuleTestDeleteClearPrerequisites)
+    foreach (var line in Model.GetModuleTestDeleteClearPrerequisites(true, false))
+    {
+@:@(line)
+    }
+    foreach (var line in Model.GetModuleTestDeleteClearPrerequisites(true, false, "second"))
+    {
+@:@(line)
+    }
+for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
+{
+@EmptyLine
+    foreach (var line in Model.GetModuleFactTest(testIdx, "unexisting"))
+    {
+@:@(line)
+    }
+@:  register: output
+@:- name: Assert that empty dictionary was returned
+@:  assert:
+@:    that:
+@:      - output.changed == False
+@:      - output.@(Model.ModuleOperationName) == {}
+}
+@EmptyLine
+    foreach (var line in Model.GetModuleTestDeleteClearPrerequisites(false, true))
+    {
+@:@(line)
+    }
+    foreach (var line in Model.GetModuleTestDeleteClearPrerequisites(false, true, "second"))
     {
 @:@(line)
     }

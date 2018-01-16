@@ -12,7 +12,7 @@
 @if (Model.HasPrerequisites())
 {
 @EmptyLine
-    foreach (var line in Model.ModuleTestPrerequisites)
+    foreach (var line in Model.GetModuleTestPrerequisites(true, true))
     {
 @:@(line)
     }
@@ -96,7 +96,7 @@ foreach (var line in Model.ModuleTestUpdate)
 @if (Model.HasPrerequisites())
 {
 @EmptyLine
-    foreach (var line in Model.ModuleTestDeleteClearPrerequisites)
+    foreach (var line in Model.GetModuleTestDeleteClearPrerequisites(true, true))
     {
 @:@(line)
     }

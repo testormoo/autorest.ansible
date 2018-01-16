@@ -473,10 +473,16 @@ namespace AutoRest.Ansible.Model
             return m.Methods.Length;
         }
 
-        public string[] GetModuleFactTest(int idx)
+        public string[] GetModuleFactTest(int idx, string instanceNamePostfix = "")
         {
             var m = GetModuleMap(ModuleName);
-            return GetModuleTest(0, "Gather facts", m.Methods[idx].Name, false);
+            return GetModuleTest(0, "Gather facts", m.Methods[idx].Name, false, instanceNamePostfix);
+        }
+
+        public bool IsModuleFactsTestMulti(int idx)
+        {
+            var m = GetModuleMap(ModuleName);
+            return m.Methods[idx].Name != "get";
         }
 
         public string[] ModuleTestDelete
@@ -494,61 +500,99 @@ namespace AutoRest.Ansible.Model
             get { return GetModuleTest(0, "Delete unexisting instance of", "delete", false); }
         }
 
-        public string[] ModuleTestPrerequisites
+        public string[] GetModuleTestPrerequisites(bool parent, bool grandparent, string instancePostfix = "")
         {
-            get
-            {
-                List<string> prePlaybook = new List<string>();
-                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+            List<string> prePlaybook = new List<string>();
+            string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
 
-                if ((prerequisites != null) && (prerequisites != ""))
+            if ((prerequisites != null) && (prerequisites != ""))
+            {
+                var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+                if (grandparent)
                 {
-                    var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
-                    prePlaybook.AddRange(subModel.ModuleTestPrerequisites);
-                    prePlaybook.AddRange(subModel.GetModuleTest(1, "Create", "", false));
+                    prePlaybook.AddRange(subModel.GetModuleTestPrerequisites(true, true));
                 }
 
-                if (Map.Modules[_selectedMethod].TestPrerequisites != null)
-                    prePlaybook.AddRange(Map.Modules[_selectedMethod].TestPrerequisites);
-
-                return prePlaybook.ToArray();
-            }
-        }
-        public string[] ModuleTestDeleteClearPrerequisites
-        {
-            get
-            {
-                List<string> prePlaybook = new List<string>();
-
-                string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
-
-                if ((prerequisites != null) && (prerequisites != ""))
+                if (parent)
                 {
-                    var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+                    prePlaybook.AddRange(subModel.GetModuleTest(1, "Create", "", false, instancePostfix));
+                }
+            }
 
+            if (parent)
+            {
+                if (Map.Modules[_selectedMethod].TestPrerequisites != null)
+                {
+                    string[] preRequisites = Map.Modules[_selectedMethod].TestPrerequisites.Clone() as string[];
+                    for (int i = 0; i < preRequisites.Length; i++) preRequisites[i] = preRequisites[i].Replace("$postfix$", instancePostfix);
+                    prePlaybook.AddRange(preRequisites);
+                }
+            }
+
+            return prePlaybook.ToArray();
+        }
+        public bool GetModuleCanDeletePrerequisites()
+        {
+            string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+
+            if ((prerequisites != null) && (prerequisites != ""))
+            {
+                var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+                if (!subModel.CanDelete())
+                    return false;
+            }
+
+            return true;
+        }
+
+        public string[] GetModuleTestDeleteClearPrerequisites(bool includeParentPrerequisites, bool includeGrandparentPrerequisites, string instancePostfix = "")
+        {
+            List<string> prePlaybook = new List<string>();
+
+            string prerequisites = Map.Modules[_selectedMethod].TestPrerequisitesModule;
+
+            if ((prerequisites != null) && (prerequisites != ""))
+            {
+                var subModel = new CodeModelAnsibleMap(Map, null, prerequisites);
+
+                // parent prerequisites from submodule
+                if (includeParentPrerequisites)
+                {
                     if (subModel.CanDelete())
                     {
-                        prePlaybook.AddRange(subModel.ModuleTestDelete);
+                        prePlaybook.AddRange(subModel.GetModuleTest(0, "Delete instance of", "delete", false, instancePostfix));
                     }
-
-                    prePlaybook.AddRange(subModel.ModuleTestDeleteClearPrerequisites);
                 }
 
-                if (Map.Modules[_selectedMethod].TestPostrequisites != null)
-                    prePlaybook.AddRange(Map.Modules[_selectedMethod].TestPostrequisites);
-
-                string[] arr = prePlaybook.ToArray();
-
-                if (Map.Modules[_selectedMethod].TestReplaceStringFrom != null)
+                // grandparent prerequisites from submodule
+                if (includeGrandparentPrerequisites)
                 {
-                    for (int i = 0; i < arr.Length; i++)
-                    {
-                        arr[i] = arr[i].Replace(Map.Modules[_selectedMethod].TestReplaceStringFrom, Map.Modules[_selectedMethod].TestReplaceStringTo);
-                    }
+                    prePlaybook.AddRange(subModel.GetModuleTestDeleteClearPrerequisites(true, true));
                 }
-
-                return arr;
             }
+
+            // this are parent prerequisites defined like playbook
+            if (includeParentPrerequisites)
+            {
+                if (Map.Modules[_selectedMethod].TestPostrequisites != null)
+                {
+                    string[] postRequisites = Map.Modules[_selectedMethod].TestPostrequisites.Clone() as string[];
+                    for (int i = 0; i < postRequisites.Length; i++) postRequisites[i] = postRequisites[i].Replace("$postfix$", instancePostfix);
+                    prePlaybook.AddRange(postRequisites);
+                }
+            }
+
+            string[] arr = prePlaybook.ToArray();
+
+            if (Map.Modules[_selectedMethod].TestReplaceStringFrom != null)
+            {
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    arr[i] = arr[i].Replace(Map.Modules[_selectedMethod].TestReplaceStringFrom, Map.Modules[_selectedMethod].TestReplaceStringTo);
+                }
+            }
+
+            return arr;
         }
 
         public string FindResourceNameInTest()
@@ -938,6 +982,12 @@ namespace AutoRest.Ansible.Model
                 else
                 {
                     string predefined = option.DefaultValueSample.GetValueOrDefault(playbookType, null);
+
+                    // XXX - this is just a temporary hack for now
+                    if (option.NameAlt == "name")
+                    {
+                        predefined += instanceNamePostfix;
+                    }
 
                     if (predefined != "")
                     {
