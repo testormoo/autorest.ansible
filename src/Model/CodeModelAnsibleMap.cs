@@ -576,12 +576,12 @@ namespace AutoRest.Ansible.Model
             return "xxxunknownxxx";
         }
 
-        private string[] GetModuleTest(int level, string testType, string methodType, bool isCheckMode)
+        private string[] GetModuleTest(int level, string testType, string methodType, bool isCheckMode, string instanceNamePostfix = "")
         {
             List<string> prePlaybook = new List<string>();
             string postfix = isCheckMode ? " -- check mode" : "";
 
-            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", "test:default", postfix));
+            prePlaybook.AddRange(GetPlaybook(testType, ((methodType == "") ? ModuleOptions : GetMethodOptions(methodType)), "", "test:default", postfix, instanceNamePostfix));
 
             if (methodType == "delete")
                 prePlaybook.Add("    state: absent");
@@ -867,17 +867,17 @@ namespace AutoRest.Ansible.Model
         //  - sample generation
         //  - test generation
         //---------------------------------------------------------------------------------------------------------------------------------
-        private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, string playbookType, string operationPostfix = "")
+        private string[] GetPlaybook(string operation, ModuleOption[] options, string padding, string playbookType, string operationPostfix = "", string instanceNamePostfix = "")
         {
             List<string> help = new List<string>();
 
             help.Add(padding + "- name: " + operation + " " + ObjectName + operationPostfix);
             help.Add(padding + "  " + ModuleNameAlt + ":");
-            help.AddRange(GetPlaybookFromOptions(options, padding + "    ", playbookType));
+            help.AddRange(GetPlaybookFromOptions(options, padding + "    ", playbookType, instanceNamePostfix));
             return help.ToArray();
         }
 
-        private string[] GetPlaybookFromOptions(ModuleOption[] options, string padding, string playbookType)
+        private string[] GetPlaybookFromOptions(ModuleOption[] options, string padding, string playbookType, string instanceNamePostfix = "")
         {
             List<string> help = new List<string>();
             foreach (var option in options)
