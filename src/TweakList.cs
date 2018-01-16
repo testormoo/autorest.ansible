@@ -171,6 +171,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_mysqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqldatabase", "testdatabase"),
             new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_mysqldatabase"),
+            new Tweak_Module_NeedsForceUpdate("azure_rm_mysqldatabase"),
 
             // MySQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase_facts", "azure_rm_mysqldatabase", null, null),
@@ -314,6 +315,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqldatabase", "testdatabase"),
             new Tweak_Module_NeedsDeleteBeforeUpdate("azure_rm_postgresqldatabase"),
+            new Tweak_Module_NeedsForceUpdate("azure_rm_postgresqldatabase"),
 
             // PostgreSQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase_facts", "azure_rm_postgresqldatabase", null, null),

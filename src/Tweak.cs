@@ -201,6 +201,19 @@ namespace AutoRest.Ansible
         }
     }
 
+    class Tweak_Module_NeedsForceUpdate : Tweak_Module
+    {
+        public Tweak_Module_NeedsForceUpdate(string module)
+        {
+            _module = module;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.NeedsForceUpdate = true;
+        }
+    }
+
     class Tweak_Module_CannotTestUpdate : Tweak_Module
     {
         public Tweak_Module_CannotTestUpdate(string module)

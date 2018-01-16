@@ -107,6 +107,7 @@ namespace AutoRest.Ansible.Model
         public MapAnsibleModule()
         {
             NeedsDeleteBeforeUpdate = false;
+            NeedsForceUpdate = false;
             CannotTestUpdate = true;
             ReleaseStatus = "";
         }
@@ -133,6 +134,7 @@ namespace AutoRest.Ansible.Model
         public string ReleaseStatus { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
+        public bool NeedsForceUpdate { get; set; }
 
         public bool CannotTestUpdate { get; set; }
 

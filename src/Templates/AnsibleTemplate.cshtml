@@ -33,6 +33,13 @@ options:
 {
 @:@(line)
 }
+@if (Model.NeedsForceUpdate)
+{
+@:    force_update:
+@:      description:
+@:          - Needs to be set to True in order to @(Model.ObjectName) to be updated.
+@:      type: boolean
+}
 @EmptyLine
 extends_documentation_fragment:
     - azure
@@ -186,8 +193,20 @@ else
     }
     if (Model.NeedsDeleteBeforeUpdate)
     {
+        if (Model.NeedsForceUpdate)
+        {
+@:        if self.to_do == Actions.Update:
+@:            if self.force_update:
+@:                if not self.check_mode:
+@:                    self.delete_@(Model.ObjectNamePythonized)()
+@:            else:
+@:                self.to_do = Actions.NoAction
+        }
+        else
+        {
 @:        if self.to_do == Actions.Update:
 @:            self.delete_@(Model.ObjectNamePythonized)()
+        }
     }
 }
 @EmptyLine

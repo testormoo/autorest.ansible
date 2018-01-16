@@ -87,6 +87,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public bool NeedsForceUpdate
+        {
+            get
+            {
+                return Map.Modules[_selectedMethod].NeedsForceUpdate;
+            }
+        }
+
         public bool HasResourceGroup()
         {
             return (Array.Find(ModuleOptions, element => (element.Name == "resource_group_name")) != null);
@@ -136,7 +144,7 @@ namespace AutoRest.Ansible.Model
         //---------------------------------------------------------------------------------------------------------------------------------------
         // Return module options as module_arg_spec
         //---------------------------------------------------------------------------------------------------------------------------------------
-        public string[] GetModuleArgSpec(bool appendState)
+        public string[] GetModuleArgSpec(bool appendMainModuleOptions)
         {
             var argSpec = new List<string>();
 
@@ -186,11 +194,18 @@ namespace AutoRest.Ansible.Model
                     }
                 }
 
-                argSpec.Add(")" + ((i < ModuleOptions.Length - 1 || appendState) ? "," : ""));
+                argSpec.Add(")" + ((i < ModuleOptions.Length - 1 || appendMainModuleOptions) ? "," : ""));
             }
 
-            if (appendState)
+            if (appendMainModuleOptions)
             {
+                if (NeedsForceUpdate)
+                {
+                    argSpec.Add("force_update=dict(");
+                    argSpec.Add("    type='bool'");
+                    argSpec.Add("),");
+                }
+
                 argSpec.Add("state=dict(");
                 argSpec.Add("    type='str',");
                 argSpec.Add("    default='present',");
