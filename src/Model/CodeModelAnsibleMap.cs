@@ -963,11 +963,34 @@ namespace AutoRest.Ansible.Model
                 if (!option.IncludeInDocumentation)
                     continue;
 
-                string doc = NormalizeString(option.Documentation);
+                string doc = option.Documentation;
+
+                doc = NormalizeString(option.Documentation);
+
+                // replace all mentioned option names with C()
+                if (option.EnumValues != null)
+                {
+                    foreach (var choice in option.EnumValues)
+                    {
+                        doc = doc.Replace("'" + choice.Value + "'", "C(" + choice.Key + ")");
+                        doc = doc.Replace("\"" + choice.Value + "\"", "C(" + choice.Key + ")");
+                        doc = doc.Replace(choice.Value + ":", "C(" + choice.Key + ")");
+                        doc = doc.Replace(choice.Value, "C(" + choice.Key + ")");
+                    }
+                }
+
                 help.Add(padding + option.NameAlt + ":");
                 help.Add(padding + "    description:");
 
-                help.AddRange(WrapString(padding + "        - ", doc));
+                string[] docParagraphs = doc.Split("\n");
+
+                foreach (var paragraph in docParagraphs)
+                {
+                    if (paragraph.Trim() != "")
+                    {
+                        help.AddRange(WrapString(padding + "        - ", paragraph));
+                    }
+                }
 
                 // write only if true
                 if (option.Required != "False")
@@ -1287,26 +1310,7 @@ namespace AutoRest.Ansible.Model
                 }
             }
 
-            // also replace '' with C()
-            string normalized = new string(a);
-
-            string[] ss = normalized.Split('\'');
-
-            normalized = ss[0];
-            // now merge and replace
-            for (int i = 1; i < ss.Length; i += 2)
-            {
-                if (ss.Length > i + 1)
-                {
-                    normalized += "C(" + ss[i] + ")" + ss[i + 1];
-                }
-                else
-                {
-                    normalized += "'" + ss[i];
-                }
-            }
-
-            return normalized;
+            return new string(a);
         }
 
         public static string Indent(string original)
