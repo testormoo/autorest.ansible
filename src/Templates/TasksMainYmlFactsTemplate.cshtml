@@ -65,7 +65,8 @@ for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
 @:  assert:
 @:    that:
 @:      - output.changed == False
-@:      - output.@(Model.ModuleOperationName) == {}
+@:      - "'@(Model.FindResourceNameInTest())' not in output.@(Model.ModuleOperationName)" 
+@:      - "'@(Model.FindResourceNameInTest())second' not in output.@(Model.ModuleOperationName)"
 }
 @EmptyLine
     foreach (var line in Model.GetModuleTestDeleteClearPrerequisites(false, true))

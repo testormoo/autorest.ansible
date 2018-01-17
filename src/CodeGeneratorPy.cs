@@ -78,24 +78,6 @@ namespace AutoRest.Ansible
                 await WriteWithLf(aliasesTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "aliases"));
                 await WriteWithLf(metaMainYmlTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
                 await WriteWithLf((isFacts ? tasksMainYmlFactsTemplate : tasksMainYmlTemplate), Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
-
-                string status = codeModelPure.GetModuleReleaseStatus();
-
-                if (status.Contains('R'))
-                {
-                    await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("role", "modules", codeModelPure.ModuleNameAlt + ".py"));
-                    await WriteWithLf(aliasesTemplate, Path.Combine("role", "tests", codeModelPure.ModuleNameAlt, "aliases"));
-                    await WriteWithLf(metaMainYmlTemplate, Path.Combine("role", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
-                    await WriteWithLf((isFacts ? tasksMainYmlFactsTemplate : tasksMainYmlTemplate), Path.Combine("role", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
-                }
-
-                //if (status.Contains('P'))
-                //{
-                //    await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("prs", "modules", codeModelPure.ModuleNameAlt + ".py"));
-                //    await WriteWithLf(aliasesTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "aliases"));
-                //    await WriteWithLf(metaMainYmlTemplate, Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
-                //    await WriteWithLf((isFacts ? tasksMainYmlFactsTemplate : tasksMainYmlTemplate), Path.Combine("prs", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
-                //}
             }
 
             if (codeModelPure != null)

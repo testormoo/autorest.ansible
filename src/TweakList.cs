@@ -541,6 +541,8 @@ namespace AutoRest.Ansible
                                                     "        image: httpd",
                                                     "        memory: 1.5" },
                                                 new string[] {
+                                                    "- name: Delete sample container instance",
+                                                    "  azure_rm_containerinstance:",
                                                     "    resource_group: \"{{ resource_group }}\"",
                                                     "    name: aci{{ rpfx }}$postfix$",
                                                     "    os_type: linux",
@@ -659,59 +661,6 @@ namespace AutoRest.Ansible
 
             new Tweak_Option_Flatten("azure_rm_vault", "properties.access_policies.permissions", ""),
             new Tweak_Option_Flatten("azure_rm_vault", "properties", ""),
-
-            // RELEASE STATUS FOR VARIOUS MODULES
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlserver", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlserver", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqlfirewallrule", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlfirewallrule", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_sqlvirtualnetworkrule", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_mysqlvirtualnetworkrule", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_postgresqlvirtualnetworkrule", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlconfiguration", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration", "RP"),
-
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlelasticpool", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlelasticpool_facts", "RP"),
-
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlserver_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqlserver_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlserver_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_sqldatabase_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqldatabase_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqldatabase_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_sqlfirewallrule_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqlfirewallrule_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlfirewallrule_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_sqlvirtualnetworkrule_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_mysqlvirtualnetworkrule_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_postgresqlvirtualnetworkrule_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_sqlconfiguration_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_mysqlconfiguration_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_postgresqlconfiguration_facts", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_authorizationroleassignment", "RP"),
-
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgateway", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroutetable", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroute", "RP"),
-            //new Tweak_Module_ReleaseStatus("azure_rm_applicationgateway_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroutetable_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_applicationgatewayroute_facts", "RP"),
-
-            new Tweak_Module_ReleaseStatus("azure_rm_containerinstancecontainergroup_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryregistry_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_containerregistryreplication_facts", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook", "RP"),
-            new Tweak_Module_ReleaseStatus("azure_rm_containerregistrywebhook_facts", "RP"),
-
-            //new Tweak_Module_ReleaseStatus("azure_rm_vault", "RP"),
         };
     }
 }

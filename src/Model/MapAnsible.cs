@@ -109,7 +109,6 @@ namespace AutoRest.Ansible.Model
             NeedsDeleteBeforeUpdate = false;
             NeedsForceUpdate = false;
             CannotTestUpdate = true;
-            ReleaseStatus = "";
         }
 
         public string ModuleName { get; set; }
@@ -127,11 +126,6 @@ namespace AutoRest.Ansible.Model
         public string ObjectName { get; set; }
         public string ResourceNameFieldInRequest { get; set; }
         public string ResourceNameFieldInResponse { get; set; }
-
-        // Release status may contain:
-        // 'R' : add to role
-        // 'P' : pull request to ansible 
-        public string ReleaseStatus { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
         public bool NeedsForceUpdate { get; set; }

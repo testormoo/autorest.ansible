@@ -336,22 +336,6 @@ namespace AutoRest.Ansible
         private string[] _responsePath;
     }
 
-    class Tweak_Module_ReleaseStatus : Tweak_Module
-    {
-        public Tweak_Module_ReleaseStatus(string module, string status)
-        {
-            _module = module;
-            _status = status;
-        }
-
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
-        {
-            m.ReleaseStatus = _status;
-        }
-
-        private string _status;
-    }
-
     class Tweak_Option_Rename : Tweak_Option
     {
         public Tweak_Option_Rename(string module, string path, string newName, int levelChange = 0)
