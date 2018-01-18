@@ -220,6 +220,39 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string[] GetModuleResponseFieldsPaths()
+        {
+            List<string> paths = new List<string>();
+
+            if (ModuleResponseFields != null)
+            {
+                paths.AddRange(AddModuleResponseFieldPaths("", ModuleResponseFields));
+            }
+
+            return paths.ToArray();
+        }
+
+        private string[] AddModuleResponseFieldPaths(string prefix, ModuleResponseField[] fields)
+        {
+            List<string> paths = new List<string>();
+            foreach (var f in fields)
+            {
+                if (f.Returned == "always")
+                {
+                    if (f.Type == "complex")
+                    {
+                        paths.AddRange(AddModuleResponseFieldPaths(prefix + f.NameAlt + ".", f.SubFields));
+                    }
+                    else if (f.NameAlt != "x")
+                    {
+                        paths.Add(prefix + f.NameAlt);
+                    }
+                }
+            }
+
+            return paths.ToArray();
+        }
+
         public ModuleOption[] ModuleOptionsUnflattened
         {
             get

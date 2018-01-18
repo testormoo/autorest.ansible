@@ -83,6 +83,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_ObjectName("azure_rm_sqlelasticpool_facts", "SQL Elastic Pool"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "elastic_pool_name", "elasticpool{{ rpfx }}"),
+            new Tweak_Response_FieldReturned("azure_rm_sqlelasticpool_facts", "kind", ""),
 
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
@@ -567,6 +568,7 @@ namespace AutoRest.Ansible
 
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "registry_name", "acr{{ rpfx }}"),
+            new Tweak_Response_FieldReturned("azure_rm_containerregistryregistry_facts", "status", ""),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistry_facts",
                                                 new string[] {
                                                      "- name: Create an container registry",
@@ -617,6 +619,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "registry_name", "acr{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "replication_name", "replication{{ rpfx }}"),
+            new Tweak_Response_FieldReturned("azure_rm_containerregistryreplication_facts", "status.message", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistryreplication_facts", "azure_rm_containerregistryreplication", null, null),
 
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "resource_group", "\"{{ resource_group }}\""),
@@ -650,6 +653,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "registry_name", "acr{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "webhook_name", "webhook{{ rpfx }}"),
+            new Tweak_Response_FieldReturned("azure_rm_containerregistrywebhook_facts", "scope", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
             // Key Vault

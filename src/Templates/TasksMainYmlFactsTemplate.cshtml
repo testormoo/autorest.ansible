@@ -27,8 +27,8 @@
 @for (int testIdx = 0; testIdx < Model.GetModuleFactTestCount(); testIdx++)
 {
 @EmptyLine
-foreach (var line in Model.GetModuleFactTest(testIdx))
-{
+    foreach (var line in Model.GetModuleFactTest(testIdx))
+    {
 @:@(line)
 }
 @:  register: output
@@ -36,10 +36,16 @@ foreach (var line in Model.GetModuleFactTest(testIdx))
 @:  assert:
 @:    that:
 @:      - output.changed == False
-@:      - output.@(Model.ModuleOperationName + "." + Model.FindResourceNameInTest()).id != None
+    foreach (var rf in Model.GetModuleResponseFieldsPaths())
+    {
+@:      - output.@(Model.ModuleOperationName + "." + Model.FindResourceNameInTest()).@(rf) != None
+    }
     if (Model.IsModuleFactsTestMulti(testIdx) && Model.GetModuleCanDeletePrerequisites())
     {
-@:      - output.@(Model.ModuleOperationName + "." + Model.FindResourceNameInTest())second.id != None
+        foreach (var rf in Model.GetModuleResponseFieldsPaths())
+        {
+@:      - output.@(Model.ModuleOperationName + "." + Model.FindResourceNameInTest())second.@(rf) != None
+        }
     }
 }
 @if (Model.HasPrerequisites() && Model.GetModuleCanDeletePrerequisites())

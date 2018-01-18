@@ -694,5 +694,25 @@ namespace AutoRest.Ansible
         private string _newValue;
         private int _levelChange;
     }
+
+    class Tweak_Response_FieldReturned : Tweak_Response
+    {
+        public Tweak_Response_FieldReturned(string module, string path, string returned)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _returned = returned;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleResponseField field = GetResultField(m, _map, _path);
+            if (field != null) field.Returned = _returned;
+            // XXX - level change
+        }
+
+        private string[] _path;
+        private string _returned;
+    }
 }
 
