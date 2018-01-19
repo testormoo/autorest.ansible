@@ -19,6 +19,7 @@ namespace AutoRest.Ansible.Model
         {
             Map = map;
             MergeReport = mergeReport;
+            IsSnakeToCamelNeeded = false;
 
             _selectedMethod = method;
         }
@@ -326,6 +327,7 @@ namespace AutoRest.Ansible.Model
                     {
                         var valueTranslation = new List<string>();
                         string valueTranslationPrefix = "if";
+                        bool _snakeToCamelNeeded = false;
 
                         if (option.EnumValues != null && option.EnumValues.Length > 0)
                         {
@@ -335,9 +337,21 @@ namespace AutoRest.Ansible.Model
                             {
                                 if (enumValue.Key != enumValue.Value)
                                 {
-                                    valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
-                                    valueTranslation.Add("        ev = '" + enumValue.Value + "'");
-                                    valueTranslationPrefix = "elif";
+                                    // can it be translated using snake_to_camel?
+                                    string camel = CamelCase(enumValue.Key);
+
+                                    Map.Info.Add("CC: " + camel + " " + enumValue.Key + " " + enumValue.Value);
+
+                                    if (camel != enumValue.Value)
+                                    {
+                                        valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
+                                        valueTranslation.Add("        ev = '" + enumValue.Value + "'");
+                                        valueTranslationPrefix = "elif";
+                                    }
+                                    else
+                                    {
+                                        _snakeToCamelNeeded = true;
+                                    }
                                 }
                             }
                         }
@@ -366,9 +380,18 @@ namespace AutoRest.Ansible.Model
                                                 valueTranslation.Add("    if '" + suboption.NameAlt + "' in ev:");
                                                 ifStatementAdded = true;
                                             }
-                                            valueTranslation.Add("        " + valueTranslationPrefix + " ev['" + suboption.NameAlt + "'] == '" + enumValue.Key + "':");
-                                            valueTranslation.Add("            ev['" + suboption.NameAlt + "'] = '" + enumValue.Value + "'");
-                                            valueTranslationPrefix = "elif";
+                                            string camel = ("_" + enumValue.Key).ToCamelCase();
+
+                                            if (camel != enumValue.Value)
+                                            {
+                                                valueTranslation.Add("        " + valueTranslationPrefix + " ev['" + suboption.NameAlt + "'] == '" + enumValue.Key + "':");
+                                                valueTranslation.Add("            ev['" + suboption.NameAlt + "'] = '" + enumValue.Value + "'");
+                                                valueTranslationPrefix = "elif";
+                                            }
+                                            else
+                                            {
+                                                IsSnakeToCamelNeeded = true;
+                                            }
                                         }
                                     }
                                 }
@@ -380,12 +403,22 @@ namespace AutoRest.Ansible.Model
                         if (valueTranslation.Count > 1)
                         {
                             variables.AddRange(valueTranslation);
-                            variable += "ev";
+
+                            if (!_snakeToCamelNeeded)
+                            {
+                                variable += "ev";
+                            }
+                            else
+                            {
+                                variable += "_snake_to_camel(ev, True)";
+                            }
                         }
                         else
                         {
-                            variable += "kwargs[key]";
+                            variable += _snakeToCamelNeeded ? "_snake_to_camel(kwargs[key], True)" : "kwargs[key]";
                         }
+
+                        if (_snakeToCamelNeeded) IsSnakeToCamelNeeded = true;
                     }
 
                     variables.Add("    " + variable);
@@ -1034,6 +1067,19 @@ namespace AutoRest.Ansible.Model
         //---------------------------------------------------------------------------------------------------------------------------------
         private string[] GetHelpFromOptions(ModuleOption[] options, string padding)
         {
+            List<KeyValuePair<string, string>> allChoices = new List<KeyValuePair<string, string>>();
+            // XXX - collect all possible choices
+            foreach (var option in options)
+            {
+                if (option.EnumValues != null)
+                {
+                    foreach (var choice in option.EnumValues)
+                    {
+                        allChoices.Add(choice);
+                    }
+                }
+            }
+
             List<string> help = new List<string>();
             foreach (var option in options)
             {
@@ -1044,17 +1090,28 @@ namespace AutoRest.Ansible.Model
                 string doc = option.Documentation;
 
                 doc = NormalizeString(option.Documentation);
+                
+                // try to replace all mentioned option names with I()
+                foreach (var oo in options)
+                {
+                    string name = oo.Name.ToCamelCase();
+
+                    if (oo.Name == "name" || oo.Name == "location" || oo.Name == "id" || oo.Name == "edition" || oo.Name == option.Name)
+                        continue;
+
+                    doc = doc.Replace("'" + name + "'", "I(" + oo.NameAlt + ")");
+                    doc = doc.Replace("\"" + name + "\"", "I(" + oo.NameAlt + ")");
+                    doc = doc.Replace(name + ":", "I(" + oo.NameAlt + ")");
+                    doc = doc.Replace(name, "I(" + oo.NameAlt + ")");
+                }   
 
                 // replace all mentioned option names with C()
-                if (option.EnumValues != null)
+                foreach (var choice in allChoices)
                 {
-                    foreach (var choice in option.EnumValues)
-                    {
-                        doc = doc.Replace("'" + choice.Value + "'", "C(" + choice.Key + ")");
-                        doc = doc.Replace("\"" + choice.Value + "\"", "C(" + choice.Key + ")");
-                        doc = doc.Replace(choice.Value + ":", "C(" + choice.Key + ")");
-                        doc = doc.Replace(choice.Value, "C(" + choice.Key + ")");
-                    }
+                    doc = doc.Replace("'" + choice.Value + "'", "C(" + choice.Key + ")");
+                    doc = doc.Replace("\"" + choice.Value + "\"", "C(" + choice.Key + ")");
+                    doc = doc.Replace(choice.Value + ":", "C(" + choice.Key + ")");
+                    doc = doc.Replace(choice.Value, "C(" + choice.Key + ")");
                 }
 
                 help.Add(padding + option.NameAlt + ":");
@@ -1325,6 +1382,11 @@ namespace AutoRest.Ansible.Model
             return rules.ToArray();
         }
 
+        public bool IsSnakeToCamelNeeded
+        {
+            get; set;
+        }
+
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         // HELPERS
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1398,6 +1460,44 @@ namespace AutoRest.Ansible.Model
             for (int i = 0; i < a.Length; i++) a[i] = ' ';
 
             return new string(a);
+        }
+        public string CamelCase(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            if (name[0] == '_')
+            // Preserve leading underscores.
+            {
+                return '_' + CamelCase(name.Substring(1));
+            }
+
+            return
+                name.Split('_', '-', ' ')
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select((s, i) => FormatCase(s, false)) // Pass true/toLower for just the first element.
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
+        }
+        private string FormatCase(string name, bool toLower)
+        {
+            if (!string.IsNullOrEmpty(name))
+            {
+                if ((name.Length < 2) || ((name.Length == 2) && char.IsUpper(name[0]) && char.IsUpper(name[1])))
+                {
+                    name = toLower ? name.ToLowerInvariant() : name.ToUpperInvariant();
+                }
+                else
+                {
+                    name =
+                    (toLower
+                        ? char.ToLowerInvariant(name[0])
+                        : char.ToUpperInvariant(name[0])) + name.Substring(1, name.Length - 1);
+                }
+            }
+            return name;
         }
     }
 }

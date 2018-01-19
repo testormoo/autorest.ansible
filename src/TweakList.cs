@@ -60,9 +60,19 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "database_name", "database{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "location", "eastus"),
+            new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "zone_redundant", "Enabled", "Disabled", false, "Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability zones."),
+            new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "read_scale", "Enabled", "Disabled", false, "If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition."),
             new Tweak_Response_AddField("azure_rm_sqldatabase", "database_id"),
             new Tweak_Module_AssertStateVariable("azure_rm_sqldatabase", "status"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqldatabase", "Online"),
+
+            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['location']", "location"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['read_scale']", "read_scale"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "requested_service_objective_id", "requested_service_objective_id"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "requested_service_objective_name", "requested_service_objective_name"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "max_size_bytes", "max_size_bytes"),
+            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "edition", "edition"),
+            new Tweak_Module_NeedsForceUpdate("azure_rm_sqldatabase"),
 
             // SQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase_facts", "azure_rm_sqldatabase", null, null),
