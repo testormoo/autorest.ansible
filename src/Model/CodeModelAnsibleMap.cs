@@ -10,6 +10,7 @@ using AutoRest.Extensions;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Ansible.Model
 {
@@ -1098,20 +1099,14 @@ namespace AutoRest.Ansible.Model
 
                     if (oo.Name == "name" || oo.Name == "location" || oo.Name == "id" || oo.Name == "edition" || oo.Name == option.Name)
                         continue;
-
-                    doc = doc.Replace("'" + name + "'", "I(" + oo.NameAlt + ")");
-                    doc = doc.Replace("\"" + name + "\"", "I(" + oo.NameAlt + ")");
-                    doc = doc.Replace(name + ":", "I(" + oo.NameAlt + ")");
-                    doc = doc.Replace(name, "I(" + oo.NameAlt + ")");
+                    
+                    doc = Regex.Replace(doc, "\\b" + name + "\\b", "I(" + oo.NameAlt + ")", RegexOptions.IgnoreCase);
                 }   
 
                 // replace all mentioned option names with C()
                 foreach (var choice in allChoices)
                 {
-                    doc = doc.Replace("'" + choice.Value + "'", "C(" + choice.Key + ")");
-                    doc = doc.Replace("\"" + choice.Value + "\"", "C(" + choice.Key + ")");
-                    doc = doc.Replace(choice.Value + ":", "C(" + choice.Key + ")");
-                    doc = doc.Replace(choice.Value, "C(" + choice.Key + ")");
+                    doc = Regex.Replace(doc, "\\b" + choice.Value + "\\b", "C(" + choice.Key + ")", RegexOptions.IgnoreCase);
                 }
 
                 help.Add(padding + option.NameAlt + ":");
