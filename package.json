@@ -1,5 +1,5 @@
 {
-  "name": "@microsoft.azure/autorest.python",
+  "name": "@microsoft.azure/autorest.ansible",
   "version": "2.0.0",
   "description": "The Ansible extension for classic generators in AutoRest.",
   "scripts": {

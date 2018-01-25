@@ -670,6 +670,9 @@ namespace AutoRest.Ansible
             new Tweak_Module_Rename("azure_rm_vault", "azure_rm_keyvault"),
             new Tweak_Module_ObjectName("azure_rm_vault", "Key Vault"),
 
+            // Key Vault Facts
+            new Tweak_Module_Rename("azure_rm_vault_facts", "azure_rm_keyvault_facts"),
+
             //new Tweak_Option_Rename("azure_rm_vault", "properties.access_policies", "moo"),
             //new Tweak_Option_Rename("azure_rm_vault", "properties", "kfiii"),
 

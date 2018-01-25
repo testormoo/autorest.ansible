@@ -10,7 +10,7 @@ Tasks "publishing"
 # Settings
 Import
   initialized: false
-  solution: "#{basefolder}/autorest.python.sln"
+  solution: "#{basefolder}/autorest.ansible.sln"
   sourceFolder:  "#{basefolder}/src/"
 
 # ==============================================================================
