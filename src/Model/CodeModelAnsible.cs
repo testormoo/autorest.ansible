@@ -461,10 +461,9 @@ namespace AutoRest.Ansible.Model
             }
 
             // QQQQQQQQQQ
-            if (method != null)
+            if (method != null && method.ReturnType != null && method.ReturnType.Body != null)
             {
                 string responseModel = method.ReturnType.Body.ClassName;
-
                 var suboptions = GetResponseFieldsForModel(responseModel, 0, v, alwaysInclude);
                 fields.AddRange(suboptions);
             }
