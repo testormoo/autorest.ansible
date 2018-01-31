@@ -24,6 +24,17 @@ namespace AutoRest.Ansible
             {
                 modules.AddRange(map.Modules); ;
             }
+            else if (_module.EndsWith("*"))
+            {
+                string modulePrefix = _module.Substring(0, _module.Length - 1);
+                foreach (var m in map.Modules)
+                {
+                    if (m.ModuleName.StartsWith(modulePrefix))
+                    {
+                        modules.Add(m);
+                    }
+                }
+            }
             else
             {
                 foreach (var m in map.Modules)
@@ -132,7 +143,16 @@ namespace AutoRest.Ansible
 
         public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
-            m.ModuleNameAlt = _newName;
+            if (_module.EndsWith("*"))
+            {
+                string prefix = _module.Substring(0, _module.Length - 1);
+                string postfix = m.ModuleName.Substring(prefix.Length);
+                m.ModuleNameAlt = _newName.Substring(0, _newName.Length - 1) + postfix;
+            }
+            else
+            {
+                m.ModuleNameAlt = _newName;
+            }
         }
 
         private string _newName;

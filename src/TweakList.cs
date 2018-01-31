@@ -9,6 +9,7 @@ namespace AutoRest.Ansible
         public static Tweak[] All =
         {
             new Tweak_Option_Rename("*", "resource_group_name", "resource_group"),
+            new Tweak_Module_Rename("azure_rm_applicationgateway*", "azure_rm_appgw*"),
             new Tweak_Option_DefaultValueTest("*", "resource_group_name", "\"{{ resource_group }}\""),
             new Tweak_Option_Required("*", "location", false),
             new Tweak_Response_AddField("*", "id"),
@@ -401,7 +402,6 @@ namespace AutoRest.Ansible
             //new Tweak_Option_Flatten("azure_rm_authorizationroleassignment", "properties", "properties_"),
 
             // Application Gateway
-            new Tweak_Module_Rename("azure_rm_applicationgateway", "azure_rm_appgw"),
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
             new Tweak_Module_ObjectName("azure_rm_applicationgateway", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgateway", "application_gateway_name", "name"),
@@ -466,31 +466,25 @@ namespace AutoRest.Ansible
                                                     //"    resource_group: \"{{ resource_group }}\"",
                                                     //"    state: absent" }),
 
-            new Tweak_Module_Rename("azure_rm_applicationgateway_facts", "azure_rm_appgw_facts"),
             new Tweak_Module_ObjectName("azure_rm_applicationgateway_facts", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgateway_facts", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
 
             // Application Gateway Application Security Group
-            new Tweak_Module_Rename("azure_rm_applicationgatewayapplicationsecuritygroup", "azure_rm_appgwapplicationsecuritygroup"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationsecuritygroup", "application_security_group_name", "appgwsg{{ rpfx }}"),
 
             // Application Gateway Application Security Group Facts
-            new Tweak_Module_Rename("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "azure_rm_appgwapplicationsecuritygroup_facts"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "azure_rm_applicationgatewayapplicationsecuritygroup", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "application_security_group_name", "appgwsg{{ rpfx }}"),
 
             // Application Gateway Route Table
-            new Tweak_Module_Rename("azure_rm_applicationgatewayroutetable", "azure_rm_appgwroutetable"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable", "route_table_name", "routetablename{{ rpfx }}"),
 
             // Application Gateway Route Table Facts
-            new Tweak_Module_Rename("azure_rm_applicationgatewayroutetable_facts", "azure_rm_appgwroutetable_facts"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroutetable_facts", "azure_rm_applicationgatewayroutetable", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable_facts", "route_table_name", "routetablename{{ rpfx }}"),
 
             // Application Gateway Route
-            new Tweak_Module_Rename("azure_rm_applicationgatewayroute", "azure_rm_appgwroute"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute", "azure_rm_applicationgatewayroutetable", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "next_hop_type", "virtual_network_gateway"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_name", "testroute{{ rpfx }}"),
@@ -500,13 +494,11 @@ namespace AutoRest.Ansible
             new Tweak_Option_Required("azure_rm_applicationgatewayroute", "next_hop_type", false),
 
             // Application Gateway Route Facts
-            new Tweak_Module_Rename("azure_rm_applicationgatewayroute_facts", "azure_rm_appgwroute_facts"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute_facts", "azure_rm_applicationgatewayroute", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute_facts", "route_name", "testroute{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute_facts", "route_table_name", "routetablename{{ rpfx }}"),
 
             // Application Inbound NAT Rule
-            new Tweak_Module_Rename("azure_rm_applicationgatewayinboundnatrule", "azure_rm_appgwinboundnatrule"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayinboundnatrule", "load_balancer_name", "lb{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayinboundnatrule", "inbound_nat_rule_name", "rule{{ rpfx }}"),
 
