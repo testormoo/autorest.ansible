@@ -40,6 +40,3 @@ xcopy /S c:\dev\tmp\python\all\modules\* c:\dev\ansible-hatchery\library\
 xcopy /S c:\dev\tmp\python\all\tests\* c:\dev\ansible-hatchery\tests\integration\targets\
 xcopy /S c:\dev\tmp\all\modules\* c:\dev\ansible-hatchery\library\
 xcopy /S c:\dev\tmp\all\tests\* c:\dev\ansible-hatchery\tests\integration\targets\
-
-xcopy /S c:\dev\tmp\python\template\* c:\dev\ansible-hatchery\template\
-xcopy /S c:\dev\tmp\template\* c:\dev\ansible-hatchery\template\
