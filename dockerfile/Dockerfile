@@ -27,5 +27,5 @@ RUN chmod 777 /run.sh
 
 ENV invalidatecache bbb
 RUN cd /autorest.ansible && git pull
-RUN chmod 777 /autorest.ansible/scripts/*.sh
+RUN chmod 777 /autorest.ansible/scripts/entry.sh
 ENTRYPOINT [ "bash", "/autorest.ansible/scripts/entry.sh" ]
