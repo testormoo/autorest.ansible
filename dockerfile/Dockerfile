@@ -25,7 +25,7 @@ RUN git clone https://github.com/zikalino/ansible-hatchery.git
 RUN echo "chmod 777 /ansible-hatchery/generate* && cd /ansible-hatchery && ./generate-with-pull.sh" > /run.sh
 RUN chmod 777 /run.sh
 
-ENV invalidatecache ccc
+ENV invalidatecache ddd
 RUN cd /autorest.ansible && git pull
 RUN chmod 777 /autorest.ansible/scripts/entry.sh
 

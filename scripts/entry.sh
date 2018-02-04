@@ -1,6 +1,6 @@
 
 # delete all old temporary files
-rm -tf /ansible-hatchery-tmp/*
+rm -rf /ansible-hatchery-tmp/*
 
 cd /autorest.ansible
 git pull
