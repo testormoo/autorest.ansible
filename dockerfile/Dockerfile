@@ -24,3 +24,7 @@ RUN cd autorest.ansible && npm install && npm run build
 RUN git clone https://github.com/zikalino/ansible-hatchery.git
 RUN echo "chmod 777 /ansible-hatchery/generate* && cd /ansible-hatchery && ./generate-with-pull.sh" > /run.sh
 RUN chmod 777 /run.sh
+
+RUN cd /autorest.ansible && git pull
+RUN chmod 777 /autorest.ansible/scripts/*.sh
+ENTRYPOINT bash /autorest.ansible/scripts/entry.sh
