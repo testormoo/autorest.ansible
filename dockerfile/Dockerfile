@@ -16,11 +16,11 @@ RUN apt-get update
 RUN apt-get install -y apt-transport-https
 RUN apt-get install -y dotnet-sdk-2.1.4
 
+ENV invalidatecache xxx
 RUN git clone https://github.com/zikalino/autorest.ansible.git
 RUN git clone https://github.com/zikalino/azure-rest-api-specs.git
 RUN cd azure-rest-api-specs && git checkout ansible-generator-branch
 RUN cd autorest.ansible && npm install && npm run build
-ENV invalidatecache xxx
 RUN git clone https://github.com/zikalino/ansible-hatchery.git
 RUN echo "chmod 777 /ansible-hatchery/generate* && cd /ansible-hatchery && ./generate-with-pull.sh" > /run.sh
 RUN chmod 777 /run.sh
