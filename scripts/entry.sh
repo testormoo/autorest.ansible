@@ -3,6 +3,7 @@
 rm -rf /ansible-hatchery-tmp/*
 
 cd /autorest.ansible
+git stash
 git pull
 cd /autorest.ansible/scripts
 chmod 777 generate*
