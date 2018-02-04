@@ -30,5 +30,5 @@ RUN cd /autorest.ansible && git pull
 RUN chmod 777 /autorest.ansible/scripts/entry.sh
 
 # generate sth once, first time autorest will fail
-RUN autorest --output-folder=/tmp --use=/autorest.ansible --python --tag=package-2017-04-preview
+RUN if autorest --output-folder=/tmp --use=/autorest.ansible --python --tag=package-2017-04-preview; then echo "success"; else echo "failed"; fi
 ENTRYPOINT [ "bash", "/autorest.ansible/scripts/entry.sh" ]
