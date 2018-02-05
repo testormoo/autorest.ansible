@@ -4,11 +4,11 @@ services:
   - docker
 
 script:
-  - cd dockerfile && docker build --tag dockiot/autorest-ansible .
+  - cd dockerfile-inc && docker build --tag dockiot/autorest-ansible-inc .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-    docker push dockiot/autorest-ansible;
+    docker push dockiot/autorest-ansible-inc;
     fi
 
