@@ -1,1 +1,1 @@
-docker push dockiot/autorest-ansible
+docker push dockiot/autorest-ansible-alt

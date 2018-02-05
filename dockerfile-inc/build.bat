@@ -1,1 +1,1 @@
-docker build --tag dockiot/autorest-ansible .
+docker build --tag dockiot/autorest-ansible-alt .
