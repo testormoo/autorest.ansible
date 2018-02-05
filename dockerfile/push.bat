@@ -1,1 +1,1 @@
-docker push dockiot/webassembly
+docker push dockiot/autorest-ansible
