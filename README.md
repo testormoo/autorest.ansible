@@ -1,50 +1,35 @@
 
-# Prerequisites
+# How to use Autorest.Ansible?
 
-To use this extenstion you have to install autorest. Just follow instructions here:
+Recommended way to use this extension is to use Docker image that is automatically produced by the CI.
 
-https://github.com/Azure/autorest
+  docker run -v <your-output-directory>:/ansible-hatchery -v <your-temporary-directory>:/ansible-hatchery-tmp dockiot/autorest-ansible-alt <api-to-generate>
 
-You also need Azure REST API specification, clone it from here:
+where:
 
-https://github.com/Azure/azure-rest-api-specs
+**your-output-directory** - is the directory where modules will be generated
 
-and you need to clone this repo as well.
+**your-temporary-directory** - this directory is used by the generator as a temporary directory, and some additional diagnostic output will be written here
 
+**api-to-generate** - what should be generated? Use **all** to generate all configured modules, or **sql**, **mysql**, **keyvault**, etc. Check **scripts** subdirectory for available scripts.
 
-# How to use?
+# How to add additional APIs?
 
-To generate ansibel modules, go to selected directory in REST API spec, for example:
+You have to add additional **generate-<module-name>.sh** script in **scripts** subfolder, and include it in **generate-all.sh**.
 
-     cd ...\azure-rest-api-specs\specification\sql\resource-manager\
+# How to tweak generator output?
 
-and execute following command:
+Following tweaks can be applied to the generator output:
+- change module name
+- rename options
+- flatten options
+- hide unnecessary options
+- change default option values
+- update sample option values
+- update test dependencies
+- update test field values
 
-     autorest --output-folder=[your output directory]\ --use=[your source directory]\autorest.ansible\ --python --tag=package-2017-03-preview
-
-Note that you have to specify location **autorest.ansible** repo, and the plugin should be already built here, either using **npm** or **Visual Studio**.
-
-Also note that **--tag** value comes from **readme.txt** file you can find in your curent directory.
-
-# How it works?
-
-Ansible generator works as follows:
-
-(1) Parses entire REST API definition, just like other autorest plugins
-
-(2) Generates Ansible Module Map which will be later used to generate ansible modules.
-
-(3) Merges newly generated map with old version (if exists in **templates** directory)
-
-(4) Generates Ansible modules and tests in a directory structure matching Ansible directory layout.
-
-(5) ALso generates **xxx.template.json** file and **xxx.merge.txt** file
-
-**xxx.template.json** is an updated (merged) version of new template generated in (2) merged with older version.
-You can copy **xxx.template.json** to **templates** directory in **autorest.ansible**.
-You can modify almost any values in this file to override values that were automatically generated from REST API.
-
-**xxx.merge.txt** file is a short merge report. It will tell you which fields in the template were overriden.
+More information will be added here...
 
 
 
