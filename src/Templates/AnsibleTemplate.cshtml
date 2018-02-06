@@ -43,7 +43,8 @@ options:
 }
     state:
       description:
-        - Assert the state of the SQL Database. Use 'present' to create or update an SQL Database and 'absent' to delete it.
+        - Assert the state of the @(Model.ObjectName).
+        - Use 'present' to create or update an @(Model.ObjectName) and 'absent' to delete it.
       default: present
       choices:
         - absent
