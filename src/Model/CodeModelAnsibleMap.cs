@@ -1404,27 +1404,39 @@ namespace AutoRest.Ansible.Model
                 content = String.Join("\\n", content.Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None));
                 content = String.Join("'", content.Split(new[] { "\"" }, StringSplitOptions.None));
                 int chunkLength = 160 - (prefix.Length + 4);
-                int currentIdx = 0;
                 int docLength = content.Length;
+                string[] words = content.Split(' ');
+                int wordIdx = 0;
+                bool first = true;
 
-                while (currentIdx < docLength)
+                while (wordIdx < words.Length)
                 {
-                    if (currentIdx + chunkLength > docLength) chunkLength = docLength - currentIdx;
-                    string chunk = content.Substring(currentIdx, chunkLength);
-                    if (currentIdx == 0)
+                    string chunk = words[wordIdx++];
+
+                    while (wordIdx < words.Length)
                     {
-                        output.Add(prefix + "\"" + chunk + ((docLength > chunkLength) ? "" : "\""));
+                        if (chunk.Length + 1 + words[wordIdx].Length > chunkLength)
+                            break;
+
+                        chunk += " " + words[wordIdx++];
+                    }
+
+                    if (first)
+                    {
+                        // first line -- add quotes
+                        output.Add(prefix + "\"" + chunk + ((wordIdx != words.Length) ? "" : "\""));
                         prefix = new String(prefix.Select(r => ' ').ToArray());
                     }
-                    else if (currentIdx + chunk.Length != docLength)
+                    else if (wordIdx != words.Length)
                     {
+                        // everything in the middle
                         output.Add(prefix + chunk);
                     }
                     else
                     {
+                        // last line -- add closing quotes
                         output.Add(prefix + chunk + "\"");
                     }
-                    currentIdx += chunkLength;
                 }
             }
 
