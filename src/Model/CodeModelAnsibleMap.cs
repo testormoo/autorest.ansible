@@ -148,6 +148,8 @@ namespace AutoRest.Ansible.Model
             for (int i = 0; i < ModuleOptions.Length; i++)
             {
                 var option = ModuleOptions[i];
+                if (!option.IncludeInArgSpec)
+                    continue;
                 bool defaultOrRequired = (option.DefaultValue != null) || (option.Required == "True");
                 bool choices = (option.EnumValues != null) && option.EnumValues.Length > 0;
                 argSpec.Add(option.NameAlt + "=dict(");
