@@ -1431,12 +1431,12 @@ namespace AutoRest.Ansible.Model
                     else if (wordIdx != words.Length)
                     {
                         // everything in the middle
-                        output.Add(prefix + chunk);
+                        " " + output.Add(prefix + chunk);
                     }
                     else
                     {
                         // last line -- add closing quotes
-                        output.Add(prefix + chunk + "\"");
+                        " " + output.Add(prefix + chunk + "\"");
                     }
                 }
             }
