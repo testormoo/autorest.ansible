@@ -309,6 +309,9 @@ namespace AutoRest.Ansible.Model
 
                 foreach (var option in options)
                 {
+                    if (!option.IncludeInArgSpec)
+                        continue;
+
                     variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
 
                     string[] path = option.Disposition.Split(":");

@@ -71,8 +71,8 @@ namespace AutoRest.Ansible
 
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['location']", "location"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['read_scale']", "read_scale"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['requested_service_objective_id']", "requested_service_objective_id"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['requested_service_objective_name']", "requested_service_objective_name"),
+            //new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['requested_service_objective_id']", "requested_service_objective_id"),
+            //new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['requested_service_objective_name']", "requested_service_objective_name"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['max_size_bytes']", "max_size_bytes"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['edition']", "edition"),
             new Tweak_Module_NeedsForceUpdate("azure_rm_sqldatabase"),
