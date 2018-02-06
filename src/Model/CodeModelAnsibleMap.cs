@@ -1426,6 +1426,7 @@ namespace AutoRest.Ansible.Model
                         // first line -- add quotes
                         output.Add(prefix + "\"" + chunk + ((wordIdx != words.Length) ? "" : "\""));
                         prefix = new String(prefix.Select(r => ' ').ToArray());
+                        first = false;
                     }
                     else if (wordIdx != words.Length)
                     {
