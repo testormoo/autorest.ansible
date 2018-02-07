@@ -1407,26 +1407,31 @@ namespace AutoRest.Ansible.Model
                 int docLength = content.Length;
                 List<string> words = new List<string>(content.Split(' '));
 
-                int wordIdx = 0;
+                int wordIdx = 1;
+                while (wordIdx < words.Count)
+                {
+                    words[wordIdx] = " " + words[wordIdx];
+                    wordIdx++;
+                }
+
+                wordIdx = 0;
 
                 while (wordIdx < words.Count)
                 {
                     string word = words[wordIdx];
 
-                    // attach space before each word except of first one
-                    if (wordIdx > 0) word = " " + word;
-
                     // make sure words are no longer than max width
                     if (word.Length > chunkLength)
                     {
                         words.Insert(wordIdx + 1, word.Substring(chunkLength));
-                        word = word.Substring(0, chunkLength);
+                        words[wordIdx] = word.Substring(0, chunkLength);
                     }
 
-                    words[wordIdx++] = word;
+                    wordIdx++;
                 }
 
                 bool first = true;
+
                 wordIdx = 0;
 
                 while (wordIdx < words.Count)
