@@ -1427,6 +1427,7 @@ namespace AutoRest.Ansible.Model
                 }
 
                 bool first = true;
+                wordIdx = 0;
 
                 while (wordIdx < words.Count)
                 {
