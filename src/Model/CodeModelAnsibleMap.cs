@@ -1405,20 +1405,41 @@ namespace AutoRest.Ansible.Model
                 content = String.Join("'", content.Split(new[] { "\"" }, StringSplitOptions.None));
                 int chunkLength = 160 - (prefix.Length + 4);
                 int docLength = content.Length;
-                string[] words = content.Split(' ');
+                List<string> words = new List<string>(content.Split(' '));
+
                 int wordIdx = 0;
+
+                while (wordIdx < words.Count)
+                {
+                    string word = words[wordIdx];
+
+                    // attach space before each word except of first one
+                    if (wordIdx > 0) word = " " + word;
+
+                    // make sure words are no longer than max width
+                    if (word.Length > chunkLength)
+                    {
+                        words.Insert(wordIdx + 1, word.Substring(chunkLength));
+                        word = word.Substring(0, chunkLength);
+                    }
+
+                    words[wordIdx++] = word;
+                }
+
                 bool first = true;
 
-                while (wordIdx < words.Length)
+                while (wordIdx < words.Count)
                 {
                     string chunk = words[wordIdx++];
 
-                    while (wordIdx < words.Length)
+                    // if the word still longer than line -- break it down
+
+                    while (wordIdx < words.Count)
                     {
                         if (chunk.Length + 1 + words[wordIdx].Length > chunkLength)
                             break;
 
-                        chunk += " " + words[wordIdx++];
+                        chunk += words[wordIdx++];
                     }
 
                     if (first)
@@ -1428,15 +1449,15 @@ namespace AutoRest.Ansible.Model
                         prefix = new String(prefix.Select(r => ' ').ToArray());
                         first = false;
                     }
-                    else if (wordIdx != words.Length)
+                    else if (wordIdx != words.Count)
                     {
                         // everything in the middle
-                        output.Add(prefix + " " + chunk);
+                        output.Add(prefix + chunk);
                     }
                     else
                     {
                         // last line -- add closing quotes
-                        output.Add(prefix + " " + chunk + "\"");
+                        output.Add(prefix + chunk + "\"");
                     }
                 }
             }
