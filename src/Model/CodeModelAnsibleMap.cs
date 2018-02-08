@@ -36,7 +36,40 @@ namespace AutoRest.Ansible.Model
                     break;
             }
         }
+
         public string[] MergeReport { get; set; }
+
+        public string[] MetadataTemplate
+        {
+            get
+            {
+                List<string> template = new List<string>();
+
+                AppendMetadataTemplateForModules(template);
+                return template.ToArray();
+            }
+        }
+
+        private void AppendMetadataTemplateForModules(List<string> template)
+        {
+            foreach (var m in Map.Modules)
+            {
+                template.Add(m.ModuleName);
+                AppendMetadataTemplateForOptions(template, m.ModuleName + ".", m.Options);
+            }
+        }
+
+        private void AppendMetadataTemplateForOptions(List<string> template, string prefix, ModuleOption[] options)
+        {
+            if (options == null)
+                return;
+
+            foreach (var o in options)
+            {
+                template.Add(prefix + o.Name);
+                AppendMetadataTemplateForOptions(template, prefix + o.Name + ".", o.SubOptions);
+            }
+        }
 
         public string ModuleName
         {

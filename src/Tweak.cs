@@ -403,6 +403,30 @@ namespace AutoRest.Ansible
         private bool _newValue;
     }
 
+    class Tweak_Option_SetType : Tweak_Option
+    {
+        public Tweak_Option_SetType(string module,
+                                        string path,
+                                        string newType)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _newType = newType;
+        }
+
+        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                option.Type = _newType;
+            }
+        }
+
+        private string[] _path;
+        private string _newType;
+    }
+
     class Tweak_Option_MakeBoolean : Tweak_Option
     {
         public Tweak_Option_MakeBoolean(string module,
