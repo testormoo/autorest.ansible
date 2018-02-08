@@ -674,12 +674,12 @@ namespace AutoRest.Ansible
             // Key Vault
             new Tweak_Module_Rename("azure_rm_vault", "azure_rm_keyvault"),
             new Tweak_Option_Rename("azure_rm_vault", "properties.tenant_id", "vault_tenant"),
-            new Tweak_Option_Rename("azure_rm_vault", "properties.recover_mode", "create_mode"),
+            new Tweak_Option_Rename("azure_rm_vault", "properties.create_mode", "recover_mode"),
             new Tweak_Option_SetType("azure_rm_vault", "properties.enabled_for_deployment", "bool"),
             new Tweak_Option_SetType("azure_rm_vault", "properties.enabled_for_disk_encryption", "bool"),
             new Tweak_Option_SetType("azure_rm_vault", "properties.enabled_for_template_deployment", "bool"),
             new Tweak_Option_SetType("azure_rm_vault", "properties.enable_soft_delete", "bool"),
-            new Tweak_Option_MakeBoolean("azure_rm_vault", "properties.recover_mode", "Recover", "Default", false, "Create vault in recovery mode."),
+            new Tweak_Option_MakeBoolean("azure_rm_vault", "properties.create_mode", "Recover", "Default", false, "Create vault in recovery mode."),
 
             new Tweak_Option_DefaultValueTest("azure_rm_vault", "vault_name", "vault{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_vault", "properties.enabled_for_deployment", "yes"),
