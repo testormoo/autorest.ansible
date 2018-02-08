@@ -673,7 +673,7 @@ namespace AutoRest.Ansible
 
             // Key Vault
             new Tweak_Module_Rename("azure_rm_vault", "azure_rm_keyvault"),
-            new Tweak_Option_Rename("azure_rm_vault", "tenant_id", "vault_tenant"),
+            new Tweak_Option_Rename("azure_rm_vault", "properties.tenant_id", "vault_tenant"),
             new Tweak_Option_DefaultValueTest("azure_rm_vault", "vault_name", "vault{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_vault", "properties.enabled_for_deployment", "yes"),
             new Tweak_Option_DefaultValueTest("azure_rm_vault", "properties.sku.family", "A"),
