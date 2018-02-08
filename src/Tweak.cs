@@ -452,7 +452,7 @@ namespace AutoRest.Ansible
                 option.ValueIfFalse = _valueIfFalse;
                 option.ValueIfTrue = _valueIfTrue;
                 option.Type = "bool";
-                option.DefaultValue = _defaultValue ? "True" : "False";
+                option.DefaultValue = _defaultValue ? "True" : null;
                 option.Documentation = option.Documentation.Split(" Possible values include:")[0];
                 if (_newDescription != null) option.Documentation = _newDescription;
                 option.EnumValues = null;
