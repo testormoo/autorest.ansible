@@ -55,11 +55,18 @@ namespace AutoRest.Ansible
             // TODO: load additional tweaks from file
             map.Info.Add("CURRENT DIRECTORY: " + System.IO.Directory.GetCurrentDirectory());
 
-            string[] lines = File.ReadLines("./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml").ToArray();
-
-            foreach (var l in lines)
+            try
             {
-                map.Info.Add("ADDITIONAL TWEAK: " + l);
+                string[] lines = File.ReadLines("./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml").ToArray();
+
+                foreach (var l in lines)
+                {
+                    map.Info.Add("ADDITIONAL TWEAK: " + l);
+                }
+            }
+            catch (Exception)
+            {
+                map.Info.Add("NO TWEAK FILE FOUND");
             }
 
             // apply tweaks
