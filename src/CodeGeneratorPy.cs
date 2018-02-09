@@ -50,6 +50,11 @@ namespace AutoRest.Ansible
             map = codeModel.Map;
             report = empty;
 
+            // TODO: get built-in tweaks here
+
+            // TODO: load additional tweaks from file
+            map.Info.Add("CURRENT DIRECTORY: " + System.IO.Directory.GetCurrentDirectory());
+
             // apply tweaks
             foreach (var tweak in Tweaks.All)
             {
