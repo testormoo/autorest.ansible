@@ -55,6 +55,13 @@ namespace AutoRest.Ansible
             // TODO: load additional tweaks from file
             map.Info.Add("CURRENT DIRECTORY: " + System.IO.Directory.GetCurrentDirectory());
 
+            string[] lines = File.ReadLines("./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml").ToArray();
+
+            foreach (var l in lines)
+            {
+                map.Info.Add("ADDITIONAL TWEAK: " + l);
+            }
+
             // apply tweaks
             foreach (var tweak in Tweaks.All)
             {
