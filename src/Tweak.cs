@@ -12,6 +12,41 @@ namespace AutoRest.Ansible
         public abstract void ApplyOnModule(Model.MapAnsibleModule m);
 
         public string log = null;
+
+        public static Tweak CreateTweak(string item, string name, string parameter)
+        {
+            string[] path = item.Split('.');
+
+            if (path.Length == 1)
+            {
+                // module level tweak
+            }
+            else if (path[1] == "response")
+            {
+                // response level tweak
+            }
+            else
+            {
+                // option level tweak
+                switch (name)
+                {
+                case "rename":                  return new Tweak_Option_Rename(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "required":                return new Tweak_Option_Required(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
+                case "type":                    return new Tweak_Option_SetType(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "exclude":                 return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes", parameter == "yes");
+                case "default":                 return new Tweak_Option_DefaultValue(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "test":                    return new Tweak_Option_DefaultValueTest(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "sample":                  return new Tweak_Option_DefaultValueSample(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation":           return new Tweak_Option_Documentation(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation-append":    return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                    //case "documentation-cut": return new Tweak_Option_DocumentationCut(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "flatten":                 return new Tweak_Option_Flatten(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                }
+            }
+
+            return null;
+        }
+
     }
 
     public abstract class Tweak_Module : Tweak

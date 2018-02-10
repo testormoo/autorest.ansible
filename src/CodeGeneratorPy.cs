@@ -50,7 +50,15 @@ namespace AutoRest.Ansible
             map = codeModel.Map;
             report = empty;
 
-            // TODO: get built-in tweaks here
+            // apply all built in tweaks
+            foreach (var tweak in Tweaks.All)
+            {
+                tweak.Apply(map);
+                if (tweak.log != null)
+                {
+                    map.Info.Add("TWEAK: " + tweak.log);
+                }
+            }
 
             // TODO: load additional tweaks from file
             map.Info.Add("CURRENT DIRECTORY: " + System.IO.Directory.GetCurrentDirectory());
@@ -61,7 +69,29 @@ namespace AutoRest.Ansible
 
                 foreach (var l in lines)
                 {
-                    map.Info.Add("ADDITIONAL TWEAK: " + l);
+                    string module = null;
+                    if (l.StartsWith("- ") && l.EndsWith(":"))
+                    {
+                        module = l.Substring(2, l.Length - 3);
+                    }
+                    else if (l.StartsWith("  - "))
+                    {
+                        if (module != null)
+                        {
+                            var split = l.Split(":");
+
+                            var tweak = Tweak.CreateTweak(module, split[0].Trim(), split[1].Trim());
+                            tweak.Apply(map);
+                        }
+                        else
+                        {
+                            map.Info.Add("INVALID METADATA: " + l);
+                        }
+                    }
+                    else
+                    {
+                        map.Info.Add("INVALID METADATA: " + l);
+                    }
                 }
             }
             catch (Exception)
