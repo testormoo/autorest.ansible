@@ -99,16 +99,6 @@ namespace AutoRest.Ansible
                 map.Info.Add("NO TWEAK FILE FOUND");
             }
 
-            // apply tweaks
-            foreach (var tweak in Tweaks.All)
-            {
-                tweak.Apply(map);
-                if (tweak.log != null)
-                {
-                    map.Info.Add("TWEAK: " + tweak.log);
-                }
-            }
-
             CodeModelAnsibleMap codeModelPure = null;
 
             for (int idx = 0; idx < codeModel.Map.Modules.Length; idx++)
