@@ -278,6 +278,7 @@ namespace AutoRest.Ansible
         public override void ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.NeedsForceUpdate = true;
+            return true;
         }
     }
 
