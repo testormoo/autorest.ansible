@@ -81,7 +81,10 @@ namespace AutoRest.Ansible
                             var split = l.Substring(6).Split(":");
 
                             var tweak = Tweak.CreateTweak(module, split[0].Trim(), split[1].Trim());
-                            tweak.Apply(map);
+                            if (!tweak.Apply(map))
+                            {
+                                map.Info.Add("TWEAK NOT APPLIED: " + l);
+                            }
                         }
                         else
                         {

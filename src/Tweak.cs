@@ -7,9 +7,9 @@ namespace AutoRest.Ansible
 {
     public abstract class Tweak
     {
-        public abstract void Apply(Model.MapAnsible map);
+        public abstract bool Apply(Model.MapAnsible map);
 
-        public abstract void ApplyOnModule(Model.MapAnsibleModule m);
+        public abstract bool ApplyOnModule(Model.MapAnsibleModule m);
 
         public string log = null;
 
@@ -51,8 +51,9 @@ namespace AutoRest.Ansible
 
     public abstract class Tweak_Module : Tweak
     {
-        public override void Apply(Model.MapAnsible map)
+        public override bool Apply(Model.MapAnsible map)
         {
+            bool applied = false;
             var modules = new List<Model.MapAnsibleModule>();
 
             if (_module == "*")
@@ -85,8 +86,11 @@ namespace AutoRest.Ansible
 
             foreach (var m in modules)
             {
-                ApplyOnModule(m);
+                if (ApplyOnModule(m))
+                    applied = true;
             }
+
+            return applied;
         }
 
         protected Model.MapAnsible _map;
@@ -176,7 +180,7 @@ namespace AutoRest.Ansible
             _newName = newName;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             if (_module.EndsWith("*"))
             {
@@ -188,6 +192,8 @@ namespace AutoRest.Ansible
             {
                 m.ModuleNameAlt = _newName;
             }
+
+            return true;
         }
 
         private string _newName;
@@ -200,11 +206,12 @@ namespace AutoRest.Ansible
             _module = module;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleMethod method = null;
             List<string> methodOptions = null;
             string dictionaryName = "";
+            bool applied = false;
 
             foreach (var mth in m.Methods)
             {
@@ -233,6 +240,8 @@ namespace AutoRest.Ansible
                     // XXX - this is a terrible, terrible hack
                     methodOptions.RemoveAll(element => element.EndsWith("_parameters"));
                     method.RequiredOptions = methodOptions.ToArray();
+
+                    applied = true;
                 }
             }
             foreach (var o in m.Options)
@@ -240,6 +249,8 @@ namespace AutoRest.Ansible
                 if (o.Disposition == "__none") o.Disposition = "none";
                 else if (o.Disposition == "__default") o.Disposition = "default";
             }
+
+            return applied;
         }
     }
 
@@ -250,9 +261,10 @@ namespace AutoRest.Ansible
             _module = module;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.NeedsDeleteBeforeUpdate = true;
+            return true;
         }
     }
 
@@ -276,9 +288,10 @@ namespace AutoRest.Ansible
             _module = module;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.CannotTestUpdate = false;
+            return true;
         }
     }
 
@@ -290,9 +303,10 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.AssertStateVariable = _newValue;
+            return true;
         }
 
         private string _newValue;
@@ -306,9 +320,10 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.AssertStateExpectedValue = _newValue;
+            return true;
         }
 
         private string _newValue;
@@ -322,9 +337,10 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.ObjectName = _newValue;
+            return true;
         }
 
         private string _newValue;
@@ -340,11 +356,12 @@ namespace AutoRest.Ansible
             _replaceTo = replaceTo;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.TestPrerequisitesModule = _newValue;
             m.TestReplaceStringFrom = _replaceFrom;
             m.TestReplaceStringTo = _replaceTo;
+            return true;
         }
 
         private string _newValue;
@@ -361,10 +378,11 @@ namespace AutoRest.Ansible
             _post = post;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.TestPrerequisites = _pre;
             m.TestPostrequisites = _post;
+            return true;
         }
 
         private string[] _pre;
@@ -380,11 +398,12 @@ namespace AutoRest.Ansible
             _responsePath = responsePath.Split(":");
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             List<Model.UpdateComparisonRule> rules = (m.UpdateComparisonRules != null) ? m.UpdateComparisonRules.ToList() : new List<Model.UpdateComparisonRule>();
             rules.Add(new Model.UpdateComparisonRule(_parameterPath, _responsePath));
             m.UpdateComparisonRules = rules.ToArray();
+            return true;
         }
 
         private string[] _parameterPath;
@@ -401,7 +420,7 @@ namespace AutoRest.Ansible
             _levelChange = levelChange;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             log = "RENAMING " + string.Join(".", _path) + " -- ";
             Model.ModuleOption option = GetOption(m, _path);
@@ -411,6 +430,8 @@ namespace AutoRest.Ansible
                 option.NameAlt = _newName;
             }
             // XXX - level change
+
+            return (option != null);
         }
 
         private string[] _path;
@@ -427,11 +448,14 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.Required = _newValue ? "True" : "False";
             // XXX - level change
+
+
+            return (option != null);
         }
 
         private string[] _path;
@@ -449,13 +473,15 @@ namespace AutoRest.Ansible
             _newType = newType;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null)
             {
                 option.Type = _newType;
             }
+
+            return option != null;
         }
 
         private string[] _path;
@@ -479,7 +505,7 @@ namespace AutoRest.Ansible
             _newDescription = newDescription;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null)
@@ -492,6 +518,8 @@ namespace AutoRest.Ansible
                 if (_newDescription != null) option.Documentation = _newDescription;
                 option.EnumValues = null;
             }
+
+            return (option != null);
         }
 
         private string[] _path;
@@ -514,7 +542,7 @@ namespace AutoRest.Ansible
             _excludeFromArgSpec = excludeFromArgSpec;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null)
@@ -522,6 +550,8 @@ namespace AutoRest.Ansible
                 option.IncludeInDocumentation = !_excludeFromDocumentation;
                 option.IncludeInArgSpec = !_excludeFromArgSpec;
             }
+
+            return (option != null);
         }
 
         private string[] _path;
@@ -538,10 +568,12 @@ namespace AutoRest.Ansible
             _value = value;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.DefaultValue = _value;
+
+            return (option != null);
         }
 
         private string[] _path;
@@ -557,11 +589,13 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.DefaultValueSample["test:default"] = _newValue;
             // XXX - level change
+
+            return (option != null);
         }
 
         private string[] _path;
@@ -577,11 +611,13 @@ namespace AutoRest.Ansible
             _newValue = newValue;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.DefaultValueSample["default"] = _newValue;
             // XXX - level change
+
+            return option != null;
         }
 
         private string[] _path;
@@ -597,11 +633,13 @@ namespace AutoRest.Ansible
             _newText = newText;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.Documentation = _newText;
             // XXX - level change
+
+            return option != null;
         }
 
         private string[] _path;
@@ -617,11 +655,13 @@ namespace AutoRest.Ansible
             _appendedText = appendedText;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleOption option = GetOption(m, _path);
             if (option != null) option.Documentation += _appendedText;
             // XXX - level change
+
+            return option != null;
         }
 
         private string[] _path;
@@ -637,24 +677,24 @@ namespace AutoRest.Ansible
             _namePrefix = namePrefix;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             log = "FLATTENING " + string.Join(".", _path) + " -- ";
 
             Model.ModuleOption option = GetOption(m, _path);
 
             if (option == null)
-                return;
+                return false;
 
             log += "A";
 
             if (option.IsList)
-                return;
+                return false;
 
             log += "B";
 
             if (option.Type != "dict")
-                return;
+                return false;
 
             log += "C";
 
@@ -693,6 +733,8 @@ namespace AutoRest.Ansible
                 o.AddRange(suboptions);
                 parent.SubOptions = o.ToArray();
             }
+
+            return true;
         }
 
         private string[] _path;
@@ -709,11 +751,13 @@ namespace AutoRest.Ansible
             _levelChange = levelChange;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleResponseField field = GetResultField(m, _map, _path);
             if (field != null) field.NameAlt = _newName;
             // XXX - level change
+
+            return (field != null);
         }
 
         private string[] _path;
@@ -743,10 +787,12 @@ namespace AutoRest.Ansible
             _path = path.Split(".");
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleResponseField field = GetResultField(m, _map, _path);
             if (field != null) field.NameAlt = field.Name;
+
+            return field != null;
         }
 
         private string[] _path;
@@ -762,11 +808,13 @@ namespace AutoRest.Ansible
             _levelChange = levelChange;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleResponseField field = GetResultField(m, _map, _path);
             if (field != null) field.SampleValue = _newValue;
             // XXX - level change
+
+            return field != null;
         }
 
         private string[] _path;
@@ -783,11 +831,13 @@ namespace AutoRest.Ansible
             _returned = returned;
         }
 
-        public override void ApplyOnModule(Model.MapAnsibleModule m)
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleResponseField field = GetResultField(m, _map, _path);
             if (field != null) field.Returned = _returned;
             // XXX - level change
+
+            return field != null;
         }
 
         private string[] _path;
