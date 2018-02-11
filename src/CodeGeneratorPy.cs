@@ -74,11 +74,11 @@ namespace AutoRest.Ansible
                     {
                         module = l.Substring(2, l.Length - 3);
                     }
-                    else if (l.StartsWith("  - "))
+                    else if (l.StartsWith("    - "))
                     {
                         if (module != null)
                         {
-                            var split = l.Split(":");
+                            var split = l.Substring(6).Split(":");
 
                             var tweak = Tweak.CreateTweak(module, split[0].Trim(), split[1].Trim());
                             tweak.Apply(map);
