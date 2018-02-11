@@ -66,13 +66,13 @@ namespace AutoRest.Ansible
             try
             {
                 string[] lines = File.ReadLines("./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml").ToArray();
-
+                string module = null;
                 foreach (var l in lines)
                 {
-                    string module = null;
                     if (l.StartsWith("- ") && l.EndsWith(":"))
                     {
                         module = l.Substring(2, l.Length - 3);
+                        map.Info.Add("GOT MODULE: " + module);
                     }
                     else if (l.StartsWith("    - "))
                     {
@@ -88,7 +88,7 @@ namespace AutoRest.Ansible
                         }
                         else
                         {
-                            map.Info.Add("INVALID METADATA: " + l);
+                            map.Info.Add("INVALID METADATA -- NULL MODULE: " + l);
                         }
                     }
                     else
