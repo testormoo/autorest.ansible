@@ -77,16 +77,24 @@ namespace AutoRest.Ansible
                     {
                         if (module != null)
                         {
-                            var split = l.Substring(6).Split(":", 1);
-                            var tweakName = split[0].Trim();
-                            var tweakValue = split[1].Trim();
-                            if (tweakValue[0] == '"')
-                                tweakValue = tweakValue.Substring(1, tweakValue.Length - 2);
+                            int position = l.IndexOf(':');
 
-                            var tweak = Tweak.CreateTweak(module, tweakName, tweakValue);
-                            if (!tweak.Apply(map))
+                            if (position > 0)
                             {
-                                map.Info.Add("TWEAK NOT APPLIED: " + l);
+                                var tweakName = l.Substring(6, position - 6).Trim();
+                                var tweakValue = l.Substring(position + 1).Trim();
+                                if (tweakValue[0] == '"')
+                                    tweakValue = tweakValue.Substring(1, tweakValue.Length - 2);
+
+                                var tweak = Tweak.CreateTweak(module, tweakName, tweakValue);
+                                if (!tweak.Apply(map))
+                                {
+                                    map.Info.Add("TWEAK NOT APPLIED: " + l);
+                                }
+                            }
+                            else
+                            {
+                                map.Info.Add("NO : FOUND" + l);
                             }
                         }
                         else
