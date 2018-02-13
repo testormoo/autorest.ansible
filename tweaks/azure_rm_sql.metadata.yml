@@ -136,6 +136,7 @@
     - documentation-append-line: "C(restore_long_term_retention_backup): Creates a database by restoring from a long term retention vault."
     - documentation-append-line: "C(copy), C(non_readable_secondary), C(online_secondary) and C(restore_long_term_retention_backup) are not supported for C(data_warehouse) edition."
 - azure_rm_sqldatabase.source_database_id:
+    - documentation: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     - documentation-replace: Conditional. If>>>Required if
 - azure_rm_sqldatabase.source_database_deletion_date:
     - documentation-replace: Conditional. If>>>Required if
