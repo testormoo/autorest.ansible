@@ -55,7 +55,7 @@ namespace AutoRest.Ansible.Model
             foreach (var m in Map.Modules)
             {
                 template.Add("- " + m.ModuleName + ":");
-                AppendMetadataTemplateForOptions(template, "- " + m.ModuleName, m.Options);
+                AppendMetadataTemplateForOptions(template, "- " + m.ModuleName + ".", m.Options);
             }
         }
 
