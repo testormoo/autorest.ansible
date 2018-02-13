@@ -72,7 +72,6 @@ namespace AutoRest.Ansible
                     if (l.StartsWith("- ") && l.EndsWith(":"))
                     {
                         module = l.Substring(2, l.Length - 3);
-                        map.Info.Add("GOT MODULE: " + module);
                     }
                     else if (l.StartsWith("    - "))
                     {

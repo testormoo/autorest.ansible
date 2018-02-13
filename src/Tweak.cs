@@ -30,17 +30,18 @@ namespace AutoRest.Ansible
                 // option level tweak
                 switch (name)
                 {
-                case "rename":                  return new Tweak_Option_Rename(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "required":                return new Tweak_Option_Required(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
-                case "type":                    return new Tweak_Option_SetType(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "exclude":                 return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes", parameter == "yes");
-                case "default":                 return new Tweak_Option_DefaultValue(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "test":                    return new Tweak_Option_DefaultValueTest(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "sample":                  return new Tweak_Option_DefaultValueSample(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "documentation":           return new Tweak_Option_Documentation(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "documentation-append":    return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "rename":                      return new Tweak_Option_Rename(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "required":                    return new Tweak_Option_Required(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
+                case "type":                        return new Tweak_Option_SetType(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "exclude":                     return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes", parameter == "yes");
+                case "default":                     return new Tweak_Option_DefaultValue(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "test":                        return new Tweak_Option_DefaultValueTest(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "sample":                      return new Tweak_Option_DefaultValueSample(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation":               return new Tweak_Option_Documentation(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation-append":        return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation-append-line":   return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), "\n" + parameter);
                     //case "documentation-cut": return new Tweak_Option_DocumentationCut(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "flatten":                 return new Tweak_Option_Flatten(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "flatten":                     return new Tweak_Option_Flatten(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 }
             }
 
