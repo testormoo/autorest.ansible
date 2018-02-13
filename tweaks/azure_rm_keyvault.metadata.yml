@@ -12,7 +12,7 @@
 - azure_rm_vault.access_policies:
 - azure_rm_vault.access_policies.tenant_id:
 - azure_rm_vault.access_policies.object_id:
-    - documentation-append-line: XXXPlease note this is not application id. Object id can be obtained by running "az ad show sp --id <application id>".
+    - documentation-append-line: Please note this is not application id. Object id can be obtained by running "az ad show sp --id <application id>".
 - azure_rm_vault.access_policies.application_id:
 - azure_rm_vault.access_policies.permissions:
 - azure_rm_vault.access_policies.keys:
