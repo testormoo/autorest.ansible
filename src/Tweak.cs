@@ -40,7 +40,9 @@ namespace AutoRest.Ansible
                 case "documentation":               return new Tweak_Option_Documentation(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation-append":        return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation-append-line":   return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), "\n" + parameter);
-                    //case "documentation-cut": return new Tweak_Option_DocumentationCut(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation-replace":       return new Tweak_Option_DocumentationReplace(path[0], String.Join('.', path, 1, path.Length - 1), parameter.Split(">>>")[0], parameter.Split(">>>")[1]);
+                case "documentation-cut-after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation-mark-keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
                 case "flatten":                     return new Tweak_Option_Flatten(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 }
             }
@@ -668,6 +670,92 @@ namespace AutoRest.Ansible
 
         private string[] _path;
         private string _appendedText;
+    }
+
+    class Tweak_Option_DocumentationCutAfter : Tweak_Option
+    {
+        public Tweak_Option_DocumentationCutAfter(string module, string path, string cutAfter)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _cutAfter = cutAfter;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                int idx = option.Documentation.IndexOf(_cutAfter);
+                if (idx >= 0)
+                {
+                    option.Documentation = option.Documentation.Substring(idx + _cutAfter.Length);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private string[] _path;
+        private string _cutAfter;
+    }
+
+    class Tweak_Option_DocumentationReplace : Tweak_Option
+    {
+        public Tweak_Option_DocumentationReplace(string module, string path, string replaceFrom, string replaceTo)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _replaceFrom = replaceFrom;
+            _replaceTo = replaceTo;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                string newString = option.Documentation.Replace(_replaceFrom, _replaceTo);
+
+                if (newString != option.Documentation)
+                {
+                    option.Documentation = newString;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private string[] _path;
+        private string _replaceFrom;
+        private string _replaceTo;
+    }
+
+    class Tweak_Option_DocumentationMarkKeywords : Tweak_Option
+    {
+        public Tweak_Option_DocumentationMarkKeywords(string module, string path, bool markKeywords)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _markKeywords = markKeywords;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                if (option.DocumentationMarkKeywords != _markKeywords)
+                {
+                    option.DocumentationMarkKeywords = _markKeywords;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private string[] _path;
+        private bool _markKeywords;
     }
 
     class Tweak_Option_Flatten : Tweak_Option

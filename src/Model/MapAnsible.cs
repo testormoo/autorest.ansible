@@ -32,6 +32,7 @@ namespace AutoRest.Ansible.Model
             AdditionalInfo = null;
             IncludeInDocumentation = true;
             IncludeInArgSpec = true;
+            DocumentationMarkKeywords = true;
         }
 
         public string Name { get; set; }
@@ -49,6 +50,7 @@ namespace AutoRest.Ansible.Model
         public string Required { get; set; }
         public string VariableValue { get; set; }
         public string Documentation { get; set; }
+        public bool DocumentationMarkKeywords { get; set; }
         public string DefaultValue { get; set; }
         public Dictionary<string, string> DefaultValueSample { get; set; }
         public ModuleOption[] SubOptions { get; set; }

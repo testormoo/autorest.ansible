@@ -1129,22 +1129,25 @@ namespace AutoRest.Ansible.Model
                 string doc = option.Documentation;
 
                 doc = NormalizeString(option.Documentation);
-                
-                // try to replace all mentioned option names with I()
-                foreach (var oo in options)
-                {
-                    string name = oo.Name.ToCamelCase();
 
-                    if (oo.Name == "name" || oo.Name == "location" || oo.Name == "id" || oo.Name == "edition" || oo.Name == option.Name)
-                        continue;
-                    
-                    doc = Regex.Replace(doc, "\\b" + name + "\\b", "I(" + oo.NameAlt + ")", RegexOptions.IgnoreCase);
-                }   
-
-                // replace all mentioned option names with C()
-                foreach (var choice in allChoices)
+                if (option.DocumentationMarkKeywords)
                 {
-                    doc = Regex.Replace(doc, "\\b" + choice.Value + "\\b", "C(" + choice.Key + ")", RegexOptions.IgnoreCase);
+                    // try to replace all mentioned option names with I()
+                    foreach (var oo in options)
+                    {
+                        string name = oo.Name.ToCamelCase();
+
+                        if (oo.Name == "name" || oo.Name == "location" || oo.Name == "id" || oo.Name == "edition" || oo.Name == option.Name)
+                            continue;
+
+                        doc = Regex.Replace(doc, "\\b" + name + "\\b", "I(" + oo.NameAlt + ")", RegexOptions.IgnoreCase);
+                    }
+
+                    // replace all mentioned option names with C()
+                    foreach (var choice in allChoices)
+                    {
+                        doc = Regex.Replace(doc, "\\b" + choice.Value + "\\b", "C(" + choice.Key + ")", RegexOptions.IgnoreCase);
+                    }
                 }
 
                 help.Add(padding + option.NameAlt + ":");
