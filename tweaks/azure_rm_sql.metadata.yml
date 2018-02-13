@@ -128,9 +128,9 @@
 - azure_rm_sqldatabase.create_mode:
     - documentation-mark-keywords: no
     - documentation-cut-after: database creation.
-    - documentation-append-line: "C(copy): creates a database as a copy of an existing database."
-    - documentation-append-line: "C(online_secondary)/C(non_readable_secondary): creates a database as a (readable or nonreadable) secondary replica of an existing database."
-    - documentation-append-line: "C(point_in_time_restore): Creates a database by restoring a point in time backup of an existing database."
+    - documentation-append-line: "moo C(copy): creates a database as a copy of an existing database."
+    - documentation-append-line: "boo C(online_secondary)/C(non_readable_secondary): creates a database as a (readable or nonreadable) secondary replica of an existing database."
+    - documentation-append-line: "kfi C(point_in_time_restore): Creates a database by restoring a point in time backup of an existing database."
     - documentation-append-line: "C(recovery): Creates a database by restoring a geo-replicated backup."
     - documentation-append-line: "C(restore): Creates a database by restoring a backup of a deleted database."
     - documentation-append-line: "C(restore_long_term_retention_backup): Creates a database by restoring from a long term retention vault."
