@@ -65,7 +65,14 @@ author:
 EXAMPLES = '''
 @foreach (var line in Model.ModuleExamples)
 {
-@:-@(line)-
+    if (line != "")
+    {
+@:@(line)
+    }
+    else
+    {
+@EmptyLine
+    }
 }
 '''
 @EmptyLine
