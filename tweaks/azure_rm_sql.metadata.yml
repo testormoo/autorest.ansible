@@ -139,6 +139,7 @@
     - samples-append-line: "      create_mode: copy"
     - samples-append-line: "      source_database_id: "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/tests"
     - samples-append-line: "                          vr/databases/testdb""
+    - samples-append-line: ""
 - azure_rm_sqldatabase.resource_group_name:
 - azure_rm_sqldatabase.server_name:
 - azure_rm_sqldatabase.database_name:
@@ -147,7 +148,8 @@
 - azure_rm_sqldatabase.collation:
 - azure_rm_sqldatabase.create_mode:
     - documentation-mark-keywords: no
-    - documentation: "C(default): regular database creation."
+    - documentation: Specifies the mode of database creation.
+    - documentation-append-line: "C(default): regular database creation."
     - documentation-append-line: "C(copy): creates a database as a copy of an existing database."
     - documentation-append-line: "C(online_secondary)/C(non_readable_secondary): creates a database as a (readable or nonreadable) secondary replica of an existing database."
     - documentation-append-line: "C(point_in_time_restore): Creates a database by restoring a point in time backup of an existing database."
@@ -156,6 +158,7 @@
     - documentation-append-line: "C(restore_long_term_retention_backup): Creates a database by restoring from a long term retention vault."
     - documentation-append-line: "C(copy), C(non_readable_secondary), C(online_secondary) and C(restore_long_term_retention_backup) are not supported for C(data_warehouse) edition."
 - azure_rm_sqldatabase.source_database_id:
+    - documentation-mark-keywords: no
     - documentation: "Required unless I(create_mode) is C(default) or C(restore_long_term_retention_backup)."
     - documentation-append-line: Specifies the resource ID of the source database
 - azure_rm_sqldatabase.source_database_deletion_date:
@@ -169,6 +172,8 @@
 - azure_rm_sqldatabase.requested_service_objective_id:
 - azure_rm_sqldatabase.requested_service_objective_name:
 - azure_rm_sqldatabase.elastic_pool_name:
+    - documentation-mark-keywords: no
+    - documentation: The name of the elastic pool the database is in. Not supported for C(data_warehouse) edition.
 - azure_rm_sqldatabase.read_scale:
     - documentation-replace: readScale >>>
 - azure_rm_sqldatabase.sample_name:
