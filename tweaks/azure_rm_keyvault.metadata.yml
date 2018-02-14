@@ -9,6 +9,7 @@
 - azure_rm_vault.sku:
 - azure_rm_vault.sku.family:
 - azure_rm_vault.sku.name:
+    - documentation-mark-keywords: no
 - azure_rm_vault.access_policies:
 - azure_rm_vault.access_policies.tenant_id:
 - azure_rm_vault.access_policies.object_id:
