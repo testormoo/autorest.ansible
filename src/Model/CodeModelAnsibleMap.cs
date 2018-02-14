@@ -524,7 +524,10 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetPlaybook("Create (or update)", ModuleOptions, "  ", "default");
+                var m = GetModuleMap(ModuleName);
+                List<string> samples = new List<string>(GetPlaybook("Create (or update)", ModuleOptions, "  ", "default"));
+                samples.AddRange(m.AdditionalSampleLines);
+                return samples.ToArray();
             }
         }
 

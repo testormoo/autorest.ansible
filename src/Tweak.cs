@@ -20,6 +20,10 @@ namespace AutoRest.Ansible
             if (path.Length == 1)
             {
                 // module level tweak
+                switch (name)
+                {
+                    case "samples-append-line": return new Tweak_Module_SampleAppendLine(path[0], parameter);
+                }
             }
             else if (path[1] == "response")
             {
@@ -200,6 +204,25 @@ namespace AutoRest.Ansible
         }
 
         private string _newName;
+    }
+
+    class Tweak_Module_SampleAppendLine : Tweak_Module
+    {
+        public Tweak_Module_SampleAppendLine(string module, string newLine)
+        {
+            _module = module;
+            _newLine = newLine;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            List<string> newLines = new List<string>(m.AdditionalSampleLines);
+            newLines.Add(_newLine);
+            m.AdditionalSampleLines = newLines.ToArray();
+            return true;
+        }
+
+        private string _newLine;
     }
 
     class Tweak_Module_FlattenParametersDictionary : Tweak_Module

@@ -111,6 +111,7 @@ namespace AutoRest.Ansible.Model
             NeedsDeleteBeforeUpdate = false;
             NeedsForceUpdate = false;
             CannotTestUpdate = true;
+            AdditionalSampleLines = new List<string>().ToArray();
         }
 
         public string ModuleName { get; set; }
@@ -138,6 +139,8 @@ namespace AutoRest.Ansible.Model
         
         public string TestReplaceStringFrom { get; set; }
         public string TestReplaceStringTo { get; set; }
+
+        public string[] AdditionalSampleLines { get; set; }
     }
 
     public class MapAnsible
