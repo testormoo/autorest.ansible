@@ -84,7 +84,12 @@ namespace AutoRest.Ansible
                                 var tweakName = l.Substring(6, position - 6).Trim();
                                 var tweakValue = l.Substring(position + 1).Trim();
                                 if (tweakValue[0] == '"')
-                                    tweakValue = tweakValue.Substring(1, tweakValue.Length - 2);
+                                {
+                                    if (tweakValue.Length > 2)
+                                        tweakValue = tweakValue.Substring(1, tweakValue.Length - 2);
+                                    else
+                                        tweakValue = "";
+                                }
 
                                 var tweak = Tweak.CreateTweak(module, tweakName, tweakValue);
                                 if (!tweak.Apply(map))
