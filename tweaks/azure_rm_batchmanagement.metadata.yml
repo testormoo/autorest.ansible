@@ -1,7 +1,7 @@
 - azure_rm_batchmanagementbatchaccount:
 - azure_rm_batchmanagementbatchaccount.resource_group_name:
 - azure_rm_batchmanagementbatchaccount.account_name:
-    - test: ba{{ rpfx }}
+    - test: ba{{ rpfx }}$postfix$
 - azure_rm_batchmanagementbatchaccount.parameters:
 - azure_rm_batchmanagementbatchaccount.location:
 - azure_rm_batchmanagementbatchaccount.auto_storage:
