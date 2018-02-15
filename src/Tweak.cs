@@ -23,6 +23,7 @@ namespace AutoRest.Ansible
                 switch (name)
                 {
                     case "samples-append-line": return new Tweak_Module_SampleAppendLine(path[0], parameter);
+                    case "test-prerequisites-module": return new Tweak_Module_TestPrerequisitesModule(path[0], parameter, null, null);
                 }
             }
             else if (path[1] == "response")

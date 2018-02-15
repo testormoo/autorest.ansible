@@ -11,6 +11,7 @@
 - azure_rm_batchmanagementbatchaccount.key_vault_reference.id:
 - azure_rm_batchmanagementbatchaccount.key_vault_reference.url:
 - azure_rm_batchmanagementbatchaccount_facts:
+    - test-prerequisites-module: azure_rm_batchmanagementbatchaccount
 - azure_rm_batchmanagementbatchaccount_facts.resource_group_name:
 - azure_rm_batchmanagementbatchaccount_facts.account_name:
     - test: batchaccount{{ rpfx }}
