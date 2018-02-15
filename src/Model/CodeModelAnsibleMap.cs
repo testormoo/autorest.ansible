@@ -1090,7 +1090,7 @@ namespace AutoRest.Ansible.Model
                     // XXX - this is just a temporary hack for now
                     if (predefined.Contains("$postfix$"))
                     {
-                        predefined = predefined.Replace("$postfix", instanceNamePostfix);
+                        predefined = predefined.Replace("$postfix$", instanceNamePostfix);
                     }
                     else if (option.NameAlt == "name")
                     {
