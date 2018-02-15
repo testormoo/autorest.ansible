@@ -1088,7 +1088,11 @@ namespace AutoRest.Ansible.Model
                     string predefined = option.DefaultValueSample.GetValueOrDefault(playbookType, null);
 
                     // XXX - this is just a temporary hack for now
-                    if (option.NameAlt == "name")
+                    if (predefined.Contains("$postfix$"))
+                    {
+                        predefined = predefined.Replace("$postfix", instanceNamePostfix);
+                    }
+                    else if (option.NameAlt == "name")
                     {
                         predefined += instanceNamePostfix;
                     }
