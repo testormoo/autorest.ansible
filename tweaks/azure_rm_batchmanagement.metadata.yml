@@ -1,7 +1,7 @@
 - azure_rm_batchmanagementbatchaccount:
 - azure_rm_batchmanagementbatchaccount.resource_group_name:
 - azure_rm_batchmanagementbatchaccount.account_name:
-    - test: batchaccount{{ rpfx }}
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementbatchaccount.parameters:
 - azure_rm_batchmanagementbatchaccount.location:
 - azure_rm_batchmanagementbatchaccount.auto_storage:
@@ -14,7 +14,7 @@
     - test-prerequisites-module: azure_rm_batchmanagementbatchaccount
 - azure_rm_batchmanagementbatchaccount_facts.resource_group_name:
 - azure_rm_batchmanagementbatchaccount_facts.account_name:
-    - test: batchaccount{{ rpfx }}
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementapplicationpackage:
 - azure_rm_batchmanagementapplicationpackage.resource_group_name:
 - azure_rm_batchmanagementapplicationpackage.account_name:
@@ -56,9 +56,12 @@
 - azure_rm_batchmanagementcertificate_facts.filter:
 - azure_rm_batchmanagementcertificate_facts.certificate_name:
 - azure_rm_batchmanagementpool:
+    - test-prerequisites-module: azure_rm_batchmanagementbatchaccount
 - azure_rm_batchmanagementpool.resource_group_name:
 - azure_rm_batchmanagementpool.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementpool.pool_name:
+    - test: bmp{{ rpfx }}
 - azure_rm_batchmanagementpool.parameters:
 - azure_rm_batchmanagementpool.display_name:
 - azure_rm_batchmanagementpool.vm_size:
@@ -150,9 +153,12 @@
 - azure_rm_batchmanagementpool.if_match:
 - azure_rm_batchmanagementpool.if_none_match:
 - azure_rm_batchmanagementpool_facts:
+    - test-prerequisites-module: azure_rm_batchmanagementpool
 - azure_rm_batchmanagementpool_facts.resource_group_name:
 - azure_rm_batchmanagementpool_facts.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementpool_facts.maxresults:
 - azure_rm_batchmanagementpool_facts.select:
 - azure_rm_batchmanagementpool_facts.filter:
 - azure_rm_batchmanagementpool_facts.pool_name:
+    - test: bmp{{ rpfx }}
