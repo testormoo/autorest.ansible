@@ -18,16 +18,19 @@
 - azure_rm_batchmanagementapplicationpackage:
 - azure_rm_batchmanagementapplicationpackage.resource_group_name:
 - azure_rm_batchmanagementapplicationpackage.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementapplicationpackage.application_id:
 - azure_rm_batchmanagementapplicationpackage.version:
 - azure_rm_batchmanagementapplicationpackage_facts:
 - azure_rm_batchmanagementapplicationpackage_facts.resource_group_name:
 - azure_rm_batchmanagementapplicationpackage_facts.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementapplicationpackage_facts.application_id:
 - azure_rm_batchmanagementapplicationpackage_facts.version:
 - azure_rm_batchmanagementapplication:
 - azure_rm_batchmanagementapplication.resource_group_name:
 - azure_rm_batchmanagementapplication.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementapplication.application_id:
 - azure_rm_batchmanagementapplication.parameters:
 - azure_rm_batchmanagementapplication.allow_updates:
@@ -39,18 +42,22 @@
 - azure_rm_batchmanagementcertificate:
 - azure_rm_batchmanagementcertificate.resource_group_name:
 - azure_rm_batchmanagementcertificate.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementcertificate.certificate_name:
+    - test: cert{{ rpfx }}
 - azure_rm_batchmanagementcertificate.parameters:
 - azure_rm_batchmanagementcertificate.thumbprint_algorithm:
 - azure_rm_batchmanagementcertificate.thumbprint:
 - azure_rm_batchmanagementcertificate.format:
 - azure_rm_batchmanagementcertificate.data:
+    - test: 123456789993833838
 - azure_rm_batchmanagementcertificate.password:
 - azure_rm_batchmanagementcertificate.if_match:
 - azure_rm_batchmanagementcertificate.if_none_match:
 - azure_rm_batchmanagementcertificate_facts:
 - azure_rm_batchmanagementcertificate_facts.resource_group_name:
 - azure_rm_batchmanagementcertificate_facts.account_name:
+    - test: ba{{ rpfx }}
 - azure_rm_batchmanagementcertificate_facts.maxresults:
 - azure_rm_batchmanagementcertificate_facts.select:
 - azure_rm_batchmanagementcertificate_facts.filter:
@@ -68,10 +75,12 @@
 - azure_rm_batchmanagementpool.deployment_configuration:
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration:
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration.os_family:
+    - test: linux
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration.target_os_version:
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration.current_os_version:
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration:
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration.image_reference:
+    - test: vmimage
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration.image_reference.publisher:
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration.image_reference.offer:
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration.image_reference.sku:
