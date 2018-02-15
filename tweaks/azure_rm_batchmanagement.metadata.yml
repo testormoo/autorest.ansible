@@ -47,11 +47,15 @@
     - test: cert{{ rpfx }}
 - azure_rm_batchmanagementcertificate.parameters:
 - azure_rm_batchmanagementcertificate.thumbprint_algorithm:
+    - test: SHA1
 - azure_rm_batchmanagementcertificate.thumbprint:
+    - test: 0A0E4F50D51BEADEAC1D35AFC5116098E7902E6E
 - azure_rm_batchmanagementcertificate.format:
+    - test: Pfx
 - azure_rm_batchmanagementcertificate.data:
-    - test: 123456789993833838
+    - test: MIIJsgIBAzCCCW4GCSqGSIb3DQE...
 - azure_rm_batchmanagementcertificate.password:
+    - test: KG0UY40e...
 - azure_rm_batchmanagementcertificate.if_match:
 - azure_rm_batchmanagementcertificate.if_none_match:
 - azure_rm_batchmanagementcertificate_facts:
@@ -62,6 +66,7 @@
 - azure_rm_batchmanagementcertificate_facts.select:
 - azure_rm_batchmanagementcertificate_facts.filter:
 - azure_rm_batchmanagementcertificate_facts.certificate_name:
+    - test: cert{{ rpfx }}
 - azure_rm_batchmanagementpool:
     - test-prerequisites-module: azure_rm_batchmanagementbatchaccount
 - azure_rm_batchmanagementpool.resource_group_name:
@@ -75,8 +80,9 @@
 - azure_rm_batchmanagementpool.deployment_configuration:
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration:
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration.os_family:
-    - test: linux
+    - test: 4
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration.target_os_version:
+    - test: WA-GUEST-OS-4.45_201708-01
 - azure_rm_batchmanagementpool.deployment_configuration.cloud_service_configuration.current_os_version:
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration:
 - azure_rm_batchmanagementpool.deployment_configuration.virtual_machine_configuration.image_reference:
