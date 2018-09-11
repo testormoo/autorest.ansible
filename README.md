@@ -5,6 +5,9 @@ Recommended way to use this extension is to use Docker image that is automatical
 
 CI is here: https://travis-ci.org/zikalino/autorest.ansible
 
+Modules (shall be) generated here: https://github.com/zikalino/ansible-hatchery
+Note: additional step needs to be added in the CI to create PR automatically
+
   docker run -v <your-output-directory>:/ansible-hatchery -v <your-temporary-directory>:/ansible-hatchery-tmp dockiot/autorest-ansible-alt <api-to-generate>
 
 where:
@@ -30,6 +33,11 @@ Following tweaks can be applied to the generator output:
 - update sample option values
 - update test dependencies
 - update test field values
+
+Some future plans:
+- flexible REST API -> input parameter mapping
+- flexible REST API -> facts return values mapping
+- idempotency comparison definitions
 
 More information will be added here...
 
