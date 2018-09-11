@@ -3,6 +3,8 @@
 
 Recommended way to use this extension is to use Docker image that is automatically produced by the CI.
 
+CI is here: https://travis-ci.org/zikalino/autorest.ansible
+
   docker run -v <your-output-directory>:/ansible-hatchery -v <your-temporary-directory>:/ansible-hatchery-tmp dockiot/autorest-ansible-alt <api-to-generate>
 
 where:
