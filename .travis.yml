@@ -5,6 +5,10 @@ services:
 
 script:
   - cd dockerfile-inc && docker build --tag dockiot/autorest-ansible-inc .
+  - git clone https://github.com/zikalino/ansible-hatchery.git
+  - mkdir tmp
+  - docker run --name autorest-ansible -v ~/ansible-hatchery:/ansible-hatchery -v ~/tmp:/ansible-hatchery-tmp dockiot/autorest-ansible-inc all
+
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
