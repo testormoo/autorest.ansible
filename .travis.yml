@@ -7,7 +7,8 @@ script:
   - cd dockerfile-inc && docker build --tag dockiot/autorest-ansible-inc .
   - git clone https://github.com/zikalino/ansible-hatchery.git
   - mkdir tmp
-  - docker run --name autorest-ansible -v ./ansible-hatchery:/ansible-hatchery -v ./tmp:/ansible-hatchery-tmp dockiot/autorest-ansible-inc all
+  - echo $TRAVIS_BUILD_DIR
+  - docker run --name autorest-ansible -v $TRAVIS_BUILD_DIR/ansible-hatchery:/ansible-hatchery -v $TRAVIS_BUILD_DIR/tmp:/ansible-hatchery-tmp dockiot/autorest-ansible-inc all
 
 
 after_success:
