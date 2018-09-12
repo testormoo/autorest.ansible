@@ -120,7 +120,7 @@
 - azure_rm_sqlgeobackuppolicy_facts.geo_backup_policy_name:
 - azure_rm_sqldatabase:
     - samples-append-line: ""
-    - samples-append-line: "  - name: Restore SQL Database XXX"
+    - samples-append-line: "  - name: Restore SQL Database XXXY"
     - samples-append-line: "    azure_rm_sqldatabase:"
     - samples-append-line: "      resource_group: sqlcrudtest-4799"
     - samples-append-line: "      server_name: sqlcrudtest-5961"
