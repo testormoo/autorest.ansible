@@ -9,6 +9,7 @@ cd /autorest.ansible/scripts
 chmod 777 generate*
 ./generate-$1.sh
 
+ls -al /ansible-hatchery-tmp
 cp -R /ansible-hatchery-tmp/python/all/modules/* /ansible-hatchery/library/
 cp -R /ansible-hatchery-tmp/python/all/tests/* /ansible-hatchery/tests/integration/targets
 cp -R /ansible-hatchery-tmp/all/modules/* /ansible-hatchery/library/
