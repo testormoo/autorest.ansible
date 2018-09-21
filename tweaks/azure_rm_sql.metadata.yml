@@ -20,8 +20,8 @@
 - azure_rm_sqlbackuplongtermretentionvault_facts.server_name:
 - azure_rm_sqlbackuplongtermretentionvault_facts.backup_long_term_retention_vault_name:
 - azure_rm_sqlrestorepoint_facts:
-    - rename: azure_rm_xxx
 - azure_rm_sqlrestorepoint_facts.resource_group_name:
+    - rename: resource_group
 - azure_rm_sqlrestorepoint_facts.server_name:
 - azure_rm_sqlrestorepoint_facts.database_name:
 - azure_rm_sqlrecoverabledatabase_facts:
