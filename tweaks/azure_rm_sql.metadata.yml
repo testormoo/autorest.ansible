@@ -23,6 +23,7 @@
 - azure_rm_sqlrestorepoint_facts.resource_group_name:
     - rename: resource_group
 - azure_rm_sqlrestorepoint_facts.server_name:
+    - rename: xxxxx
 - azure_rm_sqlrestorepoint_facts.database_name:
 - azure_rm_sqlrecoverabledatabase_facts:
 - azure_rm_sqlrecoverabledatabase_facts.resource_group_name:
