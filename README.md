@@ -34,7 +34,7 @@ Find module name in the metadata file and apply rename tweak as follows:
 
 ``` yaml
 - azure_rm_sqlrestorepoint_facts:
-    - rename: azure_rm_xxx
+    - rename: azure_rm_xxxxxxxxxxx_facts
 ```
 
 ## Rename Option
