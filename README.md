@@ -39,6 +39,13 @@ Find module name in the metadata file and apply rename tweak as follows:
 
 ## Rename Option
 
+Renaming options is very simple. Just find appropriate option in metadata file, and add tweak as follows:
+
+``` yaml
+- azure_rm_sqlrestorepoint_facts.resource_group_name:
+    - rename: resource_group
+```
+
 ## Flatten Options
 
 ## Hide Unnecessary Options
