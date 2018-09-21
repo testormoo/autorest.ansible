@@ -30,8 +30,18 @@ autorest --output-folder=/ansible-hatchery-tmp/ --use=/autorest.ansible --python
 and include it in **generate-all.sh** as follows:
 
 ``` bash
+...
+/autorest.ansible/scripts/generate-api-group-name.sh
 ```
- 
+
+## Metadata Template
+
+After adding scripts to generate new API group, generator will run automatically, and you can find your new metadata template in:
+
+https://github.com/zikalino/ansible-hatchery/tree/master/__template
+
+Copy **azure_rm_apigroupname.metadata.template.yml** to https://github.com/zikalino/autorest.ansible/tree/master/tweaks, where you can start modifying it.
+
 # How to tweak generator output?
 
 Following tweaks can be applied to the generator output:
