@@ -9,7 +9,7 @@ namespace AutoRest.Ansible
         public static Tweak[] All =
         {
             new Tweak_Option_Rename("*", "resource_group_name", "resource_group"),
-            new Tweak_Module_Rename("azure_rm_applicationgateway*", "azure_rm_appgw*"),
+            new Tweak_Module_Rename("azure_rm_applicationgateway*", "azure_rm_appgateway*"),
             new Tweak_Option_DefaultValueTest("*", "resource_group_name", "\"{{ resource_group }}\""),
             new Tweak_Option_Required("*", "location", false),
             new Tweak_Response_AddField("*", "id"),

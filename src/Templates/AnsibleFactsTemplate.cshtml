@@ -7,7 +7,7 @@
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
 #!/usr/bin/python
 #
-# Copyright (c) 2017 Zim Kalinowski, <zikalino@microsoft.com>
+# Copyright (c) 2018 Zim Kalinowski, <zikalino@microsoft.com>
 #
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 @EmptyLine
@@ -23,7 +23,7 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 DOCUMENTATION = '''
 ---
 module: @(Model.ModuleNameAlt)
-version_added: "2.5"
+version_added: "2.8"
 short_description: Get @(Model.ObjectName) facts.
 description:
     - Get facts of @(Model.ObjectName).
@@ -36,10 +36,6 @@ options:
 @EmptyLine
 extends_documentation_fragment:
     - azure
-@if (false)
-{
-@:    -azure_tags
-}
 @EmptyLine
 author:
     - "Zim Kalinowski (@@zikalino)"
@@ -147,7 +143,7 @@ else
 @:        :return: deserialized @(Model.ObjectName)instance state dictionary
 @:        '''
 @:        response = None
-@:        results = {}
+@:        results = []
 @:        try:
 foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 {
@@ -161,19 +157,28 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 if (m.Name.Contains("list"))
     {
 @:            for item in response:
-@:                results[item.name] = item.as_dict()
+@:                results.push(format_item(item))
 }
 else
 {
-@:            results[response.name] = response.as_dict()
+@:            results.push(this.format_item(response))
 }
 @EmptyLine
 @:        return results
 }
 @EmptyLine
+    def format_item(self, item):
+        d = item.as_dict()
+        d = {
+            'id': d['id'],
+            'resource_group': self.resource_group
+        }
+        return d
+@EmptyLine
 @EmptyLine
 def main():
     AzureRM@(Model.ModuleOperationNameUpper)Facts()
-
+@EmptyLine
+@EmptyLine
 if __name__ == '__main__':
     main()
