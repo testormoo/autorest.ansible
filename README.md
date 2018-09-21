@@ -28,7 +28,23 @@ Following tweaks can be applied to the generator output:
 
 ## Changing Module Name
 
+Automatically generated modules have pre-assigned names, but they can be renamed by applying appropriate tweak:
+
+Find module name in the metadata file and apply rename tweak as follows:
+
+``` yaml
+- azure_rm_sqlrestorepoint_facts:
+    - rename: azure_rm_xxx
+```
+
 ## Rename Option
+
+Renaming options is very simple. Just find appropriate option in metadata file, and add tweak as follows:
+
+``` yaml
+- azure_rm_sqlrestorepoint_facts.resource_group_name:
+    - rename: resource_group
+```
 
 ## Flatten Options
 
