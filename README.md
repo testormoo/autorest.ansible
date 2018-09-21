@@ -25,14 +25,22 @@ You have to add additional **generate-<module-name>.sh** script in **scripts** s
 # How to tweak generator output?
 
 Following tweaks can be applied to the generator output:
-- change module name
-- rename options
-- flatten options
-- hide unnecessary options
-- change default option values
-- update sample option values
-- update test dependencies
-- update test field values
+
+## Changing Module Name
+
+## Rename Option
+
+## Flatten Options
+
+## Hide Unnecessary Options
+
+## Change Default Option Values
+
+## Update Sample Option Values
+
+## Update Test Dependencies
+
+## Update Test Field Values
 
 Some future plans:
 - flexible REST API -> input parameter mapping
