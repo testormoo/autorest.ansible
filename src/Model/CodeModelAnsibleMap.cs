@@ -56,7 +56,7 @@ namespace AutoRest.Ansible.Model
             {
                 template.Add("- " + m.ModuleName + ":");
                 AppendMetadataTemplateForOptions(template, "- " + m.ModuleName + ".", m.Options);
-                AppendMetadataTemplateForResponse(template, "- " + m.ModuleName + ".response.", m.ModuleResponseFields);
+                AppendMetadataTemplateForResponse(template, "- " + m.ModuleName + ".response.", m.ResponseFields);
             }
         }
 
