@@ -22,6 +22,7 @@ namespace AutoRest.Ansible
                 // module level tweak
                 switch (name)
                 {
+                    case "rename": return new Tweak_Module_Rename(path[0], parameter);
                     case "samples-append-line": return new Tweak_Module_SampleAppendLine(path[0], parameter);
                     case "test-prerequisites-module": return new Tweak_Module_TestPrerequisitesModule(path[0], parameter, null, null);
                 }
