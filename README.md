@@ -18,10 +18,20 @@ where:
 
 **api-to-generate** - what should be generated? Use **all** to generate all configured modules, or **sql**, **mysql**, **keyvault**, etc. Check **scripts** subdirectory for available scripts.
 
-# How to add additional APIs?
+# How to add additional API groups?
 
-You have to add additional **generate-<module-name>.sh** script in **scripts** subfolder, and include it in **generate-all.sh**.
+You have to add additional **generate-api-group-name.sh** script in **scripts** subfolder:
 
+``` bash
+cd /azure-rest-api-specs/specification/api-group-name/resource-manager
+autorest --output-folder=/ansible-hatchery-tmp/ --use=/autorest.ansible --python --tag=package-2017-04-preview
+```
+
+and include it in **generate-all.sh** as follows:
+
+``` bash
+```
+ 
 # How to tweak generator output?
 
 Following tweaks can be applied to the generator output:
