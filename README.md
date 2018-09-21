@@ -18,21 +18,65 @@ where:
 
 **api-to-generate** - what should be generated? Use **all** to generate all configured modules, or **sql**, **mysql**, **keyvault**, etc. Check **scripts** subdirectory for available scripts.
 
-# How to add additional APIs?
+# How to add additional API groups?
 
-You have to add additional **generate-<module-name>.sh** script in **scripts** subfolder, and include it in **generate-all.sh**.
+You have to add additional **generate-api-group-name.sh** script in **scripts** subfolder:
+
+``` bash
+cd /azure-rest-api-specs/specification/api-group-name/resource-manager
+autorest --output-folder=/ansible-hatchery-tmp/ --use=/autorest.ansible --python --tag=package-2017-04-preview
+```
+
+and include it in **generate-all.sh** as follows:
+
+``` bash
+...
+/autorest.ansible/scripts/generate-api-group-name.sh
+```
+
+## Metadata Template
+
+After adding scripts to generate new API group, generator will run automatically, and you can find your new metadata template in:
+
+https://github.com/zikalino/ansible-hatchery/tree/master/__template
+
+Copy **azure_rm_apigroupname.metadata.template.yml** to https://github.com/zikalino/autorest.ansible/tree/master/tweaks, where you can start modifying it.
 
 # How to tweak generator output?
 
 Following tweaks can be applied to the generator output:
-- change module name
-- rename options
-- flatten options
-- hide unnecessary options
-- change default option values
-- update sample option values
-- update test dependencies
-- update test field values
+
+## Changing Module Name
+
+Automatically generated modules have pre-assigned names, but they can be renamed by applying appropriate tweak:
+
+Find module name in the metadata file and apply rename tweak as follows:
+
+``` yaml
+- azure_rm_sqlrestorepoint_facts:
+    - rename: azure_rm_xxxxxxxxxxx_facts
+```
+
+## Rename Option
+
+Renaming options is very simple. Just find appropriate option in metadata file, and add tweak as follows:
+
+``` yaml
+- azure_rm_sqlrestorepoint_facts.resource_group_name:
+    - rename: resource_group
+```
+
+## Flatten Options
+
+## Hide Unnecessary Options
+
+## Change Default Option Values
+
+## Update Sample Option Values
+
+## Update Test Dependencies
+
+## Update Test Field Values
 
 Some future plans:
 - flexible REST API -> input parameter mapping
