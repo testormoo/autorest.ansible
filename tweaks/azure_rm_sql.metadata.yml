@@ -422,6 +422,7 @@
 - azure_rm_sqldatabase_facts.response.location:
 - azure_rm_sqldatabase_facts.response.kind:
 - azure_rm_sqldatabase_facts.response.collation:
+    - add: xxx
 - azure_rm_sqldatabase_facts.response.creation_date:
 - azure_rm_sqldatabase_facts.response.containment_state:
 - azure_rm_sqldatabase_facts.response.current_service_objective_id:
