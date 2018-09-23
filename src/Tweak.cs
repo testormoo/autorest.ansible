@@ -32,7 +32,7 @@ namespace AutoRest.Ansible
                 switch(name)
                 {
                 case "rename":                      return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
-                case "remove":                      return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2));
+                case "remove":                      return new Tweak_Response_RemoveField(path[0], String.Join('.', path, 2, path.Length - 2));
                 case "add":                         return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
                 }
             }
