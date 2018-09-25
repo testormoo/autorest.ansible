@@ -18,3 +18,4 @@ echo "Generating PostgreSQL"
 /autorest.ansible/scripts/generate-keyvault.sh
 /autorest.ansible/scripts/generate-batch.sh
 /autorest.ansible/scripts/generate-batchai.sh
+/autorest.ansible/scripts/generate-cosmos.sh
