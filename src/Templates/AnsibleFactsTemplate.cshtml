@@ -157,11 +157,11 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 if (m.Name.Contains("list"))
     {
 @:            for item in response:
-@:                results.push(format_item(item))
+@:                results.append(format_item(item))
 }
 else
 {
-@:            results.push(this.format_item(response))
+@:            results.append(this.format_item(response))
 }
 @EmptyLine
 @:        return results
