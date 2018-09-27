@@ -170,8 +170,7 @@ else
     def format_item(self, item):
         d = item.as_dict()
         d = {
-            'id': d['id'],
-            'resource_group': self.resource_group
+            'resource_group': self.resource_group,
 @foreach (var line in Model.ModuleReturnResponseDictionary)
 {
 @:@(line)
