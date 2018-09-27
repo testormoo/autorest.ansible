@@ -1434,7 +1434,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else
                     {
-                        help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + "[" + field.Name + "]," );
+                        help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + "['" + field.Name + "']," );
                     }
                 }
             }
