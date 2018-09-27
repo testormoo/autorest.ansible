@@ -1430,7 +1430,7 @@ namespace AutoRest.Ansible.Model
                     {
                         help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + '{' );
                         help.AddRange(GetResponseDictionary(field.SubFields, padding + "  ", srcPrefix + "['" + field.Name + "']"));
-                        help.Add("},");
+                        help.Add(padding + "},");
                     }
                     else
                     {
