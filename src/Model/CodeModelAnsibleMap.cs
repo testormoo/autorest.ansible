@@ -514,6 +514,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string[] ModuleReturnResponseDictionary
+        {
+            get
+            {
+                return GetResponseDictionary(ModuleResponseFields, "            ", "d");
+            }
+        }
+
         public string[] ModuleFactsReturnResponseFields
         {
             get
@@ -1399,6 +1407,34 @@ namespace AutoRest.Ansible.Model
                     {
                         help.Add(padding + "    contains:");
                         help.AddRange(GetHelpFromResponseFields(field.SubFields, padding + "        "));
+                    }
+                }
+            }
+
+            return help.ToArray();
+        }
+
+        private string[] GetResponseDictionary(ModuleResponseField[] fields, string padding, string srcPrefix)
+        {
+            List<string> help = new List<string>();
+
+            if (fields != null)
+            {
+                foreach (var field in fields)
+                {
+                    // setting nameAlt to empty or "x" will remove the field
+                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
+                        continue;
+
+                    if (field.SubFields != null && field.SubFields.Length > 0)
+                    {
+                        help.Add(padding + "'"field.NameAlt + "': " + srcPrefix + '{' );
+                        help.AddRange(GetResponseDictionary(field.SubFields, padding + "  ", srcPrefix + "['" + field.Name + "']"));
+                        help.Add('},' );
+                    }
+                    else
+                    {
+                        help.Add(padding + "'"field.NameAlt + "': " + srcPrefix + '[' + field.Name + '],' );
                     }
                 }
             }

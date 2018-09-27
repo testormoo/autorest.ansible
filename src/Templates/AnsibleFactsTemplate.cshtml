@@ -172,6 +172,10 @@ else
         d = {
             'id': d['id'],
             'resource_group': self.resource_group
+@foreach (var line in Model.ModuleReturnResponseDictionary)
+{
+@:@(line)
+}
         }
         return d
 @EmptyLine
