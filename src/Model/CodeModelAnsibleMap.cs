@@ -1420,8 +1420,10 @@ namespace AutoRest.Ansible.Model
 
             if (fields != null)
             {
-                foreach (var field in fields)
+                foreach (int i = 0; i < fields.Length; i++)
                 {
+                    ModuleResponseField field = fields[i];
+                    bool last = (i == fields.Length - 1);
                     // setting nameAlt to empty or "x" will remove the field
                     if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
                         continue;
@@ -1430,11 +1432,11 @@ namespace AutoRest.Ansible.Model
                     {
                         help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + '{' );
                         help.AddRange(GetResponseDictionary(field.SubFields, padding + "  ", srcPrefix + "['" + field.Name + "']"));
-                        help.Add(padding + "},");
+                        help.Add(padding + "}" + (last ? "" : ","));
                     }
                     else
                     {
-                        help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + "['" + field.Name + "']," );
+                        help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + "['" + field.Name + "']" + (last ? "" : ","));
                     }
                 }
             }
