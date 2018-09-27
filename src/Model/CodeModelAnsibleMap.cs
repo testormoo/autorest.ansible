@@ -1420,7 +1420,7 @@ namespace AutoRest.Ansible.Model
 
             if (fields != null)
             {
-                foreach (int i = 0; i < fields.Length; i++)
+                for (int i = 0; i < fields.Length; i++)
                 {
                     ModuleResponseField field = fields[i];
                     bool last = (i == fields.Length - 1);
