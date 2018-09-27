@@ -862,6 +862,9 @@ namespace AutoRest.Ansible.Model
                     case (char)8221:
                         a[i] = '"';
                         break;
+                    case (char)0xe2:
+                        '-';
+                        break;
                 }
             }
 
