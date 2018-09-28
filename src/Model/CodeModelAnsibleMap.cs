@@ -1425,7 +1425,7 @@ namespace AutoRest.Ansible.Model
                 {
                     if (!first)
                     {
-                        help[help.Length - 1] += ",";
+                        help[help.Count - 1] += ",";
                     }
 
                     ModuleResponseField field = fields[i];
