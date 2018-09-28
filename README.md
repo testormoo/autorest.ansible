@@ -113,6 +113,20 @@ Renaming options is very simple. Just find appropriate option in metadata file, 
 
 ## Update Test Field Values
 
+## Rename Return Value
+
+``` yaml
+- azure_rm_mysqlserver_facts.response.sku.name:
+    - rename: new_name
+```
+
+## Collapse Return value
+
+``` yaml
+- azure_rm_mysqlserver_facts.response.sku:
+    - collapse
+```
+
 Some future plans:
 - flexible REST API -> input parameter mapping
 - flexible REST API -> facts return values mapping

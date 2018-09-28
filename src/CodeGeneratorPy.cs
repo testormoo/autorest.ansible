@@ -79,10 +79,12 @@ namespace AutoRest.Ansible
                         {
                             int position = l.IndexOf(':');
 
+                            if (position < 0) position = l.Length;
+
                             if (position > 0)
                             {
                                 string tweakName = l.Substring(6, position - 6).Trim();
-                                string tweakValue = l.Substring(position + 1).Trim();
+                                string tweakValue = (position < l.Length - 1) ?  l.Substring(position + 1).Trim() : "";
                                 if (tweakValue.Length > 0 &&  tweakValue[0] == '"')
                                 {
                                     if (tweakValue.Length > 2)
