@@ -897,7 +897,7 @@ namespace AutoRest.Ansible
         public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             Model.ModuleResponseField field = GetResultField(m, _map, _path);
-            if (field != null) field.Collapse = true;
+            if (field != null) field.Collapsed = true;
             return (field != null);
         }
 
