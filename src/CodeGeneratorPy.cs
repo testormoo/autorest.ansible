@@ -113,9 +113,10 @@ namespace AutoRest.Ansible
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 map.Info.Add("NO TWEAK FILE FOUND: " + "./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml");
+                map.Info.Add(e.ToString());
             }
 
             CodeModelAnsibleMap codeModelPure = null;
