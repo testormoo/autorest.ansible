@@ -70,6 +70,7 @@ namespace AutoRest.Ansible.Model
             SubFields = null; // if dictionary or list of dictionaries
             Description = description;
             SampleValue = sampleValue;
+            Collapsed = false;
         }
 
         public string Name { get; set; }
@@ -83,6 +84,7 @@ namespace AutoRest.Ansible.Model
         public ModuleResponseField[] SubFields { get; set; }
 
         public string Info { get; set; }
+        public bool Collapsed { get; set; }
     }
 
     public class ModuleMethod

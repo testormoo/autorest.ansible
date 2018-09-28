@@ -31,6 +31,7 @@ namespace AutoRest.Ansible
             {
                 switch(name)
                 {
+                case "collapse":                    return new Tweak_Response_CollapseField(path[0], String.Join('.', path, 2, path.Length - 2));
                 case "rename":                      return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
                 case "remove":                      return new Tweak_Response_RemoveField(path[0], String.Join('.', path, 2, path.Length - 2));
                 case "add":                         return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
@@ -883,6 +884,24 @@ namespace AutoRest.Ansible
         private string[] _path;
         private string _newName;
         private int _levelChange;
+    }
+
+    class Tweak_Response_CollapseField : Tweak_Response
+    {
+        public Tweak_Response_RenameField(string module, string path)
+        {
+            _module = module;
+            _path = path.Split(".");
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleResponseField field = GetResultField(m, _map, _path);
+            if (field != null) field.Collapse = true;
+            return (field != null);
+        }
+
+        private string[] _path;
     }
 
     class Tweak_Response_RemoveField : Tweak_Response_RenameField

@@ -1437,9 +1437,16 @@ namespace AutoRest.Ansible.Model
 
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
-                        help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + '{' );
-                        help.AddRange(GetResponseDictionary(field.SubFields, padding + "  ", srcPrefix + "['" + field.Name + "']"));
-                        help.Add(padding + "}");
+                        if (!field.Collapsed)
+                        {
+                            help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + '{' );
+                            help.AddRange(GetResponseDictionary(field.SubFields, padding + "  ", srcPrefix + "['" + field.Name + "']"));
+                            help.Add(padding + "}");
+                        }
+                        else
+                        {
+                            help.AddRange(GetResponseDictionary(field.SubFields, padding, srcPrefix + "['" + field.Name + "']"));
+                        }
                     }
                     else
                     {
