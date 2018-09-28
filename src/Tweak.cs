@@ -888,7 +888,7 @@ namespace AutoRest.Ansible
 
     class Tweak_Response_CollapseField : Tweak_Response
     {
-        public Tweak_Response_RenameField(string module, string path)
+        public Tweak_Response_CollapseField(string module, string path)
         {
             _module = module;
             _path = path.Split(".");
