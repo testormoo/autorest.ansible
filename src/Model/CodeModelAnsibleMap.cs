@@ -1420,12 +1420,13 @@ namespace AutoRest.Ansible.Model
 
             if (fields != null)
             {
-                bool first = true;
+                bool coma = false;
                 for (int i = 0; i < fields.Length; i++)
                 {
-                    if (!first)
+                    if (coma)
                     {
                         help[help.Count - 1] += ",";
+                        coma = false;
                     }
 
                     ModuleResponseField field = fields[i];
@@ -1444,7 +1445,7 @@ namespace AutoRest.Ansible.Model
                     {
                         help.Add(padding + "'" + field.NameAlt + "': " + srcPrefix + "['" + field.Name + "']");
                     }
-                    first = false;
+                    coma = true;
                 }
             }
 
