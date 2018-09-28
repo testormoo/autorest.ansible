@@ -1423,17 +1423,17 @@ namespace AutoRest.Ansible.Model
                 bool coma = false;
                 for (int i = 0; i < fields.Length; i++)
                 {
-                    if (coma)
-                    {
-                        help[help.Count - 1] += ",";
-                        coma = false;
-                    }
-
                     ModuleResponseField field = fields[i];
                     bool last = (i == fields.Length - 1);
                     // setting nameAlt to empty or "x" will remove the field
                     if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
                         continue;
+
+                    if (coma)
+                    {
+                        help[help.Count - 1] += ",";
+                        coma = false;
+                    }
 
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
