@@ -234,17 +234,6 @@ else
                 return self.results
 @EmptyLine
             response = self.create_update_@(Model.ObjectNamePythonized)()
-@{
-    var stmts = Model.DeleteResponseNoLogFields;
-
-    if (stmts.Length > 0)
-    {
-        foreach (var s in stmts)
-        {
-@:            @(s)
-        }
-    }
-}
 @EmptyLine
             if not old_response:
                 self.results['changed'] = True

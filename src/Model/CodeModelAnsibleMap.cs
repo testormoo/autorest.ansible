@@ -1229,101 +1229,6 @@ namespace AutoRest.Ansible.Model
             return help.ToArray();
         }
 
-        public string[] DeleteResponseNoLogFields
-        {
-            get
-            {
-                return GetDeleteResponseNoLogFields(ModuleResponseFields, "response");
-            }
-        }
-
-        private string[] GetDeleteResponseNoLogFields(ModuleResponseField[] fields, string responseDict)
-        {
-            List<string> statements = new List<string>();
-
-            foreach (var field in fields)
-            {
-                if (field.NameAlt == "nl")
-                {
-                    string statement = responseDict + ".pop('" + field.Name + "', None)";
-                    statements.Add(statement);
-                }
-                else
-                {
-                    // XXX - not for now
-                    //if (field.SubFields != null)
-                    //{
-                    //    statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
-                    //}
-                }
-            }
-
-            return statements.ToArray();
-        }
-
-        public string[] DeleteResponseFieldStatements
-        {
-            get
-            {
-                return GetExcludedResponseFieldDeleteStatements(ModuleResponseFields, "self.results");
-            }
-        }
-
-        private string[] GetExcludedResponseFieldDeleteStatements(ModuleResponseField[] fields, string responseDict)
-        {
-            List<string> statements = new List<string>();
-
-            foreach (var field in fields)
-            {
-                if (field.NameAlt == "" || field.NameAlt.ToLower() == "x")
-                {
-                    string statement = responseDict + ".pop('" + field.Name + "', None)";
-                    statements.Add(statement);
-                }
-                else
-                {
-                    if (field.SubFields != null)
-                    {
-                        statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
-                    }
-                }
-            }
-
-            return statements.ToArray();
-        }
-
-        public string[] ResponseFieldStatements
-        {
-            get
-            {
-                return GetResponseFieldStatements(ModuleResponseFields, "self.results");
-            }
-        }
-
-        private string[] GetResponseFieldStatements(ModuleResponseField[] fields, string responseDict)
-        {
-            List<string> statements = new List<string>();
-
-            foreach (var field in fields)
-            {
-                if (field.NameAlt != "" && field.NameAlt.ToLower() != "x" && field.NameAlt.ToLower() != "nl")
-                {
-                    string statement = responseDict + "[\"" + field.NameAlt + "\"] = response[\"" + field.Name + "\"]";
-                    statements.Add(statement);
-                }
-                else
-                {
-                    // XXX - no need now
-                    //if (field.SubFields != null)
-                    //{
-                    //    statements.AddRange(GetExcludedResponseFieldDeleteStatements(field.SubFields, responseDict + "[" + field.Name + "]"));
-                    //}
-                }
-            }
-
-            return statements.ToArray();
-        }
-
         public string[] FixParameterStatements
         {
             get
@@ -1386,7 +1291,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var field in fields)
                 {
                     // setting nameAlt to empty or "x" will remove the field
-                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
+                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x"
                         continue;
 
                     if (!field.Collapsed)
@@ -1432,7 +1337,7 @@ namespace AutoRest.Ansible.Model
                     ModuleResponseField field = fields[i];
                     bool last = (i == fields.Length - 1);
                     // setting nameAlt to empty or "x" will remove the field
-                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
+                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x")
                         continue;
 
                     if (coma)
