@@ -1393,16 +1393,19 @@ namespace AutoRest.Ansible.Model
                     if (field.NameAlt == "" || field.NameAlt.ToLower() == "x" || field.NameAlt.ToLower() == "nl")
                         continue;
 
-                    string doc = NormalizeString(field.Description);
-                    help.Add(padding + field.NameAlt + ":");
-                    help.Add(padding + "    description:");
-                    help.AddRange(WrapString(padding + "        - ", doc));
+                    if (!field.Collapsed)
+                    {
+                        string doc = NormalizeString(field.Description);
+                        help.Add(padding + field.NameAlt + ":");
+                        help.Add(padding + "    description:");
+                        help.AddRange(WrapString(padding + "        - ", doc));
 
-                    help.Add(padding + "    returned: " + field.Returned);
-                    help.Add(padding + "    type: " + field.Type);
+                        help.Add(padding + "    returned: " + field.Returned);
+                        help.Add(padding + "    type: " + field.Type);
 
-                    help.AddRange(WrapString(padding + "    sample: ", field.SampleValue));
-
+                        help.AddRange(WrapString(padding + "    sample: ", field.SampleValue));
+                    }
+                    
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
                         if (field.Collapsed)
