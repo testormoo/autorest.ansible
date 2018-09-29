@@ -527,16 +527,7 @@ namespace AutoRest.Ansible.Model
             get
             {
                 List<string> help = new List<string>();
-                help.Add(ModuleOperationName + ":");
-                help.Add("    description: A list of dict results where the key is the name of the " + ObjectName + " and the values are the facts for that " + ObjectName + ".");
-                help.Add("    returned: always");
-                help.Add("    type: complex");
-                help.Add("    contains:");
-                help.Add("        " + ObjectNamePythonized + "_name:");
-                help.Add("            description: The key is the name of the server that the values relate to.");
-                help.Add("            type: complex");
-                help.Add("            contains:");
-                help.AddRange(GetHelpFromResponseFields(ModuleResponseFields, "                "));
+                help.AddRange(GetHelpFromResponseFields(ModuleResponseFields, "    "));
                 return help.ToArray();
             }
         }
@@ -1405,7 +1396,7 @@ namespace AutoRest.Ansible.Model
 
                         help.AddRange(WrapString(padding + "    sample: ", field.SampleValue));
                     }
-                    
+
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
                         if (field.Collapsed)
