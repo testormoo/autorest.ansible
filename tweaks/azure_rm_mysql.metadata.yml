@@ -37,6 +37,7 @@
 - azure_rm_mysqlserver.response.ssl_enforcement:
     - rename: enforce_ssl
 - azure_rm_mysqlserver.response.user_visible_state:
+    - rename: state
 - azure_rm_mysqlserver.response.fully_qualified_domain_name:
 - azure_rm_mysqlserver_facts:
     - object_name: MySQL Server
@@ -61,6 +62,7 @@
 - azure_rm_mysqlserver_facts.response.version:
 - azure_rm_mysqlserver_facts.response.ssl_enforcement:
 - azure_rm_mysqlserver_facts.response.user_visible_state:
+    - rename: state
 - azure_rm_mysqlserver_facts.response.fully_qualified_domain_name:
 - azure_rm_mysqlfirewallrule:
     - object_name: MySQL Firewall Rule

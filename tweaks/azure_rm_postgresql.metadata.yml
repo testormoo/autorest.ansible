@@ -37,6 +37,7 @@
 - azure_rm_postgresqlserver.response.ssl_enforcement:
     - rename: enforce_ssl
 - azure_rm_postgresqlserver.response.user_visible_state:
+    - rename: state
 - azure_rm_postgresqlserver.response.fully_qualified_domain_name:
 - azure_rm_postgresqlserver_facts:
     - object_name: PostgreSQL Server
@@ -59,6 +60,7 @@
 - azure_rm_postgresqlserver_facts.response.version:
 - azure_rm_postgresqlserver_facts.response.ssl_enforcement:
 - azure_rm_postgresqlserver_facts.response.user_visible_state:
+    rename: state
 - azure_rm_postgresqlserver_facts.response.fully_qualified_domain_name:
 - azure_rm_postgresqlfirewallrule:
     - object_name: PostgreSQL Firewall Rule
