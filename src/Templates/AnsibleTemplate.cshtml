@@ -261,7 +261,7 @@ else
             self.delete_@(Model.ObjectNamePythonized)()
 
             # make sure instance is actually deleted, for some Azure resources, instance is hanging around
-            # for some time after deletion -- this should be really fixed in Azure
+            # for some time after deletion -- this should be really fixed in Azure.
             while self.get_@(Model.ObjectNamePythonized)():
                 time.sleep(20)
         else:
