@@ -911,13 +911,6 @@ namespace AutoRest.Ansible
         }
     }
 
-    class Tweak_Response_SetFieldNoLog : Tweak_Response_RenameField
-    {
-        public Tweak_Response_SetFieldNoLog(string module, string path) : base(module, path, "nl", 0)
-        {
-        }
-    }
-
     class Tweak_Response_AddField : Tweak_Response
     {
         public Tweak_Response_AddField(string module, string path)
