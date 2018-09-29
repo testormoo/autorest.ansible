@@ -6,6 +6,7 @@
 - azure_rm_vault.location:
 - azure_rm_vault.properties:
 - azure_rm_vault.tenant_id:
+    - rename: vault_tenant
     - documentation-append-line: Current tenant will be used as default if not specified.
 - azure_rm_vault.sku:
 - azure_rm_vault.sku.family:
@@ -27,6 +28,7 @@
 - azure_rm_vault.enabled_for_template_deployment:
 - azure_rm_vault.enable_soft_delete:
 - azure_rm_vault.create_mode:
+    - rename: recover_mode
 - azure_rm_vault.response.id:
 - azure_rm_vault.response.name:
 - azure_rm_vault.response.type:

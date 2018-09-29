@@ -22,9 +22,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("*", "location", "eastus"),
 
             // SQL Server
-            new Tweak_Option_Rename("azure_rm_sqlserver", "server_name", "name"),
-            new Tweak_Option_Rename("azure_rm_sqlserver", "administrator_login", "admin_username"),
-            new Tweak_Option_Rename("azure_rm_sqlserver", "administrator_login_password", "admin_password"),
             new Tweak_Option_Rename("azure_rm_sqlserver", "identity.type", "identity"),
             new Tweak_Option_DocumentationAppend("azure_rm_sqlserver", "version", " For example '12.0'."),
             new Tweak_Option_DefaultValueSample("azure_rm_sqlserver", "resource_group_name", "resource_group"),
@@ -51,7 +48,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver_facts", "server_name", "sqlsrv{{ rpfx }}"),
 
             // SQL Database
-            new Tweak_Option_Rename("azure_rm_sqldatabase", "database_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "database_name", "database{{ rpfx }}"),
@@ -78,7 +74,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "database_name", "database{{ rpfx }}"),
 
             // SQL Elastic Pool
-            new Tweak_Option_Rename("azure_rm_sqlelasticpool", "elastic_pool_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool", "azure_rm_sqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "elastic_pool_name", "elasticpool{{ rpfx }}"),
@@ -92,7 +87,6 @@ namespace AutoRest.Ansible
 
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_sqlfirewallrule", "firewall_rule_name", "name"),
             new Tweak_Option_Required("azure_rm_sqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_sqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "server_name", "sqlsrv{{ rpfx }}"),
@@ -112,7 +106,6 @@ namespace AutoRest.Ansible
 
             // SQL Geo Backup Policy
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy", "azure_rm_sqldatabase", null, null),
-            new Tweak_Option_Rename("azure_rm_sqlgeobackuppolicy", "state", "policy_state"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "database_name", "database{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "geo_backup_policy_name", "geo-policy-name"),
@@ -125,11 +118,7 @@ namespace AutoRest.Ansible
 
 
             // MySQL Server
-            new Tweak_Option_Rename("azure_rm_mysqlserver", "server_name", "name"),
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
-            new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login", "admin_username"),
-            new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login_password", "admin_password"),
-            new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.ssl_enforcement", "enforce_ssl"),
             new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
             new Tweak_Option_Required("azure_rm_mysqlserver", "properties", false),
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "sku.family", true, true),
@@ -161,7 +150,6 @@ namespace AutoRest.Ansible
 
             // MySQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_mysqldatabase", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "database_name", "testdatabase"),
             new Tweak_Module_AddUpdateRule("azure_rm_mysqldatabase", "parameters['collation']", "collation"),
@@ -181,7 +169,6 @@ namespace AutoRest.Ansible
 
             // MySQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_mysqlfirewallrule", "firewall_rule_name", "name"),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "server_name", "mysqlsrv{{ rpfx }}"),
@@ -201,7 +188,6 @@ namespace AutoRest.Ansible
 
             // MySQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_mysqlconfiguration", "configuration_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "configuration_name", "event_scheduler"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "value", "\"ON\""),
@@ -217,7 +203,6 @@ namespace AutoRest.Ansible
 
             // MySQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "virtual_network_rule_name", "test-virtual-network-rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule", "virtual_network_subnet_id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}"),
@@ -265,11 +250,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqllogfile_facts", "server_name", "mysqlsrv{{ rpfx }}"),
 
             // PostgreSQL Server
-            new Tweak_Option_Rename("azure_rm_postgresqlserver", "server_name", "name"),
             new Tweak_Option_Exclude("azure_rm_postgresqlserver", "properties.create_mode", true, false),
-            new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login", "admin_username"),
-            new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login_password", "admin_password"),
-            new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.ssl_enforcement", "enforce_ssl"),
             new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "location", "westus"),
             new Tweak_Option_Required("azure_rm_postgresqlserver", "properties", false),
@@ -300,7 +281,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_postgresqldatabase", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "database_name", "testdatabase"),
             new Tweak_Module_AddUpdateRule("azure_rm_postgresqldatabase", "parameters['collation']", "collation"),
@@ -320,7 +300,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_postgresqlfirewallrule", "firewall_rule_name", "name"),
             new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "start_ip_address", false),
             new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "server_name", "postgresqlsrv{{ rpfx }}"),
@@ -340,7 +319,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_postgresqlconfiguration", "configuration_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "configuration_name", "deadlock_timeout"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration", "value", "2000"),
@@ -356,7 +334,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlvirtualnetworkrule", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Option_Rename("azure_rm_postgresqlvirtualnetworkrule", "virtual_network_rule_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule", "virtual_network_rule_name", "test-virtual-network-rule"),
 
@@ -379,7 +356,6 @@ namespace AutoRest.Ansible
 
             // Application Gateway
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
-            new Tweak_Option_Rename("azure_rm_applicationgateway", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "sku.name", "Standard_Small"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "sku.tier", "Standard"),
@@ -441,7 +417,6 @@ namespace AutoRest.Ansible
                                                     //"    resource_group: \"{{ resource_group }}\"",
                                                     //"    state: absent" }),
 
-            new Tweak_Option_Rename("azure_rm_applicationgateway_facts", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
 
             // Application Gateway Application Security Group
@@ -639,8 +614,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_Flatten("azure_rm_vault", "properties.access_policies.permissions", ""),
             new Tweak_Option_Flatten("azure_rm_vault", "properties", ""),
 
-            new Tweak_Option_Rename("azure_rm_vault", "tenant_id", "vault_tenant"),
-            new Tweak_Option_Rename("azure_rm_vault", "create_mode", "recover_mode"),
             new Tweak_Option_Exclude("azure_rm_vault", "vault_uri", true, true),
             new Tweak_Option_SetType("azure_rm_vault", "enabled_for_deployment", "bool"),
             new Tweak_Option_SetType("azure_rm_vault", "enabled_for_disk_encryption", "bool"),
@@ -663,10 +636,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "sku.name", "standard"),
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.tenant_id", "72f98888-8666-4144-9199-2d7cd0111111"),
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.object_id", "99998888-8666-4144-9199-2d7cd0111111"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.keys", "get"),
-
-            //new Tweak_Option_Rename("azure_rm_vault", "properties.access_policies", "moo"),
-            //new Tweak_Option_Rename("azure_rm_vault", "properties", "kfiii"),
+            new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.keys", "get")
         };
     }
 }

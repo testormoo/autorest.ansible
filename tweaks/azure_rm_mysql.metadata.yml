@@ -2,6 +2,7 @@
     - object_name: MySQL Server
 - azure_rm_mysqlserver.resource_group_name:
 - azure_rm_mysqlserver.server_name:
+    - rename: name
 - azure_rm_mysqlserver.parameters:
 - azure_rm_mysqlserver.sku:
 - azure_rm_mysqlserver.sku.name:
@@ -16,7 +17,9 @@
 - azure_rm_mysqlserver.ssl_enforcement:
 - azure_rm_mysqlserver.create_mode:
 - azure_rm_mysqlserver.administrator_login:
+    - rename: admin_username
 - azure_rm_mysqlserver.administrator_login_password:
+    - rename: admin_password
 - azure_rm_mysqlserver.response.id:
 - azure_rm_mysqlserver.response.name:
 - azure_rm_mysqlserver.response.type:
@@ -32,12 +35,14 @@
 - azure_rm_mysqlserver.response.storage_mb:
 - azure_rm_mysqlserver.response.version:
 - azure_rm_mysqlserver.response.ssl_enforcement:
+    - rename: enforce_ssl
 - azure_rm_mysqlserver.response.user_visible_state:
 - azure_rm_mysqlserver.response.fully_qualified_domain_name:
 - azure_rm_mysqlserver_facts:
     - object_name: MySQL Server
 - azure_rm_mysqlserver_facts.resource_group_name:
 - azure_rm_mysqlserver_facts.server_name:
+    - rename: name
 - azure_rm_mysqlserver_facts.response.id:
 - azure_rm_mysqlserver_facts.response.name:
 - azure_rm_mysqlserver_facts.response.type:
@@ -75,6 +80,7 @@
 - azure_rm_mysqlfirewallrule_facts.resource_group_name:
 - azure_rm_mysqlfirewallrule_facts.server_name:
 - azure_rm_mysqlfirewallrule_facts.firewall_rule_name:
+    - rename: name
 - azure_rm_mysqlfirewallrule_facts.response.id:
 - azure_rm_mysqlfirewallrule_facts.response.name:
 - azure_rm_mysqlfirewallrule_facts.response.type:
@@ -85,6 +91,7 @@
 - azure_rm_mysqlvirtualnetworkrule.resource_group_name:
 - azure_rm_mysqlvirtualnetworkrule.server_name:
 - azure_rm_mysqlvirtualnetworkrule.virtual_network_rule_name:
+    - rename: name
 - azure_rm_mysqlvirtualnetworkrule.parameters:
 - azure_rm_mysqlvirtualnetworkrule.virtual_network_subnet_id:
 - azure_rm_mysqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
@@ -99,6 +106,7 @@
 - azure_rm_mysqlvirtualnetworkrule_facts.resource_group_name:
 - azure_rm_mysqlvirtualnetworkrule_facts.server_name:
 - azure_rm_mysqlvirtualnetworkrule_facts.virtual_network_rule_name:
+    - rename: name
 - azure_rm_mysqlvirtualnetworkrule_facts.response.id:
 - azure_rm_mysqlvirtualnetworkrule_facts.response.name:
 - azure_rm_mysqlvirtualnetworkrule_facts.response.type:
@@ -110,6 +118,7 @@
 - azure_rm_mysqldatabase.resource_group_name:
 - azure_rm_mysqldatabase.server_name:
 - azure_rm_mysqldatabase.database_name:
+    - rename: name
 - azure_rm_mysqldatabase.parameters:
 - azure_rm_mysqldatabase.charset:
 - azure_rm_mysqldatabase.collation:
@@ -123,6 +132,7 @@
 - azure_rm_mysqldatabase_facts.resource_group_name:
 - azure_rm_mysqldatabase_facts.server_name:
 - azure_rm_mysqldatabase_facts.database_name:
+    - rename: name
 - azure_rm_mysqldatabase_facts.response.id:
 - azure_rm_mysqldatabase_facts.response.name:
 - azure_rm_mysqldatabase_facts.response.type:
@@ -133,6 +143,7 @@
 - azure_rm_mysqlconfiguration.resource_group_name:
 - azure_rm_mysqlconfiguration.server_name:
 - azure_rm_mysqlconfiguration.configuration_name:
+    - rename: name
 - azure_rm_mysqlconfiguration.parameters:
 - azure_rm_mysqlconfiguration.value:
 - azure_rm_mysqlconfiguration.source:
@@ -149,6 +160,7 @@
 - azure_rm_mysqlconfiguration_facts.resource_group_name:
 - azure_rm_mysqlconfiguration_facts.server_name:
 - azure_rm_mysqlconfiguration_facts.configuration_name:
+    - rename: name
 - azure_rm_mysqlconfiguration_facts.response.id:
 - azure_rm_mysqlconfiguration_facts.response.name:
 - azure_rm_mysqlconfiguration_facts.response.type:

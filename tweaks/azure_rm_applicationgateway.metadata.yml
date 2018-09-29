@@ -2,6 +2,7 @@
     - rename: azure_rm_appgateway
 - azure_rm_applicationgateway.resource_group_name:
 - azure_rm_applicationgateway.application_gateway_name:
+    - rename: name
 - azure_rm_applicationgateway.parameters:
 - azure_rm_applicationgateway.id:
 - azure_rm_applicationgateway.location:
@@ -660,6 +661,7 @@
 - azure_rm_applicationgateway_facts:
 - azure_rm_applicationgateway_facts.resource_group_name:
 - azure_rm_applicationgateway_facts.application_gateway_name:
+    - rename: name
 - azure_rm_applicationgateway_facts.response.id:
 - azure_rm_applicationgateway_facts.response.name:
 - azure_rm_applicationgateway_facts.response.type:

@@ -2,6 +2,7 @@
     - object_name: PostgreSQL Server
 - azure_rm_postgresqlserver.resource_group_name:
 - azure_rm_postgresqlserver.server_name:
+    - rename: name
 - azure_rm_postgresqlserver.parameters:
 - azure_rm_postgresqlserver.sku:
 - azure_rm_postgresqlserver.sku.name:
@@ -16,7 +17,9 @@
 - azure_rm_postgresqlserver.ssl_enforcement:
 - azure_rm_postgresqlserver.create_mode:
 - azure_rm_postgresqlserver.administrator_login:
+    - rename: admin_username
 - azure_rm_postgresqlserver.administrator_login_password:
+    - rename: admin_password
 - azure_rm_postgresqlserver.response.id:
 - azure_rm_postgresqlserver.response.name:
 - azure_rm_postgresqlserver.response.type:
@@ -32,12 +35,14 @@
 - azure_rm_postgresqlserver.response.storage_mb:
 - azure_rm_postgresqlserver.response.version:
 - azure_rm_postgresqlserver.response.ssl_enforcement:
+    - rename: enforce_ssl
 - azure_rm_postgresqlserver.response.user_visible_state:
 - azure_rm_postgresqlserver.response.fully_qualified_domain_name:
 - azure_rm_postgresqlserver_facts:
     - object_name: PostgreSQL Server
 - azure_rm_postgresqlserver_facts.resource_group_name:
 - azure_rm_postgresqlserver_facts.server_name:
+    - rename: name
 - azure_rm_postgresqlserver_facts.response.id:
 - azure_rm_postgresqlserver_facts.response.name:
 - azure_rm_postgresqlserver_facts.response.type:
@@ -60,6 +65,7 @@
 - azure_rm_postgresqlfirewallrule.resource_group_name:
 - azure_rm_postgresqlfirewallrule.server_name:
 - azure_rm_postgresqlfirewallrule.firewall_rule_name:
+    - rename: name
 - azure_rm_postgresqlfirewallrule.parameters:
 - azure_rm_postgresqlfirewallrule.start_ip_address:
 - azure_rm_postgresqlfirewallrule.end_ip_address:
@@ -73,6 +79,7 @@
 - azure_rm_postgresqlfirewallrule_facts.resource_group_name:
 - azure_rm_postgresqlfirewallrule_facts.server_name:
 - azure_rm_postgresqlfirewallrule_facts.firewall_rule_name:
+    - rename: name
 - azure_rm_postgresqlfirewallrule_facts.response.id:
 - azure_rm_postgresqlfirewallrule_facts.response.name:
 - azure_rm_postgresqlfirewallrule_facts.response.type:
@@ -83,6 +90,7 @@
 - azure_rm_postgresqlvirtualnetworkrule.resource_group_name:
 - azure_rm_postgresqlvirtualnetworkrule.server_name:
 - azure_rm_postgresqlvirtualnetworkrule.virtual_network_rule_name:
+    - rename: name
 - azure_rm_postgresqlvirtualnetworkrule.parameters:
 - azure_rm_postgresqlvirtualnetworkrule.virtual_network_subnet_id:
 - azure_rm_postgresqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
@@ -97,6 +105,7 @@
 - azure_rm_postgresqlvirtualnetworkrule_facts.resource_group_name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.server_name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.virtual_network_rule_name:
+    - rename: name
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.id:
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.type:
@@ -108,6 +117,7 @@
 - azure_rm_postgresqldatabase.resource_group_name:
 - azure_rm_postgresqldatabase.server_name:
 - azure_rm_postgresqldatabase.database_name:
+    - rename: name
 - azure_rm_postgresqldatabase.parameters:
 - azure_rm_postgresqldatabase.charset:
 - azure_rm_postgresqldatabase.collation:
@@ -121,6 +131,7 @@
 - azure_rm_postgresqldatabase_facts.resource_group_name:
 - azure_rm_postgresqldatabase_facts.server_name:
 - azure_rm_postgresqldatabase_facts.database_name:
+    - rename: name
 - azure_rm_postgresqldatabase_facts.response.id:
 - azure_rm_postgresqldatabase_facts.response.name:
 - azure_rm_postgresqldatabase_facts.response.type:
@@ -131,6 +142,7 @@
 - azure_rm_postgresqlconfiguration.resource_group_name:
 - azure_rm_postgresqlconfiguration.server_name:
 - azure_rm_postgresqlconfiguration.configuration_name:
+    - rename: name
 - azure_rm_postgresqlconfiguration.parameters:
 - azure_rm_postgresqlconfiguration.value:
 - azure_rm_postgresqlconfiguration.source:
@@ -148,6 +160,7 @@
 - azure_rm_postgresqlconfiguration_facts.resource_group_name:
 - azure_rm_postgresqlconfiguration_facts.server_name:
 - azure_rm_postgresqlconfiguration_facts.configuration_name:
+    - rename: name
 - azure_rm_postgresqlconfiguration_facts.response.id:
 - azure_rm_postgresqlconfiguration_facts.response.name:
 - azure_rm_postgresqlconfiguration_facts.response.type:
