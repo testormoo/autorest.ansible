@@ -1291,7 +1291,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var field in fields)
                 {
                     // setting nameAlt to empty or "x" will remove the field
-                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x"
+                    if (field.NameAlt == "" || field.NameAlt.ToLower() == "x")
                         continue;
 
                     if (!field.Collapsed)
