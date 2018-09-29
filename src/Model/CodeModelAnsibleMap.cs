@@ -527,7 +527,8 @@ namespace AutoRest.Ansible.Model
             get
             {
                 List<string> help = new List<string>();
-                help.AddRange(GetHelpFromResponseFields(ModuleResponseFields, "    "));
+                help.Add(ModuleOperationName + ":");
+                help.AddRange(GetHelpFromResponseFields(ModuleResponseFields, "        "));
                 return help.ToArray();
             }
         }
