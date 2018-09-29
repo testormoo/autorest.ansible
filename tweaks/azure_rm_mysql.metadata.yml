@@ -71,7 +71,9 @@
 - azure_rm_mysqlfirewallrule.firewall_rule_name:
 - azure_rm_mysqlfirewallrule.parameters:
 - azure_rm_mysqlfirewallrule.start_ip_address:
+    - required: no
 - azure_rm_mysqlfirewallrule.end_ip_address:
+    - required: no
 - azure_rm_mysqlfirewallrule.response.id:
 - azure_rm_mysqlfirewallrule.response.name:
 - azure_rm_mysqlfirewallrule.response.type:

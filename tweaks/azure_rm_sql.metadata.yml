@@ -220,7 +220,9 @@
 - azure_rm_sqlfirewallrule.firewall_rule_name:
     - rename: name
 - azure_rm_sqlfirewallrule.start_ip_address:
+    - required: no
 - azure_rm_sqlfirewallrule.end_ip_address:
+    - required: no
 - azure_rm_sqlfirewallrule.response.id:
 - azure_rm_sqlfirewallrule.response.name:
 - azure_rm_sqlfirewallrule.response.type:

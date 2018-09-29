@@ -70,7 +70,9 @@
     - rename: name
 - azure_rm_postgresqlfirewallrule.parameters:
 - azure_rm_postgresqlfirewallrule.start_ip_address:
+    - required: no
 - azure_rm_postgresqlfirewallrule.end_ip_address:
+    - required: no
 - azure_rm_postgresqlfirewallrule.response.id:
 - azure_rm_postgresqlfirewallrule.response.name:
 - azure_rm_postgresqlfirewallrule.response.type:

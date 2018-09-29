@@ -87,8 +87,6 @@ namespace AutoRest.Ansible
 
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_Required("azure_rm_sqlfirewallrule", "start_ip_address", false),
-            new Tweak_Option_Required("azure_rm_sqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "start_ip_address", "172.28.10.136"),
@@ -168,8 +166,6 @@ namespace AutoRest.Ansible
 
             // MySQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "start_ip_address", false),
-            new Tweak_Option_Required("azure_rm_mysqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "start_ip_address", "172.28.10.136"),
@@ -298,8 +294,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "start_ip_address", false),
-            new Tweak_Option_Required("azure_rm_postgresqlfirewallrule", "end_ip_address", false),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule", "start_ip_address", "172.28.10.136"),
