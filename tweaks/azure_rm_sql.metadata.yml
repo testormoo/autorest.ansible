@@ -214,6 +214,7 @@
 - azure_rm_sqldatamaskingrule_facts.database_name:
 - azure_rm_sqldatamaskingrule_facts.data_masking_policy_name:
 - azure_rm_sqlfirewallrule:
+    - object_name: SQL Firewall Rule
 - azure_rm_sqlfirewallrule.resource_group_name:
 - azure_rm_sqlfirewallrule.server_name:
 - azure_rm_sqlfirewallrule.firewall_rule_name:
@@ -263,6 +264,7 @@
 - azure_rm_sqlgeobackuppolicy_facts.response.kind:
 - azure_rm_sqlgeobackuppolicy_facts.response.location:
 - azure_rm_sqldatabase:
+    - object_name: SQL Database
     - samples-append-line: ""
     - samples-append-line: "  - name: Restore SQL Database XXXYQ"
     - samples-append-line: "    azure_rm_sqldatabase:"
@@ -408,6 +410,7 @@
 - azure_rm_sqldatabase.response.sample_name:
 - azure_rm_sqldatabase.response.zone_redundant:
 - azure_rm_sqldatabase_facts:
+    - object_name: SQL Database
 - azure_rm_sqldatabase_facts.resource_group_name:
 - azure_rm_sqldatabase_facts.server_name:
 - azure_rm_sqldatabase_facts.database_name:
@@ -502,6 +505,7 @@
 - azure_rm_sqldatabase_facts.response.sample_name:
 - azure_rm_sqldatabase_facts.response.zone_redundant:
 - azure_rm_sqlelasticpool:
+    - object_name: SQL Elastic Pool
 - azure_rm_sqlelasticpool.resource_group_name:
 - azure_rm_sqlelasticpool.server_name:
 - azure_rm_sqlelasticpool.elastic_pool_name:
@@ -627,6 +631,7 @@
 - azure_rm_sqlserviceobjective_facts.response.description:
 - azure_rm_sqlserviceobjective_facts.response.enabled:
 - azure_rm_sqlserver:
+    - object_name: SQL Server
 - azure_rm_sqlserver.resource_group_name:
 - azure_rm_sqlserver.server_name:
 - azure_rm_sqlserver.parameters:
@@ -652,6 +657,7 @@
 - azure_rm_sqlserver.response.state:
 - azure_rm_sqlserver.response.fully_qualified_domain_name:
 - azure_rm_sqlserver_facts:
+    - object_name: SQL Server
 - azure_rm_sqlserver_facts.resource_group_name:
 - azure_rm_sqlserver_facts.server_name:
 - azure_rm_sqlserver_facts.response.id:

@@ -1,4 +1,5 @@
 - azure_rm_applicationgateway:
+    - rename: azure_rm_appgateway
 - azure_rm_applicationgateway.resource_group_name:
 - azure_rm_applicationgateway.application_gateway_name:
 - azure_rm_applicationgateway.parameters:

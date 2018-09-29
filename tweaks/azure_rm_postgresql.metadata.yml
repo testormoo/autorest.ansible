@@ -1,4 +1,5 @@
 - azure_rm_postgresqlserver:
+    - object_name: PostgreSQL Server
 - azure_rm_postgresqlserver.resource_group_name:
 - azure_rm_postgresqlserver.server_name:
 - azure_rm_postgresqlserver.parameters:
@@ -34,6 +35,7 @@
 - azure_rm_postgresqlserver.response.user_visible_state:
 - azure_rm_postgresqlserver.response.fully_qualified_domain_name:
 - azure_rm_postgresqlserver_facts:
+    - object_name: PostgreSQL Server
 - azure_rm_postgresqlserver_facts.resource_group_name:
 - azure_rm_postgresqlserver_facts.server_name:
 - azure_rm_postgresqlserver_facts.response.id:
@@ -54,6 +56,7 @@
 - azure_rm_postgresqlserver_facts.response.user_visible_state:
 - azure_rm_postgresqlserver_facts.response.fully_qualified_domain_name:
 - azure_rm_postgresqlfirewallrule:
+    - object_name: PostgreSQL Firewall Rule
 - azure_rm_postgresqlfirewallrule.resource_group_name:
 - azure_rm_postgresqlfirewallrule.server_name:
 - azure_rm_postgresqlfirewallrule.firewall_rule_name:
@@ -66,6 +69,7 @@
 - azure_rm_postgresqlfirewallrule.response.start_ip_address:
 - azure_rm_postgresqlfirewallrule.response.end_ip_address:
 - azure_rm_postgresqlfirewallrule_facts:
+    - object_name: PostgreSQL Firewall Rule
 - azure_rm_postgresqlfirewallrule_facts.resource_group_name:
 - azure_rm_postgresqlfirewallrule_facts.server_name:
 - azure_rm_postgresqlfirewallrule_facts.firewall_rule_name:
@@ -75,6 +79,7 @@
 - azure_rm_postgresqlfirewallrule_facts.response.start_ip_address:
 - azure_rm_postgresqlfirewallrule_facts.response.end_ip_address:
 - azure_rm_postgresqlvirtualnetworkrule:
+    - object_name: PostgreSQL Virtual Network Rule
 - azure_rm_postgresqlvirtualnetworkrule.resource_group_name:
 - azure_rm_postgresqlvirtualnetworkrule.server_name:
 - azure_rm_postgresqlvirtualnetworkrule.virtual_network_rule_name:
@@ -88,6 +93,7 @@
 - azure_rm_postgresqlvirtualnetworkrule.response.ignore_missing_vnet_service_endpoint:
 - azure_rm_postgresqlvirtualnetworkrule.response.state:
 - azure_rm_postgresqlvirtualnetworkrule_facts:
+    - object_name: PostgreSQL Virtual Network Rule
 - azure_rm_postgresqlvirtualnetworkrule_facts.resource_group_name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.server_name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.virtual_network_rule_name:
@@ -98,6 +104,7 @@
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.ignore_missing_vnet_service_endpoint:
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.state:
 - azure_rm_postgresqldatabase:
+    - object_name: PostgreSQL Database
 - azure_rm_postgresqldatabase.resource_group_name:
 - azure_rm_postgresqldatabase.server_name:
 - azure_rm_postgresqldatabase.database_name:
@@ -110,6 +117,7 @@
 - azure_rm_postgresqldatabase.response.charset:
 - azure_rm_postgresqldatabase.response.collation:
 - azure_rm_postgresqldatabase_facts:
+    - object_name: PostgreSQL Database
 - azure_rm_postgresqldatabase_facts.resource_group_name:
 - azure_rm_postgresqldatabase_facts.server_name:
 - azure_rm_postgresqldatabase_facts.database_name:
@@ -119,6 +127,7 @@
 - azure_rm_postgresqldatabase_facts.response.charset:
 - azure_rm_postgresqldatabase_facts.response.collation:
 - azure_rm_postgresqlconfiguration:
+    - object_name: PostgreSQL Configuration
 - azure_rm_postgresqlconfiguration.resource_group_name:
 - azure_rm_postgresqlconfiguration.server_name:
 - azure_rm_postgresqlconfiguration.configuration_name:
@@ -135,6 +144,7 @@
 - azure_rm_postgresqlconfiguration.response.allowed_values:
 - azure_rm_postgresqlconfiguration.response.source:
 - azure_rm_postgresqlconfiguration_facts:
+    - object_name: PostgreSQL Configuration
 - azure_rm_postgresqlconfiguration_facts.resource_group_name:
 - azure_rm_postgresqlconfiguration_facts.server_name:
 - azure_rm_postgresqlconfiguration_facts.configuration_name:
@@ -148,5 +158,6 @@
 - azure_rm_postgresqlconfiguration_facts.response.allowed_values:
 - azure_rm_postgresqlconfiguration_facts.response.source:
 - azure_rm_postgresqllogfile_facts:
+    - object_name: PostgreSQL Log File
 - azure_rm_postgresqllogfile_facts.resource_group_name:
 - azure_rm_postgresqllogfile_facts.server_name:

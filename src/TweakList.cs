@@ -9,7 +9,6 @@ namespace AutoRest.Ansible
         public static Tweak[] All =
         {
             new Tweak_Option_Rename("*", "resource_group_name", "resource_group"),
-            new Tweak_Module_Rename("azure_rm_applicationgateway*", "azure_rm_appgateway*"),
             new Tweak_Option_DefaultValueTest("*", "resource_group_name", "\"{{ resource_group }}\""),
             new Tweak_Option_Required("*", "location", false),
             new Tweak_Response_AddField("*", "id"),
@@ -23,7 +22,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("*", "location", "eastus"),
 
             // SQL Server
-            new Tweak_Module_ObjectName("azure_rm_sqlserver", "SQL Server"),
             new Tweak_Option_Rename("azure_rm_sqlserver", "server_name", "name"),
             new Tweak_Option_Rename("azure_rm_sqlserver", "administrator_login", "admin_username"),
             new Tweak_Option_Rename("azure_rm_sqlserver", "administrator_login_password", "admin_password"),
@@ -50,11 +48,9 @@ namespace AutoRest.Ansible
 
             // SQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlserver_facts", "azure_rm_sqlserver", null, null),
-            new Tweak_Module_ObjectName("azure_rm_sqlserver_facts", "SQL Server"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver_facts", "server_name", "sqlsrv{{ rpfx }}"),
 
             // SQL Database
-            new Tweak_Module_ObjectName("azure_rm_sqldatabase", "SQL Database"),
             new Tweak_Option_Rename("azure_rm_sqldatabase", "database_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "sqlsrv{{ rpfx }}"),
@@ -78,12 +74,10 @@ namespace AutoRest.Ansible
 
             // SQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase_facts", "azure_rm_sqldatabase", null, null),
-            new Tweak_Module_ObjectName("azure_rm_sqldatabase_facts", "SQL Database"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "database_name", "database{{ rpfx }}"),
 
             // SQL Elastic Pool
-            new Tweak_Module_ObjectName("azure_rm_sqlelasticpool", "ElasticPool"),
             new Tweak_Option_Rename("azure_rm_sqlelasticpool", "elastic_pool_name", "name"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool", "azure_rm_sqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "server_name", "sqlsrv{{ rpfx }}"),
@@ -92,7 +86,6 @@ namespace AutoRest.Ansible
 
             // SQL Elastic Pool Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool_facts", "azure_rm_sqlelasticpool", null, null),
-            new Tweak_Module_ObjectName("azure_rm_sqlelasticpool_facts", "SQL Elastic Pool"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "elastic_pool_name", "elasticpool{{ rpfx }}"),
             new Tweak_Response_FieldReturned("azure_rm_sqlelasticpool_facts", "kind", ""),
@@ -114,11 +107,8 @@ namespace AutoRest.Ansible
 
             // SQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule_facts", "azure_rm_sqlfirewallrule", null, null),
-            new Tweak_Module_ObjectName("azure_rm_sqlfirewallrule_facts", "SQL Firewall Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "server_name", "sqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
-
-            new Tweak_Module_ObjectName("azure_rm_sqlserver_facts", "SQL Server"),
 
             // SQL Geo Backup Policy
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy", "azure_rm_sqldatabase", null, null),
@@ -135,7 +125,6 @@ namespace AutoRest.Ansible
 
 
             // MySQL Server
-            new Tweak_Module_ObjectName("azure_rm_mysqlserver", "MySQL Server"),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "server_name", "name"),
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
             new Tweak_Option_Rename("azure_rm_mysqlserver", "properties.administrator_login", "admin_username"),
@@ -168,11 +157,9 @@ namespace AutoRest.Ansible
 
             // MySQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlserver_facts", "azure_rm_mysqlserver", null, null),
-            new Tweak_Module_ObjectName("azure_rm_mysqlserver_facts", "MySQL Server"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver_facts", "server_name", "mysqlsrv{{ rpfx }}"),
 
             // MySQL Database
-            new Tweak_Module_ObjectName("azure_rm_mysqldatabase", "MySQL Database"),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", null, null),
             new Tweak_Option_Rename("azure_rm_mysqldatabase", "database_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "mysqlsrv{{ rpfx }}"),
@@ -189,7 +176,6 @@ namespace AutoRest.Ansible
 
             // MySQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase_facts", "azure_rm_mysqldatabase", null, null),
-            new Tweak_Module_ObjectName("azure_rm_mysqldatabase_facts", "MySQL Database"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase_facts", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase_facts", "database_name", "testdatabase"),
 
@@ -210,7 +196,6 @@ namespace AutoRest.Ansible
 
             // MySQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule_facts", "azure_rm_mysqlfirewallrule", null, null),
-            new Tweak_Module_ObjectName("azure_rm_mysqlfirewallrule_facts", "MySQL Firewall Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
@@ -227,7 +212,6 @@ namespace AutoRest.Ansible
 
             // MySQL Configuration Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration_facts", "azure_rm_mysqlconfiguration", null, null),
-            new Tweak_Module_ObjectName("azure_rm_mysqlconfiguration_facts", "MySQL Configuration"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration_facts", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration_facts", "configuration_name", "event_scheduler"),
 
@@ -273,7 +257,6 @@ namespace AutoRest.Ansible
 
             // MySQL Virtual Network Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule_facts", "azure_rm_mysqlvirtualnetworkrule", null, null),
-            new Tweak_Module_ObjectName("azure_rm_mysqlvirtualnetworkrule_facts", "MySQL Virtual Network Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule_facts", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlvirtualnetworkrule_facts", "virtualnetworkrule_name", "test-virtual-network-rule"),
 
@@ -282,7 +265,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqllogfile_facts", "server_name", "mysqlsrv{{ rpfx }}"),
 
             // PostgreSQL Server
-            new Tweak_Module_ObjectName("azure_rm_postgresqlserver", "PostgreSQL Server"),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "server_name", "name"),
             new Tweak_Option_Exclude("azure_rm_postgresqlserver", "properties.create_mode", true, false),
             new Tweak_Option_Rename("azure_rm_postgresqlserver", "properties.administrator_login", "admin_username"),
@@ -314,7 +296,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlserver_facts", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Module_ObjectName("azure_rm_postgresqlserver_facts", "MySQL Server"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver_facts", "server_name", "postgresqlsrv{{ rpfx }}"),
 
             // PostgreSQL Database
@@ -334,11 +315,8 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase_facts", "azure_rm_postgresqldatabase", null, null),
-            new Tweak_Module_ObjectName("azure_rm_postgresqldatabase_facts", "PostgreSQL Database"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase_facts", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase_facts", "database_name", "testdatabase"),
-
-            new Tweak_Module_ObjectName("azure_rm_postgresqldatabase", "PostgreSQL Database"),
 
             // PostgreSQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule", "azure_rm_postgresqlserver", null, null),
@@ -357,7 +335,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule_facts", "azure_rm_postgresqlfirewallrule", null, null),
-            new Tweak_Module_ObjectName("azure_rm_postgresqlfirewallrule_facts", "PostgreSQL Firewall Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
@@ -374,7 +351,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Configuration Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration", null, null),
-            new Tweak_Module_ObjectName("azure_rm_postgresqlconfiguration_facts", "PostgreSQL Configuration"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlconfiguration_facts", "configuration_name", "deadlock_timeout"),
 
@@ -386,7 +362,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Virtual Network Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlvirtualnetworkrule_facts", "azure_rm_postgresqlvirtualnetworkrule", null, null),
-            new Tweak_Module_ObjectName("azure_rm_postgresqlvirtualnetworkrule_facts", "PostgreSQL Virtual Network Rule"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule_facts", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlvirtualnetworkrule_facts", "virtualnetworkrule_name", "test-virtual-network-rule"),
 
@@ -404,7 +379,6 @@ namespace AutoRest.Ansible
 
             // Application Gateway
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
-            new Tweak_Module_ObjectName("azure_rm_applicationgateway", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgateway", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "sku.name", "Standard_Small"),
@@ -467,7 +441,6 @@ namespace AutoRest.Ansible
                                                     //"    resource_group: \"{{ resource_group }}\"",
                                                     //"    state: absent" }),
 
-            new Tweak_Module_ObjectName("azure_rm_applicationgateway_facts", "Application Gateway"),
             new Tweak_Option_Rename("azure_rm_applicationgateway_facts", "application_gateway_name", "name"),
             new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
 
@@ -528,9 +501,6 @@ namespace AutoRest.Ansible
                                                     "    resource_group: '{{ resource_group }}'",
                                                     "    state: absent" }),
 
-            new Tweak_Module_Rename("azure_rm_containerinstancecontainergroup", "azure_rm_containerinstancexx"),
-            new Tweak_Module_Rename("azure_rm_containerinstancecontainergroup_facts", "azure_rm_containerinstance_facts"),
-
             // XXX - test pre and postrequisites
             new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "container_group_name", "aci{{ rpfx }}"),
@@ -577,9 +547,6 @@ namespace AutoRest.Ansible
                                                     "        memory: 1.5",
                                                     "    state: absent" }),
 
-            new Tweak_Module_Rename("azure_rm_containerregistryregistry", "azure_rm_containerregistryxx"),
-
-
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "registry_name", "acr{{ rpfx }}"),
             new Tweak_Response_FieldReturned("azure_rm_containerregistryregistry_facts", "status", ""),
@@ -602,8 +569,6 @@ namespace AutoRest.Ansible
                                                      "    name: acr{{ rpfx }}$postfix$",
                                                      "    resource_group: \"{{ resource_group }}\"",
                                                      "    state: absent" }),
-
-            new Tweak_Module_Rename("azure_rm_containerregistryregistry_facts", "azure_rm_containerregistry_facts"),
 
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "resource_group", "\"{{ resource_group }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "registry_name", "acr{{ rpfx }}"),
@@ -671,7 +636,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
             // Key Vault
-            new Tweak_Module_Rename("azure_rm_vault", "azure_rm_keyvault"),
             new Tweak_Option_Flatten("azure_rm_vault", "properties.access_policies.permissions", ""),
             new Tweak_Option_Flatten("azure_rm_vault", "properties", ""),
 
@@ -700,11 +664,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.tenant_id", "72f98888-8666-4144-9199-2d7cd0111111"),
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.object_id", "99998888-8666-4144-9199-2d7cd0111111"),
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.keys", "get"),
-
-            new Tweak_Module_ObjectName("azure_rm_vault", "Key Vault"),
-
-            // Key Vault Facts
-            new Tweak_Module_Rename("azure_rm_vault_facts", "azure_rm_keyvault_facts"),
 
             //new Tweak_Option_Rename("azure_rm_vault", "properties.access_policies", "moo"),
             //new Tweak_Option_Rename("azure_rm_vault", "properties", "kfiii"),

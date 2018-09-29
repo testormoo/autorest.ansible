@@ -1,4 +1,5 @@
 - azure_rm_containerinstancecontainergroup:
+    - rename: azure_rm_containerinstancexx
 - azure_rm_containerinstancecontainergroup.resource_group_name:
 - azure_rm_containerinstancecontainergroup.container_group_name:
 - azure_rm_containerinstancecontainergroup.container_group:
@@ -122,6 +123,7 @@
 - azure_rm_containerinstancecontainergroup.response.instance_view.events.type:
 - azure_rm_containerinstancecontainergroup.response.instance_view.state:
 - azure_rm_containerinstancecontainergroup_facts:
+    - rename: azure_rm_containerinstance_facts
 - azure_rm_containerinstancecontainergroup_facts.resource_group_name:
 - azure_rm_containerinstancecontainergroup_facts.container_group_name:
 - azure_rm_containerinstancecontainergroup_facts.response.id:

@@ -25,6 +25,7 @@ namespace AutoRest.Ansible
                     case "rename": return new Tweak_Module_Rename(path[0], parameter);
                     case "samples-append-line": return new Tweak_Module_SampleAppendLine(path[0], parameter);
                     case "test-prerequisites-module": return new Tweak_Module_TestPrerequisitesModule(path[0], parameter, null, null);
+                    case "object_name": return new Tweak_Module_ObjectName(path[0], parameter);
                 }
             }
             else if (path[1] == "response")
@@ -55,7 +56,7 @@ namespace AutoRest.Ansible
                 case "documentation-replace":       return new Tweak_Option_DocumentationReplace(path[0], String.Join('.', path, 1, path.Length - 1), parameter.Split(">>>")[0], parameter.Split(">>>")[1]);
                 case "documentation-cut-after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation-mark-keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
-                case "flatten":                     return new Tweak_Option_Flatten(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "collapse":                    return new Tweak_Option_Collapse(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 }
             }
 
@@ -789,9 +790,9 @@ namespace AutoRest.Ansible
         private bool _markKeywords;
     }
 
-    class Tweak_Option_Flatten : Tweak_Option
+    class Tweak_Option_Collapse : Tweak_Option
     {
-        public Tweak_Option_Flatten(string module, string path, string namePrefix)
+        public Tweak_Option_Collapse(string module, string path, string namePrefix)
         {
             _module = module;
             _path = path.Split(".");
@@ -840,12 +841,14 @@ namespace AutoRest.Ansible
 
             if (_path.Length == 1)
             {
+                // append suboptions to module level options
                 List<Model.ModuleOption> o = m.Options.ToList();
                 o.AddRange(suboptions);
                 m.Options = o.ToArray();
             }
             else
             {
+                // find parent of options being flattened
                 string[] subPath = new string[_path.Length - 1];
                 Array.Copy(_path, subPath, _path.Length - 1);
                 Model.ModuleOption parent = GetOption(m, subPath);
