@@ -1405,8 +1405,15 @@ namespace AutoRest.Ansible.Model
 
                     if (field.SubFields != null && field.SubFields.Length > 0)
                     {
-                        help.Add(padding + "    contains:");
-                        help.AddRange(GetHelpFromResponseFields(field.SubFields, padding + "        "));
+                        if (field.Collapsed)
+                        {
+                            help.AddRange(GetHelpFromResponseFields(field.SubFields, padding));
+                        }
+                        else
+                        {
+                            help.Add(padding + "    contains:");
+                            help.AddRange(GetHelpFromResponseFields(field.SubFields, padding + "        "));
+                        }
                     }
                 }
             }
