@@ -269,19 +269,6 @@ else
             self.results['changed'] = False
             response = old_response
 @EmptyLine
-//@{
-//    var stmtsx = Model.ResponseFieldStatements;
-//
-//    if (stmtsx.Length > 0)
-//    {
-//@:        if response:
-//        foreach (var s in stmtsx)
-//        {
-//@:            @(s)
-//        }
- //   }
-//}
-@EmptyLine
         self.results.update(self.format_item(response))
         return self.results
 @if (Model.FixParameterStatements.Length > 0)
