@@ -29,7 +29,7 @@ description:
     - Get facts of @(Model.ObjectName).
 @EmptyLine
 options:
-@foreach (var line in Model.ModuleHelp)
+@foreach (var line in Model.ModuleDocumentation)
 {
 @:@(line)
 }
@@ -43,7 +43,7 @@ author:
 '''
 @EmptyLine
 EXAMPLES = '''
-@foreach (var line in Model.ModuleFactsExamples)
+@foreach (var line in Model.ModuleExamplesFacts)
 {
     if (line != "")
     {
@@ -57,7 +57,7 @@ EXAMPLES = '''
 '''
 @EmptyLine
 RETURN = '''
-@foreach (var line in Model.ModuleFactsReturnResponseFields)
+@foreach (var line in Model.ModuleDocumentationReturnFacts)
 {
 @:@(line)
 }

@@ -270,6 +270,9 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        //
+        // used by facts tests
+        //
         public string[] GetModuleResponseFieldsPaths()
         {
             List<string> paths = new List<string>();
@@ -303,6 +306,9 @@ namespace AutoRest.Ansible.Model
             return paths.ToArray();
         }
 
+        //
+        // NOT USED
+        //
         public ModuleOption[] ModuleOptionsUnflattened
         {
             get
@@ -313,6 +319,9 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        //
+        // Variables that are used to store top level options
+        //
         public string[] ModuleTopLevelOptionsVariables
         {
             get
@@ -344,6 +353,9 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        //
+        // Code to expand options to actual structure
+        //
         public string[] ModuleSecondLevelOptionsMapStatements
         {
             get
@@ -498,7 +510,10 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] ModuleHelp
+        //
+        // Module documentation -- used by both main and facts module
+        //
+        public string[] ModuleDocumentation
         {
             get
             {
@@ -506,7 +521,10 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] ModuleReturnResponseFields
+        //
+        // Module documentation -- return value
+        //
+        public string[] ModuleDocumentationReturn
         {
             get
             {
@@ -514,15 +532,10 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] ModuleReturnResponseDictionary
-        {
-            get
-            {
-                return GetResponseDictionary(ModuleResponseFields, "            ", "d");
-            }
-        }
-
-        public string[] ModuleFactsReturnResponseFields
+        //
+        // Module documentation -- return value -- facts
+        //
+        public string[] ModuleDocumentationReturnFacts
         {
             get
             {
@@ -548,7 +561,7 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] ModuleFactsExamples
+        public string[] ModuleExamplesFacts
         {
             get
             {
@@ -563,6 +576,17 @@ namespace AutoRest.Ansible.Model
                 }
 
                 return help.ToArray();
+            }
+        }
+
+        //
+        // This returns code to create dictionary for format_item() function
+        //
+        public string[] ModuleReturnResponseDictionary
+        {
+            get
+            {
+                return GetResponseDictionary(ModuleResponseFields, "            ", "d");
             }
         }
 
@@ -880,9 +904,11 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        //
+        // This function generates API call for specified method
+        //
         public string[] ModuleGenerateApiCall(string indent, string methodName)
         {
-            // XXX - ModuleOperationName
             var response = new List<string>();
             string line = indent + "response = self.mgmt_client." + ModuleOperationName + "." + methodName + "(";
             indent = Indent(line);

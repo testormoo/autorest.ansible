@@ -29,7 +29,7 @@ description:
     - Create, update and delete instance of @(Model.ObjectName).
 @EmptyLine
 options:
-@foreach (var line in Model.ModuleHelp)
+@foreach (var line in Model.ModuleDocumentation)
 {
 @:@(line)
 }
@@ -77,7 +77,7 @@ EXAMPLES = '''
 '''
 @EmptyLine
 RETURN = '''
-@foreach (var line in Model.ModuleReturnResponseFields)
+@foreach (var line in Model.ModuleDocumentationReturn)
 {
 @:@(line)
 }
