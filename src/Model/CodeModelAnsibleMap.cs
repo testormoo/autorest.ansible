@@ -528,6 +528,10 @@ namespace AutoRest.Ansible.Model
             {
                 List<string> help = new List<string>();
                 help.Add(ModuleOperationName + ":");
+                help.Add("    description: A list of dict results where the key is the name of the " + ObjectName + " and the values are the facts for that " + ObjectName + "."); 
+                help.Add("    returned: always");
+                help.Add("    type: complex");
+                help.Add("    contains:"); 
                 help.AddRange(GetHelpFromResponseFields(ModuleResponseFields, "        "));
                 return help.ToArray();
             }
