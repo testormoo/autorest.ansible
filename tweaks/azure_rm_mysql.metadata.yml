@@ -15,6 +15,7 @@
 - azure_rm_mysqlserver.storage_mb:
 - azure_rm_mysqlserver.version:
 - azure_rm_mysqlserver.ssl_enforcement:
+    - rename: enforce_ssl
 - azure_rm_mysqlserver.create_mode:
 - azure_rm_mysqlserver.administrator_login:
     - rename: admin_username
@@ -35,7 +36,6 @@
 - azure_rm_mysqlserver.response.storage_mb:
 - azure_rm_mysqlserver.response.version:
 - azure_rm_mysqlserver.response.ssl_enforcement:
-    - rename: enforce_ssl
 - azure_rm_mysqlserver.response.user_visible_state:
     - rename: state
 - azure_rm_mysqlserver.response.fully_qualified_domain_name:
@@ -69,6 +69,7 @@
 - azure_rm_mysqlfirewallrule.resource_group_name:
 - azure_rm_mysqlfirewallrule.server_name:
 - azure_rm_mysqlfirewallrule.firewall_rule_name:
+    - rename: name
 - azure_rm_mysqlfirewallrule.parameters:
 - azure_rm_mysqlfirewallrule.start_ip_address:
     - required: no
