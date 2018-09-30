@@ -63,11 +63,11 @@ namespace AutoRest.Ansible
             // TODO: load additional tweaks from file
             map.Info.Add("CURRENT DIRECTORY: " + System.IO.Directory.GetCurrentDirectory());
 
+            string currentLine = "";
             try
             {
                 string[] lines = File.ReadLines("./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml").ToArray();
                 string module = null;
-                string currentLine = "";
                 foreach (var l in lines)
                 {
                     currentLine = l;
