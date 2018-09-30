@@ -10470,7 +10470,7 @@
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.response.provisioning_state:
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.response.etag:
 - azure_rm_applicationgatewaysecurityrule:
-    - rename: azure_rm_appgatewaynetworksecurityrule
+    - rename: azure_rm_appgatewaysecurityrule
 - azure_rm_applicationgatewaysecurityrule.resource_group_name:
 - azure_rm_applicationgatewaysecurityrule.network_security_group_name:
 - azure_rm_applicationgatewaysecurityrule.security_rule_name:
@@ -10534,7 +10534,7 @@
 - azure_rm_applicationgatewaysecurityrule.response.name:
 - azure_rm_applicationgatewaysecurityrule.response.etag:
 - azure_rm_applicationgatewaysecurityrule_facts:
-    - rename: azure_rm_appgatewaynetworksecurityrule_facts
+    - rename: azure_rm_appgatewaysecurityrule_facts
 - azure_rm_applicationgatewaysecurityrule_facts.resource_group_name:
 - azure_rm_applicationgatewaysecurityrule_facts.network_security_group_name:
 - azure_rm_applicationgatewaysecurityrule_facts.security_rule_name:
@@ -11658,6 +11658,7 @@
 - azure_rm_applicationgatewayroutefilter_facts.response.provisioning_state:
 - azure_rm_applicationgatewayroutefilter_facts.response.etag:
 - azure_rm_applicationgatewayroutefilterrule:
+    - rename: azure_rm_appgatewayroutefilterrule:
 - azure_rm_applicationgatewayroutefilterrule.resource_group_name:
 - azure_rm_applicationgatewayroutefilterrule.route_filter_name:
 - azure_rm_applicationgatewayroutefilterrule.rule_name:
@@ -11678,6 +11679,7 @@
 - azure_rm_applicationgatewayroutefilterrule.response.etag:
 - azure_rm_applicationgatewayroutefilterrule.response.tags:
 - azure_rm_applicationgatewayroutefilterrule_facts:
+    - rename: azure_rm_appgatewayroutefilterrule_facts:
 - azure_rm_applicationgatewayroutefilterrule_facts.resource_group_name:
 - azure_rm_applicationgatewayroutefilterrule_facts.route_filter_name:
 - azure_rm_applicationgatewayroutefilterrule_facts.rule_name:
