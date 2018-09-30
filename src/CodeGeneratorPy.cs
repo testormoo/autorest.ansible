@@ -67,8 +67,10 @@ namespace AutoRest.Ansible
             {
                 string[] lines = File.ReadLines("./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml").ToArray();
                 string module = null;
+                string currentLine = "";
                 foreach (var l in lines)
                 {
+                    currentLine = l;
                     if (l.StartsWith("- ") && l.EndsWith(":"))
                     {
                         module = l.Substring(2, l.Length - 3);
@@ -119,6 +121,7 @@ namespace AutoRest.Ansible
             {
                 map.Info.Add("NO TWEAK FILE FOUND: " + "./tweaks/azure_rm_" + codeModel.Namespace + ".metadata.yml");
                 map.Info.Add(e.ToString());
+                map.Info.Add(currentLine);
             }
 
             CodeModelAnsibleMap codeModelPure = null;
