@@ -247,7 +247,7 @@
 - azure_rm_sqlgeobackuppolicy.database_name:
 - azure_rm_sqlgeobackuppolicy.geo_backup_policy_name:
 - azure_rm_sqlgeobackuppolicy.state:
-    - name: policy_state
+    - rename: policy_state
 - azure_rm_sqlgeobackuppolicy.response.id:
 - azure_rm_sqlgeobackuppolicy.response.name:
 - azure_rm_sqlgeobackuppolicy.response.type:

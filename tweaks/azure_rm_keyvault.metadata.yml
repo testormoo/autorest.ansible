@@ -55,7 +55,7 @@
 - azure_rm_vault.response.properties.enable_soft_delete:
 - azure_rm_vault.response.properties.create_mode:
 - azure_rm_vault_facts:
-    - azure_rm_keyvault_facts
+    - rename: azure_rm_keyvault_facts
 - azure_rm_vault_facts.resource_group_name:
 - azure_rm_vault_facts.vault_name:
 - azure_rm_vault_facts.top:
