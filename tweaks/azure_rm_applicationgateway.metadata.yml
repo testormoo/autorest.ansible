@@ -659,6 +659,7 @@
 - azure_rm_applicationgateway.response.provisioning_state:
 - azure_rm_applicationgateway.response.etag:
 - azure_rm_applicationgateway_facts:
+    - rename: azure_rm_appgateway_facts
 - azure_rm_applicationgateway_facts.resource_group_name:
 - azure_rm_applicationgateway_facts.application_gateway_name:
     - rename: name
@@ -1028,6 +1029,7 @@
 - azure_rm_applicationgateway_facts.response.provisioning_state:
 - azure_rm_applicationgateway_facts.response.etag:
 - azure_rm_applicationgatewayapplicationsecuritygroup:
+    - rename: azure_rm_appgatewayapplicationsecuritygroup
 - azure_rm_applicationgatewayapplicationsecuritygroup.resource_group_name:
 - azure_rm_applicationgatewayapplicationsecuritygroup.application_security_group_name:
 - azure_rm_applicationgatewayapplicationsecuritygroup.parameters:
@@ -1042,6 +1044,7 @@
 - azure_rm_applicationgatewayapplicationsecuritygroup.response.provisioning_state:
 - azure_rm_applicationgatewayapplicationsecuritygroup.response.etag:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts:
+    - rename: azure_rm_appgatewayapplicationsecuritygroup_facts
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.resource_group_name:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.application_security_group_name:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.response.id:
@@ -1053,6 +1056,7 @@
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.response.provisioning_state:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.response.etag:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization:
+    - rename: azure_rm_appgatewayexpressroutecircuitauthorization
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.authorization_name:
@@ -1069,6 +1073,7 @@
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.response.name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.response.etag:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization_facts:
+    - rename: azure_rm_appgatewayexpressroutecircuitauthorization_facts
 - azure_rm_applicationgatewayexpressroutecircuitauthorization_facts.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization_facts.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization_facts.authorization_name:
@@ -1079,6 +1084,7 @@
 - azure_rm_applicationgatewayexpressroutecircuitauthorization_facts.response.name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization_facts.response.etag:
 - azure_rm_applicationgatewayexpressroutecircuitpeering:
+    - rename: azure_rm_appgatewayexpressroutecircuitpeering
 - azure_rm_applicationgatewayexpressroutecircuitpeering.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.peering_name:
@@ -1464,6 +1470,7 @@
 - azure_rm_applicationgatewayexpressroutecircuitpeering.response.name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.response.etag:
 - azure_rm_applicationgatewayexpressroutecircuitpeering_facts:
+    - rename: azure_rm_appgatewayexpressroutecircuitpeering_facts
 - azure_rm_applicationgatewayexpressroutecircuitpeering_facts.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering_facts.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering_facts.peering_name:
@@ -1677,6 +1684,7 @@
 - azure_rm_applicationgatewayexpressroutecircuitpeering_facts.response.name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering_facts.response.etag:
 - azure_rm_applicationgatewayexpressroutecircuit:
+    - rename: azure_rm_appgatewayexpressroutecircuit
 - azure_rm_applicationgatewayexpressroutecircuit.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuit.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuit.parameters:
@@ -1992,6 +2000,7 @@
 - azure_rm_applicationgatewayexpressroutecircuit.response.gateway_manager_etag:
 - azure_rm_applicationgatewayexpressroutecircuit.response.etag:
 - azure_rm_applicationgatewayexpressroutecircuit_facts:
+    - rename: azure_rm_appgatewayexpressroutecircuit_facts
 - azure_rm_applicationgatewayexpressroutecircuit_facts.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuit_facts.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuit_facts.response.id:
@@ -2165,6 +2174,7 @@
 - azure_rm_applicationgatewayexpressroutecircuit_facts.response.gateway_manager_etag:
 - azure_rm_applicationgatewayexpressroutecircuit_facts.response.etag:
 - azure_rm_applicationgatewayloadbalancer:
+    - rename: azure_rm_appgatewayloadbalancer
 - azure_rm_applicationgatewayloadbalancer.resource_group_name:
 - azure_rm_applicationgatewayloadbalancer.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancer.parameters:
@@ -2996,6 +3006,7 @@
 - azure_rm_applicationgatewayloadbalancer.response.provisioning_state:
 - azure_rm_applicationgatewayloadbalancer.response.etag:
 - azure_rm_applicationgatewayloadbalancer_facts:
+    - rename: azure_rm_appgatewayloadbalancer_facts
 - azure_rm_applicationgatewayloadbalancer_facts.resource_group_name:
 - azure_rm_applicationgatewayloadbalancer_facts.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancer_facts.expand:
@@ -3654,6 +3665,7 @@
 - azure_rm_applicationgatewayloadbalancer_facts.response.provisioning_state:
 - azure_rm_applicationgatewayloadbalancer_facts.response.etag:
 - azure_rm_applicationgatewayloadbalancerbackendaddresspool_facts:
+    - rename: azure_rm_appgatewayloadbalancerbackendaddresspool_facts
 - azure_rm_applicationgatewayloadbalancerbackendaddresspool_facts.resource_group_name:
 - azure_rm_applicationgatewayloadbalancerbackendaddresspool_facts.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancerbackendaddresspool_facts.backend_address_pool_name:
@@ -4148,6 +4160,7 @@
 - azure_rm_applicationgatewayloadbalancerbackendaddresspool_facts.response.name:
 - azure_rm_applicationgatewayloadbalancerbackendaddresspool_facts.response.etag:
 - azure_rm_applicationgatewayloadbalancerfrontendipconfiguration_facts:
+    - rename: azure_rm_appgatewayloadbalancerfrontendipconfiguration_facts
 - azure_rm_applicationgatewayloadbalancerfrontendipconfiguration_facts.resource_group_name:
 - azure_rm_applicationgatewayloadbalancerfrontendipconfiguration_facts.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancerfrontendipconfiguration_facts.frontend_ip_configuration_name:
@@ -4623,6 +4636,7 @@
 - azure_rm_applicationgatewayloadbalancerfrontendipconfiguration_facts.response.etag:
 - azure_rm_applicationgatewayloadbalancerfrontendipconfiguration_facts.response.zones:
 - azure_rm_applicationgatewayinboundnatrule:
+    - rename: azure_rm_appgatewayinboundnatrule
 - azure_rm_applicationgatewayinboundnatrule.resource_group_name:
 - azure_rm_applicationgatewayinboundnatrule.load_balancer_name:
 - azure_rm_applicationgatewayinboundnatrule.inbound_nat_rule_name:
@@ -5132,6 +5146,7 @@
 - azure_rm_applicationgatewayinboundnatrule.response.name:
 - azure_rm_applicationgatewayinboundnatrule.response.etag:
 - azure_rm_applicationgatewayinboundnatrule_facts:
+    - rename: azure_rm_appgatewayinboundnatrule_facts
 - azure_rm_applicationgatewayinboundnatrule_facts.resource_group_name:
 - azure_rm_applicationgatewayinboundnatrule_facts.load_balancer_name:
 - azure_rm_applicationgatewayinboundnatrule_facts.inbound_nat_rule_name:
@@ -5630,6 +5645,7 @@
 - azure_rm_applicationgatewayinboundnatrule_facts.response.name:
 - azure_rm_applicationgatewayinboundnatrule_facts.response.etag:
 - azure_rm_applicationgatewayloadbalancerloadbalancingrule_facts:
+    - rename: azure_rm_appgatewayloadbalancerloadbalancingrule_facts
 - azure_rm_applicationgatewayloadbalancerloadbalancingrule_facts.resource_group_name:
 - azure_rm_applicationgatewayloadbalancerloadbalancingrule_facts.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancerloadbalancingrule_facts.load_balancing_rule_name:
@@ -5651,6 +5667,7 @@
 - azure_rm_applicationgatewayloadbalancerloadbalancingrule_facts.response.name:
 - azure_rm_applicationgatewayloadbalancerloadbalancingrule_facts.response.etag:
 - azure_rm_applicationgatewayloadbalancerprobe_facts:
+    - rename: azure_rm_appgatewayloadbalancerprobe_facts
 - azure_rm_applicationgatewayloadbalancerprobe_facts.resource_group_name:
 - azure_rm_applicationgatewayloadbalancerprobe_facts.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancerprobe_facts.probe_name:
@@ -5666,6 +5683,7 @@
 - azure_rm_applicationgatewayloadbalancerprobe_facts.response.name:
 - azure_rm_applicationgatewayloadbalancerprobe_facts.response.etag:
 - azure_rm_applicationgatewaynetworkinterface:
+    - rename: azure_rm_appgatewaynetworkinterface
 - azure_rm_applicationgatewaynetworkinterface.resource_group_name:
 - azure_rm_applicationgatewaynetworkinterface.network_interface_name:
 - azure_rm_applicationgatewaynetworkinterface.parameters:
@@ -6842,6 +6860,7 @@
 - azure_rm_applicationgatewaynetworkinterface.response.provisioning_state:
 - azure_rm_applicationgatewaynetworkinterface.response.etag:
 - azure_rm_applicationgatewaynetworkinterface_facts:
+    - rename: azure_rm_appgatewaynetworkinterface_facts
 - azure_rm_applicationgatewaynetworkinterface_facts.resource_group_name:
 - azure_rm_applicationgatewaynetworkinterface_facts.network_interface_name:
 - azure_rm_applicationgatewaynetworkinterface_facts.expand:
@@ -7758,6 +7777,7 @@
 - azure_rm_applicationgatewaynetworkinterface_facts.response.provisioning_state:
 - azure_rm_applicationgatewaynetworkinterface_facts.response.etag:
 - azure_rm_applicationgatewaynetworkinterfaceipconfiguration_facts:
+    - rename: azure_rm_appgatewaynetworkinterfaceipconfiguration_facts
 - azure_rm_applicationgatewaynetworkinterfaceipconfiguration_facts.resource_group_name:
 - azure_rm_applicationgatewaynetworkinterfaceipconfiguration_facts.network_interface_name:
 - azure_rm_applicationgatewaynetworkinterfaceipconfiguration_facts.ip_configuration_name:
@@ -8781,6 +8801,7 @@
 - azure_rm_applicationgatewaynetworkinterfaceipconfiguration_facts.response.name:
 - azure_rm_applicationgatewaynetworkinterfaceipconfiguration_facts.response.etag:
 - azure_rm_applicationgatewaynetworksecuritygroup:
+    - rename: azure_rm_appgatewaynetworksecuritygroup
 - azure_rm_applicationgatewaynetworksecuritygroup.resource_group_name:
 - azure_rm_applicationgatewaynetworksecuritygroup.network_security_group_name:
 - azure_rm_applicationgatewaynetworksecuritygroup.parameters:
@@ -9641,6 +9662,7 @@
 - azure_rm_applicationgatewaynetworksecuritygroup.response.provisioning_state:
 - azure_rm_applicationgatewaynetworksecuritygroup.response.etag:
 - azure_rm_applicationgatewaynetworksecuritygroup_facts:
+    - rename: azure_rm_appgatewaynetworksecuritygroup_facts
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.resource_group_name:
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.network_security_group_name:
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.expand:
@@ -10448,6 +10470,7 @@
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.response.provisioning_state:
 - azure_rm_applicationgatewaynetworksecuritygroup_facts.response.etag:
 - azure_rm_applicationgatewaysecurityrule:
+    - rename: azure_rm_appgatewaynetworksecurityrule
 - azure_rm_applicationgatewaysecurityrule.resource_group_name:
 - azure_rm_applicationgatewaysecurityrule.network_security_group_name:
 - azure_rm_applicationgatewaysecurityrule.security_rule_name:
@@ -10511,6 +10534,7 @@
 - azure_rm_applicationgatewaysecurityrule.response.name:
 - azure_rm_applicationgatewaysecurityrule.response.etag:
 - azure_rm_applicationgatewaysecurityrule_facts:
+    - rename: azure_rm_appgatewaynetworksecurityrule_facts
 - azure_rm_applicationgatewaysecurityrule_facts.resource_group_name:
 - azure_rm_applicationgatewaysecurityrule_facts.network_security_group_name:
 - azure_rm_applicationgatewaysecurityrule_facts.security_rule_name:
@@ -10550,6 +10574,7 @@
 - azure_rm_applicationgatewaysecurityrule_facts.response.name:
 - azure_rm_applicationgatewaysecurityrule_facts.response.etag:
 - azure_rm_applicationgatewaydefaultsecurityrule_facts:
+    - rename: azure_rm_appgatewaydefaultsecuritygroup
 - azure_rm_applicationgatewaydefaultsecurityrule_facts.resource_group_name:
 - azure_rm_applicationgatewaydefaultsecurityrule_facts.network_security_group_name:
 - azure_rm_applicationgatewaydefaultsecurityrule_facts.default_security_rule_name:
@@ -10589,6 +10614,7 @@
 - azure_rm_applicationgatewaydefaultsecurityrule_facts.response.name:
 - azure_rm_applicationgatewaydefaultsecurityrule_facts.response.etag:
 - azure_rm_applicationgatewaynetworkwatcher:
+    - rename: azure_rm_appgatewaynetworkwatcher
 - azure_rm_applicationgatewaynetworkwatcher.resource_group_name:
 - azure_rm_applicationgatewaynetworkwatcher.network_watcher_name:
 - azure_rm_applicationgatewaynetworkwatcher.parameters:
@@ -10603,6 +10629,7 @@
 - azure_rm_applicationgatewaynetworkwatcher.response.etag:
 - azure_rm_applicationgatewaynetworkwatcher.response.provisioning_state:
 - azure_rm_applicationgatewaynetworkwatcher_facts:
+    - rename: azure_rm_appgatewaynetworkwatcher_facts
 - azure_rm_applicationgatewaynetworkwatcher_facts.resource_group_name:
 - azure_rm_applicationgatewaynetworkwatcher_facts.network_watcher_name:
 - azure_rm_applicationgatewaynetworkwatcher_facts.response.id:
@@ -10613,6 +10640,7 @@
 - azure_rm_applicationgatewaynetworkwatcher_facts.response.etag:
 - azure_rm_applicationgatewaynetworkwatcher_facts.response.provisioning_state:
 - azure_rm_applicationgatewaypacketcapture:
+    - rename: azure_rm_appgatewaypacketcapture
 - azure_rm_applicationgatewaypacketcapture.resource_group_name:
 - azure_rm_applicationgatewaypacketcapture.network_watcher_name:
 - azure_rm_applicationgatewaypacketcapture.packet_capture_name:
@@ -10650,6 +10678,7 @@
 - azure_rm_applicationgatewaypacketcapture.response.filters.remote_port:
 - azure_rm_applicationgatewaypacketcapture.response.provisioning_state:
 - azure_rm_applicationgatewaypacketcapture_facts:
+    - rename: azure_rm_appgatewaypacketcapture_facts
 - azure_rm_applicationgatewaypacketcapture_facts.resource_group_name:
 - azure_rm_applicationgatewaypacketcapture_facts.network_watcher_name:
 - azure_rm_applicationgatewaypacketcapture_facts.packet_capture_name:
@@ -10672,6 +10701,7 @@
 - azure_rm_applicationgatewaypacketcapture_facts.response.filters.remote_port:
 - azure_rm_applicationgatewaypacketcapture_facts.response.provisioning_state:
 - azure_rm_applicationgatewaypublicipaddresse:
+    - rename: azure_rm_appgatewaypublicipaddresse
 - azure_rm_applicationgatewaypublicipaddresse.resource_group_name:
 - azure_rm_applicationgatewaypublicipaddresse.public_ip_address_name:
 - azure_rm_applicationgatewaypublicipaddresse.parameters:
@@ -10930,6 +10960,7 @@
 - azure_rm_applicationgatewaypublicipaddresse.response.etag:
 - azure_rm_applicationgatewaypublicipaddresse.response.zones:
 - azure_rm_applicationgatewaypublicipaddresse_facts:
+    - rename: azure_rm_appgatewaypublicipaddresse_facts
 - azure_rm_applicationgatewaypublicipaddresse_facts.resource_group_name:
 - azure_rm_applicationgatewaypublicipaddresse_facts.public_ip_address_name:
 - azure_rm_applicationgatewaypublicipaddresse_facts.expand:
@@ -11172,6 +11203,7 @@
 - azure_rm_applicationgatewaypublicipaddresse_facts.response.etag:
 - azure_rm_applicationgatewaypublicipaddresse_facts.response.zones:
 - azure_rm_applicationgatewayroutefilter:
+    - rename: azure_rm_appgatewayroutefilter
 - azure_rm_applicationgatewayroutefilter.resource_group_name:
 - azure_rm_applicationgatewayroutefilter.route_filter_name:
 - azure_rm_applicationgatewayroutefilter.route_filter_parameters:
@@ -11462,6 +11494,7 @@
 - azure_rm_applicationgatewayroutefilter.response.provisioning_state:
 - azure_rm_applicationgatewayroutefilter.response.etag:
 - azure_rm_applicationgatewayroutefilter_facts:
+    - rename: azure_rm_appgatewayroutefilter_facts
 - azure_rm_applicationgatewayroutefilter_facts.resource_group_name:
 - azure_rm_applicationgatewayroutefilter_facts.route_filter_name:
 - azure_rm_applicationgatewayroutefilter_facts.expand:
@@ -11658,6 +11691,7 @@
 - azure_rm_applicationgatewayroutefilterrule_facts.response.etag:
 - azure_rm_applicationgatewayroutefilterrule_facts.response.tags:
 - azure_rm_applicationgatewayroutetable:
+    - rename: azure_rm_appgatewayroutetable
 - azure_rm_applicationgatewayroutetable.resource_group_name:
 - azure_rm_applicationgatewayroutetable.route_table_name:
 - azure_rm_applicationgatewayroutetable.parameters:
@@ -12041,6 +12075,7 @@
 - azure_rm_applicationgatewayroutetable.response.provisioning_state:
 - azure_rm_applicationgatewayroutetable.response.etag:
 - azure_rm_applicationgatewayroutetable_facts:
+    - rename: azure_rm_appgatewayroutetable_facts
 - azure_rm_applicationgatewayroutetable_facts.resource_group_name:
 - azure_rm_applicationgatewayroutetable_facts.route_table_name:
 - azure_rm_applicationgatewayroutetable_facts.expand:
@@ -12411,6 +12446,7 @@
 - azure_rm_applicationgatewayroutetable_facts.response.provisioning_state:
 - azure_rm_applicationgatewayroutetable_facts.response.etag:
 - azure_rm_applicationgatewayroute:
+    - rename: azure_rm_appgatewayroute
 - azure_rm_applicationgatewayroute.resource_group_name:
 - azure_rm_applicationgatewayroute.route_table_name:
 - azure_rm_applicationgatewayroute.route_name:
@@ -12430,6 +12466,7 @@
 - azure_rm_applicationgatewayroute.response.name:
 - azure_rm_applicationgatewayroute.response.etag:
 - azure_rm_applicationgatewayroute_facts:
+    - rename: azure_rm_appgatewayroute_facts
 - azure_rm_applicationgatewayroute_facts.resource_group_name:
 - azure_rm_applicationgatewayroute_facts.route_table_name:
 - azure_rm_applicationgatewayroute_facts.route_name:
@@ -12441,6 +12478,7 @@
 - azure_rm_applicationgatewayroute_facts.response.name:
 - azure_rm_applicationgatewayroute_facts.response.etag:
 - azure_rm_applicationgatewayvirtualnetwork:
+    - rename: azure_rm_appgatewayvirtualnetwork
 - azure_rm_applicationgatewayvirtualnetwork.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetwork.virtual_network_name:
 - azure_rm_applicationgatewayvirtualnetwork.parameters:
@@ -12931,6 +12969,7 @@
 - azure_rm_applicationgatewayvirtualnetwork.response.enable_vm_protection:
 - azure_rm_applicationgatewayvirtualnetwork.response.etag:
 - azure_rm_applicationgatewayvirtualnetwork_facts:
+    - rename: azure_rm_appgatewayvirtualnetwork_facts
 - azure_rm_applicationgatewayvirtualnetwork_facts.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetwork_facts.virtual_network_name:
 - azure_rm_applicationgatewayvirtualnetwork_facts.expand:
@@ -13313,6 +13352,7 @@
 - azure_rm_applicationgatewayvirtualnetwork_facts.response.enable_vm_protection:
 - azure_rm_applicationgatewayvirtualnetwork_facts.response.etag:
 - azure_rm_applicationgatewaysubnet:
+    - rename: azure_rm_appgatewaysubnet
 - azure_rm_applicationgatewaysubnet.resource_group_name:
 - azure_rm_applicationgatewaysubnet.virtual_network_name:
 - azure_rm_applicationgatewaysubnet.subnet_name:
@@ -14219,6 +14259,7 @@
 - azure_rm_applicationgatewaysubnet.response.name:
 - azure_rm_applicationgatewaysubnet.response.etag:
 - azure_rm_applicationgatewaysubnet_facts:
+    - rename: azure_rm_appgatewaysubnet_facts
 - azure_rm_applicationgatewaysubnet_facts.resource_group_name:
 - azure_rm_applicationgatewaysubnet_facts.virtual_network_name:
 - azure_rm_applicationgatewaysubnet_facts.subnet_name:
@@ -15043,6 +15084,7 @@
 - azure_rm_applicationgatewaysubnet_facts.response.name:
 - azure_rm_applicationgatewaysubnet_facts.response.etag:
 - azure_rm_applicationgatewayvirtualnetworkpeering:
+    - rename: azure_rm_appgatewayvirtualnetworkpeering
 - azure_rm_applicationgatewayvirtualnetworkpeering.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkpeering.virtual_network_name:
 - azure_rm_applicationgatewayvirtualnetworkpeering.virtual_network_peering_name:
@@ -15074,6 +15116,7 @@
 - azure_rm_applicationgatewayvirtualnetworkpeering.response.name:
 - azure_rm_applicationgatewayvirtualnetworkpeering.response.etag:
 - azure_rm_applicationgatewayvirtualnetworkpeering_facts:
+    - rename: azure_rm_appgatewayvirtualnetworkpeering_facts
 - azure_rm_applicationgatewayvirtualnetworkpeering_facts.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkpeering_facts.virtual_network_name:
 - azure_rm_applicationgatewayvirtualnetworkpeering_facts.virtual_network_peering_name:
@@ -15091,6 +15134,7 @@
 - azure_rm_applicationgatewayvirtualnetworkpeering_facts.response.name:
 - azure_rm_applicationgatewayvirtualnetworkpeering_facts.response.etag:
 - azure_rm_applicationgatewayvirtualnetworkgateway:
+    - rename: azure_rm_appgatewayvirtualnetworkgateway
 - azure_rm_applicationgatewayvirtualnetworkgateway.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkgateway.virtual_network_gateway_name:
 - azure_rm_applicationgatewayvirtualnetworkgateway.parameters:
@@ -15188,6 +15232,7 @@
 - azure_rm_applicationgatewayvirtualnetworkgateway.response.provisioning_state:
 - azure_rm_applicationgatewayvirtualnetworkgateway.response.etag:
 - azure_rm_applicationgatewayvirtualnetworkgateway_facts:
+    - rename: azure_rm_appgatewayvirtualnetworkgateway_facts
 - azure_rm_applicationgatewayvirtualnetworkgateway_facts.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkgateway_facts.virtual_network_gateway_name:
 - azure_rm_applicationgatewayvirtualnetworkgateway_facts.response.id:
@@ -15241,6 +15286,7 @@
 - azure_rm_applicationgatewayvirtualnetworkgateway_facts.response.provisioning_state:
 - azure_rm_applicationgatewayvirtualnetworkgateway_facts.response.etag:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection:
+    - rename: azure_rm_appgatewayvirtualnetworkgatewayconnection
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.virtual_network_gateway_connection_name:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.parameters:
@@ -15518,6 +15564,7 @@
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.response.provisioning_state:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.response.etag:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection_facts:
+    - rename: azure_rm_appgatewayvirtualnetworkgatewayconnection_facts
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection_facts.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection_facts.virtual_network_gateway_connection_name:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection_facts.response.id:
@@ -15673,6 +15720,7 @@
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection_facts.response.provisioning_state:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection_facts.response.etag:
 - azure_rm_applicationgatewaylocalnetworkgateway:
+    - rename: azure_rm_appgatewaylocalnetworkgateway
 - azure_rm_applicationgatewaylocalnetworkgateway.resource_group_name:
 - azure_rm_applicationgatewaylocalnetworkgateway.local_network_gateway_name:
 - azure_rm_applicationgatewaylocalnetworkgateway.parameters:
@@ -15703,6 +15751,7 @@
 - azure_rm_applicationgatewaylocalnetworkgateway.response.provisioning_state:
 - azure_rm_applicationgatewaylocalnetworkgateway.response.etag:
 - azure_rm_applicationgatewaylocalnetworkgateway_facts:
+    - rename: azure_rm_appgatewaylocalnetworkgateway_facts
 - azure_rm_applicationgatewaylocalnetworkgateway_facts.resource_group_name:
 - azure_rm_applicationgatewaylocalnetworkgateway_facts.local_network_gateway_name:
 - azure_rm_applicationgatewaylocalnetworkgateway_facts.response.id:
