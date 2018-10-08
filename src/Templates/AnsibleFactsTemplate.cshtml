@@ -91,10 +91,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 @foreach (var v in Model.GetModuleArgSpec(Model.HasTags()))
 {
 @:            @(v)
-    if (Model.HasTags())
-    {
+}
+@if (Model.HasTags())
+{
 @:            tags=dict(type='list')        
-    }
 }
         )
 
