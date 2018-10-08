@@ -96,9 +96,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         # store the results of the module operation
         self.results = dict(
-            changed=False,
-            ansible_facts=dict()
-        )
+            changed=False        )
         self.mgmt_client = None
 @foreach (var v in Model.ModuleOptions)
 {
@@ -148,11 +146,6 @@ else
 {
 @EmptyLine
 @:    def @(m.Name)(self):
-@:        '''
-@:        Gets facts of the specified @(Model.ObjectName).
-@EmptyLine
-@:        :return: deserialized @(Model.ObjectName)instance state dictionary
-@:        '''
 @:        response = None
 @:        results = []
 @:        try:
