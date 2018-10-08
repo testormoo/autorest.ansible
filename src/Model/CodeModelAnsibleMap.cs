@@ -267,7 +267,7 @@ namespace AutoRest.Ansible.Model
                 argSpec.Add("    type='str',");
                 argSpec.Add("    default='present',");
                 argSpec.Add("    choices=['present', 'absent']");
-
+                argSpec.Add(")");
             }
             else
             {
