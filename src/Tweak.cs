@@ -87,6 +87,17 @@ namespace AutoRest.Ansible
                     }
                 }
             }
+            else if (_module.EndsWith("*_facts"))
+            {
+                string modulePrefix = _module.Substring(0, _module.Length - 7);
+                foreach (var m in map.Modules)
+                {
+                    if (m.ModuleName.StartsWith(modulePrefix) && m.ModuleName.EndsWith("_facts"))
+                    {
+                        modules.Add(m);
+                    }
+                }
+            }
             else
             {
                 foreach (var m in map.Modules)
