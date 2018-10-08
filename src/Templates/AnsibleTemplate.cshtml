@@ -125,7 +125,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
                                       @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_check_mode=True,
 @if (Model.HasTags())
 {
-                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=True)
+@:                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=True)
 }
 else
 {
