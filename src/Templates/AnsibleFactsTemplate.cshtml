@@ -34,7 +34,7 @@ options:
 @:@(line)
 }
 @EmptyLine
-@if (Module.HasTags())
+@if (Model.HasTags())
 {
 @:    tags:
 @:        description:
@@ -88,10 +88,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         # define user inputs into argument
         self.module_arg_spec = dict(
-@foreach (var v in Model.GetModuleArgSpec(Module.HasTags()))
+@foreach (var v in Model.GetModuleArgSpec(Model.HasTags()))
 {
 @:            @(v)
-    if (Module.HasTags())
+    if (Model.HasTags())
     {
 @:            tags=dict(type='list')        
     }
@@ -108,7 +108,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 {
 @:        self.@(v.NameAlt) = None
 }
-@if (Module.HasTags())
+@if (Model.HasTags())
 {
 @:        self.tags = None
 }
@@ -172,7 +172,7 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 if (m.Name.Contains("list"))
     {
 @:            for item in response:
-    if (Module.HasTags())
+    if (Model.HasTags())
     {
 @:                if self.has_tags(item.tags, self.tags):
 @:                    results.append(self.format_item(item))
