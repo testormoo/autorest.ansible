@@ -96,7 +96,8 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         # store the results of the module operation
         self.results = dict(
-            changed=False        )
+            changed=False
+        )
         self.mgmt_client = None
 @foreach (var v in Model.ModuleOptions)
 {
