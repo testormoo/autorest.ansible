@@ -251,7 +251,7 @@ namespace AutoRest.Ansible.Model
                     }
                 }
 
-                argSpec.Add(")" + ((i < ModuleOptions.Length - 1 || appendMainModuleOptions) ? "," : ""));
+                argSpec.Add(")" + ((i < ModuleOptions.Length - 1 || appendMainModuleOptions || (!appendMainModuleOptions && HasTags())) ? "," : ""));
             }
 
             if (appendMainModuleOptions)
@@ -268,16 +268,13 @@ namespace AutoRest.Ansible.Model
                 argSpec.Add("    default='present',");
                 argSpec.Add("    choices=['present', 'absent']");
 
-                if (HasTags() && ModuleName.EndsWith("_tags"))
+            }
+            else
+            {
+                if (HasTags())
                 {
-                    argSpec.Add("),");
                     argSpec.Add("tags=dict(type='list')");        
                 }
-                else
-                {
-                    argSpec.Add(")");
-                }
-
             }
 
             return argSpec.ToArray();
