@@ -268,7 +268,7 @@ namespace AutoRest.Ansible.Model
                 argSpec.Add("    default='present',");
                 argSpec.Add("    choices=['present', 'absent']");
 
-                if (Model.HasTags() && Model.ModuleName.EndsWith("_tags"))
+                if (HasTags() && ModuleName.EndsWith("_tags"))
                 {
                     argSpec.Add("),");
                     argSpec.Add("tags=dict(type='list')");        
