@@ -158,9 +158,9 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 @:        except CloudError as e:
 @:            self.log('Could not get facts for @(Model.ModuleOperationNameUpper).')
 @EmptyLine
-@:        if response is not None:
 if (m.Name.Contains("list"))
     {
+@:        if response is not None:
 @:            for item in response:
     if (Model.HasTags())
     {
@@ -176,8 +176,8 @@ else
 {
     if (Model.HasTags())
     {
-@:            if response and self.has_tags(response.tags, self.tags):
-@:                results.append(self.format_item(response))
+@:        if response and self.has_tags(response.tags, self.tags):
+@:            results.append(self.format_item(response))
     }
     else
     {
