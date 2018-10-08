@@ -145,7 +145,10 @@ namespace AutoRest.Ansible.Model
 
         public bool HasTags()
         {
-            return (Array.Find(this.ModuleResponseFields, element => (element.Name == "tags")) != null);
+            if (ModuleResponseFields != null)
+            {
+                return (Array.Find(ModuleResponseFields, element => (element.Name == "tags")) != null);
+            }
         }
 
         public bool HasPrerequisites()
