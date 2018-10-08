@@ -24,7 +24,7 @@ DOCUMENTATION = '''
 ---
 module: @(Model.ModuleNameAlt)
 version_added: "2.8"
-short_description: Get @(Model.ObjectName) facts.
+short_description: Get Azure @(Model.ObjectName) facts.
 description:
     - Get facts of @(Model.ObjectName).
 @EmptyLine
@@ -174,7 +174,15 @@ if (m.Name.Contains("list"))
 }
 else
 {
+    if (Model.HasTags())
+    {
+@:            if response and self.has_tags(response.tags, self.tags):
+@:                results.append(self.format_item(response))
+    }
+    else
+    {
 @:            results.append(self.format_item(response))
+    }
 }
 @EmptyLine
 @:        return results

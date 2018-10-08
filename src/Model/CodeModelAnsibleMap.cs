@@ -273,7 +273,9 @@ namespace AutoRest.Ansible.Model
             {
                 if (HasTags())
                 {
-                    argSpec.Add("tags=dict(type='list')");        
+                    argSpec.Add("tags=dict(");        
+                    argSpec.Add("    type='list'");        
+                    argSpec.Add(")");        
                 }
             }
 
@@ -560,7 +562,7 @@ namespace AutoRest.Ansible.Model
             {
                 List<string> help = new List<string>();
                 help.Add(ModuleOperationName + ":");
-                help.Add("    description: A list of dict results where the key is the name of the " + ObjectName + " and the values are the facts for that " + ObjectName + "."); 
+                help.Add("    description: A list of dictionaries containing facts for " + ObjectName + "."); 
                 help.Add("    returned: always");
                 help.Add("    type: complex");
                 help.Add("    contains:"); 
