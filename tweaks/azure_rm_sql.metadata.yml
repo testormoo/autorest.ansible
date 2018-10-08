@@ -3,6 +3,7 @@
 - azure_rm_sqlbackuplongtermretentionpolicy.server_name:
 - azure_rm_sqlbackuplongtermretentionpolicy.database_name:
 - azure_rm_sqlbackuplongtermretentionpolicy.backup_long_term_retention_policy_name:
+    - rename: name
 - azure_rm_sqlbackuplongtermretentionpolicy.state:
 - azure_rm_sqlbackuplongtermretentionpolicy.recovery_services_backup_policy_resource_id:
 - azure_rm_sqlbackuplongtermretentionpolicy.response.id:
@@ -16,6 +17,7 @@
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.server_name:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.database_name:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.backup_long_term_retention_policy_name:
+    - rename: name
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.response.id:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.response.name:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.response.type:
@@ -293,6 +295,7 @@
 - azure_rm_sqldatabase.resource_group_name:
 - azure_rm_sqldatabase.server_name:
 - azure_rm_sqldatabase.database_name:
+    - rename: name
 - azure_rm_sqldatabase.parameters:
 - azure_rm_sqldatabase.location:
 - azure_rm_sqldatabase.collation:

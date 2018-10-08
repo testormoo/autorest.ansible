@@ -129,7 +129,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
 }
 else
 {
-                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=False)
+@:                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=False)
 }
 @EmptyLine
     def exec_module(self, **kwargs):
