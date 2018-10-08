@@ -143,6 +143,11 @@ namespace AutoRest.Ansible.Model
             return (Array.Find(ModuleOptions, element => (element.Name == "resource_group_name")) != null);
         }
 
+        public bool HasTags()
+        {
+            return (Array.Find(this.ModuleResponseFields, element => (element.Name == "tags")) != null);
+        }
+
         public bool HasPrerequisites()
         {
             bool hasPrerequisites = false;

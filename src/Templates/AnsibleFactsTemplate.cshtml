@@ -34,6 +34,13 @@ options:
 @:@(line)
 }
 @EmptyLine
+@if (Module.HasTags())
+{
+@:    tags:
+@:        description:
+@:            - Limit results by providing a list of tags. Format tags as 'key' or 'key:value'.
+@:
+}
 extends_documentation_fragment:
     - azure
 @EmptyLine
@@ -81,9 +88,13 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         # define user inputs into argument
         self.module_arg_spec = dict(
-@foreach (var v in Model.GetModuleArgSpec(false))
+@foreach (var v in Model.GetModuleArgSpec(Module.HasTags()))
 {
 @:            @(v)
+    if (Module.HasTags())
+    {
+@:            tags=dict(type='list')        
+    }
 }
         )
 
@@ -96,6 +107,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 @foreach (var v in Model.ModuleOptions)
 {
 @:        self.@(v.NameAlt) = None
+}
+@if (Module.HasTags())
+{
+@:        self.tags = None
 }
 
         super(AzureRM@(Model.ModuleOperationNameUpper)Facts, self).__init__(self.module_arg_spec)
@@ -157,7 +172,16 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 if (m.Name.Contains("list"))
     {
 @:            for item in response:
+    if (Module.HasTags())
+    {
+@:                if self.has_tags(item.tags, self.tags):
+@:                    results.append(self.format_item(item))
+    }
+    else
+    {
 @:                results.append(self.format_item(item))
+    }
+}
 }
 else
 {
