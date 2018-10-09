@@ -70,6 +70,7 @@
 - azure_rm_mysqlserver_facts.response.fully_qualified_domain_name:
 - azure_rm_mysqlfirewallrule:
     - object_name: MySQL Firewall Rule
+    - object_name_plural: MySQL Firewall Rules
 - azure_rm_mysqlfirewallrule.resource_group_name:
 - azure_rm_mysqlfirewallrule.server_name:
 - azure_rm_mysqlfirewallrule.firewall_rule_name:
@@ -86,6 +87,7 @@
 - azure_rm_mysqlfirewallrule.response.end_ip_address:
 - azure_rm_mysqlfirewallrule_facts:
     - object_name: MySQL Firewall Rule
+    - object_name_plural: MySQL Firewall Rules
 - azure_rm_mysqlfirewallrule_facts.resource_group_name:
 - azure_rm_mysqlfirewallrule_facts.server_name:
 - azure_rm_mysqlfirewallrule_facts.firewall_rule_name:
@@ -97,6 +99,7 @@
 - azure_rm_mysqlfirewallrule_facts.response.end_ip_address:
 - azure_rm_mysqlvirtualnetworkrule:
     - object_name: MySQL Virtual Network Rule
+    - object_name_plural: MySQL Virtual Network Rules
 - azure_rm_mysqlvirtualnetworkrule.resource_group_name:
 - azure_rm_mysqlvirtualnetworkrule.server_name:
 - azure_rm_mysqlvirtualnetworkrule.virtual_network_rule_name:
@@ -112,6 +115,7 @@
 - azure_rm_mysqlvirtualnetworkrule.response.state:
 - azure_rm_mysqlvirtualnetworkrule_facts:
     - object_name: MySQL Virtual Network Rule
+    - object_name_plural: MySQL Virtual Network Rules
 - azure_rm_mysqlvirtualnetworkrule_facts.resource_group_name:
 - azure_rm_mysqlvirtualnetworkrule_facts.server_name:
 - azure_rm_mysqlvirtualnetworkrule_facts.virtual_network_rule_name:
@@ -124,6 +128,7 @@
 - azure_rm_mysqlvirtualnetworkrule_facts.response.state:
 - azure_rm_mysqldatabase:
     - object_name: MySQL Database
+    - object_name_plural: MySQL Databases
 - azure_rm_mysqldatabase.resource_group_name:
 - azure_rm_mysqldatabase.server_name:
 - azure_rm_mysqldatabase.database_name:
@@ -138,6 +143,7 @@
 - azure_rm_mysqldatabase.response.collation:
 - azure_rm_mysqldatabase_facts:
     - object_name: MySQL Database
+    - object_name_plural: MySQL Databases
 - azure_rm_mysqldatabase_facts.resource_group_name:
 - azure_rm_mysqldatabase_facts.server_name:
 - azure_rm_mysqldatabase_facts.database_name:
@@ -149,6 +155,7 @@
 - azure_rm_mysqldatabase_facts.response.collation:
 - azure_rm_mysqlconfiguration:
     - object_name: MySQL Configuration
+    - object_name_plural: MySQL Configurations
 - azure_rm_mysqlconfiguration.resource_group_name:
 - azure_rm_mysqlconfiguration.server_name:
 - azure_rm_mysqlconfiguration.configuration_name:
