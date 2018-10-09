@@ -1021,7 +1021,7 @@ namespace AutoRest.Ansible.Model
         public string[] ModuleGenerateApiCall(string indent, string methodName)
         {
             var response = new List<string>();
-            string line = indent + "response = self." + MgmtClient != null ? MgmtClient : "mgmt_client" + "." + ModuleOperationName + "." + methodName + "(";
+            string line = indent + "response = self." + (MgmtClient != null ? MgmtClient : "mgmt_client") + "." + ModuleOperationName + "." + methodName + "(";
             indent = Indent(line);
             ModuleMethod method = GetMethod(methodName);
 
