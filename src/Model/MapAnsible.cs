@@ -134,6 +134,7 @@ namespace AutoRest.Ansible.Model
         public string ModuleOperationNameUpper { get; set; }
         public string ModuleOperationName { get; set; }
         public string ObjectName { get; set; }
+        public string ObjectNamePlural { get; set; }
         public string ResourceNameFieldInRequest { get; set; }
         public string ResourceNameFieldInResponse { get; set; }
 
