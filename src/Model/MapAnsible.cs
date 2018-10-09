@@ -119,6 +119,7 @@ namespace AutoRest.Ansible.Model
             Author = "Zim Kalinowski";
             AuthorEmail = "zikalino@microsoft.com";
             AuthorIRC = "@zikalino";
+            MgmtClient = null;
         }
 
         public string ModuleName { get; set; }
@@ -137,6 +138,7 @@ namespace AutoRest.Ansible.Model
         public string ObjectNamePlural { get; set; }
         public string ResourceNameFieldInRequest { get; set; }
         public string ResourceNameFieldInResponse { get; set; }
+        public string MgmtClient { get; set; }
 
         public string VersionAdded { get; set; }
         public string YearAdded { get; set; }

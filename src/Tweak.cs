@@ -32,6 +32,7 @@ namespace AutoRest.Ansible
                     case "author": return new Tweak_Module_Author(path[0], parameter);
                     case "author_email": return new Tweak_Module_AuthorEmail(path[0], parameter);
                     case "author_irc": return new Tweak_Module_AuthorIRC(path[0], parameter);
+                    case "mgmt_client": return new Tweak_Module_MgmtClient(path[0], parameter);
                 }
             }
             else if (path[1] == "response")
@@ -495,6 +496,23 @@ namespace AutoRest.Ansible
         public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.AuthorEmail = _newValue;
+            return true;
+        }
+
+        private string _newValue;
+    }
+
+    class Tweak_Module_MgmtClient : Tweak_Module
+    {
+        public Tweak_Module_MgmtClient(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.MgmtClient = _newValue;
             return true;
         }
 

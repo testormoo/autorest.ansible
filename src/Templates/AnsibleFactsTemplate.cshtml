@@ -98,7 +98,10 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         self.results = dict(
             changed=False
         )
+@if (Model.MgmtClient == null)
+{        
         self.mgmt_client = None
+}
 @foreach (var v in Model.ModuleOptions)
 {
 @:        self.@(v.NameAlt) = None
@@ -114,16 +117,18 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         for key in self.module_arg_spec:
             setattr(self, key, kwargs[key])
-        
-        self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
-@if (Model.ApiVersion != null && Model.ApiVersion != "")
-{
+@if (Model.MgmtClient == null)
+{        
+@:        self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
+    if (Model.ApiVersion != null && Model.ApiVersion != "")
+    {
 @:                                                    base_url=self._cloud_environment.endpoints.resource_manager,
 @:                                                    api_version='@(Model.ApiVersion)')
-}
-else
-{
+    }
+    else
+    {
 @:                                                    base_url=self._cloud_environment.endpoints.resource_manager)
+    }
 }
 @EmptyLine
 @{

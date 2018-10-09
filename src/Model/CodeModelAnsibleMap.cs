@@ -189,6 +189,21 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string MgmtClient
+        {
+            get
+            {
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].MgmtClient : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
+            }
+        }
+
         public string ApiVersion
         {
             get
@@ -1006,7 +1021,7 @@ namespace AutoRest.Ansible.Model
         public string[] ModuleGenerateApiCall(string indent, string methodName)
         {
             var response = new List<string>();
-            string line = indent + "response = self.mgmt_client." + ModuleOperationName + "." + methodName + "(";
+            string line = indent + "response = self." + MgmtClient != null ? MgmtClient : "mgmt_client" + "." + ModuleOperationName + "." + methodName + "(";
             indent = Indent(line);
             ModuleMethod method = GetMethod(methodName);
 
