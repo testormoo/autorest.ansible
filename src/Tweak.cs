@@ -30,6 +30,7 @@ namespace AutoRest.Ansible
                     case "year_added": return new Tweak_Module_YearAdded(path[0], parameter);
                     case "author": return new Tweak_Module_Author(path[0], parameter);
                     case "author_email": return new Tweak_Module_AuthorEmail(path[0], parameter);
+                    case "author_irc": return new Tweak_Module_AuthorIRC(path[0], parameter);
                 }
             }
             else if (path[1] == "response")
@@ -451,6 +452,23 @@ namespace AutoRest.Ansible
     class Tweak_Module_AuthorEmail : Tweak_Module
     {
         public Tweak_Module_AuthorEmail(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.AuthorEmail = _newValue;
+            return true;
+        }
+
+        private string _newValue;
+    }
+
+    class Tweak_Module_AuthorIRC : Tweak_Module
+    {
+        public Tweak_Module_AuthorIRC(string module, string newValue)
         {
             _module = module;
             _newValue = newValue;

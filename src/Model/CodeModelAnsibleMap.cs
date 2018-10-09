@@ -159,6 +159,36 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string AuthorEmail
+        {
+            get
+            {
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].AuthorEmail : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
+            }
+        }
+
+        public string AuthorIRC
+        {
+            get
+            {
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].AuthorIRC : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
+            }
+        }
+
         public string ApiVersion
         {
             get

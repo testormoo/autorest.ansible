@@ -33,7 +33,6 @@ options:
 {
 @:@(line)
 }
-@EmptyLine
 @if (Model.HasTags())
 {
 @:    tags:
@@ -41,11 +40,12 @@ options:
 @:            - Limit results by providing a list of tags. Format tags as 'key' or 'key:value'.
 @:
 }
+@EmptyLine
 extends_documentation_fragment:
     - azure
 @EmptyLine
 author:
-    - "Zim Kalinowski (@@zikalino)"
+    - "@(Model.Author) (@(Model.AuthorIRC))"
 @EmptyLine
 '''
 @EmptyLine

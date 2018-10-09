@@ -118,6 +118,7 @@ namespace AutoRest.Ansible.Model
             YearAdded = "2018";
             Author = "Zim Kalinowski";
             AutorEmail = "zikalino@microsoft.com";
+            AuthorIRC = "@zikalino";
         }
 
         public string ModuleName { get; set; }
@@ -140,6 +141,7 @@ namespace AutoRest.Ansible.Model
         public string YearAdded { get; set; }
         public string Author { get; set; }
         public string AuthorEmail { get; set; }
+        public string AuthorIRC { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
         public bool NeedsForceUpdate { get; set; }
