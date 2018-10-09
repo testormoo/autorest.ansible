@@ -53,7 +53,6 @@
 - azure_rm_mysqlserver_facts.response.id:
 - azure_rm_mysqlserver_facts.response.name:
 - azure_rm_mysqlserver_facts.response.type:
-    - remove
 - azure_rm_mysqlserver_facts.response.location:
 - azure_rm_mysqlserver_facts.response.tags:
 - azure_rm_mysqlserver_facts.response.sku:
