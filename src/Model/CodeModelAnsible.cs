@@ -125,7 +125,7 @@ namespace AutoRest.Ansible.Model
                         method.RequiredOptions = GetMethodOptionNames(ModuleGetMethod.Name);
                         methods.Add(method);
 
-                        module.ResponseFields = GetResponseFieldsForMethod(method.Name, true);
+                        module.ResponseFields = GetResponseFieldsForMethod(method.Name, false);
                     }
 
                     if (ModuleCreateOrUpdateMethod != null)
@@ -207,7 +207,7 @@ namespace AutoRest.Ansible.Model
 
                     if (ModuleGetMethod != null)
                     {
-                        module.ResponseFields = GetResponseFieldsForMethod(ModuleGetMethod.Name, true);
+                        module.ResponseFields = GetResponseFieldsForMethod(ModuleGetMethod.Name, false);
                     }
 
                     module.Methods = methods.ToArray();
