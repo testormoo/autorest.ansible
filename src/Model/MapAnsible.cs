@@ -114,6 +114,9 @@ namespace AutoRest.Ansible.Model
             NeedsForceUpdate = false;
             CannotTestUpdate = true;
             AdditionalSampleLines = new List<string>().ToArray();
+            VersionAdded = "2.8";
+            YearAdded = "2018";
+            Author = "Zim Kalinowski";
         }
 
         public string ModuleName { get; set; }
@@ -131,6 +134,10 @@ namespace AutoRest.Ansible.Model
         public string ObjectName { get; set; }
         public string ResourceNameFieldInRequest { get; set; }
         public string ResourceNameFieldInResponse { get; set; }
+
+        public string VersionAdded { get; set; }
+        public string YearAdded { get; set; }
+        public string Author { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
         public bool NeedsForceUpdate { get; set; }

@@ -26,6 +26,9 @@ namespace AutoRest.Ansible
                     case "samples-append-line": return new Tweak_Module_SampleAppendLine(path[0], parameter);
                     case "test-prerequisites-module": return new Tweak_Module_TestPrerequisitesModule(path[0], parameter, null, null);
                     case "object_name": return new Tweak_Module_ObjectName(path[0], parameter);
+                    case "version_added": return new Tweak_Module_VersionAdded(path[0], parameter);
+                    case "year_added": return new Tweak_Module_YearAdded(path[0], parameter);
+                    case "author": return new Tweak_Module_Author(path[0], parameter);
                 }
             }
             else if (path[1] == "response")
@@ -387,6 +390,57 @@ namespace AutoRest.Ansible
         public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.ObjectName = _newValue;
+            return true;
+        }
+
+        private string _newValue;
+    }
+
+    class Tweak_Module_VersionAdded : Tweak_Module
+    {
+        public Tweak_Module_VersionAdded(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.VersionAdded = _newValue;
+            return true;
+        }
+
+        private string _newValue;
+    }
+
+    class Tweak_Module_YearAdded : Tweak_Module
+    {
+        public Tweak_Module_YearAdded(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.YearAdded = _newValue;
+            return true;
+        }
+
+        private string _newValue;
+    }
+
+    class Tweak_Module_Author : Tweak_Module
+    {
+        public Tweak_Module_Author(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.Author = _newValue;
             return true;
         }
 

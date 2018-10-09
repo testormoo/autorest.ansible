@@ -1,5 +1,8 @@
 - azure_rm_mysqlserver:
     - object_name: MySQL Server
+    - version_added: 2.7
+    - year_added: 2017
+    - author: Mukan Muka
 - azure_rm_mysqlserver.resource_group_name:
 - azure_rm_mysqlserver.server_name:
     - rename: name
