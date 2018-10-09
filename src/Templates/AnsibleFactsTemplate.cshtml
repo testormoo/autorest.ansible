@@ -100,7 +100,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         )
 @if (Model.MgmtClient == null)
 {        
-        self.mgmt_client = None
+@:        self.mgmt_client = None
 }
 @foreach (var v in Model.ModuleOptions)
 {
