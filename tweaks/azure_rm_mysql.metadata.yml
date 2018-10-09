@@ -54,9 +54,7 @@
 - azure_rm_mysqlserver_facts.response.location:
 - azure_rm_mysqlserver_facts.response.tags:
 - azure_rm_mysqlserver_facts.response.sku:
-    - collapse
 - azure_rm_mysqlserver_facts.response.sku.name:
-    - rename: moo
 - azure_rm_mysqlserver_facts.response.sku.tier:
 - azure_rm_mysqlserver_facts.response.sku.capacity:
 - azure_rm_mysqlserver_facts.response.sku.size:
