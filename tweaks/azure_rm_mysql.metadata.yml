@@ -43,6 +43,8 @@
 - azure_rm_mysqlserver.response.fully_qualified_domain_name:
 - azure_rm_mysqlserver_facts:
     - object_name: MySQL Server
+    - version_added: 2.7
+    - year_added: 2017
 - azure_rm_mysqlserver_facts.resource_group_name:
 - azure_rm_mysqlserver_facts.server_name:
     - rename: name
