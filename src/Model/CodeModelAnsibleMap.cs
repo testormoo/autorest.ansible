@@ -114,6 +114,51 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string VersionAdded
+        {
+            get
+            {
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].VersionAdded : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
+            }
+        }
+
+        public string YearAdded
+        {
+            get
+            {
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].YearAdded : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
+            }
+        }
+
+        public string Author
+        {
+            get
+            {
+                try
+                {
+                    return (_selectedMethod < Map.Modules.Length) ? Map.Modules[_selectedMethod].Author : "INVALID";
+                }
+                catch (Exception e)
+                {
+                    return "EXCEPTION";
+                }
+            }
+        }
+
         public string ApiVersion
         {
             get

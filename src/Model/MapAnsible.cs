@@ -117,6 +117,7 @@ namespace AutoRest.Ansible.Model
             VersionAdded = "2.8";
             YearAdded = "2018";
             Author = "Zim Kalinowski";
+            AutorEmail = "zikalino@microsoft.com";
         }
 
         public string ModuleName { get; set; }
@@ -138,6 +139,7 @@ namespace AutoRest.Ansible.Model
         public string VersionAdded { get; set; }
         public string YearAdded { get; set; }
         public string Author { get; set; }
+        public string AuthorEmail { get; set; }
 
         public bool NeedsDeleteBeforeUpdate { get; set; }
         public bool NeedsForceUpdate { get; set; }
