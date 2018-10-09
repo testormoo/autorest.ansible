@@ -18,6 +18,7 @@ namespace AutoRest.Ansible
             new Tweak_Response_AddField("*", "state"),
             new Tweak_Response_AddField("*", "user_visible_state"),
             new Tweak_Response_AddField("*_facts", "tags"),
+            new Tweak_Response_RemoveField("*_facts", "type");
             new Tweak_Option_Documentation("*", "location", "Resource location. If not set, location from the resource group will be used as default."),
             //new Tweak_Option_DefaultValueTest("*", "location", "eastus"),
             new Tweak_Option_DefaultValueSample("*", "location", "eastus"),
