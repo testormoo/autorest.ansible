@@ -117,7 +117,7 @@ namespace AutoRest.Ansible.Model
             VersionAdded = "2.8";
             YearAdded = "2018";
             Author = "Zim Kalinowski";
-            AutorEmail = "zikalino@microsoft.com";
+            AuthorEmail = "zikalino@microsoft.com";
             AuthorIRC = "@zikalino";
         }
 
