@@ -47,6 +47,7 @@
     - object_name_plural: MySQL Servers
     - version_added: 2.7
     - year_added: 2017
+    - mgmt_client: mysql_client
 - azure_rm_mysqlserver_facts.resource_group_name:
 - azure_rm_mysqlserver_facts.server_name:
     - rename: name
