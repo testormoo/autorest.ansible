@@ -637,7 +637,7 @@ namespace AutoRest.Ansible.Model
             {
                 List<string> help = new List<string>();
                 help.Add(ModuleOperationName + ":");
-                help.Add("    description: A list of dictionaries containing facts for " + ObjectName + "."); 
+                help.Add("    description: A list of dictionaries containing facts for " + ObjectNamePlural + "."); 
                 help.Add("    returned: always");
                 help.Add("    type: complex");
                 help.Add("    contains:"); 
