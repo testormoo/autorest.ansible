@@ -1084,11 +1084,20 @@ namespace AutoRest.Ansible.Model
                 return GetModuleMap(ModuleName).ModuleOperationName;
             }
         }
+
         public string ObjectName
         {
             get
             {
                 return GetModuleMap(ModuleName).ObjectName;
+            }
+        }
+
+        public string ObjectNamePlural
+        {
+            get
+            {
+                return GetModuleMap(ModuleName).ObjectNamePlural;
             }
         }
 
