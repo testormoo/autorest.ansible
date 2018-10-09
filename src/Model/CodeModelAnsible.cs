@@ -217,6 +217,7 @@ namespace AutoRest.Ansible.Model
                     module.ModuleOperationName = ModuleOperationName;
                     module.ModuleOperationNameUpper = ModuleOperationNameUpper;
                     module.ObjectName = ObjectName;
+                    module.ObjectNamePlural = ObjectName + "s";
 
                     UpdateResourceNameFields(module);
 
