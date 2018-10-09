@@ -1,5 +1,6 @@
 - azure_rm_postgresqlserver:
     - object_name: PostgreSQL Server
+    - object_name_plural: PostgreSQL Servers
 - azure_rm_postgresqlserver.resource_group_name:
 - azure_rm_postgresqlserver.server_name:
     - rename: name
@@ -41,6 +42,7 @@
 - azure_rm_postgresqlserver.response.fully_qualified_domain_name:
 - azure_rm_postgresqlserver_facts:
     - object_name: PostgreSQL Server
+    - object_name_plural: PostgreSQL Servers
 - azure_rm_postgresqlserver_facts.resource_group_name:
 - azure_rm_postgresqlserver_facts.server_name:
     - rename: name

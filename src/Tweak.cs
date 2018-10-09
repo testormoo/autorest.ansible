@@ -26,6 +26,7 @@ namespace AutoRest.Ansible
                     case "samples-append-line": return new Tweak_Module_SampleAppendLine(path[0], parameter);
                     case "test-prerequisites-module": return new Tweak_Module_TestPrerequisitesModule(path[0], parameter, null, null);
                     case "object_name": return new Tweak_Module_ObjectName(path[0], parameter);
+                    case "object_name_plural": return new Tweak_Module_ObjectNamePlural(path[0], parameter);
                     case "version_added": return new Tweak_Module_VersionAdded(path[0], parameter);
                     case "year_added": return new Tweak_Module_YearAdded(path[0], parameter);
                     case "author": return new Tweak_Module_Author(path[0], parameter);
@@ -392,6 +393,23 @@ namespace AutoRest.Ansible
         public override bool ApplyOnModule(Model.MapAnsibleModule m)
         {
             m.ObjectName = _newValue;
+            return true;
+        }
+
+        private string _newValue;
+    }
+
+    class Tweak_Module_ObjectNamePlural : Tweak_Module
+    {
+        public Tweak_Module_ObjectNamePlural(string module, string newValue)
+        {
+            _module = module;
+            _newValue = newValue;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            m.ObjectNamePlural = _newValue;
             return true;
         }
 
