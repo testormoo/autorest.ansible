@@ -33,6 +33,7 @@ namespace AutoRest.Ansible
                     case "author_email": return new Tweak_Module_AuthorEmail(path[0], parameter);
                     case "author_irc": return new Tweak_Module_AuthorIRC(path[0], parameter);
                     case "mgmt_client": return new Tweak_Module_MgmtClient(path[0], parameter);
+                    case "add_update_rule": return new Tweak_Module_AddUpdateRule(path[0], parameter, parameter);
                 }
             }
             else if (path[1] == "response")

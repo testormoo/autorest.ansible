@@ -175,8 +175,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_mysqlfirewallrule", "firewall_rule_name"),
             //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlfirewallrule", "firewallrule{{ rpfx }}"),
-            new Tweak_Module_AddUpdateRule("azure_rm_mysqlfirewallrule", "start_ip_address", "start_ip_address"),
-            new Tweak_Module_AddUpdateRule("azure_rm_mysqlfirewallrule", "end_ip_address", "end_ip_address"),
 
             // MySQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule_facts", "azure_rm_mysqlfirewallrule", null, null),
@@ -303,8 +301,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_postgresqlfirewallrule", "firewall_rule_name"),
             //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlfirewallrule", "firewallrule{{ rpfx }}"),
-            new Tweak_Module_AddUpdateRule("azure_rm_postgresqlfirewallrule", "start_ip_address", "start_ip_address"),
-            new Tweak_Module_AddUpdateRule("azure_rm_postgresqlfirewallrule", "end_ip_address", "end_ip_address"),
 
             // PostgreSQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule_facts", "azure_rm_postgresqlfirewallrule", null, null),

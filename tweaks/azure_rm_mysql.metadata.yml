@@ -72,6 +72,8 @@
 - azure_rm_mysqlfirewallrule:
     - object_name: MySQL Firewall Rule
     - object_name_plural: MySQL Firewall Rules
+    - add_update_rule: start_ip_address
+    - add_update_rule: end_ip_address
 - azure_rm_mysqlfirewallrule.resource_group_name:
 - azure_rm_mysqlfirewallrule.server_name:
 - azure_rm_mysqlfirewallrule.firewall_rule_name:
