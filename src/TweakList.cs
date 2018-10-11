@@ -64,8 +64,6 @@ namespace AutoRest.Ansible
 
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['location']", "location"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['read_scale']", "read_scale"),
-            //new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['requested_service_objective_id']", "requested_service_objective_id"),
-            //new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['requested_service_objective_name']", "requested_service_objective_name"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['max_size_bytes']", "max_size_bytes"),
             new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['edition']", "edition"),
             new Tweak_Module_NeedsForceUpdate("azure_rm_sqldatabase"),
@@ -94,10 +92,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "start_ip_address", "172.28.10.136"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "end_ip_address", "172.28.10.138"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_sqlfirewallrule"),
-            //new Tweak_Module_AssertStateVariable("azure_rm_sqlfirewallrule", "firewall_rule_name"),
-            //new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlfirewallrule", "firewallrule{{ rpfx }}"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "start_ip_address", "start_ip_address"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqlfirewallrule", "end_ip_address", "end_ip_address"),
 
             // SQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule_facts", "azure_rm_sqlfirewallrule", null, null),
