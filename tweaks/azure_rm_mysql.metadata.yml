@@ -138,7 +138,9 @@
     - rename: name
 - azure_rm_mysqldatabase.parameters:
 - azure_rm_mysqldatabase.charset:
+    - update_rule: compare
 - azure_rm_mysqldatabase.collation:
+    - update_rule: compare
 - azure_rm_mysqldatabase.response.id:
 - azure_rm_mysqldatabase.response.name:
 - azure_rm_mysqldatabase.response.type:
