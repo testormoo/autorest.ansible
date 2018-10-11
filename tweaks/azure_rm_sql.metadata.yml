@@ -274,7 +274,7 @@
 - azure_rm_sqldatabase:
     - object_name: SQL Database
     - samples-append-line: ""
-    - samples-append-line: "  - name: Restore SQL Database XXXYQ"
+    - samples-append-line: "  - name: Restore SQL Database"
     - samples-append-line: "    azure_rm_sqldatabase:"
     - samples-append-line: "      resource_group: sqlcrudtest-4799"
     - samples-append-line: "      server_name: sqlcrudtest-5961"
