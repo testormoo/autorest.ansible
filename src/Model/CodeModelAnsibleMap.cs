@@ -646,7 +646,6 @@ namespace AutoRest.Ansible.Model
         {
             List<string> statements = new List<string>();
 
-            statements.Add("OPTIONS XXXXXXXXXXXXXXXXXX");
             foreach (var option in options)
             {
                 string optionStatementPrefix = statementPrefix;
@@ -664,7 +663,6 @@ namespace AutoRest.Ansible.Model
 
                 if (option.UpdateRule != null && option.UpdateRule != "none")
                 {
-                    statements.Add("OPTION " + option.Name + " HAS RULE");
                     // if update rule is defined at this level, it will be applied, even if option has suboptions
                     // suboptions will be ignored
                     // right now just simple update rule
@@ -677,7 +675,6 @@ namespace AutoRest.Ansible.Model
                     // check suboptions
                     if (option.SubOptions != null)
                     {
-                        statements.Add("OPTION " + option.Name + " HAS SUBOPTIONS");
                         // XXX - take collapse into account
                         // XXX - check if actually exists
                         string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", dictPrefix + "['" + option.Name + "']");
@@ -685,7 +682,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else
                     {
-                        statements.Add("OPTION " + option.Name + " DOESN'T HAVE SUBOPTIONS");
+                        //statements.Add("OPTION " + option.Name + " DOESN'T HAVE SUBOPTIONS");
                     }
                 }
             }
