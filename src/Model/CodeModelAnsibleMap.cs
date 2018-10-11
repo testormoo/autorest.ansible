@@ -637,7 +637,7 @@ namespace AutoRest.Ansible.Model
                 else
                 {
                     // default
-                    return new string[1] { "                self.to_do = Actions.Update"};
+                    return new string[1] { "self.to_do = Actions.Update"};
                 }
             }
         }
