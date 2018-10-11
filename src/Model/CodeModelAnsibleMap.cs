@@ -646,6 +646,7 @@ namespace AutoRest.Ansible.Model
         {
             List<string> statements = new List<string>();
 
+            statements.Add("OPTIONS XXXXXXXXXXXXXXXXXX");
             foreach (var option in options)
             {
                 string optionStatementPrefix = statementPrefix;
@@ -679,6 +680,10 @@ namespace AutoRest.Ansible.Model
                         // XXX - check if actually exists
                         string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", dictPrefix + "['" + option.Name + "']");
                         statements.AddRange(subStatements);
+                    }
+                    else
+                    {
+                        statements.Add("OPTION " + option.Name + " DOESN'T HAVE SUBOPTIONS");
                     }
                 }
             }
