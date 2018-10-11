@@ -628,7 +628,17 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetIdempotencyCheck(ModuleOptions, "self", "old_response");
+                string[] code = GetIdempotencyCheck(ModuleOptions, "self", "old_response");
+
+                if (code.Length != 0)
+                {
+                    return code;
+                }
+                else
+                {
+                    // default
+                    return new string[1] { "                self.to_do = Actions.Update"};
+                }
             }
         }
 
