@@ -210,7 +210,7 @@ else
             elif self.state == 'present':
                 self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
 @{
-    foreach (var rule in Model.GetUpdateCheckRules())
+    foreach (var rule in Model.ModuleIdempotencyCheck)
     {
 @:                @(rule)
     }

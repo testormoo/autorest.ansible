@@ -622,6 +622,61 @@ namespace AutoRest.Ansible.Model
         }
 
         //
+        // Module idempotency check
+        //
+        public string[] ModuleIdempotencyCheck
+        {
+            get
+            {
+                return GetIdempotencyCheck(ModuleOptions, "self", "old_response");
+            }
+        }
+
+        private string[] GetIdempotencyCheck(ModuleOption[] options, string statementPrefix, string dictPrefix)
+        {
+            List<string> statements = new List<string>();
+
+            foreach (var option in options)
+            {
+                string optionStatementPrefix = statementPrefix;
+                string optionDictPrefix = dictPrefix + "['" + option.Name + "']";
+
+                if (statementPrefix == "self")
+                {
+                    optionStatementPrefix += "." + option.NameAlt;
+                }
+                else
+                {
+                    optionStatementPrefix += "['" + option.NameAlt + "']";
+                }
+
+
+                if (option.UpdateRule != null && option.UpdateRule != "none")
+                {
+                    // if update rule is defined at this level, it will be applied, even if option has suboptions
+                    // suboptions will be ignored
+                    // right now just simple update rule
+                    statements.Add("                if (" + optionStatementPrefix + " is not None) and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                    statements.Add("                    self.to_do = Actions.Update");
+                }
+                else
+                {
+                    // there's no rule for this option
+                    // check suboptions
+                    if (option.SubOptions != null)
+                    {
+                        // XXX - take collapse into account
+                        // XXX - check if actually exists
+                        string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", dictPrefix + "['" + option.Name + "']");
+                        statements.AddRange(subStatements);
+                    }
+                }
+            }
+
+            return statements.ToArray();
+        }
+
+        //
         // Module documentation -- used by both main and facts module
         //
         public string[] ModuleDocumentation
