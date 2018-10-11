@@ -652,6 +652,7 @@
     - rename: admin_username
 - azure_rm_sqlserver.administrator_login_password:
     - rename: admin_password
+    - update_rule: none
 - azure_rm_sqlserver.version:
 - azure_rm_sqlserver.type:
 - azure_rm_sqlserver.response.id:
@@ -667,6 +668,7 @@
 - azure_rm_sqlserver.response.administrator_login:
 - azure_rm_sqlserver.response.administrator_login_password:
 - azure_rm_sqlserver.response.version:
+    - update_rule: compare
 - azure_rm_sqlserver.response.state:
 - azure_rm_sqlserver.response.fully_qualified_domain_name:
 - azure_rm_sqlserver_facts:

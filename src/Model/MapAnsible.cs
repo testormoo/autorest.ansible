@@ -60,6 +60,7 @@ namespace AutoRest.Ansible.Model
         public bool IncludeInDocumentation { get; set; }
         public bool IncludeInArgSpec { get; set; }
         public string AdditionalInfo { get; set; }
+        public string UpdateRule { get; set; }
     }
 
     public class ModuleResponseField

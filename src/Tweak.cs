@@ -65,6 +65,7 @@ namespace AutoRest.Ansible
                 case "documentation-cut-after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation-mark-keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
                 case "collapse":                    return new Tweak_Option_Collapse(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "update_rule":                 return new Tweak_Option_UpdateRule(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 }
             }
 
@@ -611,6 +612,31 @@ namespace AutoRest.Ansible
         private string[] _path;
         private string _newName;
         private int _levelChange;
+    }
+
+    class Tweak_Option_UpdateRule : Tweak_Option
+    {
+        public Tweak_Option_UpdateRule(string module, string path, string rule)
+        {
+            _module = module;
+            _path = path.Split(".");
+            _rule = rule;
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            log = "SETTING UPDATE RULE " + string.Join(".", _path) + " -- ";
+            Model.ModuleOption option = GetOption(m, _path);
+            if (option != null)
+            {
+                option.UpdateRule = _rule;
+            }
+
+            return (option != null);
+        }
+
+        private string[] _path;
+        private string _rule;
     }
 
     class Tweak_Option_Required : Tweak_Option
