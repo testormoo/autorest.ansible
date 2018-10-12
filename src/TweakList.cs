@@ -62,10 +62,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_AssertStateVariable("azure_rm_sqldatabase", "status"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqldatabase", "Online"),
 
-            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['location']", "location"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['read_scale']", "read_scale"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['max_size_bytes']", "max_size_bytes"),
-            new Tweak_Module_AddUpdateRule("azure_rm_sqldatabase", "parameters['edition']", "edition"),
             new Tweak_Module_NeedsForceUpdate("azure_rm_sqldatabase"),
 
             // SQL Database Facts
@@ -145,8 +141,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "database_name", "testdatabase"),
-            new Tweak_Module_AddUpdateRule("azure_rm_mysqldatabase", "parameters['collation']", "collation"),
-            new Tweak_Module_AddUpdateRule("azure_rm_mysqldatabase", "parameters['charset']", "charset"),
             new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "collation", " Check MySQL documentation for possible values."),
             new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "charset", " Check MySQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_mysqldatabase", "name"),
@@ -271,8 +265,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase", "azure_rm_postgresqlserver", null, null),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqldatabase", "database_name", "testdatabase"),
-            new Tweak_Module_AddUpdateRule("azure_rm_postgresqldatabase", "parameters['collation']", "collation"),
-            new Tweak_Module_AddUpdateRule("azure_rm_postgresqldatabase", "parameters['charset']", "charset"),
             new Tweak_Option_DocumentationAppend("azure_rm_postgresqldatabase", "collation", " Check PostgreSQL documentation for possible values."),
             new Tweak_Option_DocumentationAppend("azure_rm_postgresqldatabase", "charset", " Check PostgreSQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_postgresqldatabase", "name"),
