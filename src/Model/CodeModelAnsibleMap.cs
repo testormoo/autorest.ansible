@@ -1804,13 +1804,17 @@ namespace AutoRest.Ansible.Model
 
             foreach (var o in options)
             {
-                if (o.Collapsed)
+                // XXX why?
+                if (o != null)
                 {
-                    collapsed.AddRange(GetCollapsedOptions(o.SubOptions));
-                }
-                else
-                {
-                    collapsed.Add(o);
+                    if (o.Collapsed)
+                    {
+                        collapsed.AddRange(GetCollapsedOptions(o.SubOptions));
+                    }
+                    else
+                    {
+                        collapsed.Add(o);
+                    }
                 }
             }
 
