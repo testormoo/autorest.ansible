@@ -651,12 +651,17 @@ namespace AutoRest.Ansible.Model
                 string optionStatementPrefix = statementPrefix;
                 string optionDictPrefix = dictPrefix + "['" + option.Name + "']";
 
-                if (statementPrefix == "self")
+                if (statementPrefix == "self" && option.Disposition == "default")
                 {
                     optionStatementPrefix += "." + option.NameAlt;
                 }
                 else
                 {
+                    if (option.disposition != "default")
+                    {
+                        optionStatementPrefix += "['" + option.Disposition + "']"
+                    }
+
                     optionStatementPrefix += "['" + option.NameAlt + "']";
                 }
 
@@ -666,8 +671,15 @@ namespace AutoRest.Ansible.Model
                     // if update rule is defined at this level, it will be applied, even if option has suboptions
                     // suboptions will be ignored
                     // right now just simple update rule
-                    statements.Add("                if (" + optionStatementPrefix + " is not None) and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
-                    statements.Add("                    self.to_do = Actions.Update");
+                    if (statementPrefix == "self" && option.Disposition == "default")
+                    {
+                        statements.Add("if (" + optionStatementPrefix + " is not None) and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                    }
+                    else
+                    {
+                        statements.Add("if ('" option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                    }
+                    statements.Add("    self.to_do = Actions.Update");
                 }
                 else
                 {
