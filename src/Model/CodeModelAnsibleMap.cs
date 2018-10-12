@@ -683,7 +683,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else
                     {
-                        statements.Add("if ('" + option.NameAlt + "' in " + optionStatementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                        statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + "." + option.Disposition + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
                     }
                     statements.Add("    self.to_do = Actions.Update");
                 }
