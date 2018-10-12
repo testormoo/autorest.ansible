@@ -33,7 +33,6 @@ namespace AutoRest.Ansible
                     case "author_email": return new Tweak_Module_AuthorEmail(path[0], parameter);
                     case "author_irc": return new Tweak_Module_AuthorIRC(path[0], parameter);
                     case "mgmt_client": return new Tweak_Module_MgmtClient(path[0], parameter);
-                    case "add_update_rule": return new Tweak_Module_AddUpdateRule(path[0], parameter, parameter);
                 }
             }
             else if (path[1] == "response")
@@ -562,27 +561,6 @@ namespace AutoRest.Ansible
 
         private string[] _pre;
         private string[] _post;
-    }
-
-    class Tweak_Module_AddUpdateRule : Tweak_Module
-    {
-        public Tweak_Module_AddUpdateRule(string module, string parameterPath, string responsePath)
-        {
-            _module = module;
-            _parameterPath = parameterPath.Split(":");
-            _responsePath = responsePath.Split(":");
-        }
-
-        public override bool ApplyOnModule(Model.MapAnsibleModule m)
-        {
-            List<Model.UpdateComparisonRule> rules = (m.UpdateComparisonRules != null) ? m.UpdateComparisonRules.ToList() : new List<Model.UpdateComparisonRule>();
-            rules.Add(new Model.UpdateComparisonRule(_parameterPath, _responsePath));
-            m.UpdateComparisonRules = rules.ToArray();
-            return true;
-        }
-
-        private string[] _parameterPath;
-        private string[] _responsePath;
     }
 
     class Tweak_Option_Rename : Tweak_Option
