@@ -14,6 +14,7 @@
 - azure_rm_mysqlserver.sku.size:
 - azure_rm_mysqlserver.sku.family:
 - azure_rm_mysqlserver.properties:
+    - collapse
 - azure_rm_mysqlserver.properties.location:
 - azure_rm_mysqlserver.properties.storage_mb:
 - azure_rm_mysqlserver.properties.version:

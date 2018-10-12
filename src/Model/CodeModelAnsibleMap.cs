@@ -715,7 +715,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetHelpFromOptions(ModuleOptions, "    ");
+                return GetHelpFromOptions(GetCollapsedOptions(ModuleOptions), "    ");
             }
         }
 
@@ -1455,7 +1455,7 @@ namespace AutoRest.Ansible.Model
                 if (option.SubOptions != null && option.SubOptions.Length > 0)
                 {
                     help.Add(padding + "    suboptions:");
-                    help.AddRange(GetHelpFromOptions(option.SubOptions, padding + "        "));
+                    help.AddRange(GetHelpFromOptions(GetCollapsedOptions(option.SubOptions), padding + "        "));
                 }
             }
 
@@ -1795,6 +1795,25 @@ namespace AutoRest.Ansible.Model
                 }
             }
             return name;
+        }
+
+        private static ModuleOption[] GetCollapsedOptions(ModuleOption[] options)
+        {
+            var collapsed = new List<ModuleOption>();
+
+            foreach (var o in options)
+            {
+                if (o.Collapsed)
+                {
+                    collapsed.AddRange(GetCollapsedOptions(o.SubOptions));
+                }
+                else
+                {
+                    collapsed.Add(o);
+                }
+            }
+
+            return collapsed.ToArray();
         }
     }
 }
