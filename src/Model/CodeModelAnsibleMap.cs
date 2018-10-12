@@ -292,10 +292,11 @@ namespace AutoRest.Ansible.Model
         public string[] GetModuleArgSpec(bool appendMainModuleOptions)
         {
             var argSpec = new List<string>();
+            var options = GetCollapsedOptions(ModuleOptions);
 
-            for (int i = 0; i < ModuleOptions.Length; i++)
+            for (int i = 0; i < options.Length; i++)
             {
-                var option = ModuleOptions[i];
+                var option = options[i];
                 if (!option.IncludeInArgSpec)
                     continue;
                 bool defaultOrRequired = (option.DefaultValue != null) || (option.Required == "True");
@@ -341,7 +342,7 @@ namespace AutoRest.Ansible.Model
                     }
                 }
 
-                argSpec.Add(")" + ((i < ModuleOptions.Length - 1 || appendMainModuleOptions || (!appendMainModuleOptions && HasTags())) ? "," : ""));
+                argSpec.Add(")" + ((i < options.Length - 1 || appendMainModuleOptions || (!appendMainModuleOptions && HasTags())) ? "," : ""));
             }
 
             if (appendMainModuleOptions)
@@ -1278,7 +1279,7 @@ namespace AutoRest.Ansible.Model
         private string[] GetPlaybookFromOptions(ModuleOption[] options, string padding, string playbookType, string instanceNamePostfix = "")
         {
             List<string> help = new List<string>();
-            foreach (var option in options)
+            foreach (var option in GetCollapsedOptions(options))
             {
                 // XXX - this should not be necessary
                 if (option == null)
