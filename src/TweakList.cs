@@ -125,7 +125,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_DefaultValueSample("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.storage_mb", "51200"),
-            //new Tweak_Option_CollapseX("azure_rm_mysqlserver", "properties", ""),
+            new Tweak_Option_CollapseX("azure_rm_mysqlserver", "properties", ""),
             new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "fully_qualified_domain_name", "mysqlsrv1b6dd89593.mysql.database.azure.com"),
             new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "id", "/subscriptions/12345678-1234-1234-1234-123412341234/testrg/providers/Microsoft.DBforMySQL/servers/mysqlsrv1b6dd89593"),
             new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "user_visible_state", "Ready"),
