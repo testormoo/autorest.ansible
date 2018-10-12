@@ -657,7 +657,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    if (option.disposition != "default")
+                    if (option.Disposition != "default")
                     {
                         optionStatementPrefix += "['" + option.Disposition + "']";
                     }
