@@ -63,7 +63,7 @@ namespace AutoRest.Ansible
                 case "documentation-replace":       return new Tweak_Option_DocumentationReplace(path[0], String.Join('.', path, 1, path.Length - 1), parameter.Split(">>>")[0], parameter.Split(">>>")[1]);
                 case "documentation-cut-after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation-mark-keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
-                //case "collapse":                    return new Tweak_Option_CollapseX(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "collapse":                    return new Tweak_Option_Collapse(path[0], String.Join('.', path, 1, path.Length - 1));
                 case "update_rule":                 return new Tweak_Option_UpdateRule(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 }
             }
@@ -1005,6 +1005,31 @@ namespace AutoRest.Ansible
 
         private string[] _path;
         private string _namePrefix;
+    }
+
+    class Tweak_Option_Collapse : Tweak_Option
+    {
+        public Tweak_Option_Collapse(string module, string path)
+        {
+            _module = module;
+            _path = path.Split(".");
+        }
+
+        public override bool ApplyOnModule(Model.MapAnsibleModule m)
+        {
+            Model.ModuleOption option = GetOption(m, _path);
+
+            if (option == null)
+                return false;
+
+            if (option.Type != "dict")
+                return false;
+
+            option.Collapsed = true;
+            return true;
+        }
+
+        private string[] _path;
     }
 
     class Tweak_Response_RenameField : Tweak_Response

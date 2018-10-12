@@ -33,6 +33,7 @@ namespace AutoRest.Ansible.Model
             IncludeInDocumentation = true;
             IncludeInArgSpec = true;
             DocumentationMarkKeywords = true;
+            Collapsed = false;
         }
 
         public string Name { get; set; }
@@ -61,6 +62,7 @@ namespace AutoRest.Ansible.Model
         public bool IncludeInArgSpec { get; set; }
         public string AdditionalInfo { get; set; }
         public string UpdateRule { get; set; }
+        public string Collapsed { get; set; }
     }
 
     public class ModuleResponseField
