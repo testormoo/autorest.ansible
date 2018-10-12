@@ -659,12 +659,11 @@ namespace AutoRest.Ansible.Model
                 {
                     if (option.disposition != "default")
                     {
-                        optionStatementPrefix += "['" + option.Disposition + "']"
+                        optionStatementPrefix += "['" + option.Disposition + "']";
                     }
 
                     optionStatementPrefix += "['" + option.NameAlt + "']";
                 }
-
 
                 if (option.UpdateRule != null && option.UpdateRule != "none")
                 {
@@ -677,7 +676,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else
                     {
-                        statements.Add("if ('" option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                        statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
                     }
                     statements.Add("    self.to_do = Actions.Update");
                 }
