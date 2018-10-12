@@ -63,7 +63,7 @@ namespace AutoRest.Ansible
                 case "documentation-replace":       return new Tweak_Option_DocumentationReplace(path[0], String.Join('.', path, 1, path.Length - 1), parameter.Split(">>>")[0], parameter.Split(">>>")[1]);
                 case "documentation-cut-after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation-mark-keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
-                case "collapse":                    return new Tweak_Option_Collapse(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                //case "collapse":                    return new Tweak_Option_CollapseX(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "update_rule":                 return new Tweak_Option_UpdateRule(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 }
             }
@@ -932,9 +932,9 @@ namespace AutoRest.Ansible
         private bool _markKeywords;
     }
 
-    class Tweak_Option_Collapse : Tweak_Option
+    class Tweak_Option_CollapseX : Tweak_Option
     {
-        public Tweak_Option_Collapse(string module, string path, string namePrefix)
+        public Tweak_Option_CollapseX(string module, string path, string namePrefix)
         {
             _module = module;
             _path = path.Split(".");

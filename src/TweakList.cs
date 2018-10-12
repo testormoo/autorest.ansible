@@ -41,7 +41,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "administrator_login_password", "Testpasswordxyz12!"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "location", "eastus"),
             new Tweak_Option_DefaultValueTest("azure_rm_sqlserver", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_Collapse("azure_rm_sqlserver", "identity", ""),
+            new Tweak_Option_CollapseX("azure_rm_sqlserver", "identity", ""),
             new Tweak_Module_AssertStateVariable("azure_rm_sqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlserver", "Ready"),
 
@@ -125,7 +125,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_DefaultValueSample("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.storage_mb", "51200"),
-            new Tweak_Option_Collapse("azure_rm_mysqlserver", "properties", ""),
+            new Tweak_Option_CollapseX("azure_rm_mysqlserver", "properties", ""),
             new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "fully_qualified_domain_name", "mysqlsrv1b6dd89593.mysql.database.azure.com"),
             new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "id", "/subscriptions/12345678-1234-1234-1234-123412341234/testrg/providers/Microsoft.DBforMySQL/servers/mysqlsrv1b6dd89593"),
             new Tweak_Response_FieldSampleValue("azure_rm_mysqlserver", "user_visible_state", "Ready"),
@@ -249,7 +249,7 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.ssl_enforcement", "True"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.storage_mb", "51200"),
             new Tweak_Option_Documentation("azure_rm_postgresqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
-            new Tweak_Option_Collapse("azure_rm_postgresqlserver", "properties", ""),
+            new Tweak_Option_CollapseX("azure_rm_postgresqlserver", "properties", ""),
             new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "fully_qualified_domain_name", "postgresqlsrv1b6dd89593.postgresql.database.azure.com"),
             new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "id", "/subscriptions/12345678-1234-1234-1234-123412341234/resourceGroups/samplerg/providers/Microsoft.DBforPostgreSQL/servers/mysqlsrv1b6dd89593"),
             new Tweak_Response_FieldSampleValue("azure_rm_postgresqlserver", "user_visible_state", "Ready"),
@@ -321,14 +321,14 @@ namespace AutoRest.Ansible
             // Authorization
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "role_definition_id", "rolexyz"),
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroledefinition", "scope", "\"/subscriptions/{{ azure_subscription_id }}\""),
-            new Tweak_Option_Collapse("azure_rm_authorizationroledefinition", "properties", "properties_"),
+            new Tweak_Option_CollapseX("azure_rm_authorizationroledefinition", "properties", "properties_"),
 
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "scope", "\"/subscriptions/{{ azure_subscription_id }}\""),
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "role_assignment_name", "\"d3881f73-7777-8888-8283-e981cbba0404\""),
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "properties.role_definition_id", "\"/subscriptions/{{ azure_subscription_id }}/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c\""),
             new Tweak_Option_DefaultValueTest("azure_rm_authorizationroleassignment", "properties.principal_id", "\"98b422c6-7bea-4706-b6f3-920a782746d4\""),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_authorizationroleassignment"),
-            //new Tweak_Option_Collapse("azure_rm_authorizationroleassignment", "properties", "properties_"),
+            //new Tweak_Option_CollapseX("azure_rm_authorizationroleassignment", "properties", "properties_"),
 
             // Application Gateway
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
@@ -587,8 +587,8 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
             // Key Vault
-            new Tweak_Option_Collapse("azure_rm_vault", "properties.access_policies.permissions", ""),
-            new Tweak_Option_Collapse("azure_rm_vault", "properties", ""),
+            new Tweak_Option_CollapseX("azure_rm_vault", "properties.access_policies.permissions", ""),
+            new Tweak_Option_CollapseX("azure_rm_vault", "properties", ""),
 
             new Tweak_Option_Exclude("azure_rm_vault", "vault_uri", true, true),
             new Tweak_Option_SetType("azure_rm_vault", "enabled_for_deployment", "bool"),
