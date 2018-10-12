@@ -217,16 +217,16 @@
 - azure_rm_sqldatamaskingrule_facts.data_masking_policy_name:
 - azure_rm_sqlfirewallrule:
     - object_name: SQL Firewall Rule
-    - add_update_rule: start_ip_address
-    - add_update_rule: end_ip_address
 - azure_rm_sqlfirewallrule.resource_group_name:
 - azure_rm_sqlfirewallrule.server_name:
 - azure_rm_sqlfirewallrule.firewall_rule_name:
     - rename: name
 - azure_rm_sqlfirewallrule.start_ip_address:
     - required: no
+    - update_rule: compare
 - azure_rm_sqlfirewallrule.end_ip_address:
     - required: no
+    - update_rule: compare
 - azure_rm_sqlfirewallrule.response.id:
 - azure_rm_sqlfirewallrule.response.name:
 - azure_rm_sqlfirewallrule.response.type:
@@ -300,6 +300,7 @@
     - rename: name
 - azure_rm_sqldatabase.parameters:
 - azure_rm_sqldatabase.location:
+    - update_rule: compare
 - azure_rm_sqldatabase.collation:
 - azure_rm_sqldatabase.create_mode:
     - documentation-mark-keywords: no
@@ -323,7 +324,9 @@
 - azure_rm_sqldatabase.recovery_services_recovery_point_resource_id:
     - documentation: "Required if I(create_mode) is C(restore_long_term_retention_backup), then this value is required. Specifies the resource ID of therecovery point to restore from."
 - azure_rm_sqldatabase.edition:
+    - update_rule: compare
 - azure_rm_sqldatabase.max_size_bytes:
+    - update_rule: compare
 - azure_rm_sqldatabase.requested_service_objective_id:
 - azure_rm_sqldatabase.requested_service_objective_name:
 - azure_rm_sqldatabase.elastic_pool_name:
@@ -331,6 +334,7 @@
     - documentation: The name of the elastic pool the database is in. Not supported for C(data_warehouse) edition.
 - azure_rm_sqldatabase.read_scale:
     - documentation-replace: readScale >>>
+    - update_rule: compare
 - azure_rm_sqldatabase.sample_name:
 - azure_rm_sqldatabase.zone_redundant:
 - azure_rm_sqldatabase.response.id:

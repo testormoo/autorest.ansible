@@ -76,8 +76,10 @@
 - azure_rm_postgresqlfirewallrule.parameters:
 - azure_rm_postgresqlfirewallrule.start_ip_address:
     - required: no
+    - update_rule: compare
 - azure_rm_postgresqlfirewallrule.end_ip_address:
     - required: no
+    - update_rule: compare
 - azure_rm_postgresqlfirewallrule.response.id:
 - azure_rm_postgresqlfirewallrule.response.name:
 - azure_rm_postgresqlfirewallrule.response.type:
@@ -133,7 +135,9 @@
     - rename: name
 - azure_rm_postgresqldatabase.parameters:
 - azure_rm_postgresqldatabase.charset:
+    - update_rule: compare
 - azure_rm_postgresqldatabase.collation:
+    - update_rule: compare
 - azure_rm_postgresqldatabase.response.id:
 - azure_rm_postgresqldatabase.response.name:
 - azure_rm_postgresqldatabase.response.type:
