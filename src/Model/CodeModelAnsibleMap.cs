@@ -620,7 +620,7 @@ namespace AutoRest.Ansible.Model
 
                 if (xa.Length == 1)
                 {
-                    if (xa[0].SubOptions != null && xa[0].SubOptions.Lenght > 0)
+                    if (xa[0].SubOptions != null && xa[0].SubOptions.Length > 0)
                         return xa[0].SubOptions;
                 }
                 
