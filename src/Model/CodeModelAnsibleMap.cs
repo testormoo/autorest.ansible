@@ -611,6 +611,19 @@ namespace AutoRest.Ansible.Model
             get
             {
                 var m = GetModuleMap(ModuleName);
+
+                IEnumerable<ModuleOption> x = from option
+                                              in m.Options
+                                              where (option.Name == "properties")
+                                              select option;
+                ModuleOption[] xa = x.ToArray();
+
+                if (xa.Length == 1)
+                {
+                    if (xa[0].SubOptions != null && xa[0].SubOptions.Lenght > 0)
+                        return xa[0].SubOptions;
+                }
+                
                 IEnumerable<ModuleOption> options = from option
                                                     in m.Options
                                                     where (option.Disposition != "dictionary") &&
