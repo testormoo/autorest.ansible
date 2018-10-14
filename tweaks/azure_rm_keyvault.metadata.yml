@@ -45,6 +45,7 @@
 - azure_rm_vault.response.properties.access_policies.object_id:
 - azure_rm_vault.response.properties.access_policies.application_id:
 - azure_rm_vault.response.properties.access_policies.permissions:
+    - collapse
 - azure_rm_vault.response.properties.access_policies.permissions.keys:
 - azure_rm_vault.response.properties.access_policies.permissions.secrets:
 - azure_rm_vault.response.properties.access_policies.permissions.certificates:
