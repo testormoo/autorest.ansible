@@ -49,13 +49,19 @@
 - azure_rm_authorizationroledefinition.role_definition_id:
 - azure_rm_authorizationroledefinition.role_definition:
 - azure_rm_authorizationroledefinition.properties:
+    - collapse
 - azure_rm_authorizationroledefinition.properties.role_name:
+    - rename: properties_role_name
 - azure_rm_authorizationroledefinition.properties.description:
+    - rename: properties_description
 - azure_rm_authorizationroledefinition.properties.type:
+    - rename: properties_type
 - azure_rm_authorizationroledefinition.properties.permissions:
+    - rename: properties_permissions
 - azure_rm_authorizationroledefinition.properties.permissions.actions:
 - azure_rm_authorizationroledefinition.properties.permissions.not_actions:
 - azure_rm_authorizationroledefinition.properties.assignable_scopes:
+    - rename: properties_assignable_scopes
 - azure_rm_authorizationroledefinition.response.id:
 - azure_rm_authorizationroledefinition.response.name:
 - azure_rm_authorizationroledefinition.response.type:
