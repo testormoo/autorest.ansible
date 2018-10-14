@@ -659,7 +659,7 @@
     - rename: admin_password
     - update_rule: none
 - azure_rm_sqlserver.version:
-- azure_rm_sqlserver.type:
+- azure_rm_sqlserver.identity.type:
 - azure_rm_sqlserver.response.id:
 - azure_rm_sqlserver.response.name:
 - azure_rm_sqlserver.response.type:

@@ -13,14 +13,14 @@
 - azure_rm_postgresqlserver.sku.family:
 - azure_rm_postgresqlserver.properties:
 - azure_rm_postgresqlserver.location:
-- azure_rm_postgresqlserver.storage_mb:
-- azure_rm_postgresqlserver.version:
-- azure_rm_postgresqlserver.ssl_enforcement:
+- azure_rm_postgresqlserver.properties.storage_mb:
+- azure_rm_postgresqlserver.properties.version:
+- azure_rm_postgresqlserver.properties.ssl_enforcement:
     - rename: enforce_ssl
-- azure_rm_postgresqlserver.create_mode:
-- azure_rm_postgresqlserver.administrator_login:
+- azure_rm_postgresqlserver.properties.create_mode:
+- azure_rm_postgresqlserver.properties.administrator_login:
     - rename: admin_username
-- azure_rm_postgresqlserver.administrator_login_password:
+- azure_rm_postgresqlserver.properties.administrator_login_password:
     - rename: admin_password
 - azure_rm_postgresqlserver.response.id:
 - azure_rm_postgresqlserver.response.name:
