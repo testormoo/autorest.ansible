@@ -5,6 +5,7 @@
 - azure_rm_vault.parameters:
 - azure_rm_vault.location:
 - azure_rm_vault.properties:
+    - collapse
 - azure_rm_vault.properties.tenant_id:
     - rename: vault_tenant
     - documentation-append-line: Current tenant will be used as default if not specified.

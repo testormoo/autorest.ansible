@@ -12,6 +12,7 @@
 - azure_rm_postgresqlserver.sku.size:
 - azure_rm_postgresqlserver.sku.family:
 - azure_rm_postgresqlserver.properties:
+    - collapse
 - azure_rm_postgresqlserver.location:
 - azure_rm_postgresqlserver.properties.storage_mb:
 - azure_rm_postgresqlserver.properties.version:
