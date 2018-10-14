@@ -652,6 +652,7 @@
 - azure_rm_sqlserver.parameters:
 - azure_rm_sqlserver.location:
 - azure_rm_sqlserver.identity:
+    - collapse
 - azure_rm_sqlserver.administrator_login:
     - rename: admin_username
 - azure_rm_sqlserver.administrator_login_password:
