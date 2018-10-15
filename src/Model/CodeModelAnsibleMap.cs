@@ -465,7 +465,7 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public OptionMappingStatements
+        public string[] OptionMappingStatements
         {
             get
             {
@@ -613,7 +613,9 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-
+        // "parameters" is flattened by default
+        // in fact what we are looking here is content of "parameters"
+        // so most likely all of the options returned will have "disposition" == "parameters"
         public ModuleOption[] ModuleOptionsSecondLevel
         {
             get
