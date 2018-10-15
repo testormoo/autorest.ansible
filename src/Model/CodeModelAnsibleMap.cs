@@ -476,7 +476,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var o in options)
                 {
                     ModuleOption[] single = new ModuleOption[1] { o };
-                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, statements.Length == 0));
+                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, statements.Count == 0));
                 }
 
                 return statements.ToArray();
@@ -493,6 +493,7 @@ namespace AutoRest.Ansible.Model
 
             foreach (var option in options)
             {
+                if (variables.Count > 0) prefix = "elif";
                 if (!option.IncludeInArgSpec)
                     continue;
 
