@@ -478,7 +478,7 @@ namespace AutoRest.Ansible.Model
         //
         // Code to expand options to actual structure
         //
-        public string[] GetOptionsMappingStatements(ModuleOption[] options, string prefix)
+        public string[] GetOptionsMappingStatements(ModuleOption[] options, string targetPrefix)
         {
             string prefix = "if";
             var variables = new List<string>();
@@ -490,19 +490,19 @@ namespace AutoRest.Ansible.Model
 
                 if (option.Collapsed)
                 {
-                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, prefix + ".setdefault(\"" + option.Name + "\", {})"));
+                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, targetPrefix + ".setdefault(\"" + option.Name + "\", {})"));
                     continue;
                 }
 
                 variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
 
-                if (path.Length > 1)
-                {
-                    for (int i = 1; i < path.Length; i++)
-                        variable += "";
-                }
+                //if (path.Length > 1)
+                //{
+                //    for (int i = 1; i < path.Length; i++)
+                //        variable += "";
+                //}
 
-                variable = prefix + "[\"" + option.Name + "\"] = ";
+                string variable = targetPrefix + "[\"" + option.Name + "\"] = ";
 
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
