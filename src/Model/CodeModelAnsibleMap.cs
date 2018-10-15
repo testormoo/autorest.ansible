@@ -470,7 +470,7 @@ namespace AutoRest.Ansible.Model
             get
             {
                 var m = GetModuleMap(ModuleName);
-                ModuleOption[] options = ModuleOptionsSecondLevel;
+                ModuleOption[] options = ModuleOptions;
                 List<string> statements = new List<string>();
 
                 foreach (var o in options)
