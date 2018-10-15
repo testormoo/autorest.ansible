@@ -488,7 +488,7 @@ namespace AutoRest.Ansible.Model
         //
         public string[] GetOptionsMappingStatements(ModuleOption[] options, string targetPrefix, bool first)
         {
-            var prefix = "if" if first else "elif"
+            var prefix = first ? "if" : "elif";
             var variables = new List<string>();
 
             foreach (var option in options)
