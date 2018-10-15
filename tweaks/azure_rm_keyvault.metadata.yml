@@ -23,11 +23,11 @@
     - test: 99998888-8666-4144-9199-2d7cd0111111
 - azure_rm_vault.properties.access_policies.application_id:
 - azure_rm_vault.properties.access_policies.permissions:
-- azure_rm_vault.properties.access_policies.keys:
+- azure_rm_vault.properties.access_policies.permissions.keys:
     - test: get
-- azure_rm_vault.properties.access_policies.secrets:
-- azure_rm_vault.properties.access_policies.certificates:
-- azure_rm_vault.properties.access_policies.storage:
+- azure_rm_vault.properties.access_policies.permissions.secrets:
+- azure_rm_vault.properties.access_policies.permissions.certificates:
+- azure_rm_vault.properties.access_policies.permissions.storage:
 - azure_rm_vault.properties.vault_uri:
     - exclude
 - azure_rm_vault.properties.enabled_for_deployment:
