@@ -1494,8 +1494,8 @@ namespace AutoRest.Ansible.Model
 
                 foreach (var o in options)
                 {
-                    ModuleOption[] single = new ModuleOption[]() = { o };
-                    statements.AddRange(GetFixParameterStatements(, 0, "", "self." + o.Disposition));
+                    ModuleOption[] single = new ModuleOption[]() { o };
+                    statements.AddRange(GetFixParameterStatements(single, 0, "", "self." + o.Disposition));
                 }
 
                 return statements.ToArray();
