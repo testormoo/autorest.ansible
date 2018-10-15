@@ -471,7 +471,15 @@ namespace AutoRest.Ansible.Model
             {
                 var m = GetModuleMap(ModuleName);
                 ModuleOption[] options = ModuleOptionsSecondLevel;
-                return GetOptionsMappingStatements(options, "self.parameters");
+                List<string> statements = new List<string>();
+
+                foreach (var o in options)
+                {
+                    ModuleOption[] single = new ModuleOption[1] { o };
+                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition));
+                }
+
+                return statements.ToArray();
             }
         }
 
