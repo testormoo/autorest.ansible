@@ -581,19 +581,8 @@ namespace AutoRest.Ansible
             new Tweak_Response_FieldReturned("azure_rm_containerregistrywebhook_facts", "scope", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
-            new Tweak_Option_Exclude("azure_rm_vault", "vault_uri", true, true),
-            new Tweak_Option_SetType("azure_rm_vault", "enabled_for_deployment", "bool"),
-            new Tweak_Option_SetType("azure_rm_vault", "enabled_for_disk_encryption", "bool"),
-            new Tweak_Option_SetType("azure_rm_vault", "enabled_for_template_deployment", "bool"),
-            new Tweak_Option_SetType("azure_rm_vault", "enable_soft_delete", "bool"),
             new Tweak_Option_MakeBoolean("azure_rm_vault", "create_mode", "Recover", "Default", false, "Create vault in recovery mode."),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_vault", "vault_name", "vault{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_vault", "enabled_for_deployment", "yes"),
-            new Tweak_Option_DefaultValueTest("azure_rm_vault", "sku.family", "A"),
-            new Tweak_Option_DefaultValueTest("azure_rm_vault", "sku.name", "standard"),
-            new Tweak_Option_DefaultValueTest("azure_rm_vault", "access_policies.object_id", "99998888-8666-4144-9199-2d7cd0111111"),
-            new Tweak_Option_DefaultValueTest("azure_rm_vault", "access_policies.keys", "get"),
 
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "resource_group_name", "myresourcegroup"),
             new Tweak_Option_DefaultValueSample("azure_rm_vault", "vault_name", "samplekeyvault"),

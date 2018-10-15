@@ -2,6 +2,7 @@
     - rename: azure_rm_keyvault
 - azure_rm_vault.resource_group_name:
 - azure_rm_vault.vault_name:
+    - test: vault{{ rpfx }}
 - azure_rm_vault.parameters:
 - azure_rm_vault.location:
 - azure_rm_vault.properties:
@@ -11,15 +12,19 @@
     - documentation-append-line: Current tenant will be used as default if not specified.
 - azure_rm_vault.properties.sku:
 - azure_rm_vault.properties.sku.family:
+    - test: A
 - azure_rm_vault.properties.sku.name:
     - documentation-mark-keywords: no
+    - test: standard
 - azure_rm_vault.properties.access_policies:
 - azure_rm_vault.properties.access_policies.tenant_id:
 - azure_rm_vault.properties.access_policies.object_id:
     - documentation-append-line: Please note this is not application id. Object id can be obtained by running "az ad show sp --id <application id>".
+    - test: 99998888-8666-4144-9199-2d7cd0111111
 - azure_rm_vault.properties.access_policies.application_id:
 - azure_rm_vault.properties.access_policies.permissions:
 - azure_rm_vault.properties.access_policies.keys:
+    - test: get
 - azure_rm_vault.properties.access_policies.secrets:
 - azure_rm_vault.properties.access_policies.certificates:
 - azure_rm_vault.properties.access_policies.storage:
@@ -27,6 +32,7 @@
     - exclude
 - azure_rm_vault.properties.enabled_for_deployment:
     - type: bool
+    - test: yes
 - azure_rm_vault.properties.enabled_for_disk_encryption:
     - type: bool
 - azure_rm_vault.properties.enabled_for_template_deployment:
