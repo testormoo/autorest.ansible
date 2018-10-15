@@ -482,7 +482,7 @@ namespace AutoRest.Ansible.Model
                     if (optionName.EndsWith("_parameters"))
                         optionName = "parameters";
 
-                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, statements.Count == 0));
+                    statements.AddRange(GetOptionsMappingStatements(single, "self." + optionName, statements.Count == 0));
                 }
 
                 return statements.ToArray();
