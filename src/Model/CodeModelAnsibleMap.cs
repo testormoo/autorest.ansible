@@ -1489,7 +1489,16 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetFixParameterStatements(ModuleOptionsSecondLevel, 0, "", "self.parameters");
+                List<string> statements = new List<string>();
+                ModuleOption[] options = ModuleOptionsSecondLevel;
+
+                foreach (var o in options)
+                {
+                    ModuleOption[] single = new ModuleOption[]() = { o };
+                    statements.AddRange(GetFixParameterStatements(, 0, "", "self." + o.Disposition));
+                }
+
+                return statements.ToArray();
             }
         }
 
