@@ -471,14 +471,14 @@ namespace AutoRest.Ansible.Model
             {
                 var m = GetModuleMap(ModuleName);
                 ModuleOption[] options = ModuleOptionsSecondLevel;
-                return GetOptionsMappingStatements(options);
+                return GetOptionsMappingStatements(options, "self.parameters");
             }
         }
 
         //
         // Code to expand options to actual structure
         //
-        public string[] GetOptionsMappingStatements(ModuleOption[] options)
+        public string[] GetOptionsMappingStatements(ModuleOption[] options, string prefix)
         {
             string prefix = "if";
             var variables = new List<string>();
@@ -488,18 +488,21 @@ namespace AutoRest.Ansible.Model
                 if (!option.IncludeInArgSpec)
                     continue;
 
-                variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
+                if (option.Collapsed)
+                {
+                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, prefix + ".setdefault(\"" + option.Name + "\", {})));
+                    continue;
+                }
 
-                string[] path = option.Disposition.Split(":");
-                string variable = "self." + (path[0].EndsWith("_parameters") ? "parameters" : path[0]);
+                variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
 
                 if (path.Length > 1)
                 {
                     for (int i = 1; i < path.Length; i++)
-                        variable += ".setdefault(\"" + path[i] + "\", {})";
+                        variable += "";
                 }
 
-                variable += "[\"" + option.Name + "\"] = ";
+                variable = prefix + "[\"" + option.Name + "\"] = ";
 
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
