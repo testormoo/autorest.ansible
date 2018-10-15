@@ -476,7 +476,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var o in options)
                 {
                     ModuleOption[] single = new ModuleOption[1] { o };
-                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, true));
+                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, statements.Length == 0));
                 }
 
                 return statements.ToArray();
