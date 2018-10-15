@@ -4,6 +4,7 @@
 - azure_rm_postgresqlserver.resource_group_name:
 - azure_rm_postgresqlserver.server_name:
     - rename: name
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlserver.parameters:
 - azure_rm_postgresqlserver.sku:
 - azure_rm_postgresqlserver.sku.name:
@@ -22,27 +23,40 @@
 - azure_rm_postgresqlserver.properties.administrator_login:
     - rename: admin_username
     - required: no
+    - test: zimxyz
 - azure_rm_postgresqlserver.properties.administrator_login_password:
     - rename: admin_password
     - required: no
+    - test: Testpasswordxyz12!
 - azure_rm_postgresqlserver.response.id:
+    - sample: /subscriptions/12345678-1234-1234-1234-123412341234/resourceGroups/samplerg/providers/Microsoft.DBforPostgreSQL/servers/mysqlsrv1b6dd89593
 - azure_rm_postgresqlserver.response.name:
 - azure_rm_postgresqlserver.response.type:
 - azure_rm_postgresqlserver.response.location:
 - azure_rm_postgresqlserver.response.tags:
 - azure_rm_postgresqlserver.response.sku:
 - azure_rm_postgresqlserver.response.sku.name:
+    - test: PGSQLS100
+    - sample: PGSQLS100
 - azure_rm_postgresqlserver.response.sku.tier:
+    - test: basic
+    - sample: basic
 - azure_rm_postgresqlserver.response.sku.capacity:
 - azure_rm_postgresqlserver.response.sku.size:
 - azure_rm_postgresqlserver.response.sku.family:
 - azure_rm_postgresqlserver.response.administrator_login:
 - azure_rm_postgresqlserver.response.storage_mb:
+    - test: 51200
 - azure_rm_postgresqlserver.response.version:
+    - sample: 9.6
 - azure_rm_postgresqlserver.response.ssl_enforcement:
+    - test: True
+    - sample: True
 - azure_rm_postgresqlserver.response.user_visible_state:
     - rename: state
+    - sample: Ready
 - azure_rm_postgresqlserver.response.fully_qualified_domain_name:
+    - sample: postgresqlsrv1b6dd89593.postgresql.database.azure.com
 - azure_rm_postgresqlserver_facts:
     - object_name: PostgreSQL Server
     - object_name_plural: PostgreSQL Servers

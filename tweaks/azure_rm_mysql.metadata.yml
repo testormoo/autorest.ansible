@@ -28,6 +28,7 @@
     - rename: admin_password
     - required: no
 - azure_rm_mysqlserver.response.id:
+    - sample: /subscriptions/12345678-1234-1234-1234-123412341234/testrg/providers/Microsoft.DBforMySQL/servers/mysqlsrv1b6dd89593
 - azure_rm_mysqlserver.response.name:
 - azure_rm_mysqlserver.response.type:
 - azure_rm_mysqlserver.response.location:
@@ -41,10 +42,13 @@
 - azure_rm_mysqlserver.response.administrator_login:
 - azure_rm_mysqlserver.response.storage_mb:
 - azure_rm_mysqlserver.response.version:
+    - sample: 5.6
 - azure_rm_mysqlserver.response.ssl_enforcement:
 - azure_rm_mysqlserver.response.user_visible_state:
     - rename: state
+    - sample: Ready
 - azure_rm_mysqlserver.response.fully_qualified_domain_name:
+    - sample: mysqlsrv1b6dd89593.mysql.database.azure.com
 - azure_rm_mysqlserver_facts:
     - object_name: MySQL Server
     - object_name_plural: MySQL Servers

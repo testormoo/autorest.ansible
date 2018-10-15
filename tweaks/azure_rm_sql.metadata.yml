@@ -647,20 +647,28 @@
 - azure_rm_sqlserver:
     - object_name: SQL Server
 - azure_rm_sqlserver.resource_group_name:
+    - test: resource_group
 - azure_rm_sqlserver.server_name:
     - rename: name
+    - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlserver.parameters:
 - azure_rm_sqlserver.location:
-- azure_rm_sqlserver.identity:
+    - test: westus
     - collapse
 - azure_rm_sqlserver.administrator_login:
     - rename: admin_username
+    - test: mylogin
 - azure_rm_sqlserver.administrator_login_password:
     - rename: admin_password
     - update_rule: none
+    - test: Testpasswordxyz12!
 - azure_rm_sqlserver.version:
+    - test: ""
+- azure_rm_sqlserver.identity:
 - azure_rm_sqlserver.identity.type:
+    - test: ""
 - azure_rm_sqlserver.response.id:
+    - sample: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
 - azure_rm_sqlserver.response.name:
 - azure_rm_sqlserver.response.type:
 - azure_rm_sqlserver.response.tags:
@@ -674,8 +682,10 @@
 - azure_rm_sqlserver.response.administrator_login_password:
 - azure_rm_sqlserver.response.version:
     - update_rule: compare
+    - sample: 12.0
 - azure_rm_sqlserver.response.state:
 - azure_rm_sqlserver.response.fully_qualified_domain_name:
+    - sample: sqlcrudtest-4645.database.windows.net
 - azure_rm_sqlserver_facts:
     - object_name: SQL Server
 - azure_rm_sqlserver_facts.resource_group_name:
