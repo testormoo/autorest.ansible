@@ -465,17 +465,25 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public OptionMappingStatements
+        {
+            get
+            {
+                var m = GetModuleMap(ModuleName);
+                ModuleOption[] options = ModuleOptionsSecondLevel;
+                return GetOptionsMappingStatements(options);
+            }
+        }
+
         //
         // Code to expand options to actual structure
         //
-        public string[] ModuleSecondLevelOptionsMapStatements
+        public string[] GetOptionsMappingStatements(ModuleOption[] options)
         {
             get
             {
                 string prefix = "if";
                 var variables = new List<string>();
-                var m = GetModuleMap(ModuleName);
-                ModuleOption[] options = ModuleOptionsSecondLevel;
 
                 foreach (var option in options)
                 {
@@ -612,18 +620,17 @@ namespace AutoRest.Ansible.Model
             {
                 var m = GetModuleMap(ModuleName);
 
-                IEnumerable<ModuleOption> x = from option
-                                              in m.Options
-                                              where (option.Name == "properties")
-                                              select option;
-                ModuleOption[] xa = x.ToArray();
+                //IEnumerable<ModuleOption> x = from option
+                //                              in m.Options
+                //                              where (option.Name == "properties")
+                //                              select option;
+                //ModuleOption[] xa = x.ToArray();
 
-                if (xa.Length == 1)
-                {
-                    if (xa[0].SubOptions != null && xa[0].SubOptions.Length > 0)
-                        return xa[0].SubOptions;
-                }
-                
+                //if (xa.Length == 1)
+                //{
+                //    if (xa[0].SubOptions != null && xa[0].SubOptions.Length > 0)
+                //        return xa[0].SubOptions;
+                //}
                 IEnumerable<ModuleOption> options = from option
                                                     in m.Options
                                                     where (option.Disposition != "dictionary") &&
