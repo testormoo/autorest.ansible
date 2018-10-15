@@ -109,7 +109,6 @@ namespace AutoRest.Ansible
             // MySQL Server
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
             new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
-            new Tweak_Option_Required("azure_rm_mysqlserver", "properties", false),
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "sku.family", true, true),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "server_name", "mysqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.version", "5.6"),
@@ -234,7 +233,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_Exclude("azure_rm_postgresqlserver", "properties.create_mode", true, false),
             new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "location", "westus"),
-            new Tweak_Option_Required("azure_rm_postgresqlserver", "properties", false),
             new Tweak_Option_Exclude("azure_rm_postgresqlserver", "sku.family", true, true),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "server_name", "postgresqlsrv{{ rpfx }}"),
             new Tweak_Option_DefaultValueTest("azure_rm_postgresqlserver", "properties.administrator_login", "zimxyz"),

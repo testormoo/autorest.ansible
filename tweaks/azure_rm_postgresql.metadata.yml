@@ -21,8 +21,10 @@
 - azure_rm_postgresqlserver.properties.create_mode:
 - azure_rm_postgresqlserver.properties.administrator_login:
     - rename: admin_username
+    - required: no
 - azure_rm_postgresqlserver.properties.administrator_login_password:
     - rename: admin_password
+    - required: no
 - azure_rm_postgresqlserver.response.id:
 - azure_rm_postgresqlserver.response.name:
 - azure_rm_postgresqlserver.response.type:

@@ -23,8 +23,10 @@
 - azure_rm_mysqlserver.properties.create_mode:
 - azure_rm_mysqlserver.properties.administrator_login:
     - rename: admin_username
+    - required: no
 - azure_rm_mysqlserver.properties.administrator_login_password:
     - rename: admin_password
+    - required: no
 - azure_rm_mysqlserver.response.id:
 - azure_rm_mysqlserver.response.name:
 - azure_rm_mysqlserver.response.type:
