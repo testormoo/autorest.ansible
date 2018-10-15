@@ -490,7 +490,7 @@ namespace AutoRest.Ansible.Model
 
                 if (option.Collapsed)
                 {
-                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, prefix + ".setdefault(\"" + option.Name + "\", {})));
+                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, prefix + ".setdefault(\"" + option.Name + "\", {})"));
                     continue;
                 }
 
