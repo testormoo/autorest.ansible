@@ -476,13 +476,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var o in options)
                 {
                     ModuleOption[] single = new ModuleOption[1] { o };
-                    var optionName = o.NameAlt;
-
-                    // XXX - this is a hack, can we unhack it? --- where does it come from?
-                    if (optionName.EndsWith("_parameters"))
-                        optionName = "parameters";
-
-                    statements.AddRange(GetOptionsMappingStatements(single, "self." + optionName, statements.Count == 0));
+                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, statements.Count == 0));
                 }
 
                 return statements.ToArray();
