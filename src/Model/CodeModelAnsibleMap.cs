@@ -1143,8 +1143,8 @@ namespace AutoRest.Ansible.Model
                     string optionName = (o != null) ? o.NameAlt : p;
 
                     // XXX - this is a hack, can we unhack it?
-                    if (optionName.EndsWith("_parameters"))
-                        optionName = "parameters";
+                    //if (optionName.EndsWith("_parameters"))
+                    //    optionName = "parameters";
 
                     if (line.EndsWith("("))
                     {
