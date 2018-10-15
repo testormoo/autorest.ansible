@@ -23,6 +23,7 @@
     - test: 99998888-8666-4144-9199-2d7cd0111111
 - azure_rm_vault.properties.access_policies.application_id:
 - azure_rm_vault.properties.access_policies.permissions:
+    - collapse
 - azure_rm_vault.properties.access_policies.permissions.keys:
     - test: get
 - azure_rm_vault.properties.access_policies.permissions.secrets:
