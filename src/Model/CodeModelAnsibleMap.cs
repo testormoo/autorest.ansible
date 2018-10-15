@@ -476,7 +476,7 @@ namespace AutoRest.Ansible.Model
                 foreach (var o in options)
                 {
                     ModuleOption[] single = new ModuleOption[1] { o };
-                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition));
+                    statements.AddRange(GetOptionsMappingStatements(single, "self." + o.Disposition, true));
                 }
 
                 return statements.ToArray();
@@ -486,9 +486,9 @@ namespace AutoRest.Ansible.Model
         //
         // Code to expand options to actual structure
         //
-        public string[] GetOptionsMappingStatements(ModuleOption[] options, string targetPrefix)
+        public string[] GetOptionsMappingStatements(ModuleOption[] options, string targetPrefix, bool first)
         {
-            string prefix = "if";
+            var prefix = "if" if first else "elif"
             var variables = new List<string>();
 
             foreach (var option in options)
@@ -498,7 +498,7 @@ namespace AutoRest.Ansible.Model
 
                 if (option.Collapsed)
                 {
-                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, targetPrefix + ".setdefault(\"" + option.Name + "\", {})"));
+                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, targetPrefix + ".setdefault(\"" + option.Name + "\", {})", first));
                     continue;
                 }
 
@@ -616,6 +616,7 @@ namespace AutoRest.Ansible.Model
 
                 variables.Add("    " + variable);
                 prefix = "elif";
+                first = false;
             }
                 
             return variables.ToArray();
