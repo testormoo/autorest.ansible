@@ -11,7 +11,7 @@
     - test: PGSQLS100
     - sample: PGSQLS100
 - azure_rm_postgresqlserver.sku.tier:
-    - test: Basic
+    - test: basic
     - sample: Basic
 - azure_rm_postgresqlserver.sku.capacity:
 - azure_rm_postgresqlserver.sku.size:
