@@ -198,7 +198,7 @@
     - test: event_scheduler
 - azure_rm_mysqlconfiguration.parameters:
 - azure_rm_mysqlconfiguration.value:
-    - test: "ON"
+    - test: "\"ON\""
 - azure_rm_mysqlconfiguration.source:
     - test: user-override
 - azure_rm_mysqlconfiguration.response.id:

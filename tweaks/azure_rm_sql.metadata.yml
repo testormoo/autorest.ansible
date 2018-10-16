@@ -261,7 +261,7 @@
     - test: geo-policy-name
 - azure_rm_sqlgeobackuppolicy.state:
     - rename: policy_state
-    - test: enabled
+    - test: "\"enabled\""
 - azure_rm_sqlgeobackuppolicy.response.id:
 - azure_rm_sqlgeobackuppolicy.response.name:
 - azure_rm_sqlgeobackuppolicy.response.type:
