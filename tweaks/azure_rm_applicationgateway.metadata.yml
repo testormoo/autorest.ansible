@@ -3,13 +3,17 @@
 - azure_rm_applicationgateway.resource_group_name:
 - azure_rm_applicationgateway.application_gateway_name:
     - rename: name
+    - test: appgateway{{ rpfx }}
 - azure_rm_applicationgateway.parameters:
 - azure_rm_applicationgateway.id:
 - azure_rm_applicationgateway.location:
 - azure_rm_applicationgateway.sku:
 - azure_rm_applicationgateway.sku.name:
+    - test: Standard_Small
 - azure_rm_applicationgateway.sku.tier:
+    - test: Standard
 - azure_rm_applicationgateway.sku.capacity:
+    - test: 2
 - azure_rm_applicationgateway.ssl_policy:
 - azure_rm_applicationgateway.ssl_policy.disabled_ssl_protocols:
 - azure_rm_applicationgateway.ssl_policy.policy_type:
@@ -20,8 +24,10 @@
 - azure_rm_applicationgateway.gateway_ip_configurations.id:
 - azure_rm_applicationgateway.gateway_ip_configurations.subnet:
 - azure_rm_applicationgateway.gateway_ip_configurations.subnet.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}
 - azure_rm_applicationgateway.gateway_ip_configurations.provisioning_state:
 - azure_rm_applicationgateway.gateway_ip_configurations.name:
+    - test: app_gateway_ip_config
 - azure_rm_applicationgateway.gateway_ip_configurations.etag:
 - azure_rm_applicationgateway.gateway_ip_configurations.type:
 - azure_rm_applicationgateway.authentication_certificates:
@@ -46,17 +52,21 @@
 - azure_rm_applicationgateway.frontend_ip_configurations.private_ip_allocation_method:
 - azure_rm_applicationgateway.frontend_ip_configurations.subnet:
 - azure_rm_applicationgateway.frontend_ip_configurations.subnet.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}
 - azure_rm_applicationgateway.frontend_ip_configurations.public_ip_address:
 - azure_rm_applicationgateway.frontend_ip_configurations.public_ip_address.id:
 - azure_rm_applicationgateway.frontend_ip_configurations.provisioning_state:
 - azure_rm_applicationgateway.frontend_ip_configurations.name:
+    - test: sample_gateway_frontend_ip_config
 - azure_rm_applicationgateway.frontend_ip_configurations.etag:
 - azure_rm_applicationgateway.frontend_ip_configurations.type:
 - azure_rm_applicationgateway.frontend_ports:
 - azure_rm_applicationgateway.frontend_ports.id:
 - azure_rm_applicationgateway.frontend_ports.port:
+    - test: 90
 - azure_rm_applicationgateway.frontend_ports.provisioning_state:
 - azure_rm_applicationgateway.frontend_ports.name:
+    - test: ag_frontend_port
 - azure_rm_applicationgateway.frontend_ports.etag:
 - azure_rm_applicationgateway.frontend_ports.type:
 - azure_rm_applicationgateway.probes:
@@ -181,15 +191,20 @@
 - azure_rm_applicationgateway.backend_address_pools.backend_addresses:
 - azure_rm_applicationgateway.backend_address_pools.backend_addresses.fqdn:
 - azure_rm_applicationgateway.backend_address_pools.backend_addresses.ip_address:
+    - test: 10.0.0.4
 - azure_rm_applicationgateway.backend_address_pools.provisioning_state:
 - azure_rm_applicationgateway.backend_address_pools.name:
+    - test: test_backend_address_pool
 - azure_rm_applicationgateway.backend_address_pools.etag:
 - azure_rm_applicationgateway.backend_address_pools.type:
 - azure_rm_applicationgateway.backend_http_settings_collection:
 - azure_rm_applicationgateway.backend_http_settings_collection.id:
 - azure_rm_applicationgateway.backend_http_settings_collection.port:
+    - test: 80
 - azure_rm_applicationgateway.backend_http_settings_collection.protocol:
+    - test: Http
 - azure_rm_applicationgateway.backend_http_settings_collection.cookie_based_affinity:
+    - test: Enabled
 - azure_rm_applicationgateway.backend_http_settings_collection.request_timeout:
 - azure_rm_applicationgateway.backend_http_settings_collection.probe:
 - azure_rm_applicationgateway.backend_http_settings_collection.probe.id:
@@ -205,14 +220,17 @@
 - azure_rm_applicationgateway.backend_http_settings_collection.path:
 - azure_rm_applicationgateway.backend_http_settings_collection.provisioning_state:
 - azure_rm_applicationgateway.backend_http_settings_collection.name:
+    - test: sample_appgateway_http_settings
 - azure_rm_applicationgateway.backend_http_settings_collection.etag:
 - azure_rm_applicationgateway.backend_http_settings_collection.type:
 - azure_rm_applicationgateway.http_listeners:
 - azure_rm_applicationgateway.http_listeners.id:
 - azure_rm_applicationgateway.http_listeners.frontend_ip_configuration:
 - azure_rm_applicationgateway.http_listeners.frontend_ip_configuration.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/frontendIPConfigurations/sample_gateway_frontend_ip_config
 - azure_rm_applicationgateway.http_listeners.frontend_port:
 - azure_rm_applicationgateway.http_listeners.frontend_port.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/frontendPorts/ag_frontend_port
 - azure_rm_applicationgateway.http_listeners.protocol:
 - azure_rm_applicationgateway.http_listeners.host_name:
 - azure_rm_applicationgateway.http_listeners.ssl_certificate:
@@ -220,6 +238,7 @@
 - azure_rm_applicationgateway.http_listeners.require_server_name_indication:
 - azure_rm_applicationgateway.http_listeners.provisioning_state:
 - azure_rm_applicationgateway.http_listeners.name:
+    - test: sample_http_listener
 - azure_rm_applicationgateway.http_listeners.etag:
 - azure_rm_applicationgateway.http_listeners.type:
 - azure_rm_applicationgateway.url_path_maps:
@@ -250,18 +269,23 @@
 - azure_rm_applicationgateway.request_routing_rules:
 - azure_rm_applicationgateway.request_routing_rules.id:
 - azure_rm_applicationgateway.request_routing_rules.rule_type:
+    - test: Basic
 - azure_rm_applicationgateway.request_routing_rules.backend_address_pool:
 - azure_rm_applicationgateway.request_routing_rules.backend_address_pool.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/backendAddressPools/test_backend_address_pool
 - azure_rm_applicationgateway.request_routing_rules.backend_http_settings:
 - azure_rm_applicationgateway.request_routing_rules.backend_http_settings.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/backendHttpSettingsCollection/sample_appgateway_http_settings
 - azure_rm_applicationgateway.request_routing_rules.http_listener:
 - azure_rm_applicationgateway.request_routing_rules.http_listener.id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/httpListeners/sample_http_listener
 - azure_rm_applicationgateway.request_routing_rules.url_path_map:
 - azure_rm_applicationgateway.request_routing_rules.url_path_map.id:
 - azure_rm_applicationgateway.request_routing_rules.redirect_configuration:
 - azure_rm_applicationgateway.request_routing_rules.redirect_configuration.id:
 - azure_rm_applicationgateway.request_routing_rules.provisioning_state:
 - azure_rm_applicationgateway.request_routing_rules.name:
+    - test: rule1
 - azure_rm_applicationgateway.request_routing_rules.etag:
 - azure_rm_applicationgateway.request_routing_rules.type:
 - azure_rm_applicationgateway.redirect_configurations:

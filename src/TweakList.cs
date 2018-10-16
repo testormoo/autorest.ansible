@@ -213,34 +213,6 @@ namespace AutoRest.Ansible
 
             // Application Gateway
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "sku.name", "Standard_Small"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "sku.tier", "Standard"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "sku.capacity", "2"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "gateway_ip_configurations.name", "app_gateway_ip_config"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "gateway_ip_configurations.subnet.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "frontend_ip_configurations.name", "sample_gateway_frontend_ip_config"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "frontend_ip_configurations.subnet.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "frontend_ports.name", "ag_frontend_port"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "frontend_ports.port", "90"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "backend_address_pools.name", "test_backend_address_pool"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "backend_address_pools.backend_addresses.ip_address", "10.0.0.4"),
-
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "backend_http_settings_collection.name", "sample_appgateway_http_settings"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "backend_http_settings_collection.port", "80"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "backend_http_settings_collection.protocol", "Http"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "backend_http_settings_collection.cookie_based_affinity", "Enabled"),
-
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "http_listeners.name", "sample_http_listener"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "http_listeners.frontend_ip_configuration.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/frontendIPConfigurations/sample_gateway_frontend_ip_config"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "http_listeners.frontend_port.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/frontendPorts/ag_frontend_port"),
-
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "request_routing_rules.name", "rule1"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "request_routing_rules.rule_type", "Basic"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "request_routing_rules.http_listener.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/httpListeners/sample_http_listener"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "request_routing_rules.backend_address_pool.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/backendAddressPools/test_backend_address_pool"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway", "request_routing_rules.backend_http_settings.id", "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/applicationGateways/appgateway{{ rpfx }}/backendHttpSettingsCollection/sample_appgateway_http_settings"),
-
             new Tweak_Module_TestPrerequisites("azure_rm_applicationgateway",
                                                 new string[] {
                                                     "- name: Create a virtual network",
