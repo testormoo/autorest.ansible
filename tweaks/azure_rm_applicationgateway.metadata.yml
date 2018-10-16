@@ -12491,6 +12491,7 @@
     - test: 208.128.0.0/11
 - azure_rm_applicationgatewayroute.next_hop_type:
     - test: virtual_network_gateway
+    - required: no
 - azure_rm_applicationgatewayroute.next_hop_ip_address:
 - azure_rm_applicationgatewayroute.provisioning_state:
 - azure_rm_applicationgatewayroute.name:

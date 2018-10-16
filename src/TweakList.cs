@@ -251,7 +251,6 @@ namespace AutoRest.Ansible
             // Application Gateway Route
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute", "azure_rm_applicationgatewayroutetable", null, null),
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgatewayroute"),
-            new Tweak_Option_Required("azure_rm_applicationgatewayroute", "next_hop_type", false),
 
             // Application Gateway Route Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute_facts", "azure_rm_applicationgatewayroute", null, null),
@@ -372,8 +371,6 @@ namespace AutoRest.Ansible
             new Tweak_Response_FieldReturned("azure_rm_containerregistryreplication_facts", "status.message", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistryreplication_facts", "azure_rm_containerregistryreplication", null, null),
 
-            new Tweak_Option_Required("azure_rm_containerregistrywebhook", "service_uri", false),
-            new Tweak_Option_Required("azure_rm_containerregistrywebhook", "actions", false),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistrywebhook",
                                                 new string[] {
                                                      "- name: Create an container registry",
@@ -398,17 +395,6 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
             new Tweak_Option_MakeBoolean("azure_rm_vault", "create_mode", "Recover", "Default", false, "Create vault in recovery mode."),
-
-
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "resource_group_name", "myresourcegroup"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "vault_name", "samplekeyvault"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "tenant_id", "72f98888-8666-4144-9199-2d7cd0111111"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "enabled_for_deployment", "yes"),
-            //new Tweak_Option_DefaultValueSample("azure_rm_vault", "sku.family", "A"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "sku.name", "standard"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.tenant_id", "72f98888-8666-4144-9199-2d7cd0111111"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.object_id", "99998888-8666-4144-9199-2d7cd0111111"),
-            new Tweak_Option_DefaultValueSample("azure_rm_vault", "access_policies.keys", "get")
         };
     }
 }

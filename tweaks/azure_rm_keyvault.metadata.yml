@@ -1,8 +1,10 @@
 - azure_rm_vault:
     - rename: azure_rm_keyvault
 - azure_rm_vault.resource_group_name:
+    - sample: myresourcegroup
 - azure_rm_vault.vault_name:
     - test: vault{{ rpfx }}
+    - sample: samplekeyvault
 - azure_rm_vault.parameters:
 - azure_rm_vault.location:
 - azure_rm_vault.properties:
@@ -16,6 +18,7 @@
     - required: no
 - azure_rm_vault.properties.sku.family:
     - test: A
+    - sample: A
 - azure_rm_vault.properties.sku.name:
     - documentation-mark-keywords: no
     - test: standard

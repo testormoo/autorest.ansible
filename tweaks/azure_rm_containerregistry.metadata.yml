@@ -96,11 +96,13 @@
     - test: eastus2
 - azure_rm_containerregistrywebhook.service_uri:
     - test: http://serviceuri.com
+    - required: no
 - azure_rm_containerregistrywebhook.custom_headers:
 - azure_rm_containerregistrywebhook.status:
 - azure_rm_containerregistrywebhook.scope:
 - azure_rm_containerregistrywebhook.actions:
     - test: push
+    - required: no
 - azure_rm_containerregistrywebhook.response.id:
 - azure_rm_containerregistrywebhook.response.name:
 - azure_rm_containerregistrywebhook.response.type:
