@@ -2,6 +2,7 @@
 - azure_rm_batchaicluster.resource_group_name:
 - azure_rm_batchaicluster.cluster_name:
 - azure_rm_batchaicluster.parameters:
+    - collapse
 - azure_rm_batchaicluster.location:
 - azure_rm_batchaicluster.vm_size:
 - azure_rm_batchaicluster.vm_priority:
@@ -228,6 +229,7 @@
 - azure_rm_batchaijob.resource_group_name:
 - azure_rm_batchaijob.job_name:
 - azure_rm_batchaijob.parameters:
+    - collapse
 - azure_rm_batchaijob.location:
 - azure_rm_batchaijob.experiment_name:
 - azure_rm_batchaijob.priority:
@@ -463,6 +465,7 @@
 - azure_rm_batchaifileserver.resource_group_name:
 - azure_rm_batchaifileserver.file_server_name:
 - azure_rm_batchaifileserver.parameters:
+    - collapse
 - azure_rm_batchaifileserver.location:
 - azure_rm_batchaifileserver.vm_size:
 - azure_rm_batchaifileserver.ssh_configuration:

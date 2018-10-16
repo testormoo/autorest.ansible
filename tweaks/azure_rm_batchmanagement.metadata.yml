@@ -3,6 +3,7 @@
 - azure_rm_batchmanagementbatchaccount.account_name:
     - test: ba{{ rpfx }}$postfix$
 - azure_rm_batchmanagementbatchaccount.parameters:
+    - collapse
 - azure_rm_batchmanagementbatchaccount.location:
 - azure_rm_batchmanagementbatchaccount.auto_storage:
 - azure_rm_batchmanagementbatchaccount.auto_storage.storage_account_id:
@@ -83,6 +84,7 @@
     - test: ba{{ rpfx }}
 - azure_rm_batchmanagementapplication.application_id:
 - azure_rm_batchmanagementapplication.parameters:
+    - collapse
 - azure_rm_batchmanagementapplication.allow_updates:
 - azure_rm_batchmanagementapplication.display_name:
 - azure_rm_batchmanagementapplication_facts:
@@ -108,6 +110,7 @@
 - azure_rm_batchmanagementcertificate.certificate_name:
     - test: cert{{ rpfx }}
 - azure_rm_batchmanagementcertificate.parameters:
+    - collapse
 - azure_rm_batchmanagementcertificate.thumbprint_algorithm:
     - test: SHA1
 - azure_rm_batchmanagementcertificate.thumbprint:
@@ -195,6 +198,7 @@
 - azure_rm_batchmanagementpool.pool_name:
     - test: bmp{{ rpfx }}
 - azure_rm_batchmanagementpool.parameters:
+    - collapse
 - azure_rm_batchmanagementpool.display_name:
 - azure_rm_batchmanagementpool.vm_size:
 - azure_rm_batchmanagementpool.deployment_configuration:

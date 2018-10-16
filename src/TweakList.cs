@@ -49,7 +49,7 @@ namespace AutoRest.Ansible
 
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_sqlfirewallrule"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_sqlfirewallrule"),
 
             // SQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule_facts", "azure_rm_sqlfirewallrule", null, null),
@@ -80,7 +80,7 @@ namespace AutoRest.Ansible
 
             // MySQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver", null, null),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlfirewallrule"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_mysqlfirewallrule", "firewall_rule_name"),
             //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlfirewallrule", "firewallrule{{ rpfx }}"),
 
@@ -89,7 +89,7 @@ namespace AutoRest.Ansible
 
             // MySQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", null, null),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlconfiguration"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlconfiguration"),
             //new Tweak_Module_AssertStateVariable("azure_rm_mysqlconfiguration", "value"),
             //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlconfiguration", "ON"),
 
@@ -98,7 +98,7 @@ namespace AutoRest.Ansible
 
             // MySQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver", null, null),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlvirtualnetworkrule"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlvirtualnetworkrule"),
             new Tweak_Module_TestPrerequisites("azure_rm_mysqlvirtualnetworkrule",
                                                 new string[] {
                                                     "- name: Create a virtual network",
@@ -158,14 +158,14 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlfirewallrule"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlfirewallrule"),
 
             // PostgreSQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule_facts", "azure_rm_postgresqlfirewallrule", null, null),
 
             // PostgreSQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlconfiguration"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlconfiguration"),
 
             // PostgreSQL Configuration Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration", null, null),
@@ -177,7 +177,7 @@ namespace AutoRest.Ansible
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlvirtualnetworkrule_facts", "azure_rm_postgresqlvirtualnetworkrule", null, null),
 
             // Authorization
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_authorizationroleassignment"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_authorizationroleassignment"),
 
             // Application Gateway
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgateway"),
@@ -340,7 +340,7 @@ namespace AutoRest.Ansible
                                                      "    name: acr{{ rpfx }}",
                                                      "    resource_group: \"{{ resource_group }}\"",
                                                      "    state: absent" }),
-            new Tweak_Module_FlattenParametersDictionary("azure_rm_containerregistryreplication"),
+            //new Tweak_Module_FlattenParametersDictionary("azure_rm_containerregistryreplication"),
 
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistryreplication_facts", "azure_rm_containerregistryreplication", null, null),
 

@@ -6,6 +6,7 @@
     - test: vault{{ rpfx }}
     - sample: samplekeyvault
 - azure_rm_vault.parameters:
+    - collapse
 - azure_rm_vault.location:
 - azure_rm_vault.properties:
     - collapse
