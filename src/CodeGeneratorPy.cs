@@ -95,7 +95,19 @@ namespace AutoRest.Ansible
                                         tweakValue = "";
                                 }
 
-                                var tweak = Tweak.CreateTweak(module, tweakName, tweakValue);
+                                var tweak = null;
+                                
+                                try
+                                {
+                                    Tweak.CreateTweak(module, tweakName, tweakValue);
+                                }
+                                catch (Exception e)
+                                {
+                                    map.Info.Add("COULDN'T CREATE TWEAK");
+                                    map.Info.Add(e.ToString());
+                                    map.Info.Add(l);
+                                }
+
                                 if (tweak != null)
                                 {
                                     if (!tweak.Apply(map))
