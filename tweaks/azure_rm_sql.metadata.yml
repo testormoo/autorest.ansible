@@ -647,11 +647,14 @@
 - azure_rm_sqlserver:
     - object_name: SQL Server
 - azure_rm_sqlserver.resource_group_name:
+    - sample: resource_group
 - azure_rm_sqlserver.server_name:
     - rename: name
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlserver.parameters:
 - azure_rm_sqlserver.location:
+    - sample: westus
+    - test: eastus
 - azure_rm_sqlserver.administrator_login:
     - rename: admin_username
     - test: mylogin
