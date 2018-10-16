@@ -17,7 +17,7 @@
 - azure_rm_mysqlserver.sku.capacity:
 - azure_rm_mysqlserver.sku.size:
 - azure_rm_mysqlserver.sku.family:
-    - exclude: yes
+    - exclude
 - azure_rm_mysqlserver.location:
     - test: westus
 - azure_rm_mysqlserver.properties:
@@ -30,7 +30,11 @@
     - rename: enforce_ssl
     - test: True
     - sample: True
+    - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
 - azure_rm_mysqlserver.properties.create_mode:
+    - documentation_append: "Currently only 'Default' value supported"
+    - default: 'Default'
+    - exclude_from_documentation
 - azure_rm_mysqlserver.properties.administrator_login:
     - rename: admin_username
     - required: no
@@ -172,8 +176,10 @@
 - azure_rm_mysqldatabase.parameters:
 - azure_rm_mysqldatabase.charset:
     - update_rule: compare
+    - documentation_append: " Check MySQL documentation for possible values."
 - azure_rm_mysqldatabase.collation:
     - update_rule: compare
+    - documentation_append: " Check MySQL documentation for possible values."
 - azure_rm_mysqldatabase.response.id:
 - azure_rm_mysqldatabase.response.name:
 - azure_rm_mysqldatabase.response.type:
@@ -235,3 +241,4 @@
 - azure_rm_mysqllogfile_facts:
 - azure_rm_mysqllogfile_facts.resource_group_name:
 - azure_rm_mysqllogfile_facts.server_name:
+    - test: mysqlsrv{{ rpfx }}

@@ -12,7 +12,7 @@
 - azure_rm_vault.properties.tenant_id:
     - rename: vault_tenant
     - required: no
-    - documentation-append-line: Current tenant will be used as default if not specified.
+    - documentation_append_line: Current tenant will be used as default if not specified.
     - sample: 72f98888-8666-4144-9199-2d7cd0111111 
 - azure_rm_vault.properties.sku:
     - required: no
@@ -20,7 +20,7 @@
     - test: A
     - sample: A
 - azure_rm_vault.properties.sku.name:
-    - documentation-mark-keywords: no
+    - documentation_mark_keywords: no
     - test: standard
     - sample: standard
 - azure_rm_vault.properties.access_policies:
@@ -28,7 +28,7 @@
     - sample: 72f98888-8666-4144-9199-2d7cd0111111 
     - required: no
 - azure_rm_vault.properties.access_policies.object_id:
-    - documentation-append-line: Please note this is not application id. Object id can be obtained by running "az ad show sp --id <application id>".
+    - documentation_append_line: Please note this is not application id. Object id can be obtained by running "az ad show sp --id <application id>".
     - test: 99998888-8666-4144-9199-2d7cd0111111
     - sample: 99998888-8666-4144-9199-2d7cd0111111 
 - azure_rm_vault.properties.access_policies.application_id:
@@ -55,6 +55,7 @@
 - azure_rm_vault.properties.create_mode:
     - rename: recover_mode
     - type: bool
+    - make_boolean: Recover|Default|no|Create vault in recovery mode.
 - azure_rm_vault.response.id:
 - azure_rm_vault.response.name:
 - azure_rm_vault.response.type:

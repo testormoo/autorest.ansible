@@ -24,7 +24,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("*", "location", "eastus"),
 
             // SQL Server
-            new Tweak_Option_DocumentationAppend("azure_rm_sqlserver", "version", " For example '12.0'."),
             new Tweak_Module_AssertStateVariable("azure_rm_sqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlserver", "Ready"),
 
@@ -33,8 +32,6 @@ namespace AutoRest.Ansible
 
             // SQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "zone_redundant", "Enabled", "Disabled", false, "Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability zones."),
-            new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "read_scale", "Enabled", "Disabled", false, "If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition."),
             new Tweak_Response_AddField("azure_rm_sqldatabase", "database_id"),
             new Tweak_Module_AssertStateVariable("azure_rm_sqldatabase", "status"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqldatabase", "Online"),
@@ -64,10 +61,6 @@ namespace AutoRest.Ansible
 
 
             // MySQL Server
-            new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
-            new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
-            new Tweak_Option_DefaultValue("azure_rm_mysqlserver", "properties.create_mode", "'Default'"),
-            new Tweak_Option_Documentation("azure_rm_mysqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlserver", "Ready"),
 
@@ -76,8 +69,6 @@ namespace AutoRest.Ansible
 
             // MySQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "collation", " Check MySQL documentation for possible values."),
-            new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "charset", " Check MySQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_mysqldatabase", "name"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqldatabase", "testdatabase"),
@@ -146,13 +137,8 @@ namespace AutoRest.Ansible
 
             // MySQL Server LogFile Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqllogfile_facts", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqllogfile_facts", "server_name", "mysqlsrv{{ rpfx }}"),
 
             // PostgreSQL Server
-            new Tweak_Option_Exclude("azure_rm_postgresqlserver", "properties.create_mode", true, false),
-            new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
-            new Tweak_Option_DefaultValue("azure_rm_postgresqlserver", "properties.create_mode", "'Default'"),
-            new Tweak_Option_Documentation("azure_rm_postgresqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlserver", "Ready"),
 
@@ -161,8 +147,6 @@ namespace AutoRest.Ansible
 
             // PostgreSQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqldatabase", "azure_rm_postgresqlserver", null, null),
-            new Tweak_Option_DocumentationAppend("azure_rm_postgresqldatabase", "collation", " Check PostgreSQL documentation for possible values."),
-            new Tweak_Option_DocumentationAppend("azure_rm_postgresqldatabase", "charset", " Check PostgreSQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqldatabase", "name"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqldatabase", "testdatabase"),
@@ -381,8 +365,6 @@ namespace AutoRest.Ansible
                                                      "    state: absent" }),
 
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
-
-            new Tweak_Option_MakeBoolean("azure_rm_vault", "create_mode", "Recover", "Default", false, "Create vault in recovery mode."),
         };
     }
 }

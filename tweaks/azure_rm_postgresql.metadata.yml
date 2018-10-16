@@ -16,7 +16,7 @@
 - azure_rm_postgresqlserver.sku.capacity:
 - azure_rm_postgresqlserver.sku.size:
 - azure_rm_postgresqlserver.sku.family:
-    - exclude: yes
+    - exclude
 - azure_rm_postgresqlserver.properties:
     - collapse
 - azure_rm_postgresqlserver.location:
@@ -28,7 +28,11 @@
     - rename: enforce_ssl
     - test: True
     - sample: True
+    - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
 - azure_rm_postgresqlserver.properties.create_mode:
+    - documentation: "Currently only 'Default' value supported"
+    - default: "'Default'"
+    - exclude_from_documentation
 - azure_rm_postgresqlserver.properties.administrator_login:
     - rename: admin_username
     - required: no
@@ -166,8 +170,10 @@
 - azure_rm_postgresqldatabase.parameters:
 - azure_rm_postgresqldatabase.charset:
     - update_rule: compare
+    - documentation_append: " Check PostgreSQL documentation for possible values."
 - azure_rm_postgresqldatabase.collation:
     - update_rule: compare
+    - documentation_append: " Check PostgreSQL documentation for possible values."
 - azure_rm_postgresqldatabase.response.id:
 - azure_rm_postgresqldatabase.response.name:
 - azure_rm_postgresqldatabase.response.type:

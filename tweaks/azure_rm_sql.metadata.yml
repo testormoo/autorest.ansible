@@ -318,24 +318,24 @@
     - test: eastus
 - azure_rm_sqldatabase.collation:
 - azure_rm_sqldatabase.create_mode:
-    - documentation-mark-keywords: no
+    - documentation_mark_keywords: no
     - documentation: Specifies the mode of database creation.
-    - documentation-append-line: "C(default): regular database creation."
-    - documentation-append-line: "C(copy): creates a database as a copy of an existing database."
-    - documentation-append-line: "C(online_secondary)/C(non_readable_secondary): creates a database as a (readable or nonreadable) secondary replica of an existing database."
-    - documentation-append-line: "C(point_in_time_restore): Creates a database by restoring a point in time backup of an existing database."
-    - documentation-append-line: "C(recovery): Creates a database by restoring a geo-replicated backup."
-    - documentation-append-line: "C(restore): Creates a database by restoring a backup of a deleted database."
-    - documentation-append-line: "C(restore_long_term_retention_backup): Creates a database by restoring from a long term retention vault."
-    - documentation-append-line: "C(copy), C(non_readable_secondary), C(online_secondary) and C(restore_long_term_retention_backup) are not supported for C(data_warehouse) edition."
+    - documentation_append-line: "C(default): regular database creation."
+    - documentation_append_line: "C(copy): creates a database as a copy of an existing database."
+    - documentation_append_line: "C(online_secondary)/C(non_readable_secondary): creates a database as a (readable or nonreadable) secondary replica of an existing database."
+    - documentation_append_line: "C(point_in_time_restore): Creates a database by restoring a point in time backup of an existing database."
+    - documentation_append_line: "C(recovery): Creates a database by restoring a geo-replicated backup."
+    - documentation_append_line: "C(restore): Creates a database by restoring a backup of a deleted database."
+    - documentation_append_line: "C(restore_long_term_retention_backup): Creates a database by restoring from a long term retention vault."
+    - documentation_append_line: "C(copy), C(non_readable_secondary), C(online_secondary) and C(restore_long_term_retention_backup) are not supported for C(data_warehouse) edition."
 - azure_rm_sqldatabase.source_database_id:
-    - documentation-mark-keywords: no
+    - documentation_mark_keywords: no
     - documentation: "Required unless I(create_mode) is C(default) or C(restore_long_term_retention_backup)."
-    - documentation-append-line: Specifies the resource ID of the source database
+    - documentation_append_line: Specifies the resource ID of the source database
 - azure_rm_sqldatabase.source_database_deletion_date:
-    - documentation-replace: Conditional. If>>>Required if
+    - documentation_replace: Conditional. If>>>Required if
 - azure_rm_sqldatabase.restore_point_in_time:
-    - documentation-replace: Conditional. If>>>Required if
+    - documentation_replace: Conditional. If>>>Required if
 - azure_rm_sqldatabase.recovery_services_recovery_point_resource_id:
     - documentation: "Required if I(create_mode) is C(restore_long_term_retention_backup), then this value is required. Specifies the resource ID of therecovery point to restore from."
 - azure_rm_sqldatabase.edition:
@@ -343,17 +343,19 @@
 - azure_rm_sqldatabase.max_size_bytes:
     - update_rule: compare
 - azure_rm_sqldatabase.requested_service_objective_id:
-    - exclude: yes
+    - exclude
 - azure_rm_sqldatabase.requested_service_objective_name:
-    - exclude: yes
+    - exclude
 - azure_rm_sqldatabase.elastic_pool_name:
-    - documentation-mark-keywords: no
+    - documentation_mark_keywords: no
     - documentation: The name of the elastic pool the database is in. Not supported for C(data_warehouse) edition.
 - azure_rm_sqldatabase.read_scale:
-    - documentation-replace: readScale >>>
+    - documentation_replace: readScale >>>
     - update_rule: compare
+    - make_boolean: Enabled|Disabled|no|If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.
 - azure_rm_sqldatabase.sample_name:
 - azure_rm_sqldatabase.zone_redundant:
+    - make_boolean: Enabled|Disabled|no|Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability zones.
 - azure_rm_sqldatabase.response.id:
 - azure_rm_sqldatabase.response.type:
 - azure_rm_sqldatabase.response.tags:
@@ -690,6 +692,7 @@
     - sample: Testpasswordxyz12!
 - azure_rm_sqlserver.version:
     - test: ""
+    - documentation_append: " For example '12.0'."
 - azure_rm_sqlserver.identity:
     - collapse
 - azure_rm_sqlserver.identity.type:

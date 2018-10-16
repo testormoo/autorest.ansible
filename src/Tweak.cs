@@ -55,18 +55,28 @@ namespace AutoRest.Ansible
                 case "rename":                      return new Tweak_Option_Rename(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "required":                    return new Tweak_Option_Required(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
                 case "type":                        return new Tweak_Option_SetType(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "exclude":                     return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes", parameter == "yes");
+                case "exclude":                     return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), true, true);
+                case "exclude_from_documentation":  return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), true, false);
+                case "exclude_from_options":        return new Tweak_Option_Exclude(path[0], String.Join('.', path, 1, path.Length - 1), false, true);
                 case "default":                     return new Tweak_Option_DefaultValue(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "test":                        return new Tweak_Option_DefaultValueTest(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "sample":                      return new Tweak_Option_DefaultValueSample(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "documentation":               return new Tweak_Option_Documentation(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "documentation-append":        return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "documentation-append-line":   return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), "\n" + parameter);
-                case "documentation-replace":       return new Tweak_Option_DocumentationReplace(path[0], String.Join('.', path, 1, path.Length - 1), parameter.Split(">>>")[0], parameter.Split(">>>")[1]);
-                case "documentation-cut-after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
-                case "documentation-mark-keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
+                case "documentation_append":        return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation_append_line":   return new Tweak_Option_DocumentationAppend(path[0], String.Join('.', path, 1, path.Length - 1), "\n" + parameter);
+                case "documentation_replace":       return new Tweak_Option_DocumentationReplace(path[0], String.Join('.', path, 1, path.Length - 1), parameter.Split(">>>")[0], parameter.Split(">>>")[1]);
+                case "documentation_cut_after":     return new Tweak_Option_DocumentationCutAfter(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "documentation_mark_keywords": return new Tweak_Option_DocumentationMarkKeywords(path[0], String.Join('.', path, 1, path.Length - 1), parameter == "yes");
                 case "collapse":                    return new Tweak_Option_Collapse(path[0], String.Join('.', path, 1, path.Length - 1));
                 case "update_rule":                 return new Tweak_Option_UpdateRule(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
+                case "make_boolean":
+                    string[]  sub = param.Split('|');
+                    string valueIfTrue = param.Length >= 1 ? param[0] : "";
+                    string valueIfFalse = param.Length >= 2 ? param[1] : "";
+                    bool defaultValue = param.Length >= 3 ? (param[2] == "yes") : false;
+                    string documentation = param.Length >= 4 ? param[3] : null;
+
+                    return new Tweak_Option_MakeBoolean(path[0], String.Join('.', path, 1, path.Length - 1), valueIfTrue, valueIfFalse, defaultValue, documentation);
                 }
             }
 
