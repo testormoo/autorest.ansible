@@ -265,61 +265,6 @@ namespace AutoRest.Ansible
         private string _newLine;
     }
 
-    class Tweak_Module_FlattenParametersDictionary : Tweak_Module
-    {
-        public Tweak_Module_FlattenParametersDictionary(string module)
-        {
-            _module = module;
-        }
-
-        public override bool ApplyOnModule(Model.MapAnsibleModule m)
-        {
-            Model.ModuleMethod method = null;
-            List<string> methodOptions = null;
-            string dictionaryName = "";
-            bool applied = false;
-
-            foreach (var mth in m.Methods)
-            {
-                if (mth.Name == "create_or_update" || mth.Name == "create" || mth.Name == "update")
-                {
-                    method = mth;
-                    methodOptions = method.RequiredOptions.ToList();
-
-                    foreach (var o in m.Options)
-                    {
-                        if (o.Disposition == "dictionary" || o.Disposition == "__none")
-                        {
-                            o.Disposition = "__none";
-                            dictionaryName = o.Name;
-                            // remove from create_or_update function method list
-                             
-                            methodOptions.Remove(o.Name);
-                        }
-                        else if (o.Disposition == dictionaryName || o.Disposition == "__default")
-                        {
-                            o.Disposition = "__default";
-                            methodOptions.Add(o.Name);
-                        }
-                    }
-                    
-                    // XXX - this is a terrible, terrible hack
-                    methodOptions.RemoveAll(element => element.EndsWith("_parameters"));
-                    method.RequiredOptions = methodOptions.ToArray();
-
-                    applied = true;
-                }
-            }
-            foreach (var o in m.Options)
-            {
-                if (o.Disposition == "__none") o.Disposition = "none";
-                else if (o.Disposition == "__default") o.Disposition = "default";
-            }
-
-            return applied;
-        }
-    }
-
     class Tweak_Module_NeedsDeleteBeforeUpdate : Tweak_Module
     {
         public Tweak_Module_NeedsDeleteBeforeUpdate(string module)
