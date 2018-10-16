@@ -717,6 +717,7 @@
     - object_name: SQL Server
 - azure_rm_sqlserver_facts.resource_group_name:
 - azure_rm_sqlserver_facts.server_name:
+    - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlserver_facts.response.id:
 - azure_rm_sqlserver_facts.response.name:
 - azure_rm_sqlserver_facts.response.type:
