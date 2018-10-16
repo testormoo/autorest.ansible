@@ -95,29 +95,26 @@ namespace AutoRest.Ansible
                                         tweakValue = "";
                                 }
 
-                                var tweak = null;
-                                
                                 try
                                 {
-                                    Tweak.CreateTweak(module, tweakName, tweakValue);
+                                    var tweak = Tweak.CreateTweak(module, tweakName, tweakValue);
+                                    if (tweak != null)
+                                    {
+                                        if (!tweak.Apply(map))
+                                        {
+                                            map.Info.Add("TWEAK NOT APPLIED: " + l);
+                                        }
+                                    }
+                                    else
+                                    {
+                                            map.Info.Add("TWEAK NOT CREATED: " + l);
+                                    }
                                 }
                                 catch (Exception e)
                                 {
                                     map.Info.Add("COULDN'T CREATE TWEAK");
                                     map.Info.Add(e.ToString());
                                     map.Info.Add(l);
-                                }
-
-                                if (tweak != null)
-                                {
-                                    if (!tweak.Apply(map))
-                                    {
-                                        map.Info.Add("TWEAK NOT APPLIED: " + l);
-                                    }
-                                }
-                                else
-                                {
-                                        map.Info.Add("TWEAK NOT CREATED: " + l);
                                 }
                             }
                             else
