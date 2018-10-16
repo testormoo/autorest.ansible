@@ -585,6 +585,7 @@
 - azure_rm_sqlelasticpool_facts.response.storage_mb:
 - azure_rm_sqlelasticpool_facts.response.zone_redundant:
 - azure_rm_sqlelasticpool_facts.response.kind:
+    - returned: ""
 - azure_rm_sqlreplicationlink_facts:
 - azure_rm_sqlreplicationlink_facts.resource_group_name:
 - azure_rm_sqlreplicationlink_facts.server_name:

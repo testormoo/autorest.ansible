@@ -44,6 +44,7 @@
 - azure_rm_containerregistryregistry_facts.response.creation_date:
 - azure_rm_containerregistryregistry_facts.response.provisioning_state:
 - azure_rm_containerregistryregistry_facts.response.status:
+    - returned: ""
 - azure_rm_containerregistryregistry_facts.response.status.display_status:
 - azure_rm_containerregistryregistry_facts.response.status.message:
 - azure_rm_containerregistryregistry_facts.response.status.timestamp:
@@ -84,6 +85,7 @@
 - azure_rm_containerregistryreplication_facts.response.status:
 - azure_rm_containerregistryreplication_facts.response.status.display_status:
 - azure_rm_containerregistryreplication_facts.response.status.message:
+    - returned: ""
 - azure_rm_containerregistryreplication_facts.response.status.timestamp:
 - azure_rm_containerregistrywebhook:
 - azure_rm_containerregistrywebhook.resource_group_name:
@@ -125,5 +127,6 @@
 - azure_rm_containerregistrywebhook_facts.response.tags:
 - azure_rm_containerregistrywebhook_facts.response.status:
 - azure_rm_containerregistrywebhook_facts.response.scope:
+    - returned: ""
 - azure_rm_containerregistrywebhook_facts.response.actions:
 - azure_rm_containerregistrywebhook_facts.response.provisioning_state:

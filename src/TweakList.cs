@@ -51,7 +51,6 @@ namespace AutoRest.Ansible
 
             // SQL Elastic Pool Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool_facts", "azure_rm_sqlelasticpool", null, null),
-            new Tweak_Response_FieldReturned("azure_rm_sqlelasticpool_facts", "kind", ""),
 
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
@@ -326,7 +325,6 @@ namespace AutoRest.Ansible
                                                     "        memory: 1.5",
                                                     "    state: absent" }),
 
-            new Tweak_Response_FieldReturned("azure_rm_containerregistryregistry_facts", "status", ""),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistry_facts",
                                                 new string[] {
                                                      "- name: Create an container registry",
@@ -368,7 +366,6 @@ namespace AutoRest.Ansible
                                                      "    state: absent" }),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_containerregistryreplication"),
 
-            new Tweak_Response_FieldReturned("azure_rm_containerregistryreplication_facts", "status.message", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistryreplication_facts", "azure_rm_containerregistryreplication", null, null),
 
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistrywebhook",
@@ -391,7 +388,6 @@ namespace AutoRest.Ansible
                                                      "    resource_group: \"{{ resource_group }}\"",
                                                      "    state: absent" }),
 
-            new Tweak_Response_FieldReturned("azure_rm_containerregistrywebhook_facts", "scope", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 
             new Tweak_Option_MakeBoolean("azure_rm_vault", "create_mode", "Recover", "Default", false, "Create vault in recovery mode."),
