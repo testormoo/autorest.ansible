@@ -127,6 +127,7 @@
     - rename: azure_rm_containerinstance_facts
 - azure_rm_containerinstancecontainergroup_facts.resource_group_name:
 - azure_rm_containerinstancecontainergroup_facts.container_group_name:
+    - test: aci{{ rpfx }}
 - azure_rm_containerinstancecontainergroup_facts.response.id:
 - azure_rm_containerinstancecontainergroup_facts.response.name:
 - azure_rm_containerinstancecontainergroup_facts.response.type:
