@@ -70,11 +70,11 @@ namespace AutoRest.Ansible
                 case "collapse":                    return new Tweak_Option_Collapse(path[0], String.Join('.', path, 1, path.Length - 1));
                 case "update_rule":                 return new Tweak_Option_UpdateRule(path[0], String.Join('.', path, 1, path.Length - 1), parameter);
                 case "make_boolean":
-                    string[]  sub = param.Split('|');
-                    string valueIfTrue = param.Length >= 1 ? param[0] : "";
-                    string valueIfFalse = param.Length >= 2 ? param[1] : "";
-                    bool defaultValue = param.Length >= 3 ? (param[2] == "yes") : false;
-                    string documentation = param.Length >= 4 ? param[3] : null;
+                    string[]  sub = parameter.Split('|');
+                    string valueIfTrue = sub.Length >= 1 ? sub[0] : "";
+                    string valueIfFalse = sub.Length >= 2 ? sub[1] : "";
+                    bool defaultValue = sub.Length >= 3 ? (sub[2] == "yes") : false;
+                    string documentation = sub.Length >= 4 ? sub[3] : null;
 
                     return new Tweak_Option_MakeBoolean(path[0], String.Join('.', path, 1, path.Length - 1), valueIfTrue, valueIfFalse, defaultValue, documentation);
                 }
