@@ -1,5 +1,5 @@
 - azure_rm_containerregistryregistry:
-    - rename: azure_rm_containerregistryxx
+    - rename: azure_rm_containerregistry
 - azure_rm_containerregistryregistry.resource_group_name:
 - azure_rm_containerregistryregistry.registry_name:
 - azure_rm_containerregistryregistry.registry:

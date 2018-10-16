@@ -1,5 +1,5 @@
 - azure_rm_containerinstancecontainergroup:
-    - rename: azure_rm_containerinstancexx
+    - rename: azure_rm_containerinstance
 - azure_rm_containerinstancecontainergroup.resource_group_name:
 - azure_rm_containerinstancecontainergroup.container_group_name:
     - test: aci{{ rpfx }}

@@ -47,7 +47,6 @@
 - azure_rm_sqlrestorepoint_facts.resource_group_name:
     - rename: resource_group
 - azure_rm_sqlrestorepoint_facts.server_name:
-    - rename: xxxxx
 - azure_rm_sqlrestorepoint_facts.database_name:
 - azure_rm_sqlrecoverabledatabase_facts:
 - azure_rm_sqlrecoverabledatabase_facts.resource_group_name:
@@ -321,7 +320,7 @@
 - azure_rm_sqldatabase.create_mode:
     - documentation-mark-keywords: no
     - documentation: Specifies the mode of database creation.
-    - documentation-append-line: "C(default): regular database creation. XX"
+    - documentation-append-line: "C(default): regular database creation."
     - documentation-append-line: "C(copy): creates a database as a copy of an existing database."
     - documentation-append-line: "C(online_secondary)/C(non_readable_secondary): creates a database as a (readable or nonreadable) secondary replica of an existing database."
     - documentation-append-line: "C(point_in_time_restore): Creates a database by restoring a point in time backup of an existing database."
