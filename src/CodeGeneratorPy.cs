@@ -63,6 +63,8 @@ namespace AutoRest.Ansible
             // TODO: load additional tweaks from file
             map.Info.Add("CURRENT DIRECTORY: " + System.IO.Directory.GetCurrentDirectory());
 
+            map.Info.Add("--------------------- APPLYING TWEAKS FROM FILE.....");
+
             string currentLine = "";
             try
             {
