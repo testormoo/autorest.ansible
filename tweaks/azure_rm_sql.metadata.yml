@@ -343,7 +343,9 @@
 - azure_rm_sqldatabase.max_size_bytes:
     - update_rule: compare
 - azure_rm_sqldatabase.requested_service_objective_id:
+    - exclude: yes
 - azure_rm_sqldatabase.requested_service_objective_name:
+    - exclude: yes
 - azure_rm_sqldatabase.elastic_pool_name:
     - documentation-mark-keywords: no
     - documentation: The name of the elastic pool the database is in. Not supported for C(data_warehouse) edition.
@@ -353,7 +355,6 @@
 - azure_rm_sqldatabase.sample_name:
 - azure_rm_sqldatabase.zone_redundant:
 - azure_rm_sqldatabase.response.id:
-- azure_rm_sqldatabase.response.name:
 - azure_rm_sqldatabase.response.type:
 - azure_rm_sqldatabase.response.tags:
 - azure_rm_sqldatabase.response.location:

@@ -17,6 +17,7 @@
 - azure_rm_mysqlserver.sku.capacity:
 - azure_rm_mysqlserver.sku.size:
 - azure_rm_mysqlserver.sku.family:
+    - exclude: yes
 - azure_rm_mysqlserver.location:
     - test: westus
 - azure_rm_mysqlserver.properties:

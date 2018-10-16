@@ -33,8 +33,6 @@ namespace AutoRest.Ansible
 
             // SQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_Exclude("azure_rm_sqldatabase", "requested_service_objective_id", true, true),
-            new Tweak_Option_Exclude("azure_rm_sqldatabase", "requested_service_objective_name", true, true),
             new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "zone_redundant", "Enabled", "Disabled", false, "Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability zones."),
             new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "read_scale", "Enabled", "Disabled", false, "If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition."),
             new Tweak_Response_AddField("azure_rm_sqldatabase", "database_id"),
@@ -68,7 +66,6 @@ namespace AutoRest.Ansible
             // MySQL Server
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
             new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
-            new Tweak_Option_Exclude("azure_rm_mysqlserver", "sku.family", true, true),
             new Tweak_Option_DefaultValue("azure_rm_mysqlserver", "properties.create_mode", "'Default'"),
             new Tweak_Option_Documentation("azure_rm_mysqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "state"),
@@ -154,7 +151,6 @@ namespace AutoRest.Ansible
             // PostgreSQL Server
             new Tweak_Option_Exclude("azure_rm_postgresqlserver", "properties.create_mode", true, false),
             new Tweak_Option_MakeBoolean("azure_rm_postgresqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
-            new Tweak_Option_Exclude("azure_rm_postgresqlserver", "sku.family", true, true),
             new Tweak_Option_DefaultValue("azure_rm_postgresqlserver", "properties.create_mode", "'Default'"),
             new Tweak_Option_Documentation("azure_rm_postgresqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
             new Tweak_Module_AssertStateVariable("azure_rm_postgresqlserver", "state"),
@@ -179,8 +175,6 @@ namespace AutoRest.Ansible
             // PostgreSQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule", "azure_rm_postgresqlserver", null, null),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlfirewallrule"),
-            //new Tweak_Module_AssertStateVariable("azure_rm_postgresqlfirewallrule", "firewall_rule_name"),
-            //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlfirewallrule", "firewallrule{{ rpfx }}"),
 
             // PostgreSQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlfirewallrule_facts", "azure_rm_postgresqlfirewallrule", null, null),
@@ -188,8 +182,6 @@ namespace AutoRest.Ansible
             // PostgreSQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration", "azure_rm_postgresqlserver", null, null),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_postgresqlconfiguration"),
-            //new Tweak_Module_AssertStateVariable("azure_rm_postgresqlconfiguration", "value"),
-            //new Tweak_Module_AssertStateExpectedValue("azure_rm_postgresqlconfiguration", "ON"),
 
             // PostgreSQL Configuration Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_postgresqlconfiguration_facts", "azure_rm_postgresqlconfiguration", null, null),

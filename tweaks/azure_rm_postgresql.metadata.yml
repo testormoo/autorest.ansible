@@ -16,6 +16,7 @@
 - azure_rm_postgresqlserver.sku.capacity:
 - azure_rm_postgresqlserver.sku.size:
 - azure_rm_postgresqlserver.sku.family:
+    - exclude: yes
 - azure_rm_postgresqlserver.properties:
     - collapse
 - azure_rm_postgresqlserver.location:
