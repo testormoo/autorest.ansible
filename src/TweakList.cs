@@ -246,39 +246,24 @@ namespace AutoRest.Ansible
                                                     //"    resource_group: \"{{ resource_group }}\"",
                                                     //"    state: absent" }),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgateway_facts", "application_gateway_name", "\"appgateway{{ rpfx }}\""),
 
-            // Application Gateway Application Security Group
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationsecuritygroup", "application_security_group_name", "appgwsg{{ rpfx }}"),
 
             // Application Gateway Application Security Group Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "azure_rm_applicationgatewayapplicationsecuritygroup", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayapplicationsecuritygroup_facts", "application_security_group_name", "appgwsg{{ rpfx }}"),
 
-            // Application Gateway Route Table
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable", "route_table_name", "routetablename{{ rpfx }}"),
 
             // Application Gateway Route Table Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroutetable_facts", "azure_rm_applicationgatewayroutetable", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroutetable_facts", "route_table_name", "routetablename{{ rpfx }}"),
 
             // Application Gateway Route
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute", "azure_rm_applicationgatewayroutetable", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "next_hop_type", "virtual_network_gateway"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_name", "testroute{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "route_table_name", "routetablename{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute", "address_prefix", "208.128.0.0/11"),
             new Tweak_Module_CannotTestUpdate("azure_rm_applicationgatewayroute"),
             new Tweak_Option_Required("azure_rm_applicationgatewayroute", "next_hop_type", false),
 
             // Application Gateway Route Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_applicationgatewayroute_facts", "azure_rm_applicationgatewayroute", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute_facts", "route_name", "testroute{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayroute_facts", "route_table_name", "routetablename{{ rpfx }}"),
 
             // Application Inbound NAT Rule
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayinboundnatrule", "load_balancer_name", "lb{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_applicationgatewayinboundnatrule", "inbound_nat_rule_name", "rule{{ rpfx }}"),
 
             new Tweak_Module_TestPrerequisites("azure_rm_applicationgatewayinboundnatrule",
                                                 new string[] {
@@ -306,8 +291,6 @@ namespace AutoRest.Ansible
                                                     "    state: absent" }),
 
             // XXX - test pre and postrequisites
-            new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerinstancecontainergroup_facts", "container_group_name", "aci{{ rpfx }}"),
             new Tweak_Module_TestPrerequisites("azure_rm_containerinstancecontainergroup_facts",
                                                 new string[] {
                                                     "- name: Create sample container instance",
@@ -351,8 +334,6 @@ namespace AutoRest.Ansible
                                                     "        memory: 1.5",
                                                     "    state: absent" }),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryregistry_facts", "registry_name", "acr{{ rpfx }}"),
             new Tweak_Response_FieldReturned("azure_rm_containerregistryregistry_facts", "status", ""),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistryregistry_facts",
                                                 new string[] {
@@ -374,10 +355,6 @@ namespace AutoRest.Ansible
                                                      "    resource_group: \"{{ resource_group }}\"",
                                                      "    state: absent" }),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "registry_name", "acr{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "replication_name", "replication{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication", "location", "westus"),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistryreplication",
                                                 new string[] {
                                                      "- name: Create an container registry",
@@ -399,18 +376,9 @@ namespace AutoRest.Ansible
                                                      "    state: absent" }),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_containerregistryreplication"),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "registry_name", "acr{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistryreplication_facts", "replication_name", "replication{{ rpfx }}"),
             new Tweak_Response_FieldReturned("azure_rm_containerregistryreplication_facts", "status.message", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistryreplication_facts", "azure_rm_containerregistryreplication", null, null),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "registry_name", "acr{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "webhook_name", "webhook{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "location", "eastus2"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "service_uri", "http://serviceuri.com"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook", "actions", "push"),
             new Tweak_Option_Required("azure_rm_containerregistrywebhook", "service_uri", false),
             new Tweak_Option_Required("azure_rm_containerregistrywebhook", "actions", false),
             new Tweak_Module_TestPrerequisites("azure_rm_containerregistrywebhook",
@@ -433,9 +401,6 @@ namespace AutoRest.Ansible
                                                      "    resource_group: \"{{ resource_group }}\"",
                                                      "    state: absent" }),
 
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "resource_group", "\"{{ resource_group }}\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "registry_name", "acr{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_containerregistrywebhook_facts", "webhook_name", "webhook{{ rpfx }}"),
             new Tweak_Response_FieldReturned("azure_rm_containerregistrywebhook_facts", "scope", ""),
             new Tweak_Module_TestPrerequisitesModule("azure_rm_containerregistrywebhook_facts", "azure_rm_containerregistrywebhook", null, null),
 

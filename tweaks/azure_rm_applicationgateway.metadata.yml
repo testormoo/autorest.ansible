@@ -687,6 +687,7 @@
 - azure_rm_applicationgateway_facts.resource_group_name:
 - azure_rm_applicationgateway_facts.application_gateway_name:
     - rename: name
+    - test: appgateway{{ rpfx }}
 - azure_rm_applicationgateway_facts.response.id:
 - azure_rm_applicationgateway_facts.response.name:
 - azure_rm_applicationgateway_facts.response.type:
@@ -1056,6 +1057,7 @@
     - rename: azure_rm_appgatewayapplicationsecuritygroup
 - azure_rm_applicationgatewayapplicationsecuritygroup.resource_group_name:
 - azure_rm_applicationgatewayapplicationsecuritygroup.application_security_group_name:
+    - test: appgwsg{{ rpfx }}
 - azure_rm_applicationgatewayapplicationsecuritygroup.parameters:
 - azure_rm_applicationgatewayapplicationsecuritygroup.id:
 - azure_rm_applicationgatewayapplicationsecuritygroup.location:
@@ -4663,7 +4665,9 @@
     - rename: azure_rm_appgatewayinboundnatrule
 - azure_rm_applicationgatewayinboundnatrule.resource_group_name:
 - azure_rm_applicationgatewayinboundnatrule.load_balancer_name:
+    - test: lb{{ rpfx }}
 - azure_rm_applicationgatewayinboundnatrule.inbound_nat_rule_name:
+    - test: "rule{{ rpfx }}
 - azure_rm_applicationgatewayinboundnatrule.inbound_nat_rule_parameters:
 - azure_rm_applicationgatewayinboundnatrule.id:
 - azure_rm_applicationgatewayinboundnatrule.frontend_ip_configuration:
@@ -11720,6 +11724,7 @@
     - rename: azure_rm_appgatewayroutetable
 - azure_rm_applicationgatewayroutetable.resource_group_name:
 - azure_rm_applicationgatewayroutetable.route_table_name:
+    - test: routetablename{{ rpfx }}
 - azure_rm_applicationgatewayroutetable.parameters:
 - azure_rm_applicationgatewayroutetable.id:
 - azure_rm_applicationgatewayroutetable.location:
@@ -12104,6 +12109,7 @@
     - rename: azure_rm_appgatewayroutetable_facts
 - azure_rm_applicationgatewayroutetable_facts.resource_group_name:
 - azure_rm_applicationgatewayroutetable_facts.route_table_name:
+    - test: routetablename{{ rpfx }}
 - azure_rm_applicationgatewayroutetable_facts.expand:
 - azure_rm_applicationgatewayroutetable_facts.response.id:
 - azure_rm_applicationgatewayroutetable_facts.response.name:
@@ -12475,11 +12481,15 @@
     - rename: azure_rm_appgatewayroute
 - azure_rm_applicationgatewayroute.resource_group_name:
 - azure_rm_applicationgatewayroute.route_table_name:
+    - test: routetablename{{ rpfx }}
 - azure_rm_applicationgatewayroute.route_name:
+    - test: testroute{{ rpfx }}
 - azure_rm_applicationgatewayroute.route_parameters:
 - azure_rm_applicationgatewayroute.id:
 - azure_rm_applicationgatewayroute.address_prefix:
+    - test: 208.128.0.0/11
 - azure_rm_applicationgatewayroute.next_hop_type:
+    - test: virtual_network_gateway
 - azure_rm_applicationgatewayroute.next_hop_ip_address:
 - azure_rm_applicationgatewayroute.provisioning_state:
 - azure_rm_applicationgatewayroute.name:
@@ -12495,7 +12505,9 @@
     - rename: azure_rm_appgatewayroute_facts
 - azure_rm_applicationgatewayroute_facts.resource_group_name:
 - azure_rm_applicationgatewayroute_facts.route_table_name:
+    - test: routetablename{{ rpfx }}
 - azure_rm_applicationgatewayroute_facts.route_name:
+    - test: testroute{{ rpfx }}
 - azure_rm_applicationgatewayroute_facts.response.id:
 - azure_rm_applicationgatewayroute_facts.response.address_prefix:
 - azure_rm_applicationgatewayroute_facts.response.next_hop_type:

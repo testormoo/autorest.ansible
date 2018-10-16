@@ -31,6 +31,7 @@
     - rename: azure_rm_containerregistry_facts
 - azure_rm_containerregistryregistry_facts.resource_group_name:
 - azure_rm_containerregistryregistry_facts.registry_name:
+    - test: acr{{ rpfx }}
 - azure_rm_containerregistryregistry_facts.response.id:
 - azure_rm_containerregistryregistry_facts.response.name:
 - azure_rm_containerregistryregistry_facts.response.type:
@@ -52,9 +53,12 @@
 - azure_rm_containerregistryreplication:
 - azure_rm_containerregistryreplication.resource_group_name:
 - azure_rm_containerregistryreplication.registry_name:
+    - test: acr{{ rpfx }}
 - azure_rm_containerregistryreplication.replication_name:
+    - test: replication{{ rpfx }}
 - azure_rm_containerregistryreplication.replication:
 - azure_rm_containerregistryreplication.location:
+    - test: westus
 - azure_rm_containerregistryreplication.response.id:
 - azure_rm_containerregistryreplication.response.name:
 - azure_rm_containerregistryreplication.response.type:
@@ -68,7 +72,9 @@
 - azure_rm_containerregistryreplication_facts:
 - azure_rm_containerregistryreplication_facts.resource_group_name:
 - azure_rm_containerregistryreplication_facts.registry_name:
+    - test: acr{{ rpfx }}
 - azure_rm_containerregistryreplication_facts.replication_name:
+    - test: replication{{ rpfx }}
 - azure_rm_containerregistryreplication_facts.response.id:
 - azure_rm_containerregistryreplication_facts.response.name:
 - azure_rm_containerregistryreplication_facts.response.type:
@@ -82,14 +88,19 @@
 - azure_rm_containerregistrywebhook:
 - azure_rm_containerregistrywebhook.resource_group_name:
 - azure_rm_containerregistrywebhook.registry_name:
+    - test: acr{{ rpfx }}
 - azure_rm_containerregistrywebhook.webhook_name:
+    - test: webhook{{ rpfx }}
 - azure_rm_containerregistrywebhook.webhook_create_parameters:
 - azure_rm_containerregistrywebhook.location:
+    - test: eastus2
 - azure_rm_containerregistrywebhook.service_uri:
+    - test: http://serviceuri.com
 - azure_rm_containerregistrywebhook.custom_headers:
 - azure_rm_containerregistrywebhook.status:
 - azure_rm_containerregistrywebhook.scope:
 - azure_rm_containerregistrywebhook.actions:
+    - test: push
 - azure_rm_containerregistrywebhook.response.id:
 - azure_rm_containerregistrywebhook.response.name:
 - azure_rm_containerregistrywebhook.response.type:
@@ -102,7 +113,9 @@
 - azure_rm_containerregistrywebhook_facts:
 - azure_rm_containerregistrywebhook_facts.resource_group_name:
 - azure_rm_containerregistrywebhook_facts.registry_name:
+    - test: acr{{ rpfx }}
 - azure_rm_containerregistrywebhook_facts.webhook_name:
+    - test: webhook{{ rpfx }}
 - azure_rm_containerregistrywebhook_facts.response.id:
 - azure_rm_containerregistrywebhook_facts.response.name:
 - azure_rm_containerregistrywebhook_facts.response.type:

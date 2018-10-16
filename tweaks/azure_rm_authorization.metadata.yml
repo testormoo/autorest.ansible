@@ -22,11 +22,15 @@
 - azure_rm_authorizationprovideroperationsmetadata_facts.response.operations.properties:
 - azure_rm_authorizationroleassignment:
 - azure_rm_authorizationroleassignment.scope:
+    - test: subscriptions/{{ azure_subscription_id }}
 - azure_rm_authorizationroleassignment.role_assignment_name:
+    - test: d3881f73-7777-8888-8283-e981cbba0404
 - azure_rm_authorizationroleassignment.parameters:
 - azure_rm_authorizationroleassignment.properties:
 - azure_rm_authorizationroleassignment.properties.role_definition_id:
+    - test: subscriptions/{{ azure_subscription_id }}/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c
 - azure_rm_authorizationroleassignment.properties.principal_id:
+    - test: 98b422c6-7bea-4706-b6f3-920a782746d4
 - azure_rm_authorizationroleassignment.response.id:
 - azure_rm_authorizationroleassignment.response.name:
 - azure_rm_authorizationroleassignment.response.type:
@@ -46,7 +50,9 @@
 - azure_rm_authorizationroleassignment_facts.response.properties.principal_id:
 - azure_rm_authorizationroledefinition:
 - azure_rm_authorizationroledefinition.scope:
+    - test: subscriptions/{{ azure_subscription_id }}
 - azure_rm_authorizationroledefinition.role_definition_id:
+    - test: rolexyz
 - azure_rm_authorizationroledefinition.role_definition:
 - azure_rm_authorizationroledefinition.properties:
     - collapse
