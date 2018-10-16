@@ -64,6 +64,7 @@
 - azure_rm_postgresqlserver_facts.resource_group_name:
 - azure_rm_postgresqlserver_facts.server_name:
     - rename: name
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlserver_facts.response.id:
 - azure_rm_postgresqlserver_facts.response.name:
 - azure_rm_postgresqlserver_facts.response.type:
@@ -87,15 +88,19 @@
     - object_name_plural: PostgreSQL Firewall Rules
 - azure_rm_postgresqlfirewallrule.resource_group_name:
 - azure_rm_postgresqlfirewallrule.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.firewall_rule_name:
     - rename: name
+    - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.parameters:
 - azure_rm_postgresqlfirewallrule.start_ip_address:
     - required: no
     - update_rule: compare
+    - test: 172.28.10.136
 - azure_rm_postgresqlfirewallrule.end_ip_address:
     - required: no
     - update_rule: compare
+    - test: 172.28.10.138
 - azure_rm_postgresqlfirewallrule.response.id:
 - azure_rm_postgresqlfirewallrule.response.name:
 - azure_rm_postgresqlfirewallrule.response.type:
@@ -106,8 +111,10 @@
     - object_name_plural: PostgreSQL Firewall Rules
 - azure_rm_postgresqlfirewallrule_facts.resource_group_name:
 - azure_rm_postgresqlfirewallrule_facts.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlfirewallrule_facts.firewall_rule_name:
     - rename: name
+    - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule_facts.response.id:
 - azure_rm_postgresqlfirewallrule_facts.response.name:
 - azure_rm_postgresqlfirewallrule_facts.response.type:
@@ -118,8 +125,10 @@
     - object_name_plural: PostgreSQL Virtual Network Rules
 - azure_rm_postgresqlvirtualnetworkrule.resource_group_name:
 - azure_rm_postgresqlvirtualnetworkrule.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlvirtualnetworkrule.virtual_network_rule_name:
     - rename: name
+    - test: test-virtual-network-rule
 - azure_rm_postgresqlvirtualnetworkrule.parameters:
 - azure_rm_postgresqlvirtualnetworkrule.virtual_network_subnet_id:
 - azure_rm_postgresqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
@@ -134,8 +143,10 @@
     - object_name_plural: PostgreSQL Virtual Network Rules
 - azure_rm_postgresqlvirtualnetworkrule_facts.resource_group_name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlvirtualnetworkrule_facts.virtual_network_rule_name:
     - rename: name
+    - test: test-virtual-network-rule
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.id:
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.name:
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.type:
@@ -147,8 +158,10 @@
     - object_name_plural: PostgreSQL Databases
 - azure_rm_postgresqldatabase.resource_group_name:
 - azure_rm_postgresqldatabase.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqldatabase.database_name:
     - rename: name
+    - test: testdatabase
 - azure_rm_postgresqldatabase.parameters:
 - azure_rm_postgresqldatabase.charset:
     - update_rule: compare
@@ -164,8 +177,10 @@
     - object_name_plural: PostgreSQL Databases
 - azure_rm_postgresqldatabase_facts.resource_group_name:
 - azure_rm_postgresqldatabase_facts.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqldatabase_facts.database_name:
     - rename: name
+    - test: testdatabase
 - azure_rm_postgresqldatabase_facts.response.id:
 - azure_rm_postgresqldatabase_facts.response.name:
 - azure_rm_postgresqldatabase_facts.response.type:
@@ -176,11 +191,15 @@
     - object_name_plural: PostgreSQL Configurations
 - azure_rm_postgresqlconfiguration.resource_group_name:
 - azure_rm_postgresqlconfiguration.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlconfiguration.configuration_name:
     - rename: name
+    - test: deadlock_timeout
 - azure_rm_postgresqlconfiguration.parameters:
 - azure_rm_postgresqlconfiguration.value:
+    - test: 200
 - azure_rm_postgresqlconfiguration.source:
+    - test: user-override
 - azure_rm_postgresqlconfiguration.response.id:
 - azure_rm_postgresqlconfiguration.response.name:
 - azure_rm_postgresqlconfiguration.response.type:
@@ -195,8 +214,10 @@
     - object_name_plural: PostgreSQL Configurations
 - azure_rm_postgresqlconfiguration_facts.resource_group_name:
 - azure_rm_postgresqlconfiguration_facts.server_name:
+    - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlconfiguration_facts.configuration_name:
     - rename: name
+    - test: deadlock_timeout
 - azure_rm_postgresqlconfiguration_facts.response.id:
 - azure_rm_postgresqlconfiguration_facts.response.name:
 - azure_rm_postgresqlconfiguration_facts.response.type:

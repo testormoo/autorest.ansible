@@ -130,10 +130,13 @@
     - object_name_plural: MySQL Virtual Network Rules
 - azure_rm_mysqlvirtualnetworkrule.resource_group_name:
 - azure_rm_mysqlvirtualnetworkrule.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlvirtualnetworkrule.virtual_network_rule_name:
     - rename: name
+    - test: test-virtual-network-rule
 - azure_rm_mysqlvirtualnetworkrule.parameters:
 - azure_rm_mysqlvirtualnetworkrule.virtual_network_subnet_id:
+    - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}
 - azure_rm_mysqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
 - azure_rm_mysqlvirtualnetworkrule.response.id:
 - azure_rm_mysqlvirtualnetworkrule.response.name:
@@ -146,8 +149,10 @@
     - object_name_plural: MySQL Virtual Network Rules
 - azure_rm_mysqlvirtualnetworkrule_facts.resource_group_name:
 - azure_rm_mysqlvirtualnetworkrule_facts.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlvirtualnetworkrule_facts.virtual_network_rule_name:
     - rename: name
+    - test: test-virtual-network-rule
 - azure_rm_mysqlvirtualnetworkrule_facts.response.id:
 - azure_rm_mysqlvirtualnetworkrule_facts.response.name:
 - azure_rm_mysqlvirtualnetworkrule_facts.response.type:
