@@ -19,6 +19,7 @@
 - azure_rm_postgresqlserver.properties:
     - collapse
 - azure_rm_postgresqlserver.location:
+    - test: westus
 - azure_rm_postgresqlserver.properties.storage_mb:
     - test: 51200
 - azure_rm_postgresqlserver.properties.version:
