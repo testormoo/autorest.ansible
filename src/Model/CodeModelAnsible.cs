@@ -112,7 +112,7 @@ namespace AutoRest.Ansible.Model
                     op += " MAIN";
                     module.ModuleName = AnsibleModuleName;
                     module.ModuleNameAlt = module.ModuleName;
-                    module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name, true) : CreateMethodOptions(ModuleCreateMethod.Name, true);
+                    module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name, false) : CreateMethodOptions(ModuleCreateMethod.Name, false);
 
                     var methods = new List<ModuleMethod>();
 
