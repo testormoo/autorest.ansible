@@ -655,15 +655,19 @@
 - azure_rm_sqlserver.administrator_login:
     - rename: admin_username
     - test: mylogin
+    - sample: mylogin
 - azure_rm_sqlserver.administrator_login_password:
     - rename: admin_password
     - update_rule: none
     - test: Testpasswordxyz12!
+    - sample: Testpasswordxyz12!
 - azure_rm_sqlserver.version:
     - test: ""
 - azure_rm_sqlserver.identity:
+    - collapse
 - azure_rm_sqlserver.identity.type:
     - test: ""
+    - rename: identity
 - azure_rm_sqlserver.response.id:
     - sample: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645
 - azure_rm_sqlserver.response.name:

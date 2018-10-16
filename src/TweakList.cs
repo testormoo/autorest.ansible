@@ -24,7 +24,6 @@ namespace AutoRest.Ansible
             new Tweak_Option_DefaultValueSample("*", "location", "eastus"),
 
             // SQL Server
-            new Tweak_Option_Rename("azure_rm_sqlserver", "identity.type", "identity"),
             new Tweak_Option_DocumentationAppend("azure_rm_sqlserver", "version", " For example '12.0'."),
             new Tweak_Module_AssertStateVariable("azure_rm_sqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_sqlserver", "Ready"),
