@@ -30,13 +30,9 @@ namespace AutoRest.Ansible
 
             // SQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlserver_facts", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlserver_facts", "server_name", "sqlsrv{{ rpfx }}"),
 
             // SQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "database_name", "database{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase", "location", "eastus"),
             new Tweak_Option_Exclude("azure_rm_sqldatabase", "requested_service_objective_id", true, true),
             new Tweak_Option_Exclude("azure_rm_sqldatabase", "requested_service_objective_name", true, true),
             new Tweak_Option_MakeBoolean("azure_rm_sqldatabase", "zone_redundant", "Enabled", "Disabled", false, "Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability zones."),
@@ -49,75 +45,41 @@ namespace AutoRest.Ansible
 
             // SQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqldatabase_facts", "azure_rm_sqldatabase", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqldatabase_facts", "database_name", "database{{ rpfx }}"),
 
             // SQL Elastic Pool
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "elastic_pool_name", "elasticpool{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool", "location", "eastus"),
 
             // SQL Elastic Pool Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlelasticpool_facts", "azure_rm_sqlelasticpool", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlelasticpool_facts", "elastic_pool_name", "elasticpool{{ rpfx }}"),
             new Tweak_Response_FieldReturned("azure_rm_sqlelasticpool_facts", "kind", ""),
 
             // SQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule", "azure_rm_sqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "start_ip_address", "172.28.10.136"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule", "end_ip_address", "172.28.10.138"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_sqlfirewallrule"),
 
             // SQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlfirewallrule_facts", "azure_rm_sqlfirewallrule", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
             // SQL Geo Backup Policy
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy", "azure_rm_sqldatabase", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "database_name", "database{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "geo_backup_policy_name", "geo-policy-name"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy", "state", "\"enabled\""),
 
             new Tweak_Module_TestPrerequisitesModule("azure_rm_sqlgeobackuppolicy_facts", "azure_rm_sqlgeobackuppolicy", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "server_name", "sqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "database_name", "database{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_sqlgeobackuppolicy_facts", "geo_backup_policy_name", "geo-policy-name"),
 
 
             // MySQL Server
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "properties.create_mode", true, false),
             new Tweak_Option_MakeBoolean("azure_rm_mysqlserver", "properties.ssl_enforcement", "Enabled", "Disabled", false, "Enable SSL enforcement."),
             new Tweak_Option_Exclude("azure_rm_mysqlserver", "sku.family", true, true),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.version", "5.6"),
             new Tweak_Option_DefaultValue("azure_rm_mysqlserver", "properties.create_mode", "'Default'"),
             new Tweak_Option_Documentation("azure_rm_mysqlserver", "properties.create_mode", "Currently only 'Default' value supported"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login", "zimxyz"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.administrator_login_password", "Testpasswordxyz12!"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "location", "westus"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.name", "MYSQLB50"),
-            new Tweak_Option_DefaultValueSample("azure_rm_mysqlserver", "sku.name", "MYSQLB50"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "sku.tier", "basic"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
-            new Tweak_Option_DefaultValueSample("azure_rm_mysqlserver", "properties.ssl_enforcement", "True"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver", "properties.storage_mb", "51200"),
             new Tweak_Module_AssertStateVariable("azure_rm_mysqlserver", "state"),
             new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlserver", "Ready"),
 
             // MySQL Server Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlserver_facts", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlserver_facts", "server_name", "mysqlsrv{{ rpfx }}"),
 
             // MySQL Database
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase", "database_name", "testdatabase"),
             new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "collation", " Check MySQL documentation for possible values."),
             new Tweak_Option_DocumentationAppend("azure_rm_mysqldatabase", "charset", " Check MySQL documentation for possible values."),
             new Tweak_Response_AddField("azure_rm_mysqldatabase", "name"),
@@ -128,38 +90,24 @@ namespace AutoRest.Ansible
 
             // MySQL Database Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqldatabase_facts", "azure_rm_mysqldatabase", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase_facts", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqldatabase_facts", "database_name", "testdatabase"),
 
             // MySQL Server Firewall Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "firewall_rule_name", "firewallrule{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "start_ip_address", "172.28.10.136"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule", "end_ip_address", "172.28.10.138"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlfirewallrule"),
             //new Tweak_Module_AssertStateVariable("azure_rm_mysqlfirewallrule", "firewall_rule_name"),
             //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlfirewallrule", "firewallrule{{ rpfx }}"),
 
             // MySQL Firewall Rule Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlfirewallrule_facts", "azure_rm_mysqlfirewallrule", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlfirewallrule_facts", "firewall_rule_name", "firewallrule{{ rpfx }}"),
 
             // MySQL Server Configuration
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration", "azure_rm_mysqlserver", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "configuration_name", "event_scheduler"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "value", "\"ON\""),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration", "source", "user-override"),
             new Tweak_Module_FlattenParametersDictionary("azure_rm_mysqlconfiguration"),
             //new Tweak_Module_AssertStateVariable("azure_rm_mysqlconfiguration", "value"),
             //new Tweak_Module_AssertStateExpectedValue("azure_rm_mysqlconfiguration", "ON"),
 
             // MySQL Configuration Facts
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlconfiguration_facts", "azure_rm_mysqlconfiguration", null, null),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration_facts", "server_name", "mysqlsrv{{ rpfx }}"),
-            new Tweak_Option_DefaultValueTest("azure_rm_mysqlconfiguration_facts", "configuration_name", "event_scheduler"),
 
             // MySQL Server Virtual Network Rule
             new Tweak_Module_TestPrerequisitesModule("azure_rm_mysqlvirtualnetworkrule", "azure_rm_mysqlserver", null, null),

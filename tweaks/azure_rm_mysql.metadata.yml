@@ -6,27 +6,38 @@
 - azure_rm_mysqlserver.resource_group_name:
 - azure_rm_mysqlserver.server_name:
     - rename: name
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlserver.parameters:
 - azure_rm_mysqlserver.sku:
 - azure_rm_mysqlserver.sku.name:
+    - test: MYSQLB50
+    - sample: MYSQLB50
 - azure_rm_mysqlserver.sku.tier:
+    - test: basic
 - azure_rm_mysqlserver.sku.capacity:
 - azure_rm_mysqlserver.sku.size:
 - azure_rm_mysqlserver.sku.family:
 - azure_rm_mysqlserver.properties:
     - collapse
 - azure_rm_mysqlserver.properties.location:
+    - test: westus
 - azure_rm_mysqlserver.properties.storage_mb:
+    - test: 51200
 - azure_rm_mysqlserver.properties.version:
+    - test: 5.6
 - azure_rm_mysqlserver.properties.ssl_enforcement:
     - rename: enforce_ssl
+    - test: True
+    - sample: True
 - azure_rm_mysqlserver.properties.create_mode:
 - azure_rm_mysqlserver.properties.administrator_login:
     - rename: admin_username
     - required: no
+    - test: zimxyz
 - azure_rm_mysqlserver.properties.administrator_login_password:
     - rename: admin_password
     - required: no
+    - test: Testpasswordxyz12!
 - azure_rm_mysqlserver.response.id:
     - sample: /subscriptions/12345678-1234-1234-1234-123412341234/testrg/providers/Microsoft.DBforMySQL/servers/mysqlsrv1b6dd89593
 - azure_rm_mysqlserver.response.name:
@@ -58,6 +69,7 @@
 - azure_rm_mysqlserver_facts.resource_group_name:
 - azure_rm_mysqlserver_facts.server_name:
     - rename: name
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlserver_facts.response.id:
 - azure_rm_mysqlserver_facts.response.name:
 - azure_rm_mysqlserver_facts.response.type:
@@ -81,15 +93,19 @@
     - object_name_plural: MySQL Firewall Rules
 - azure_rm_mysqlfirewallrule.resource_group_name:
 - azure_rm_mysqlfirewallrule.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlfirewallrule.firewall_rule_name:
     - rename: name
+    - test: firewallrule{{ rpfx }}
 - azure_rm_mysqlfirewallrule.parameters:
 - azure_rm_mysqlfirewallrule.start_ip_address:
     - required: no
     - update_rule: compare
+    - test: 172.28.10.136
 - azure_rm_mysqlfirewallrule.end_ip_address:
     - required: no
     - update_rule: compare
+    - test: 172.28.10.138
 - azure_rm_mysqlfirewallrule.response.id:
 - azure_rm_mysqlfirewallrule.response.name:
 - azure_rm_mysqlfirewallrule.response.type:
@@ -100,8 +116,10 @@
     - object_name_plural: MySQL Firewall Rules
 - azure_rm_mysqlfirewallrule_facts.resource_group_name:
 - azure_rm_mysqlfirewallrule_facts.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlfirewallrule_facts.firewall_rule_name:
     - rename: name
+    - test: firewallrule{{ rpfx }}
 - azure_rm_mysqlfirewallrule_facts.response.id:
 - azure_rm_mysqlfirewallrule_facts.response.name:
 - azure_rm_mysqlfirewallrule_facts.response.type:
@@ -141,8 +159,10 @@
     - object_name_plural: MySQL Databases
 - azure_rm_mysqldatabase.resource_group_name:
 - azure_rm_mysqldatabase.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqldatabase.database_name:
     - rename: name
+    - test: testdatabase
 - azure_rm_mysqldatabase.parameters:
 - azure_rm_mysqldatabase.charset:
     - update_rule: compare
@@ -158,8 +178,10 @@
     - object_name_plural: MySQL Databases
 - azure_rm_mysqldatabase_facts.resource_group_name:
 - azure_rm_mysqldatabase_facts.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqldatabase_facts.database_name:
     - rename: name
+    - test: testdatabase
 - azure_rm_mysqldatabase_facts.response.id:
 - azure_rm_mysqldatabase_facts.response.name:
 - azure_rm_mysqldatabase_facts.response.type:
@@ -170,11 +192,15 @@
     - object_name_plural: MySQL Configurations
 - azure_rm_mysqlconfiguration.resource_group_name:
 - azure_rm_mysqlconfiguration.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlconfiguration.configuration_name:
     - rename: name
+    - test: event_scheduler
 - azure_rm_mysqlconfiguration.parameters:
 - azure_rm_mysqlconfiguration.value:
+    - test: "ON"
 - azure_rm_mysqlconfiguration.source:
+    - test: user-override
 - azure_rm_mysqlconfiguration.response.id:
 - azure_rm_mysqlconfiguration.response.name:
 - azure_rm_mysqlconfiguration.response.type:
@@ -187,8 +213,10 @@
 - azure_rm_mysqlconfiguration_facts:
 - azure_rm_mysqlconfiguration_facts.resource_group_name:
 - azure_rm_mysqlconfiguration_facts.server_name:
+    - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlconfiguration_facts.configuration_name:
     - rename: name
+    - test: event_scheduler
 - azure_rm_mysqlconfiguration_facts.response.id:
 - azure_rm_mysqlconfiguration_facts.response.name:
 - azure_rm_mysqlconfiguration_facts.response.type:
