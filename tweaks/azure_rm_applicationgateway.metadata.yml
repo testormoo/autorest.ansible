@@ -1073,6 +1073,7 @@
     - rename: azure_rm_appgatewayapplicationsecuritygroup_facts
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.resource_group_name:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.application_security_group_name:
+    - test: appgwsg{{ rpfx }}
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.response.id:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.response.name:
 - azure_rm_applicationgatewayapplicationsecuritygroup_facts.response.type:
