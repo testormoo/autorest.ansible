@@ -8,8 +8,13 @@
 - azure_rm_postgresqlserver.parameters:
 - azure_rm_postgresqlserver.sku:
 - azure_rm_postgresqlserver.sku.name:
+    - test: PGSQLS100
+    - sample: PGSQLS100
 - azure_rm_postgresqlserver.sku.tier:
+    - test: basic
+    - sample: basic
 - azure_rm_postgresqlserver.sku.capacity:
+    - test: 51200
 - azure_rm_postgresqlserver.sku.size:
 - azure_rm_postgresqlserver.sku.family:
 - azure_rm_postgresqlserver.properties:
@@ -19,6 +24,8 @@
 - azure_rm_postgresqlserver.properties.version:
 - azure_rm_postgresqlserver.properties.ssl_enforcement:
     - rename: enforce_ssl
+    - test: True
+    - sample: True
 - azure_rm_postgresqlserver.properties.create_mode:
 - azure_rm_postgresqlserver.properties.administrator_login:
     - rename: admin_username
@@ -36,22 +43,15 @@
 - azure_rm_postgresqlserver.response.tags:
 - azure_rm_postgresqlserver.response.sku:
 - azure_rm_postgresqlserver.response.sku.name:
-    - test: PGSQLS100
-    - sample: PGSQLS100
 - azure_rm_postgresqlserver.response.sku.tier:
-    - test: basic
-    - sample: basic
 - azure_rm_postgresqlserver.response.sku.capacity:
 - azure_rm_postgresqlserver.response.sku.size:
 - azure_rm_postgresqlserver.response.sku.family:
 - azure_rm_postgresqlserver.response.administrator_login:
 - azure_rm_postgresqlserver.response.storage_mb:
-    - test: 51200
 - azure_rm_postgresqlserver.response.version:
     - sample: 9.6
 - azure_rm_postgresqlserver.response.ssl_enforcement:
-    - test: True
-    - sample: True
 - azure_rm_postgresqlserver.response.user_visible_state:
     - rename: state
     - sample: Ready
