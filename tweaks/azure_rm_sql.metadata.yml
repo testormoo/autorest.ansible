@@ -226,18 +226,18 @@
 - azure_rm_sqlfirewallrule.start_ip_address:
     - required: no
     - update_rule: compare
+    - test: 172.28.10.136
 - azure_rm_sqlfirewallrule.end_ip_address:
     - required: no
     - update_rule: compare
+    - test: 172.28.10.138
 - azure_rm_sqlfirewallrule.response.id:
 - azure_rm_sqlfirewallrule.response.name:
 - azure_rm_sqlfirewallrule.response.type:
 - azure_rm_sqlfirewallrule.response.kind:
 - azure_rm_sqlfirewallrule.response.location:
 - azure_rm_sqlfirewallrule.response.start_ip_address:
-    - test: 172.28.10.136
 - azure_rm_sqlfirewallrule.response.end_ip_address:
-    - test: 172.28.10.138
 - azure_rm_sqlfirewallrule_facts:
 - azure_rm_sqlfirewallrule_facts.resource_group_name:
 - azure_rm_sqlfirewallrule_facts.server_name:
