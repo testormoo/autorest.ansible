@@ -536,6 +536,9 @@ namespace AutoRest.Ansible.Model
                                 suboption.IsList = (p.ModelTypeName == "list");
                                 suboption.Documentation = p.Documentation;
 
+                                if (suboption.Name.EndsWith("_parameters"))
+                                    suboption.NameAlt = "parameters";
+
                                 suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
                                 option.Add(suboption);
                             }
