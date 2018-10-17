@@ -1766,6 +1766,9 @@ namespace AutoRest.Ansible.Model
 
         private static string NormalizeString(string s)
         {
+            if (s == null)
+                return "";
+                
             char[] a = s.ToCharArray();
             int l = a.Length;
             for (int i = 0; i < l; i++)
