@@ -713,7 +713,7 @@ namespace AutoRest.Ansible.Model
                     // if update rule is defined at this level, it will be applied, even if option has suboptions
                     // suboptions will be ignored
                     // right now just simple update rule
-                    if (statementPrefix == "self" && option.Disposition == "default")
+                    if (statementPrefix == "self")
                     {
                         statements.Add("if (" + optionStatementPrefix + " is not None) and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
                     }
@@ -731,8 +731,16 @@ namespace AutoRest.Ansible.Model
                     {
                         // XXX - take collapse into account
                         // XXX - check if actually exists
-                        string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", dictPrefix + "['" + option.Name + "']");
-                        statements.AddRange(subStatements);
+                        if (statementPrefix == "self")
+                        {
+                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, dictPrefix + "['" + option.Name + "']");
+                            statements.AddRange(subStatements);
+                        }
+                        else
+                        {
+                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", dictPrefix + "['" + option.Name + "']");
+                            statements.AddRange(subStatements);
+                        }
                     }
                     else
                     {
