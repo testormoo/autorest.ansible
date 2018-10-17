@@ -685,7 +685,7 @@ namespace AutoRest.Ansible.Model
             foreach (var option in options)
             {
                 string optionStatementPrefix = statementPrefix;
-                string optionDictPrefix = dictPrefix + (level > 0) ? "['" + option.Name + "']" : "";
+                string optionDictPrefix = dictPrefix + ((level > 0) ? ("['" + option.Name + "']") : "");
 
                 if (!option.Collapsed)
                 {
