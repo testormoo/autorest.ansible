@@ -30,3 +30,5 @@ echo "----------------------------- Generating Cosmos"
 /autorest.ansible/scripts/generate-cosmos.sh
 echo "----------------------------- Generating Compute"
 /autorest.ansible/scripts/generate-compute.sh
+echo "----------------------------- Generating HDInsight"
+/autorest.ansible/scripts/generate-hdinsight.sh
