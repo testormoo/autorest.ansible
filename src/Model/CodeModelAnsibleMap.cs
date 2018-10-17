@@ -664,7 +664,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string[] code = GetIdempotencyCheck(ModuleOptions, "self", "old_response");
+                string[] code = GetIdempotencyCheck(ModuleOptions, "self", "old_response", 0);
 
                 if (code.Length != 0)
                 {
@@ -678,14 +678,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        private string[] GetIdempotencyCheck(ModuleOption[] options, string statementPrefix, string dictPrefix)
+        private string[] GetIdempotencyCheck(ModuleOption[] options, string statementPrefix, string dictPrefix, int level)
         {
             List<string> statements = new List<string>();
 
             foreach (var option in options)
             {
                 string optionStatementPrefix = statementPrefix;
-                string optionDictPrefix = dictPrefix + "['" + option.Name + "']";
+                string optionDictPrefix = dictPrefix + (level > 0) ? "['" + option.Name + "']" : "";
 
                 if (!option.Collapsed)
                 {
@@ -724,12 +724,12 @@ namespace AutoRest.Ansible.Model
                         // XXX - check if actually exists
                         if (statementPrefix == "self")
                         {
-                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, dictPrefix + "['" + option.Name + "']");
+                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, optionDictPrefix, level + 1);
                             statements.AddRange(subStatements);
                         }
                         else
                         {
-                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", dictPrefix + "['" + option.Name + "']");
+                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", optionDictPrefix, level + 1);
                             statements.AddRange(subStatements);
                         }
                     }
