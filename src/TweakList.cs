@@ -19,9 +19,9 @@ namespace AutoRest.Ansible
             new Tweak_Response_AddField("*", "user_visible_state"),
             new Tweak_Response_AddField("*_facts", "tags"),
             new Tweak_Response_RemoveField("*_facts", "type"),
-            new Tweak_Option_Documentation("*", "location", "Resource location. If not set, location from the resource group will be used as default."),
+            new Tweak_Option_Documentation("*", "parameters.location", "Resource location. If not set, location from the resource group will be used as default."),
             //new Tweak_Option_DefaultValueTest("*", "location", "eastus"),
-            new Tweak_Option_DefaultValueSample("*", "location", "eastus"),
+            new Tweak_Option_DefaultValueSample("*", "parameters.location", "eastus"),
 
             // SQL Server
             new Tweak_Module_AssertStateVariable("azure_rm_sqlserver", "state"),
