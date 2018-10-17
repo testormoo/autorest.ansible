@@ -617,6 +617,7 @@
 - azure_rm_sqlserverazureadadministrator.server_name:
 - azure_rm_sqlserverazureadadministrator.administrator_name:
 - azure_rm_sqlserverazureadadministrator.properties:
+    - collapse
 - azure_rm_sqlserverazureadadministrator.properties.administrator_type:
 - azure_rm_sqlserverazureadadministrator.properties.login:
 - azure_rm_sqlserverazureadadministrator.properties.sid:

@@ -404,6 +404,7 @@
 - azure_rm_webcertificate.resource_group_name:
 - azure_rm_webcertificate.name:
 - azure_rm_webcertificate.certificate_envelope:
+    - collapse
 - azure_rm_webcertificate.certificate_envelope.kind:
 - azure_rm_webcertificate.certificate_envelope.location:
 - azure_rm_webcertificate.certificate_envelope.host_names:
@@ -996,7 +997,8 @@
 - azure_rm_webappserviceenvironment.resource_group_name:
 - azure_rm_webappserviceenvironment.name:
 - azure_rm_webappserviceenvironment.hosting_environment_envelope:
-- azure_rm_webappserviceenvironment.kind:
+    - collapse
+- azure_rm_webappserviceenvironment.hosting_environment_envelope.kind:
 - azure_rm_webappserviceenvironment.hosting_environment_envelope.location:
 - azure_rm_webappserviceenvironment.hosting_environment_envelope.app_service_environment_resource_name:
 - azure_rm_webappserviceenvironment.hosting_environment_envelope.app_service_environment_resource_location:
@@ -1178,6 +1180,7 @@
 - azure_rm_webappserviceplan.resource_group_name:
 - azure_rm_webappserviceplan.name:
 - azure_rm_webappserviceplan.app_service_plan:
+    - collapse
 - azure_rm_webappserviceplan.app_service_plan.kind:
 - azure_rm_webappserviceplan.app_service_plan.location:
 - azure_rm_webappserviceplan.app_service_plan.app_service_plan_name:

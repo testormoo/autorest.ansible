@@ -55,6 +55,7 @@
 - azure_rm_authorizationroledefinition.role_definition_id:
     - test: rolexyz
 - azure_rm_authorizationroledefinition.role_definition:
+    - collapse
 - azure_rm_authorizationroledefinition.role_definition.properties:
     - collapse
 - azure_rm_authorizationroledefinition.role_definition.properties.role_name:

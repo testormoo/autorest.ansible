@@ -12503,16 +12503,16 @@
     - test: testroute{{ rpfx }}
 - azure_rm_applicationgatewayroute.route_parameters:
     - collapse
-- azure_rm_applicationgatewayroute.parameters.id:
-- azure_rm_applicationgatewayroute.parameters.address_prefix:
+- azure_rm_applicationgatewayroute.route_parameters.id:
+- azure_rm_applicationgatewayroute.route_parameters.address_prefix:
     - test: 208.128.0.0/11
-- azure_rm_applicationgatewayroute.parameters.next_hop_type:
+- azure_rm_applicationgatewayroute.route_parameters.next_hop_type:
     - test: virtual_network_gateway
     - required: no
-- azure_rm_applicationgatewayroute.parameters.next_hop_ip_address:
-- azure_rm_applicationgatewayroute.parameters.provisioning_state:
-- azure_rm_applicationgatewayroute.parameters.name:
-- azure_rm_applicationgatewayroute.parameters.etag:
+- azure_rm_applicationgatewayroute.route_parameters.next_hop_ip_address:
+- azure_rm_applicationgatewayroute.route_parameters.provisioning_state:
+- azure_rm_applicationgatewayroute.route_parameters.name:
+- azure_rm_applicationgatewayroute.route_parameters.etag:
 - azure_rm_applicationgatewayroute.response.id:
 - azure_rm_applicationgatewayroute.response.address_prefix:
 - azure_rm_applicationgatewayroute.response.next_hop_type:
