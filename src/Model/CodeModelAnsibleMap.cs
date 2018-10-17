@@ -686,7 +686,10 @@ namespace AutoRest.Ansible.Model
             {
                 string optionStatementPrefix = statementPrefix;
                 //string optionDictPrefix = dictPrefix + ((level > 0) ? ("['" + option.Name + "']") : "");
-                string optionDictPrefix = dictPrefix + "['" + option.Name + "']";
+                string optionDictPrefix = dictPrefix;
+                
+                if (!option.Name.Contains("parameters"))
+                    optionDictPrefic += "['" + option.Name + "']";
 
                 if (!option.Collapsed)
                 {
