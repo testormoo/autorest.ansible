@@ -28,3 +28,5 @@ echo "----------------------------- Generating Batch AI"
 /autorest.ansible/scripts/generate-batchai.sh
 echo "----------------------------- Generating Cosmos"
 /autorest.ansible/scripts/generate-cosmos.sh
+echo "----------------------------- Generating Compute"
+/autorest.ansible/scripts/generate-compute.sh
