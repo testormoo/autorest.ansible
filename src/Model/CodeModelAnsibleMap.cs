@@ -687,25 +687,16 @@ namespace AutoRest.Ansible.Model
                 string optionStatementPrefix = statementPrefix;
                 string optionDictPrefix = dictPrefix + "['" + option.Name + "']";
 
-                if (statementPrefix == "self")
+                if (!option.Collapsed)
                 {
-                    optionStatementPrefix += "." + option.NameAlt;
-                }
-                else
-                {
-                    //if (option.Disposition != "default")
-                    //{
-                    //    if (statementPrefix == "self")
-                    //    {
-                    //        optionStatementPrefix += "." + option.Disposition;
-                    //    }
-                    //    else
-                    //    {
-                    //        optionStatementPrefix += "['" + option.Disposition + "']";
-                    //    }
-                    //}
-
-                    optionStatementPrefix += "['" + option.NameAlt + "']";
+                    if (statementPrefix == "self")
+                    {
+                        optionStatementPrefix += "." + option.NameAlt;
+                    }
+                    else
+                    {
+                        optionStatementPrefix += "['" + option.NameAlt + "']";
+                    }
                 }
 
                 if (option.UpdateRule != null && option.UpdateRule != "none")
@@ -719,7 +710,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else
                     {
-                        statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + "." + option.Disposition + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                        statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
                     }
                     statements.Add("    self.to_do = Actions.Update");
                 }
