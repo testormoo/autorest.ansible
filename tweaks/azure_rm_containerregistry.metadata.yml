@@ -95,15 +95,15 @@
     - test: webhook{{ rpfx }}
 - azure_rm_containerregistrywebhook.webhook_create_parameters:
     - collapse
-- azure_rm_containerregistrywebhook.location:
+- azure_rm_containerregistrywebhook.webhook_create_parameters.location:
     - test: eastus2
-- azure_rm_containerregistrywebhook.service_uri:
+- azure_rm_containerregistrywebhook.webhook_create_parameters.service_uri:
     - test: http://serviceuri.com
     - required: no
-- azure_rm_containerregistrywebhook.custom_headers:
-- azure_rm_containerregistrywebhook.status:
-- azure_rm_containerregistrywebhook.scope:
-- azure_rm_containerregistrywebhook.actions:
+- azure_rm_containerregistrywebhook.webhook_create_parameters.custom_headers:
+- azure_rm_containerregistrywebhook.webhook_create_parameters.status:
+- azure_rm_containerregistrywebhook.webhook_create_parameters.scope:
+- azure_rm_containerregistrywebhook.webhook_create_parameters.actions:
     - test: push
     - required: no
 - azure_rm_containerregistrywebhook.response.id:

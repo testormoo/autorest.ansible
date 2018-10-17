@@ -55,19 +55,19 @@
 - azure_rm_authorizationroledefinition.role_definition_id:
     - test: rolexyz
 - azure_rm_authorizationroledefinition.role_definition:
-- azure_rm_authorizationroledefinition.properties:
+- azure_rm_authorizationroledefinition.role_definition.properties:
     - collapse
-- azure_rm_authorizationroledefinition.properties.role_name:
+- azure_rm_authorizationroledefinition.role_definition.properties.role_name:
     - rename: properties_role_name
-- azure_rm_authorizationroledefinition.properties.description:
+- azure_rm_authorizationroledefinition.role_definition.properties.description:
     - rename: properties_description
-- azure_rm_authorizationroledefinition.properties.type:
+- azure_rm_authorizationroledefinition.role_definition.properties.type:
     - rename: properties_type
-- azure_rm_authorizationroledefinition.properties.permissions:
+- azure_rm_authorizationroledefinition.role_definition.properties.permissions:
     - rename: properties_permissions
-- azure_rm_authorizationroledefinition.properties.permissions.actions:
-- azure_rm_authorizationroledefinition.properties.permissions.not_actions:
-- azure_rm_authorizationroledefinition.properties.assignable_scopes:
+- azure_rm_authorizationroledefinition.role_definition.properties.permissions.actions:
+- azure_rm_authorizationroledefinition.role_definition.properties.permissions.not_actions:
+- azure_rm_authorizationroledefinition.role_definition.properties.assignable_scopes:
     - rename: properties_assignable_scopes
 - azure_rm_authorizationroledefinition.response.id:
 - azure_rm_authorizationroledefinition.response.name:
