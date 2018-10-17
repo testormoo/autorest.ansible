@@ -7,38 +7,38 @@
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlserver.parameters:
     - collapse
-- azure_rm_postgresqlserver.sku:
-- azure_rm_postgresqlserver.sku.name:
+- azure_rm_postgresqlserver.parameters.sku:
+- azure_rm_postgresqlserver.parameters.sku.name:
     - test: PGSQLS100
     - sample: PGSQLS100
-- azure_rm_postgresqlserver.sku.tier:
+- azure_rm_postgresqlserver.parameters.sku.tier:
     - test: basic
     - sample: Basic
-- azure_rm_postgresqlserver.sku.capacity:
-- azure_rm_postgresqlserver.sku.size:
-- azure_rm_postgresqlserver.sku.family:
+- azure_rm_postgresqlserver.parameters.sku.capacity:
+- azure_rm_postgresqlserver.parameters.sku.size:
+- azure_rm_postgresqlserver.parameters.sku.family:
     - exclude
-- azure_rm_postgresqlserver.properties:
+- azure_rm_postgresqlserver.parameters.properties:
     - collapse
-- azure_rm_postgresqlserver.location:
+- azure_rm_postgresqlserver.parameters.location:
     - test: westus
-- azure_rm_postgresqlserver.properties.storage_mb:
+- azure_rm_postgresqlserver.parameters.properties.storage_mb:
     - test: 51200
-- azure_rm_postgresqlserver.properties.version:
-- azure_rm_postgresqlserver.properties.ssl_enforcement:
+- azure_rm_postgresqlserver.parameters.properties.version:
+- azure_rm_postgresqlserver.parameters.properties.ssl_enforcement:
     - rename: enforce_ssl
     - test: True
     - sample: True
     - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
-- azure_rm_postgresqlserver.properties.create_mode:
+- azure_rm_postgresqlserver.parameters.properties.create_mode:
     - documentation: "Currently only 'Default' value supported"
     - default: "'Default'"
     - exclude_from_documentation
-- azure_rm_postgresqlserver.properties.administrator_login:
+- azure_rm_postgresqlserver.parameters.properties.administrator_login:
     - rename: admin_username
     - required: no
     - test: zimxyz
-- azure_rm_postgresqlserver.properties.administrator_login_password:
+- azure_rm_postgresqlserver.parameters.properties.administrator_login_password:
     - rename: admin_password
     - required: no
     - test: Testpasswordxyz12!
@@ -100,11 +100,11 @@
     - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.parameters:
     - collapse
-- azure_rm_postgresqlfirewallrule.start_ip_address:
+- azure_rm_postgresqlfirewallrule.parameters.start_ip_address:
     - required: no
     - update_rule: compare
     - test: 172.28.10.136
-- azure_rm_postgresqlfirewallrule.end_ip_address:
+- azure_rm_postgresqlfirewallrule.parameters.end_ip_address:
     - required: no
     - update_rule: compare
     - test: 172.28.10.138
@@ -138,8 +138,8 @@
     - test: test-virtual-network-rule
 - azure_rm_postgresqlvirtualnetworkrule.parameters:
     - collapse
-- azure_rm_postgresqlvirtualnetworkrule.virtual_network_subnet_id:
-- azure_rm_postgresqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
+- azure_rm_postgresqlvirtualnetworkrule.parameters.virtual_network_subnet_id:
+- azure_rm_postgresqlvirtualnetworkrule.parameters.ignore_missing_vnet_service_endpoint:
 - azure_rm_postgresqlvirtualnetworkrule.response.id:
 - azure_rm_postgresqlvirtualnetworkrule.response.name:
 - azure_rm_postgresqlvirtualnetworkrule.response.type:
@@ -172,10 +172,10 @@
     - test: testdatabase
 - azure_rm_postgresqldatabase.parameters:
     - collapse
-- azure_rm_postgresqldatabase.charset:
+- azure_rm_postgresqldatabase.parameters.charset:
     - update_rule: compare
     - documentation_append: " Check PostgreSQL documentation for possible values."
-- azure_rm_postgresqldatabase.collation:
+- azure_rm_postgresqldatabase.parameters.collation:
     - update_rule: compare
     - documentation_append: " Check PostgreSQL documentation for possible values."
 - azure_rm_postgresqldatabase.response.id:
@@ -208,9 +208,9 @@
     - test: deadlock_timeout
 - azure_rm_postgresqlconfiguration.parameters:
     - collapse
-- azure_rm_postgresqlconfiguration.value:
+- azure_rm_postgresqlconfiguration.parameters.value:
     - test: 200
-- azure_rm_postgresqlconfiguration.source:
+- azure_rm_postgresqlconfiguration.parameters.source:
     - test: user-override
 - azure_rm_postgresqlconfiguration.response.id:
 - azure_rm_postgresqlconfiguration.response.name:

@@ -27,10 +27,10 @@
     - test: d3881f73-7777-8888-8283-e981cbba0404
 - azure_rm_authorizationroleassignment.parameters:
     - collapse
-- azure_rm_authorizationroleassignment.properties:
-- azure_rm_authorizationroleassignment.properties.role_definition_id:
+- azure_rm_authorizationroleassignment.parameters.properties:
+- azure_rm_authorizationroleassignment.parameters.properties.role_definition_id:
     - test: subscriptions/{{ azure_subscription_id }}/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c
-- azure_rm_authorizationroleassignment.properties.principal_id:
+- azure_rm_authorizationroleassignment.parameters.properties.principal_id:
     - test: 98b422c6-7bea-4706-b6f3-920a782746d4
 - azure_rm_authorizationroleassignment.response.id:
 - azure_rm_authorizationroleassignment.response.name:

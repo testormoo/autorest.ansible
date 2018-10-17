@@ -9,38 +9,38 @@
     - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlserver.parameters:
     - collapse
-- azure_rm_mysqlserver.sku:
-- azure_rm_mysqlserver.sku.name:
+- azure_rm_mysqlserver.parameters.sku:
+- azure_rm_mysqlserver.parameters.sku.name:
     - test: MYSQLB50
     - sample: MYSQLB50
-- azure_rm_mysqlserver.sku.tier:
+- azure_rm_mysqlserver.parameters.sku.tier:
     - test: basic
-- azure_rm_mysqlserver.sku.capacity:
-- azure_rm_mysqlserver.sku.size:
-- azure_rm_mysqlserver.sku.family:
+- azure_rm_mysqlserver.parameters.sku.capacity:
+- azure_rm_mysqlserver.parameters.sku.size:
+- azure_rm_mysqlserver.parameters.sku.family:
     - exclude
-- azure_rm_mysqlserver.location:
+- azure_rm_mysqlserver.parameters.location:
     - test: westus
-- azure_rm_mysqlserver.properties:
+- azure_rm_mysqlserver.parameters.properties:
     - collapse
-- azure_rm_mysqlserver.properties.storage_mb:
+- azure_rm_mysqlserver.parameters.properties.storage_mb:
     - test: 51200
-- azure_rm_mysqlserver.properties.version:
+- azure_rm_mysqlserver.parameters.properties.version:
     - test: 5.6
-- azure_rm_mysqlserver.properties.ssl_enforcement:
+- azure_rm_mysqlserver.parameters.properties.ssl_enforcement:
     - rename: enforce_ssl
     - test: True
     - sample: True
     - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
-- azure_rm_mysqlserver.properties.create_mode:
+- azure_rm_mysqlserver.parameters.properties.create_mode:
     - documentation: "Currently only 'Default' value supported"
     - default: 'Default'
     - exclude_from_documentation
-- azure_rm_mysqlserver.properties.administrator_login:
+- azure_rm_mysqlserver.parameters.properties.administrator_login:
     - rename: admin_username
     - required: no
     - test: zimxyz
-- azure_rm_mysqlserver.properties.administrator_login_password:
+- azure_rm_mysqlserver.parameters.properties.administrator_login_password:
     - rename: admin_password
     - required: no
     - test: Testpasswordxyz12!
@@ -105,11 +105,11 @@
     - test: firewallrule{{ rpfx }}
 - azure_rm_mysqlfirewallrule.parameters:
     - collapse
-- azure_rm_mysqlfirewallrule.start_ip_address:
+- azure_rm_mysqlfirewallrule.parameters.start_ip_address:
     - required: no
     - update_rule: compare
     - test: 172.28.10.136
-- azure_rm_mysqlfirewallrule.end_ip_address:
+- azure_rm_mysqlfirewallrule.parameters.end_ip_address:
     - required: no
     - update_rule: compare
     - test: 172.28.10.138
@@ -143,9 +143,9 @@
     - test: test-virtual-network-rule
 - azure_rm_mysqlvirtualnetworkrule.parameters:
     - collapse
-- azure_rm_mysqlvirtualnetworkrule.virtual_network_subnet_id:
+- azure_rm_mysqlvirtualnetworkrule.parameters.virtual_network_subnet_id:
     - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}
-- azure_rm_mysqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
+- azure_rm_mysqlvirtualnetworkrule.parameters.ignore_missing_vnet_service_endpoint:
 - azure_rm_mysqlvirtualnetworkrule.response.id:
 - azure_rm_mysqlvirtualnetworkrule.response.name:
 - azure_rm_mysqlvirtualnetworkrule.response.type:
@@ -178,10 +178,10 @@
     - test: testdatabase
 - azure_rm_mysqldatabase.parameters:
     - collapse
-- azure_rm_mysqldatabase.charset:
+- azure_rm_mysqldatabase.parameters.charset:
     - update_rule: compare
     - documentation_append: " Check MySQL documentation for possible values."
-- azure_rm_mysqldatabase.collation:
+- azure_rm_mysqldatabase.parameters.collation:
     - update_rule: compare
     - documentation_append: " Check MySQL documentation for possible values."
 - azure_rm_mysqldatabase.response.id:
@@ -214,9 +214,9 @@
     - test: event_scheduler
 - azure_rm_mysqlconfiguration.parameters:
     - collapse
-- azure_rm_mysqlconfiguration.value:
+- azure_rm_mysqlconfiguration.parameters.value:
     - test: ON
-- azure_rm_mysqlconfiguration.source:
+- azure_rm_mysqlconfiguration.parameters.source:
     - test: user-override
 - azure_rm_mysqlconfiguration.response.id:
 - azure_rm_mysqlconfiguration.response.name:

@@ -105,15 +105,15 @@
 - azure_rm_sqldatabasethreatdetectionpolicy.security_alert_policy_name:
 - azure_rm_sqldatabasethreatdetectionpolicy.parameters:
     - collapse
-- azure_rm_sqldatabasethreatdetectionpolicy.location:
-- azure_rm_sqldatabasethreatdetectionpolicy.state:
-- azure_rm_sqldatabasethreatdetectionpolicy.disabled_alerts:
-- azure_rm_sqldatabasethreatdetectionpolicy.email_addresses:
-- azure_rm_sqldatabasethreatdetectionpolicy.email_account_admins:
-- azure_rm_sqldatabasethreatdetectionpolicy.storage_endpoint:
-- azure_rm_sqldatabasethreatdetectionpolicy.storage_account_access_key:
-- azure_rm_sqldatabasethreatdetectionpolicy.retention_days:
-- azure_rm_sqldatabasethreatdetectionpolicy.use_server_default:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.location:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.state:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.disabled_alerts:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.email_addresses:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.email_account_admins:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.storage_endpoint:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.storage_account_access_key:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.retention_days:
+- azure_rm_sqldatabasethreatdetectionpolicy.parameters.use_server_default:
 - azure_rm_sqldatabasethreatdetectionpolicy.response.id:
 - azure_rm_sqldatabasethreatdetectionpolicy.response.name:
 - azure_rm_sqldatabasethreatdetectionpolicy.response.type:
@@ -183,17 +183,17 @@
 - azure_rm_sqldatamaskingrule.data_masking_rule_name:
 - azure_rm_sqldatamaskingrule.parameters:
     - collapse
-- azure_rm_sqldatamaskingrule.alias_name:
-- azure_rm_sqldatamaskingrule.rule_state:
-- azure_rm_sqldatamaskingrule.schema_name:
-- azure_rm_sqldatamaskingrule.table_name:
-- azure_rm_sqldatamaskingrule.column_name:
-- azure_rm_sqldatamaskingrule.masking_function:
-- azure_rm_sqldatamaskingrule.number_from:
-- azure_rm_sqldatamaskingrule.number_to:
-- azure_rm_sqldatamaskingrule.prefix_size:
-- azure_rm_sqldatamaskingrule.suffix_size:
-- azure_rm_sqldatamaskingrule.replacement_string:
+- azure_rm_sqldatamaskingrule.parameters.alias_name:
+- azure_rm_sqldatamaskingrule.parameters.rule_state:
+- azure_rm_sqldatamaskingrule.parameters.schema_name:
+- azure_rm_sqldatamaskingrule.parameters.table_name:
+- azure_rm_sqldatamaskingrule.parameters.column_name:
+- azure_rm_sqldatamaskingrule.parameters.masking_function:
+- azure_rm_sqldatamaskingrule.parameters.number_from:
+- azure_rm_sqldatamaskingrule.parameters.number_to:
+- azure_rm_sqldatamaskingrule.parameters.prefix_size:
+- azure_rm_sqldatamaskingrule.parameters.suffix_size:
+- azure_rm_sqldatamaskingrule.parameters.replacement_string:
 - azure_rm_sqldatamaskingrule.response.id:
 - azure_rm_sqldatamaskingrule.response.name:
 - azure_rm_sqldatamaskingrule.response.type:
@@ -316,11 +316,11 @@
     - test: database{{ rpfx }}
 - azure_rm_sqldatabase.parameters:
     - collapse
-- azure_rm_sqldatabase.location:
+- azure_rm_sqldatabase.parameters.location:
     - update_rule: compare
     - test: eastus
-- azure_rm_sqldatabase.collation:
-- azure_rm_sqldatabase.create_mode:
+- azure_rm_sqldatabase.parameters.collation:
+- azure_rm_sqldatabase.parameters.create_mode:
     - documentation_mark_keywords: no
     - documentation: Specifies the mode of database creation.
     - documentation_append_line: "C(default): regular database creation."
@@ -331,33 +331,33 @@
     - documentation_append_line: "C(restore): Creates a database by restoring a backup of a deleted database."
     - documentation_append_line: "C(restore_long_term_retention_backup): Creates a database by restoring from a long term retention vault."
     - documentation_append_line: "C(copy), C(non_readable_secondary), C(online_secondary) and C(restore_long_term_retention_backup) are not supported for C(data_warehouse) edition."
-- azure_rm_sqldatabase.source_database_id:
+- azure_rm_sqldatabase.parameters.source_database_id:
     - documentation_mark_keywords: no
     - documentation: "Required unless I(create_mode) is C(default) or C(restore_long_term_retention_backup)."
     - documentation_append_line: Specifies the resource ID of the source database
-- azure_rm_sqldatabase.source_database_deletion_date:
+- azure_rm_sqldatabase.parameters.source_database_deletion_date:
     - documentation_replace: Conditional. If>>>Required if
-- azure_rm_sqldatabase.restore_point_in_time:
+- azure_rm_sqldatabase.parameters.restore_point_in_time:
     - documentation_replace: Conditional. If>>>Required if
-- azure_rm_sqldatabase.recovery_services_recovery_point_resource_id:
+- azure_rm_sqldatabase.parameters.recovery_services_recovery_point_resource_id:
     - documentation: "Required if I(create_mode) is C(restore_long_term_retention_backup), then this value is required. Specifies the resource ID of therecovery point to restore from."
-- azure_rm_sqldatabase.edition:
+- azure_rm_sqldatabase.parameters.edition:
     - update_rule: compare
-- azure_rm_sqldatabase.max_size_bytes:
+- azure_rm_sqldatabase.parameters.max_size_bytes:
     - update_rule: compare
-- azure_rm_sqldatabase.requested_service_objective_id:
+- azure_rm_sqldatabase.parameters.requested_service_objective_id:
     - exclude
-- azure_rm_sqldatabase.requested_service_objective_name:
+- azure_rm_sqldatabase.parameters.requested_service_objective_name:
     - exclude
-- azure_rm_sqldatabase.elastic_pool_name:
+- azure_rm_sqldatabase.parameters.elastic_pool_name:
     - documentation_mark_keywords: no
     - documentation: The name of the elastic pool the database is in. Not supported for C(data_warehouse) edition.
-- azure_rm_sqldatabase.read_scale:
+- azure_rm_sqldatabase.parameters.read_scale:
     - documentation_replace: readScale >>>
     - update_rule: compare
     - make_boolean: Enabled|Disabled|no|If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.
-- azure_rm_sqldatabase.sample_name:
-- azure_rm_sqldatabase.zone_redundant:
+- azure_rm_sqldatabase.parameters.sample_name:
+- azure_rm_sqldatabase.parameters.zone_redundant:
     - make_boolean: Enabled|Disabled|no|Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability zones.
 - azure_rm_sqldatabase.response.id:
 - azure_rm_sqldatabase.response.type:
@@ -550,14 +550,14 @@
     - test: elasticpool{{ rpfx }}
 - azure_rm_sqlelasticpool.parameters:
     - collapse
-- azure_rm_sqlelasticpool.location:
+- azure_rm_sqlelasticpool.parameters.location:
     - test: eastus
-- azure_rm_sqlelasticpool.edition:
-- azure_rm_sqlelasticpool.dtu:
-- azure_rm_sqlelasticpool.database_dtu_max:
-- azure_rm_sqlelasticpool.database_dtu_min:
-- azure_rm_sqlelasticpool.storage_mb:
-- azure_rm_sqlelasticpool.zone_redundant:
+- azure_rm_sqlelasticpool.parameters.edition:
+- azure_rm_sqlelasticpool.parameters.dtu:
+- azure_rm_sqlelasticpool.parameters.database_dtu_max:
+- azure_rm_sqlelasticpool.parameters.database_dtu_min:
+- azure_rm_sqlelasticpool.parameters.storage_mb:
+- azure_rm_sqlelasticpool.parameters.zone_redundant:
 - azure_rm_sqlelasticpool.response.id:
 - azure_rm_sqlelasticpool.response.name:
 - azure_rm_sqlelasticpool.response.type:
@@ -683,24 +683,24 @@
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlserver.parameters:
     - collapse
-- azure_rm_sqlserver.location:
+- azure_rm_sqlserver.parameters.location:
     - sample: westus
     - test: eastus
-- azure_rm_sqlserver.administrator_login:
+- azure_rm_sqlserver.parameters.administrator_login:
     - rename: admin_username
     - test: mylogin
     - sample: mylogin
-- azure_rm_sqlserver.administrator_login_password:
+- azure_rm_sqlserver.parameters.administrator_login_password:
     - rename: admin_password
     - update_rule: none
     - test: Testpasswordxyz12!
     - sample: Testpasswordxyz12!
-- azure_rm_sqlserver.version:
+- azure_rm_sqlserver.parameters.version:
     - test: ""
     - documentation_append: " For example '12.0'."
-- azure_rm_sqlserver.identity:
+- azure_rm_sqlserver.parameters.identity:
     - collapse
-- azure_rm_sqlserver.identity.type:
+- azure_rm_sqlserver.parameters.identity.type:
     - test: ""
     - rename: identity
 - azure_rm_sqlserver.response.id:
@@ -927,13 +927,13 @@
 - azure_rm_sqldatabaseblobauditingpolicy.blob_auditing_policy_name:
 - azure_rm_sqldatabaseblobauditingpolicy.parameters:
     - collapse
-- azure_rm_sqldatabaseblobauditingpolicy.state:
-- azure_rm_sqldatabaseblobauditingpolicy.storage_endpoint:
-- azure_rm_sqldatabaseblobauditingpolicy.storage_account_access_key:
-- azure_rm_sqldatabaseblobauditingpolicy.retention_days:
-- azure_rm_sqldatabaseblobauditingpolicy.audit_actions_and_groups:
-- azure_rm_sqldatabaseblobauditingpolicy.storage_account_subscription_id:
-- azure_rm_sqldatabaseblobauditingpolicy.is_storage_secondary_key_in_use:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.state:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.storage_endpoint:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.parameters.storage_account_access_key:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.retention_days:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.audit_actions_and_groups:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.storage_account_subscription_id:
+- azure_rm_sqldatabaseblobauditingpolicy.parameters.is_storage_secondary_key_in_use:
 - azure_rm_sqldatabaseblobauditingpolicy.response.id:
 - azure_rm_sqldatabaseblobauditingpolicy.response.name:
 - azure_rm_sqldatabaseblobauditingpolicy.response.type:
@@ -967,9 +967,9 @@
 - azure_rm_sqlencryptionprotector.encryption_protector_name:
 - azure_rm_sqlencryptionprotector.parameters:
     - collapse
-- azure_rm_sqlencryptionprotector.kind:
-- azure_rm_sqlencryptionprotector.server_key_name:
-- azure_rm_sqlencryptionprotector.server_key_type:
+- azure_rm_sqlencryptionprotector.parameters.kind:
+- azure_rm_sqlencryptionprotector.parameters.server_key_name:
+- azure_rm_sqlencryptionprotector.parameters.server_key_type:
 - azure_rm_sqlencryptionprotector.response.id:
 - azure_rm_sqlencryptionprotector.response.name:
 - azure_rm_sqlencryptionprotector.response.type:
@@ -1000,14 +1000,14 @@
 - azure_rm_sqlfailovergroup.failover_group_name:
 - azure_rm_sqlfailovergroup.parameters:
     - collapse
-- azure_rm_sqlfailovergroup.read_write_endpoint:
-- azure_rm_sqlfailovergroup.read_write_endpoint.failover_policy:
-- azure_rm_sqlfailovergroup.read_write_endpoint.failover_with_data_loss_grace_period_minutes:
-- azure_rm_sqlfailovergroup.read_only_endpoint:
-- azure_rm_sqlfailovergroup.read_only_endpoint.failover_policy:
-- azure_rm_sqlfailovergroup.partner_servers:
-- azure_rm_sqlfailovergroup.partner_servers.id:
-- azure_rm_sqlfailovergroup.databases:
+- azure_rm_sqlfailovergroup.parameters.read_write_endpoint:
+- azure_rm_sqlfailovergroup.parameters.read_write_endpoint.failover_policy:
+- azure_rm_sqlfailovergroup.parameters.read_write_endpoint.failover_with_data_loss_grace_period_minutes:
+- azure_rm_sqlfailovergroup.parameters.read_only_endpoint:
+- azure_rm_sqlfailovergroup.parameters.read_only_endpoint.failover_policy:
+- azure_rm_sqlfailovergroup.parameters.partner_servers:
+- azure_rm_sqlfailovergroup.parameters.partner_servers.id:
+- azure_rm_sqlfailovergroup.parameters.databases:
 - azure_rm_sqlfailovergroup.response.id:
 - azure_rm_sqlfailovergroup.response.name:
 - azure_rm_sqlfailovergroup.response.type:
@@ -1052,11 +1052,11 @@
 - azure_rm_sqlserverkey.key_name:
 - azure_rm_sqlserverkey.parameters:
     - collapse
-- azure_rm_sqlserverkey.kind:
-- azure_rm_sqlserverkey.server_key_type:
-- azure_rm_sqlserverkey.uri:
-- azure_rm_sqlserverkey.thumbprint:
-- azure_rm_sqlserverkey.creation_date:
+- azure_rm_sqlserverkey.parameters.kind:
+- azure_rm_sqlserverkey.parameters.server_key_type:
+- azure_rm_sqlserverkey.parameters.uri:
+- azure_rm_sqlserverkey.parameters.thumbprint:
+- azure_rm_sqlserverkey.parameters.creation_date:
 - azure_rm_sqlserverkey.response.id:
 - azure_rm_sqlserverkey.response.name:
 - azure_rm_sqlserverkey.response.type:
@@ -1117,19 +1117,19 @@
 - azure_rm_sqlsyncgroup.sync_group_name:
 - azure_rm_sqlsyncgroup.parameters:
     - collapse
-- azure_rm_sqlsyncgroup.interval:
-- azure_rm_sqlsyncgroup.conflict_resolution_policy:
-- azure_rm_sqlsyncgroup.sync_database_id:
-- azure_rm_sqlsyncgroup.hub_database_user_name:
-- azure_rm_sqlsyncgroup.hub_database_password:
-- azure_rm_sqlsyncgroup.schema:
-- azure_rm_sqlsyncgroup.schema.tables:
-- azure_rm_sqlsyncgroup.schema.tables.columns:
-- azure_rm_sqlsyncgroup.schema.tables.columns.quoted_name:
-- azure_rm_sqlsyncgroup.schema.tables.columns.data_size:
-- azure_rm_sqlsyncgroup.schema.tables.columns.data_type:
-- azure_rm_sqlsyncgroup.schema.tables.quoted_name:
-- azure_rm_sqlsyncgroup.schema.master_sync_member_name:
+- azure_rm_sqlsyncgroup.parameters.interval:
+- azure_rm_sqlsyncgroup.parameters.conflict_resolution_policy:
+- azure_rm_sqlsyncgroup.parameters.sync_database_id:
+- azure_rm_sqlsyncgroup.parameters.hub_database_user_name:
+- azure_rm_sqlsyncgroup.parameters.hub_database_password:
+- azure_rm_sqlsyncgroup.parameters.schema:
+- azure_rm_sqlsyncgroup.parameters.schema.tables:
+- azure_rm_sqlsyncgroup.parameters.schema.tables.columns:
+- azure_rm_sqlsyncgroup.parameters.schema.tables.columns.quoted_name:
+- azure_rm_sqlsyncgroup.parameters.schema.tables.columns.data_size:
+- azure_rm_sqlsyncgroup.parameters.schema.tables.columns.data_type:
+- azure_rm_sqlsyncgroup.parameters.schema.tables.quoted_name:
+- azure_rm_sqlsyncgroup.parameters.schema.master_sync_member_name:
 - azure_rm_sqlsyncgroup.response.id:
 - azure_rm_sqlsyncgroup.response.name:
 - azure_rm_sqlsyncgroup.response.type:
@@ -1179,14 +1179,14 @@
 - azure_rm_sqlsyncmember.sync_member_name:
 - azure_rm_sqlsyncmember.parameters:
     - collapse
-- azure_rm_sqlsyncmember.database_type:
-- azure_rm_sqlsyncmember.sync_agent_id:
-- azure_rm_sqlsyncmember.sql_server_database_id:
-- azure_rm_sqlsyncmember.server_name:
-- azure_rm_sqlsyncmember.database_name:
-- azure_rm_sqlsyncmember.user_name:
-- azure_rm_sqlsyncmember.password:
-- azure_rm_sqlsyncmember.sync_direction:
+- azure_rm_sqlsyncmember.parameters.database_type:
+- azure_rm_sqlsyncmember.parameters.sync_agent_id:
+- azure_rm_sqlsyncmember.parameters.sql_server_database_id:
+- azure_rm_sqlsyncmember.parameters.server_name:
+- azure_rm_sqlsyncmember.parameters.database_name:
+- azure_rm_sqlsyncmember.parameters.user_name:
+- azure_rm_sqlsyncmember.parameters.password:
+- azure_rm_sqlsyncmember.parameters.sync_direction:
 - azure_rm_sqlsyncmember.response.id:
 - azure_rm_sqlsyncmember.response.name:
 - azure_rm_sqlsyncmember.response.type:
