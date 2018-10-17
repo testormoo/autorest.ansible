@@ -59,6 +59,7 @@
 - azure_rm_containerregistryreplication.replication_name:
     - test: replication{{ rpfx }}
 - azure_rm_containerregistryreplication.replication:
+    - collapse
 - azure_rm_containerregistryreplication.replication.location:
     - test: westus
 - azure_rm_containerregistryreplication.response.id:

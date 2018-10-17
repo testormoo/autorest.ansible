@@ -617,10 +617,10 @@
 - azure_rm_sqlserverazureadadministrator.server_name:
 - azure_rm_sqlserverazureadadministrator.administrator_name:
 - azure_rm_sqlserverazureadadministrator.properties:
-- azure_rm_sqlserverazureadadministrator.administrator_type:
-- azure_rm_sqlserverazureadadministrator.login:
-- azure_rm_sqlserverazureadadministrator.sid:
-- azure_rm_sqlserverazureadadministrator.tenant_id:
+- azure_rm_sqlserverazureadadministrator.properties.administrator_type:
+- azure_rm_sqlserverazureadadministrator.properties.login:
+- azure_rm_sqlserverazureadadministrator.properties.sid:
+- azure_rm_sqlserverazureadadministrator.properties.tenant_id:
 - azure_rm_sqlserverazureadadministrator.response.id:
 - azure_rm_sqlserverazureadadministrator.response.name:
 - azure_rm_sqlserverazureadadministrator.response.type:
