@@ -10,7 +10,7 @@ namespace AutoRest.Ansible
         {
             new Tweak_Option_Rename("*", "resource_group_name", "resource_group"),
             new Tweak_Option_DefaultValueTest("*", "resource_group_name", "\"{{ resource_group }}\""),
-            new Tweak_Option_Required("*", "location", false),
+            new Tweak_Option_Required("*", "parameters.location", false),
             new Tweak_Response_AddField("*", "id"),
             new Tweak_Response_AddField("*", "status"),
             new Tweak_Response_AddField("*", "fully_qualified_domain_name"),
