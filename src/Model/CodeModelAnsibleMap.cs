@@ -262,7 +262,9 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                var location = Array.Find(ModuleOptions, e => (e.Name == "location"));
+                var parameters = Array.Find(ModuleOptions, e => (e.Name == "parameters") || (e.Name.EndsWith("_parameters")));
+
+                var location = Array.Find(parameters, e => (e.Name == "location"));
                 if (location != null)
                 {
                     return location.Disposition;
