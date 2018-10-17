@@ -643,6 +643,11 @@ namespace AutoRest.Ansible.Model
                 {
                     if (o.SubOptions != null && o.SubOptions.Length > 0)
                     {
+                        foreach (var oo in o.SubOptions)
+                        {
+                            oo.Disposition = o.NameAlt;
+                        }
+
                         options.AddRange(o.SubOptions);
                     }
                 }
