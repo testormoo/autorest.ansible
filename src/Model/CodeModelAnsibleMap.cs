@@ -687,23 +687,23 @@ namespace AutoRest.Ansible.Model
                 string optionStatementPrefix = statementPrefix;
                 string optionDictPrefix = dictPrefix + "['" + option.Name + "']";
 
-                if (statementPrefix == "self" && option.Disposition == "default")
+                if (statementPrefix == "self")
                 {
                     optionStatementPrefix += "." + option.NameAlt;
                 }
                 else
                 {
-                    if (option.Disposition != "default")
-                    {
-                        if (statementPrefix == "self")
-                        {
-                            optionStatementPrefix += "." + option.Disposition;
-                        }
-                        else
-                        {
-                            optionStatementPrefix += "['" + option.Disposition + "']";
-                        }
-                    }
+                    //if (option.Disposition != "default")
+                    //{
+                    //    if (statementPrefix == "self")
+                    //    {
+                    //        optionStatementPrefix += "." + option.Disposition;
+                    //    }
+                    //    else
+                    //    {
+                    //        optionStatementPrefix += "['" + option.Disposition + "']";
+                    //    }
+                    //}
 
                     optionStatementPrefix += "['" + option.NameAlt + "']";
                 }
