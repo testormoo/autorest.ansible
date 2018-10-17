@@ -49,6 +49,7 @@
 - azure_rm_cosmosdbdatabaseaccount.response.failover_policies.location_name:
 - azure_rm_cosmosdbdatabaseaccount.response.failover_policies.failover_priority:
 - azure_rm_cosmosdbdatabaseaccount_facts:
+    - rename: azure_rm_cosmosdbaccount_facts
 - azure_rm_cosmosdbdatabaseaccount_facts.resource_group_name:
 - azure_rm_cosmosdbdatabaseaccount_facts.account_name:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.id:
