@@ -93,6 +93,7 @@
     - object_name: PostgreSQL Firewall Rule
     - object_name_plural: PostgreSQL Firewall Rules
 - azure_rm_postgresqlfirewallrule.resource_group_name:
+    - documentation: The name of the resource group.
 - azure_rm_postgresqlfirewallrule.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.firewall_rule_name:
@@ -130,7 +131,7 @@
 - azure_rm_postgresqlfirewallrule_facts.response.start_ip_address:
     - add
     - sample: 10.0.0.16
-    - documentation: The start IP address of the PostgreSQL firewall rule.
+    - documentation: The start IP address of the PostgreSQL firewall rule. XXX
 - azure_rm_postgresqlfirewallrule_facts.response.end_ip_address:
     - add
     - sample: 10.0.0.18
