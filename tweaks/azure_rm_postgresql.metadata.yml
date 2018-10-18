@@ -124,6 +124,7 @@
     - rename: name
     - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule_facts.response.id:
+    - sample: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1
 - azure_rm_postgresqlfirewallrule_facts.response.name:
 - azure_rm_postgresqlfirewallrule_facts.response.type:
 - azure_rm_postgresqlfirewallrule_facts.response.start_ip_address:
