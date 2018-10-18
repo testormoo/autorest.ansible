@@ -7,6 +7,7 @@
     - collapse
 - azure_rm_cluster.parameters.location:
 - azure_rm_cluster.parameters.properties:
+    - collapse
 - azure_rm_cluster.parameters.properties.cluster_version:
 - azure_rm_cluster.parameters.properties.os_type:
 - azure_rm_cluster.parameters.properties.tier:
