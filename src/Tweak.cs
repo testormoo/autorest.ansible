@@ -42,7 +42,7 @@ namespace AutoRest.Ansible
                 case "collapse":                    return new Tweak_Response_CollapseField(path[0], String.Join('.', path, 2, path.Length - 2));
                 case "rename":                      return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
                 case "remove":                      return new Tweak_Response_RemoveField(path[0], String.Join('.', path, 2, path.Length - 2));
-                case "add":                         return new Tweak_Response_RenameField(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
+                case "add":                         return new Tweak_Response_AddField(path[0], String.Join('.', path, 2, path.Length - 2));
                 case "sample":                      return new Tweak_Response_FieldSampleValue(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
                 case "returned":                    return new Tweak_Response_FieldReturned(path[0], String.Join('.', path, 2, path.Length - 2), parameter);
                 }

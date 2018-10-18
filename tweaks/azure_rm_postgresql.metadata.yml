@@ -126,7 +126,9 @@
 - azure_rm_postgresqlfirewallrule_facts.response.name:
 - azure_rm_postgresqlfirewallrule_facts.response.type:
 - azure_rm_postgresqlfirewallrule_facts.response.start_ip_address:
+    - add
 - azure_rm_postgresqlfirewallrule_facts.response.end_ip_address:
+    - add
 - azure_rm_postgresqlvirtualnetworkrule:
     - object_name: PostgreSQL Virtual Network Rule
     - object_name_plural: PostgreSQL Virtual Network Rules
