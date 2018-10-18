@@ -109,6 +109,7 @@
     - update_rule: compare
     - test: 172.28.10.138
 - azure_rm_postgresqlfirewallrule.response.id:
+    - sample: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1
 - azure_rm_postgresqlfirewallrule.response.name:
 - azure_rm_postgresqlfirewallrule.response.type:
 - azure_rm_postgresqlfirewallrule.response.start_ip_address:
@@ -127,8 +128,12 @@
 - azure_rm_postgresqlfirewallrule_facts.response.type:
 - azure_rm_postgresqlfirewallrule_facts.response.start_ip_address:
     - add
+    - sample: 10.0.0.16
+    - documentation: The start IP address of the PostgreSQL firewall rule.
 - azure_rm_postgresqlfirewallrule_facts.response.end_ip_address:
     - add
+    - sample: 10.0.0.18
+    - documentation: The end IP address of the PostgreSQL firewall rule.
 - azure_rm_postgresqlvirtualnetworkrule:
     - object_name: PostgreSQL Virtual Network Rule
     - object_name_plural: PostgreSQL Virtual Network Rules
