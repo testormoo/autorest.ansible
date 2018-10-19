@@ -557,7 +557,7 @@ namespace AutoRest.Ansible.Model
                     if (level >= 1)
                     foreach (Property attr in model.ComposedProperties)
                     {
-                        if (attr.Name == "id" attr.Description == "Resource ID.")
+                        if (attr.Name == "id" && attr.Description == "Resource ID.")
                         {
                             idOnly = true;
                             break;
