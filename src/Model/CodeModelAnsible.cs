@@ -516,7 +516,7 @@ namespace AutoRest.Ansible.Model
                             suboption.IsList = (p.ModelTypeName == "list");
                             suboption.Documentation = p.Documentation;
 
-                            if (suboption.Name.EndsWith("_parameters") || suboption.Name == "parameters")
+                            if (suboption.Name.EndsWith("_parameters") || suboption.Name == "parameters" || suboption.Name == "properties")
                             {
                                 suboption.NameAlt = "parameters";
                                 suboption.Collapsed = true;
