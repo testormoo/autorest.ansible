@@ -546,13 +546,29 @@ namespace AutoRest.Ansible.Model
             CompositeTypePy model = GetModelTypeByName(modelName);
             var options = new List<ModuleOption>();
             AutoRest.Core.Model.Parameter p;
+            bool idOnly = false;
 
             if (level < 5)
             {
                 if (model != null)
                 {
+                    // first check if model contains "id", if it does, most likely rest of the proprties are part of another module and this is just a reference
+
                     foreach (Property attr in model.ComposedProperties)
                     {
+                        if (attr.Name == "id")
+                        {
+                            idOnly = true;
+                            break;
+                        }
+                    }
+
+
+                    foreach (Property attr in model.ComposedProperties)
+                    {
+                        if (idOnly && attr.Name != "id")
+                            continue;
+                            
                         if (attr.Name != "tags" && !attr.IsReadOnly)
                         {
                             string attrName = attr.Name;
