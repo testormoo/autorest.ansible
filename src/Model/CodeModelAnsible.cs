@@ -554,15 +554,15 @@ namespace AutoRest.Ansible.Model
                 {
                     // first check if model contains "id", if it does, most likely rest of the proprties are part of another module and this is just a reference
 
-                    if (level >= 1)
-                    foreach (Property attr in model.ComposedProperties)
-                    {
-                        if (attr.Name == "id" && attr.Documentation == "Resource ID.")
-                        {
-                            idOnly = true;
-                            break;
-                        }
-                    }
+                    //if (level >= 1)
+                    //foreach (Property attr in model.ComposedProperties)
+                    //{
+                    //    if (attr.Name == "id" && attr.Documentation == "Resource ID.")
+                    //    {
+                    //        idOnly = true;
+                    //        break;
+                    //    }
+                    //}
 
 
                     foreach (Property attr in model.ComposedProperties)
