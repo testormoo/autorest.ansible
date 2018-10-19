@@ -531,7 +531,7 @@ namespace AutoRest.Ansible.Model
             return option.ToArray();
         }
 
-        private ModuleOption[] (string modelName, int level, Newtonsoft.Json.Linq.JToken sampleValue)
+        private ModuleOption[] GetModelOptions(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleValue)
         {
             // [ZKK] this is a very bad hack for SQL Server
             if (modelName == "ServerPropertiesForCreate")
@@ -609,7 +609,6 @@ namespace AutoRest.Ansible.Model
                     }
                 }
             }
-
             return options.ToArray();
         }
 
