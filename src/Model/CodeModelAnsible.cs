@@ -522,7 +522,6 @@ namespace AutoRest.Ansible.Model
 
                             suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
                             option.Add(suboption);
-                            option.
                         }
                     }
                 }
