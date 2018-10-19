@@ -26,7 +26,6 @@
 - azure_rm_authorizationroleassignment.role_assignment_name:
     - test: d3881f73-7777-8888-8283-e981cbba0404
 - azure_rm_authorizationroleassignment.parameters:
-    - collapse
 - azure_rm_authorizationroleassignment.parameters.properties:
 - azure_rm_authorizationroleassignment.parameters.properties.role_definition_id:
     - test: subscriptions/{{ azure_subscription_id }}/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c
@@ -57,7 +56,6 @@
 - azure_rm_authorizationroledefinition.role_definition:
     - collapse
 - azure_rm_authorizationroledefinition.role_definition.properties:
-    - collapse
 - azure_rm_authorizationroledefinition.role_definition.properties.role_name:
     - rename: properties_role_name
 - azure_rm_authorizationroledefinition.role_definition.properties.description:

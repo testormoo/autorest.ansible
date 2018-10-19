@@ -5,7 +5,6 @@
     - rename: name
     - test: appgateway{{ rpfx }}
 - azure_rm_applicationgateway.parameters:
-    - collapse
 - azure_rm_applicationgateway.parameters.id:
 - azure_rm_applicationgateway.parameters.location:
 - azure_rm_applicationgateway.parameters.sku:
@@ -1060,7 +1059,6 @@
 - azure_rm_applicationgatewayapplicationsecuritygroup.application_security_group_name:
     - test: appgwsg{{ rpfx }}
 - azure_rm_applicationgatewayapplicationsecuritygroup.parameters:
-    - collapse
 - azure_rm_applicationgatewayapplicationsecuritygroup.id:
 - azure_rm_applicationgatewayapplicationsecuritygroup.location:
 - azure_rm_applicationgatewayapplicationsecuritygroup.response.id:
@@ -1090,7 +1088,6 @@
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.authorization_name:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.authorization_parameters:
-    - collapse
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.id:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.authorization_key:
 - azure_rm_applicationgatewayexpressroutecircuitauthorization.authorization_use_status:
@@ -1119,7 +1116,6 @@
 - azure_rm_applicationgatewayexpressroutecircuitpeering.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.peering_name:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.peering_parameters:
-    - collapse
 - azure_rm_applicationgatewayexpressroutecircuitpeering.id:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.peering_type:
 - azure_rm_applicationgatewayexpressroutecircuitpeering.state:
@@ -1719,7 +1715,6 @@
 - azure_rm_applicationgatewayexpressroutecircuit.resource_group_name:
 - azure_rm_applicationgatewayexpressroutecircuit.circuit_name:
 - azure_rm_applicationgatewayexpressroutecircuit.parameters:
-    - collapse
 - azure_rm_applicationgatewayexpressroutecircuit.id:
 - azure_rm_applicationgatewayexpressroutecircuit.location:
 - azure_rm_applicationgatewayexpressroutecircuit.sku:
@@ -2210,7 +2205,6 @@
 - azure_rm_applicationgatewayloadbalancer.resource_group_name:
 - azure_rm_applicationgatewayloadbalancer.load_balancer_name:
 - azure_rm_applicationgatewayloadbalancer.parameters:
-    - collapse
 - azure_rm_applicationgatewayloadbalancer.id:
 - azure_rm_applicationgatewayloadbalancer.location:
 - azure_rm_applicationgatewayloadbalancer.sku:
@@ -4676,7 +4670,6 @@
 - azure_rm_applicationgatewayinboundnatrule.inbound_nat_rule_name:
     - test: "rule{{ rpfx }}
 - azure_rm_applicationgatewayinboundnatrule.inbound_nat_rule_parameters:
-    - collapse
 - azure_rm_applicationgatewayinboundnatrule.id:
 - azure_rm_applicationgatewayinboundnatrule.frontend_ip_configuration:
 - azure_rm_applicationgatewayinboundnatrule.frontend_ip_configuration.id:
@@ -5723,7 +5716,6 @@
 - azure_rm_applicationgatewaynetworkinterface.resource_group_name:
 - azure_rm_applicationgatewaynetworkinterface.network_interface_name:
 - azure_rm_applicationgatewaynetworkinterface.parameters:
-    - collapse
 - azure_rm_applicationgatewaynetworkinterface.id:
 - azure_rm_applicationgatewaynetworkinterface.location:
 - azure_rm_applicationgatewaynetworkinterface.virtual_machine:
@@ -8842,7 +8834,6 @@
 - azure_rm_applicationgatewaynetworksecuritygroup.resource_group_name:
 - azure_rm_applicationgatewaynetworksecuritygroup.network_security_group_name:
 - azure_rm_applicationgatewaynetworksecuritygroup.parameters:
-    - collapse
 - azure_rm_applicationgatewaynetworksecuritygroup.id:
 - azure_rm_applicationgatewaynetworksecuritygroup.location:
 - azure_rm_applicationgatewaynetworksecuritygroup.security_rules:
@@ -10513,7 +10504,6 @@
 - azure_rm_applicationgatewaysecurityrule.network_security_group_name:
 - azure_rm_applicationgatewaysecurityrule.security_rule_name:
 - azure_rm_applicationgatewaysecurityrule.security_rule_parameters:
-    - collapse
 - azure_rm_applicationgatewaysecurityrule.id:
 - azure_rm_applicationgatewaysecurityrule.description:
 - azure_rm_applicationgatewaysecurityrule.protocol:
@@ -10657,7 +10647,6 @@
 - azure_rm_applicationgatewaynetworkwatcher.resource_group_name:
 - azure_rm_applicationgatewaynetworkwatcher.network_watcher_name:
 - azure_rm_applicationgatewaynetworkwatcher.parameters:
-    - collapse
 - azure_rm_applicationgatewaynetworkwatcher.id:
 - azure_rm_applicationgatewaynetworkwatcher.location:
 - azure_rm_applicationgatewaynetworkwatcher.etag:
@@ -10685,7 +10674,6 @@
 - azure_rm_applicationgatewaypacketcapture.network_watcher_name:
 - azure_rm_applicationgatewaypacketcapture.packet_capture_name:
 - azure_rm_applicationgatewaypacketcapture.parameters:
-    - collapse
 - azure_rm_applicationgatewaypacketcapture.target:
 - azure_rm_applicationgatewaypacketcapture.bytes_to_capture_per_packet:
 - azure_rm_applicationgatewaypacketcapture.total_bytes_per_session:
@@ -10746,7 +10734,6 @@
 - azure_rm_applicationgatewaypublicipaddresse.resource_group_name:
 - azure_rm_applicationgatewaypublicipaddresse.public_ip_address_name:
 - azure_rm_applicationgatewaypublicipaddresse.parameters:
-    - collapse
 - azure_rm_applicationgatewaypublicipaddresse.id:
 - azure_rm_applicationgatewaypublicipaddresse.location:
 - azure_rm_applicationgatewaypublicipaddresse.sku:
@@ -11249,7 +11236,6 @@
 - azure_rm_applicationgatewayroutefilter.resource_group_name:
 - azure_rm_applicationgatewayroutefilter.route_filter_name:
 - azure_rm_applicationgatewayroutefilter.route_filter_parameters:
-    - collapse
 - azure_rm_applicationgatewayroutefilter.id:
 - azure_rm_applicationgatewayroutefilter.location:
 - azure_rm_applicationgatewayroutefilter.rules:
@@ -11706,7 +11692,6 @@
 - azure_rm_applicationgatewayroutefilterrule.route_filter_name:
 - azure_rm_applicationgatewayroutefilterrule.rule_name:
 - azure_rm_applicationgatewayroutefilterrule.route_filter_rule_parameters:
-    - collapse
 - azure_rm_applicationgatewayroutefilterrule.id:
 - azure_rm_applicationgatewayroutefilterrule.access:
 - azure_rm_applicationgatewayroutefilterrule.route_filter_rule_type:
@@ -11742,7 +11727,6 @@
 - azure_rm_applicationgatewayroutetable.route_table_name:
     - test: routetablename{{ rpfx }}
 - azure_rm_applicationgatewayroutetable.parameters:
-    - collapse
 - azure_rm_applicationgatewayroutetable.id:
 - azure_rm_applicationgatewayroutetable.location:
 - azure_rm_applicationgatewayroutetable.routes:
@@ -12502,7 +12486,6 @@
 - azure_rm_applicationgatewayroute.route_name:
     - test: testroute{{ rpfx }}
 - azure_rm_applicationgatewayroute.route_parameters:
-    - collapse
 - azure_rm_applicationgatewayroute.route_parameters.id:
 - azure_rm_applicationgatewayroute.route_parameters.address_prefix:
     - test: 208.128.0.0/11
@@ -12539,7 +12522,6 @@
 - azure_rm_applicationgatewayvirtualnetwork.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetwork.virtual_network_name:
 - azure_rm_applicationgatewayvirtualnetwork.parameters:
-    - collapse
 - azure_rm_applicationgatewayvirtualnetwork.id:
 - azure_rm_applicationgatewayvirtualnetwork.location:
 - azure_rm_applicationgatewayvirtualnetwork.address_space:
@@ -13415,7 +13397,6 @@
 - azure_rm_applicationgatewaysubnet.virtual_network_name:
 - azure_rm_applicationgatewaysubnet.subnet_name:
 - azure_rm_applicationgatewaysubnet.subnet_parameters:
-    - collapse
 - azure_rm_applicationgatewaysubnet.id:
 - azure_rm_applicationgatewaysubnet.address_prefix:
 - azure_rm_applicationgatewaysubnet.network_security_group:
@@ -15148,7 +15129,6 @@
 - azure_rm_applicationgatewayvirtualnetworkpeering.virtual_network_name:
 - azure_rm_applicationgatewayvirtualnetworkpeering.virtual_network_peering_name:
 - azure_rm_applicationgatewayvirtualnetworkpeering.virtual_network_peering_parameters:
-    - collapse
 - azure_rm_applicationgatewayvirtualnetworkpeering.id:
 - azure_rm_applicationgatewayvirtualnetworkpeering.allow_virtual_network_access:
 - azure_rm_applicationgatewayvirtualnetworkpeering.allow_forwarded_traffic:
@@ -15198,7 +15178,6 @@
 - azure_rm_applicationgatewayvirtualnetworkgateway.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkgateway.virtual_network_gateway_name:
 - azure_rm_applicationgatewayvirtualnetworkgateway.parameters:
-    - collapse
 - azure_rm_applicationgatewayvirtualnetworkgateway.id:
 - azure_rm_applicationgatewayvirtualnetworkgateway.location:
 - azure_rm_applicationgatewayvirtualnetworkgateway.ip_configurations:
@@ -15351,7 +15330,6 @@
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.resource_group_name:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.virtual_network_gateway_connection_name:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.parameters:
-    - collapse
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.id:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.location:
 - azure_rm_applicationgatewayvirtualnetworkgatewayconnection.authorization_key:
@@ -15786,7 +15764,6 @@
 - azure_rm_applicationgatewaylocalnetworkgateway.resource_group_name:
 - azure_rm_applicationgatewaylocalnetworkgateway.local_network_gateway_name:
 - azure_rm_applicationgatewaylocalnetworkgateway.parameters:
-    - collapse
 - azure_rm_applicationgatewaylocalnetworkgateway.id:
 - azure_rm_applicationgatewaylocalnetworkgateway.location:
 - azure_rm_applicationgatewaylocalnetworkgateway.local_network_address_space:
