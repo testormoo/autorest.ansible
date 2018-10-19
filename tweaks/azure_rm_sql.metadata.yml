@@ -104,7 +104,6 @@
 - azure_rm_sqldatabasethreatdetectionpolicy.database_name:
 - azure_rm_sqldatabasethreatdetectionpolicy.security_alert_policy_name:
 - azure_rm_sqldatabasethreatdetectionpolicy.parameters:
-    - collapse
 - azure_rm_sqldatabasethreatdetectionpolicy.parameters.location:
 - azure_rm_sqldatabasethreatdetectionpolicy.parameters.state:
 - azure_rm_sqldatabasethreatdetectionpolicy.parameters.disabled_alerts:
@@ -182,7 +181,6 @@
 - azure_rm_sqldatamaskingrule.data_masking_policy_name:
 - azure_rm_sqldatamaskingrule.data_masking_rule_name:
 - azure_rm_sqldatamaskingrule.parameters:
-    - collapse
 - azure_rm_sqldatamaskingrule.parameters.alias_name:
 - azure_rm_sqldatamaskingrule.parameters.rule_state:
 - azure_rm_sqldatamaskingrule.parameters.schema_name:
@@ -315,7 +313,6 @@
     - rename: name
     - test: database{{ rpfx }}
 - azure_rm_sqldatabase.parameters:
-    - collapse
 - azure_rm_sqldatabase.parameters.location:
     - update_rule: compare
     - test: eastus
@@ -549,7 +546,6 @@
     - rename: name
     - test: elasticpool{{ rpfx }}
 - azure_rm_sqlelasticpool.parameters:
-    - collapse
 - azure_rm_sqlelasticpool.parameters.location:
     - test: eastus
 - azure_rm_sqlelasticpool.parameters.edition:
@@ -617,7 +613,6 @@
 - azure_rm_sqlserverazureadadministrator.server_name:
 - azure_rm_sqlserverazureadadministrator.administrator_name:
 - azure_rm_sqlserverazureadadministrator.properties:
-    - collapse
 - azure_rm_sqlserverazureadadministrator.properties.administrator_type:
 - azure_rm_sqlserverazureadadministrator.properties.login:
 - azure_rm_sqlserverazureadadministrator.properties.sid:
@@ -683,7 +678,6 @@
     - rename: name
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlserver.parameters:
-    - collapse
 - azure_rm_sqlserver.parameters.location:
     - sample: westus
     - test: eastus
@@ -927,7 +921,6 @@
 - azure_rm_sqldatabaseblobauditingpolicy.database_name:
 - azure_rm_sqldatabaseblobauditingpolicy.blob_auditing_policy_name:
 - azure_rm_sqldatabaseblobauditingpolicy.parameters:
-    - collapse
 - azure_rm_sqldatabaseblobauditingpolicy.parameters.state:
 - azure_rm_sqldatabaseblobauditingpolicy.parameters.storage_endpoint:
 - azure_rm_sqldatabaseblobauditingpolicy.parameters.parameters.storage_account_access_key:
@@ -967,7 +960,6 @@
 - azure_rm_sqlencryptionprotector.server_name:
 - azure_rm_sqlencryptionprotector.encryption_protector_name:
 - azure_rm_sqlencryptionprotector.parameters:
-    - collapse
 - azure_rm_sqlencryptionprotector.parameters.kind:
 - azure_rm_sqlencryptionprotector.parameters.server_key_name:
 - azure_rm_sqlencryptionprotector.parameters.server_key_type:
@@ -1000,7 +992,6 @@
 - azure_rm_sqlfailovergroup.server_name:
 - azure_rm_sqlfailovergroup.failover_group_name:
 - azure_rm_sqlfailovergroup.parameters:
-    - collapse
 - azure_rm_sqlfailovergroup.parameters.read_write_endpoint:
 - azure_rm_sqlfailovergroup.parameters.read_write_endpoint.failover_policy:
 - azure_rm_sqlfailovergroup.parameters.read_write_endpoint.failover_with_data_loss_grace_period_minutes:
@@ -1052,7 +1043,6 @@
 - azure_rm_sqlserverkey.server_name:
 - azure_rm_sqlserverkey.key_name:
 - azure_rm_sqlserverkey.parameters:
-    - collapse
 - azure_rm_sqlserverkey.parameters.kind:
 - azure_rm_sqlserverkey.parameters.server_key_type:
 - azure_rm_sqlserverkey.parameters.uri:
@@ -1117,7 +1107,6 @@
 - azure_rm_sqlsyncgroup.database_name:
 - azure_rm_sqlsyncgroup.sync_group_name:
 - azure_rm_sqlsyncgroup.parameters:
-    - collapse
 - azure_rm_sqlsyncgroup.parameters.interval:
 - azure_rm_sqlsyncgroup.parameters.conflict_resolution_policy:
 - azure_rm_sqlsyncgroup.parameters.sync_database_id:
@@ -1179,7 +1168,6 @@
 - azure_rm_sqlsyncmember.sync_group_name:
 - azure_rm_sqlsyncmember.sync_member_name:
 - azure_rm_sqlsyncmember.parameters:
-    - collapse
 - azure_rm_sqlsyncmember.parameters.database_type:
 - azure_rm_sqlsyncmember.parameters.sync_agent_id:
 - azure_rm_sqlsyncmember.parameters.sql_server_database_id:

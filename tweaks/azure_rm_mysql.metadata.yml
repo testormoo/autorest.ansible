@@ -8,7 +8,6 @@
     - rename: name
     - test: mysqlsrv{{ rpfx }}
 - azure_rm_mysqlserver.parameters:
-    - collapse
 - azure_rm_mysqlserver.parameters.sku:
 - azure_rm_mysqlserver.parameters.sku.name:
     - test: MYSQLB50
@@ -22,7 +21,6 @@
 - azure_rm_mysqlserver.parameters.location:
     - test: westus
 - azure_rm_mysqlserver.parameters.properties:
-    - collapse
 - azure_rm_mysqlserver.parameters.properties.storage_mb:
     - test: 51200
 - azure_rm_mysqlserver.parameters.properties.version:
@@ -104,7 +102,6 @@
     - rename: name
     - test: firewallrule{{ rpfx }}
 - azure_rm_mysqlfirewallrule.parameters:
-    - collapse
 - azure_rm_mysqlfirewallrule.parameters.start_ip_address:
     - required: no
     - update_rule: compare
@@ -142,7 +139,6 @@
     - rename: name
     - test: test-virtual-network-rule
 - azure_rm_mysqlvirtualnetworkrule.parameters:
-    - collapse
 - azure_rm_mysqlvirtualnetworkrule.parameters.virtual_network_subnet_id:
     - test: /subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group }}/providers/Microsoft.Network/virtualNetworks/vnet{{ rpfx }}/subnets/subnet{{ rpfx }}
 - azure_rm_mysqlvirtualnetworkrule.parameters.ignore_missing_vnet_service_endpoint:
@@ -177,7 +173,6 @@
     - rename: name
     - test: testdatabase
 - azure_rm_mysqldatabase.parameters:
-    - collapse
 - azure_rm_mysqldatabase.parameters.charset:
     - update_rule: compare
     - documentation_append: " Check MySQL documentation for possible values."
@@ -213,7 +208,6 @@
     - rename: name
     - test: event_scheduler
 - azure_rm_mysqlconfiguration.parameters:
-    - collapse
 - azure_rm_mysqlconfiguration.parameters.value:
     - test: ON
 - azure_rm_mysqlconfiguration.parameters.source:

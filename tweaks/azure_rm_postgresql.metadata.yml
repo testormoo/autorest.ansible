@@ -6,7 +6,6 @@
     - rename: name
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlserver.parameters:
-    - collapse
 - azure_rm_postgresqlserver.parameters.sku:
 - azure_rm_postgresqlserver.parameters.sku.name:
     - test: PGSQLS100
@@ -19,7 +18,6 @@
 - azure_rm_postgresqlserver.parameters.sku.family:
     - exclude
 - azure_rm_postgresqlserver.parameters.properties:
-    - collapse
 - azure_rm_postgresqlserver.parameters.location:
     - test: westus
 - azure_rm_postgresqlserver.parameters.properties.storage_mb:
@@ -100,7 +98,6 @@
     - rename: name
     - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.parameters:
-    - collapse
 - azure_rm_postgresqlfirewallrule.parameters.start_ip_address:
     - required: no
     - update_rule: compare
@@ -146,7 +143,6 @@
     - rename: name
     - test: test-virtual-network-rule
 - azure_rm_postgresqlvirtualnetworkrule.parameters:
-    - collapse
 - azure_rm_postgresqlvirtualnetworkrule.parameters.virtual_network_subnet_id:
 - azure_rm_postgresqlvirtualnetworkrule.parameters.ignore_missing_vnet_service_endpoint:
 - azure_rm_postgresqlvirtualnetworkrule.response.id:
@@ -180,7 +176,6 @@
     - rename: name
     - test: testdatabase
 - azure_rm_postgresqldatabase.parameters:
-    - collapse
 - azure_rm_postgresqldatabase.parameters.charset:
     - update_rule: compare
     - documentation_append: " Check PostgreSQL documentation for possible values."
@@ -216,7 +211,6 @@
     - rename: name
     - test: deadlock_timeout
 - azure_rm_postgresqlconfiguration.parameters:
-    - collapse
 - azure_rm_postgresqlconfiguration.parameters.value:
     - test: 200
 - azure_rm_postgresqlconfiguration.parameters.source:

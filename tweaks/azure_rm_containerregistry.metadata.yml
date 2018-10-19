@@ -96,7 +96,6 @@
 - azure_rm_containerregistrywebhook.webhook_name:
     - test: webhook{{ rpfx }}
 - azure_rm_containerregistrywebhook.webhook_create_parameters:
-    - collapse
 - azure_rm_containerregistrywebhook.webhook_create_parameters.location:
     - test: eastus2
 - azure_rm_containerregistrywebhook.webhook_create_parameters.service_uri:

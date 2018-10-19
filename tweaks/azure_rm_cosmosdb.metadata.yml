@@ -3,7 +3,6 @@
 - azure_rm_cosmosdbdatabaseaccount.resource_group_name:
 - azure_rm_cosmosdbdatabaseaccount.account_name:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters:
-    - collapse
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.location:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.kind:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy:
