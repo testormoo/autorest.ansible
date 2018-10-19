@@ -112,7 +112,7 @@ namespace AutoRest.Ansible.Model
                     op += " MAIN";
                     module.ModuleName = AnsibleModuleName;
                     module.ModuleNameAlt = module.ModuleName;
-                    module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name, false) : CreateMethodOptions(ModuleCreateMethod.Name, false);
+                    module.Options = (ModuleCreateOrUpdateMethod != null) ? CreateMethodOptions(ModuleCreateOrUpdateMethod.Name) : CreateMethodOptions(ModuleCreateMethod.Name);
 
                     var methods = new List<ModuleMethod>();
 
@@ -472,7 +472,7 @@ namespace AutoRest.Ansible.Model
             return fields.ToArray();
         }
 
-        private ModuleOption[] CreateMethodOptions(string methodName, bool flatten = false)
+        private ModuleOption[] CreateMethodOptions(string methodName)
         {
             var option = new List<ModuleOption>();
             var method = ModuleFindMethod(methodName);
@@ -512,36 +512,17 @@ namespace AutoRest.Ansible.Model
                         }
                         else
                         {
-                            if (flatten)
-                            {
-                                // add hidden dictionary option here anyway to store all flattened values
-                               
-                                var suboption = new ModuleOption(p.Name, "dict", "False", "dict()");
-                                suboption.IsList = (p.ModelTypeName == "list");
-                                suboption.Disposition = "dictionary";
-                                suboption.Documentation = p.Documentation;
-                                suboption.IsList = false;
-                                option.Add(suboption);
+                            var suboption = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "dict()");
+                            suboption.IsList = (p.ModelTypeName == "list");
+                            suboption.Documentation = p.Documentation;
 
-                                if (suboption.Name.EndsWith("_parameters"))
-                                    suboption.NameAlt = "parameters";
+                            if (suboption.Name.EndsWith("_parameters") || suboption.Name == "parameters")
+                                suboption.NameAlt = "parameters";
+                                suboption.Collapsed = true;
 
-                                var suboptions = GetModelOptions(p.ModelTypeName, 0, v);
-                                foreach (var o in suboptions) o.Disposition = p.Name;
-                                option.AddRange(suboptions);
-                            }
-                            else
-                            {
-                                var suboption = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "dict()");
-                                suboption.IsList = (p.ModelTypeName == "list");
-                                suboption.Documentation = p.Documentation;
-
-                                if (suboption.Name.EndsWith("_parameters"))
-                                    suboption.NameAlt = "parameters";
-
-                                suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
-                                option.Add(suboption);
-                            }
+                            suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
+                            option.Add(suboption);
+                            option.
                         }
                     }
                 }
@@ -550,7 +531,7 @@ namespace AutoRest.Ansible.Model
             return option.ToArray();
         }
 
-        private ModuleOption[] GetModelOptions(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleValue)
+        private ModuleOption[] (string modelName, int level, Newtonsoft.Json.Linq.JToken sampleValue)
         {
             // [ZKK] this is a very bad hack for SQL Server
             if (modelName == "ServerPropertiesForCreate")
@@ -616,6 +597,13 @@ namespace AutoRest.Ansible.Model
 
                             // XXX - get next level of sample value
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
+
+                            // some options should be marked as collapsed by default
+                            if (option.Name == "properties")
+                            {
+                                option.Collapsed = true;
+                            }
+
                             options.Add(option);
                         }
                     }
