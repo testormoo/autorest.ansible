@@ -554,6 +554,7 @@ namespace AutoRest.Ansible.Model
                 {
                     // first check if model contains "id", if it does, most likely rest of the proprties are part of another module and this is just a reference
 
+                    if (level >= 1)
                     foreach (Property attr in model.ComposedProperties)
                     {
                         if (attr.Name == "id")
@@ -568,7 +569,7 @@ namespace AutoRest.Ansible.Model
                     {
                         if (idOnly && attr.Name != "id")
                             continue;
-                            
+
                         if (attr.Name != "tags" && !attr.IsReadOnly)
                         {
                             string attrName = attr.Name;
