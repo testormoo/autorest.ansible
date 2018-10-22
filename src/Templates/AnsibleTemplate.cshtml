@@ -265,7 +265,8 @@ else
             self.results['changed'] = False
             response = old_response
 @EmptyLine
-        self.results.update(self.format_item(response))
+        if self.state == 'present':
+            self.results.update(self.format_item(response))
         return self.results
 @if (Model.FixParameterStatements.Length > 0)
 {
@@ -361,8 +362,7 @@ else
 @EmptyLine
         return False
 @EmptyLine
-    def format_item(self, item):
-        d = item.as_dict()
+    def format_item(self, d):
         d = {
 @foreach (var line in Model.ModuleReturnResponseDictionary)
 {
