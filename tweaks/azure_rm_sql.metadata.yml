@@ -1226,8 +1226,11 @@
 - azure_rm_sqlvirtualnetworkrule.resource_group_name:
 - azure_rm_sqlvirtualnetworkrule.server_name:
 - azure_rm_sqlvirtualnetworkrule.virtual_network_rule_name:
+    - rename: name
 - azure_rm_sqlvirtualnetworkrule.virtual_network_subnet_id:
+    - update_rule: compare
 - azure_rm_sqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:
+    - update_rule: compare
 - azure_rm_sqlvirtualnetworkrule.response.id:
 - azure_rm_sqlvirtualnetworkrule.response.name:
 - azure_rm_sqlvirtualnetworkrule.response.type:
