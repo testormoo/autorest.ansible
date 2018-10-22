@@ -549,11 +549,17 @@
 - azure_rm_sqlelasticpool.parameters.location:
     - test: eastus
 - azure_rm_sqlelasticpool.parameters.edition:
+    - update_rule: compare
 - azure_rm_sqlelasticpool.parameters.dtu:
+    - update_rule: compare
 - azure_rm_sqlelasticpool.parameters.database_dtu_max:
+    - update_rule: compare
 - azure_rm_sqlelasticpool.parameters.database_dtu_min:
+    - update_rule: compare
 - azure_rm_sqlelasticpool.parameters.storage_mb:
+    - update_rule: compare
 - azure_rm_sqlelasticpool.parameters.zone_redundant:
+    - update_rule: compare
 - azure_rm_sqlelasticpool.response.id:
 - azure_rm_sqlelasticpool.response.name:
 - azure_rm_sqlelasticpool.response.type:
