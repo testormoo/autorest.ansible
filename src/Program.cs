@@ -62,7 +62,7 @@ namespace AutoRest.Ansible
             var codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
 
             // build settings
-            var altNamespace = "moo" +  (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First() + "moo";
+            var altNamespace = "" +  (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First() + "";
             new Settings
             {
                 Namespace = await GetValue("namespace"),
