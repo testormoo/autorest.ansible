@@ -11,7 +11,7 @@ echo "----------------------------- Generating MySQL"
 echo "----------------------------- Generating PostgreSQL"
 /autorest.ansible/scripts/generate-postgresql.sh
 echo "----------------------------- Generating Authorization"
-#/autorest.ansible/scripts/generate-authorization.sh
+/autorest.ansible/scripts/generate-authorization.sh
 echo "----------------------------- Generating Web"
 #/autorest.ansible/scripts/generate-web.sh
 echo "----------------------------- Generating Network"
