@@ -63,6 +63,7 @@ namespace AutoRest.Ansible
 
             // build settings
             var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
+
             new Settings
             {
                 Namespace = await GetValue("namespace"),
@@ -71,6 +72,15 @@ namespace AutoRest.Ansible
                 AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
                 Host = this
             };
+
+            var fixedNamespace = Settings.Instance.Namespace;
+
+            if (fixedNamespace.Split('.').Last().Any(char.IsDigit))
+            {
+                fixedNamespace = fixedNamespace.Remove(fixedNamespace.LastIndexOf('.')); 
+                Settings.Instance.Namespace = fixedNamespace;
+            }
+
             var header = await GetValue("license-header");
             if (header != null)
             {
