@@ -7,9 +7,9 @@ rm -rf /ansible-hatchery/tests/integration/targets/*
 echo "----------------------------- Generating SQL"
 /autorest.ansible/scripts/generate-sql.sh
 echo "----------------------------- Generating MySQL"
-#/autorest.ansible/scripts/generate-mysql.sh
+/autorest.ansible/scripts/generate-mysql.sh
 echo "----------------------------- Generating PostgreSQL"
-#/autorest.ansible/scripts/generate-postgresql.sh
+/autorest.ansible/scripts/generate-postgresql.sh
 echo "----------------------------- Generating Authorization"
 #/autorest.ansible/scripts/generate-authorization.sh
 echo "----------------------------- Generating Web"
