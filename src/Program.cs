@@ -73,12 +73,15 @@ namespace AutoRest.Ansible
                 Host = this
             };
 
-            var fixedNamespace = Settings.Instance.Namespace;
-
-            if (fixedNamespace.Split('.').Last().Any(char.IsDigit))
+            if (Settings.Instance.Namespace != null)
             {
-                fixedNamespace = fixedNamespace.Remove(fixedNamespace.LastIndexOf('.')); 
-                Settings.Instance.Namespace = fixedNamespace;
+                var fixedNamespace = Settings.Instance.Namespace;
+
+                if (fixedNamespace.Split('.').Last().Any(char.IsDigit))
+                {
+                    fixedNamespace = fixedNamespace.Remove(fixedNamespace.LastIndexOf('.')); 
+                    Settings.Instance.Namespace = fixedNamespace;
+                }
             }
 
             var header = await GetValue("license-header");
