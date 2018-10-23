@@ -62,10 +62,10 @@ namespace AutoRest.Ansible
             var codeModelT = new ModelSerializer<CodeModel>().Load(modelAsJson);
 
             // build settings
-            var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
+            var altNamespace = "moo" +  (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First() + "moo";
             new Settings
             {
-                Namespace = "xx" + (await GetValue("namespace")) + "xx",
+                Namespace = await GetValue("namespace"),
                 ClientName = GetXmsCodeGenSetting<string>(codeModelT, "name") ?? await GetValue("override-client-name"),
                 PayloadFlatteningThreshold = GetXmsCodeGenSetting<int?>(codeModelT, "ft") ?? await GetValue<int?>("payload-flattening-threshold") ?? 0,
                 AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
