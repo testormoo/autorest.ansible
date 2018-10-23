@@ -16,8 +16,8 @@ ls -al /ansible-hatchery-tmp/python/all/modules
 echo "----------- python/modules"
 ls -al /ansible-hatchery-tmp/all/modules
 
-cd /ansible-hatchery-tmp
-find .
+cd /
+find -name azure_rm*.py
 
 cp -R /ansible-hatchery-tmp/python/all/modules/* /ansible-hatchery/library/
 cp -R /ansible-hatchery-tmp/python/all/tests/* /ansible-hatchery/tests/integration/targets
