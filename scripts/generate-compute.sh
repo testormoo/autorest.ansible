@@ -1,3 +1,2 @@
 cd /azure-rest-api-specs/specification/compute/resource-manager
-autorest --output-folder=/ansible-hatchery-tmp --python-sdks-folder=/ansible-hatchery-tmp/ --use=/autorest.ansible --python --tag=package-2018-10-01
-cp -r  /ansible-hatchery-tmp/azure-mgmt-compute/* /ansible-hatchery-tmp && rm -R /ansible-hatchery-tmp/azure-mgmt-compute/*
+autorest --output-folder=/ansible-hatchery-tmp --python-sdks-folder=/ansible-hatchery-tmp/ --use=/autorest.ansible --python --tag=package-2017-12
