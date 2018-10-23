@@ -13,9 +13,9 @@ echo "----------------------------- Generating PostgreSQL"
 echo "----------------------------- Generating Authorization"
 /autorest.ansible/scripts/generate-authorization.sh
 echo "----------------------------- Generating Web"
-#/autorest.ansible/scripts/generate-web.sh
+/autorest.ansible/scripts/generate-web.sh
 echo "----------------------------- Generating Network"
-#/autorest.ansible/scripts/generate-network.sh
+/autorest.ansible/scripts/generate-network.sh
 echo "----------------------------- Generating Container Instance"
 #/autorest.ansible/scripts/generate-containerinstance.sh
 echo "----------------------------- Generating Container Registry"
