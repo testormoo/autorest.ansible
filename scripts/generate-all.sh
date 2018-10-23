@@ -5,30 +5,86 @@ rm -rf /ansible-hatchery/tests/integration/targets/*
 
 # generate all the modules API by API
 echo "----------------------------- Generating SQL"
+rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-sql.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating MySQL"
+rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-mysql.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating PostgreSQL"
+rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-postgresql.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Authorization"
+rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-authorization.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Web"
+rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-web.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Network"
+rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-network.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Container Instance"
-#/autorest.ansible/scripts/generate-containerinstance.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-containerinstance.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Container Registry"
-#/autorest.ansible/scripts/generate-containerregistry.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-containerregistry.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating KeyVault"
-#/autorest.ansible/scripts/generate-keyvault.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-keyvault.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Batch"
-#/autorest.ansible/scripts/generate-batch.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-batch.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Batch AI"
-#/autorest.ansible/scripts/generate-batchai.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-batchai.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Cosmos"
-#/autorest.ansible/scripts/generate-cosmos.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-cosmos.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating Compute"
-#/autorest.ansible/scripts/generate-compute.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-compute.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
 echo "----------------------------- Generating HDInsight"
-#/autorest.ansible/scripts/generate-hdinsight.sh
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-hdinsight.sh
+echo "---"
+cd /ansible-hatchery
+find -name azure_rm*.py
