@@ -1,2 +1,2 @@
 cd /azure-rest-api-specs/specification/web/resource-manager
-autorest --output-folder=/ansible-hatchery-tmp/ --output-folder=/python-sdks-folder/ --use=/autorest.ansible --python --tag=package-2016-09
+autorest --output-folder=/ansible-hatchery-tmp/ --python-sdks-folder=/ansible-hatchery-tmp/ --use=/autorest.ansible --python --tag=package-2016-09
