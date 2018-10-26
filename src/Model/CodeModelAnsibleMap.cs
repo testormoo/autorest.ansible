@@ -1623,7 +1623,7 @@ namespace AutoRest.Ansible.Model
                         if (!field.Collapsed)
                         {
                             help.Add(padding + "'" + field.NameAlt + "': {" );
-                            help.AddRange(GetResponseDictionary(field.SubFields, padding + "  ", srcPrefix + ".get('" + field.Name + "', {})"));
+                            help.AddRange(GetResponseDictionary(field.SubFields, padding + "    ", srcPrefix + ".get('" + field.Name + "', {})"));
                             help.Add(padding + "}");
                         }
                         else

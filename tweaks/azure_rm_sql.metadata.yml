@@ -473,6 +473,7 @@
 - azure_rm_sqldatabase_facts.response.managed_by:
 - azure_rm_sqldatabase_facts.response.create_mode:
 - azure_rm_sqldatabase_facts.response.collation:
+    - add
 - azure_rm_sqldatabase_facts.response.max_size_bytes:
 - azure_rm_sqldatabase_facts.response.sample_name:
 - azure_rm_sqldatabase_facts.response.elastic_pool_id:
@@ -492,6 +493,7 @@
 - azure_rm_sqldatabase_facts.response.restorable_dropped_database_id:
 - azure_rm_sqldatabase_facts.response.catalog_collation:
 - azure_rm_sqldatabase_facts.response.zone_redundant:
+    - add
 - azure_rm_sqldatabase_facts.response.license_type:
 - azure_rm_sqldatabase_facts.response.max_log_size_bytes:
 - azure_rm_sqldatabase_facts.response.earliest_restore_date:
