@@ -148,7 +148,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         }
         if (first)
         {
-@:        @(ifPadding)else:")
+@:        else:
         }
 @:            self.results['@(Model.ModuleOperationName)'] = self.@(f.Name)()
         ifStatement = "elif (";
