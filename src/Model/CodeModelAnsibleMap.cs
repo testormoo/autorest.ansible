@@ -1311,7 +1311,8 @@ namespace AutoRest.Ansible.Model
                     var option = FindOptionByName(optionName);
 
                     // don't include required options, as no need to check if they are specified
-                    if (option == null || option.Required)
+                    // XXX - that's stupid, why it's string
+                    if (option == null || option.Required == "True")
                         continue;
         
                     response.Add("        " + (first ? ifStatement : ifPadding) + "self." + option.NameAlt + " is not None" + ((idx != ps.Length - 1) ? " and" : "):"));
