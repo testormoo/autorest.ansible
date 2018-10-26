@@ -139,9 +139,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         bool first = true;
         for (int idx = 0; idx < ps.Length; idx++)
         {
+            string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
             if (Model.IsOptionRequired(optionName))
                 continue;
-            string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
             // if option is required, don't include it
 @:        @(first ? ifStatement : ifPadding)self.@(optionName) is not None@((idx != ps.Length - 1) ? " and" : "):")
             first = false;
