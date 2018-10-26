@@ -457,6 +457,7 @@
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqldatabase_facts.database_name:
     - test: database{{ rpfx }}
+    - rename: name
 - azure_rm_sqldatabase_facts.elastic_pool_name:
 - azure_rm_sqldatabase_facts.response.id:
 - azure_rm_sqldatabase_facts.response.name:

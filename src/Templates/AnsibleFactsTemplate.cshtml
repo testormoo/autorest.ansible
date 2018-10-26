@@ -74,7 +74,6 @@ from ansible.module_utils.azure_rm_common import AzureRMModuleBase
 @EmptyLine
 try:
     from msrestazure.azure_exceptions import CloudError
-    from msrestazure.azure_operation import AzureOperationPoller
     from @(Model.MgmtClientImportPath) import @(Model.MgmtClientName)
     from msrest.serialization import Model
 except ImportError:
@@ -140,6 +139,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
         for (int idx = 0; idx < ps.Length; idx++)
         {
             string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
+            // if option is required, don't include it
+            if (Model.IsOptionRequired(optionName))
+                continue;
 @:        @((idx == 0) ? ifStatement : ifPadding)self.@(optionName) is not None@((idx != ps.Length - 1) ? " and" : "):")
         }
 @:            self.results['@(Model.ModuleOperationName)'] = self.@(f.Name)()

@@ -1283,6 +1283,17 @@ namespace AutoRest.Ansible.Model
                 return name;
             }
         }
+
+        public bool IsOptionRequired(string name)
+        {
+            foreach (var o in ModuleOptions)
+            {
+                if (o.IsOptionRequired)
+                    return true;
+            }
+
+            return false;
+        }
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         // PRIVATE MAP ACCESS IMPLEMENTATION
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
