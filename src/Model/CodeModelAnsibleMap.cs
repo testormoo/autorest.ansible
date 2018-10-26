@@ -1288,7 +1288,7 @@ namespace AutoRest.Ansible.Model
         {
             foreach (var o in ModuleOptions)
             {
-                if (o.Required == "True")
+                if ((o.Name == name || o.NameAlt ==  name) && o.Required == "True")
                     return true;
             }
 
