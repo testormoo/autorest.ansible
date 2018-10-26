@@ -1322,6 +1322,7 @@ namespace AutoRest.Ansible.Model
                 response.Add("            self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
                 ifStatement = "elif (";
                 ifPadding = "      ";
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
