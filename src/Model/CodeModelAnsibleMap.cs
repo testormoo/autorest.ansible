@@ -1301,14 +1301,14 @@ namespace AutoRest.Ansible.Model
 
             string ifStatement = "if (";
             string ifPadding = "        ";
-            foreach (var f in Model.ModuleMethods)
+            foreach (var f in ModuleMethods)
             {
-                string[] ps = Model.GetMethodRequiredOptionNames(f.Name);
+                string[] ps = GetMethodRequiredOptionNames(f.Name);
                 bool first = true;
                 for (int idx = 0; idx < ps.Length; idx++)
                 {
                     string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
-                    if (Model.IsOptionRequired(optionName))
+                    if (IsOptionRequired(optionName))
                         continue;
                     // if option is required, don't include it
         
