@@ -130,30 +130,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
     }
 }
 @EmptyLine
-@{
-    string ifStatement = "if (";
-    string ifPadding = "        ";
-    foreach (var f in Model.ModuleMethods)
-    {
-        string[] ps = Model.GetMethodRequiredOptionNames(f.Name);
-        bool first = true;
-        for (int idx = 0; idx < ps.Length; idx++)
-        {
-            string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
-            if (Model.IsOptionRequired(optionName))
-                continue;
-            // if option is required, don't include it
-@:        @(first ? ifStatement : ifPadding)self.@(optionNameAlt) is not None@((idx != ps.Length - 1) ? " and" : "):")
-            first = false;
-        }
-        if (first)
-        {
-@:        else:
-        }
-@:            self.results['@(Model.ModuleOperationName)'] = self.@(f.Name)()
-        ifStatement = "elif (";
-        ifPadding = "      ";
-    }
+@foreach (var line in Model.GenerateFactsMainIfStatement())
+{
+@:@(line)
 }
         return self.results
 @foreach (var m in Model.ModuleMethods)

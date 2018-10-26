@@ -1294,6 +1294,36 @@ namespace AutoRest.Ansible.Model
 
             return false;
         }
+
+        public string[] GenerateFactsMainIfStatement()
+        {
+            var response = new List<string>();
+
+            string ifStatement = "if (";
+            string ifPadding = "        ";
+            foreach (var f in Model.ModuleMethods)
+            {
+                string[] ps = Model.GetMethodRequiredOptionNames(f.Name);
+                bool first = true;
+                for (int idx = 0; idx < ps.Length; idx++)
+                {
+                    string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
+                    if (Model.IsOptionRequired(optionName))
+                        continue;
+                    // if option is required, don't include it
+        
+                    response.Add("        " + (first ? ifStatement : ifPadding) + "self." + optionNameAlt + " is not None" + ((idx != ps.Length - 1) ? " and" : "):"));
+                    first = false;
+                }
+                if (first)
+                {
+                    response.Add("        else:");
+                }
+                response.Add("            self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
+                ifStatement = "elif (";
+                ifPadding = "      ";
+        }
+
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
         // PRIVATE MAP ACCESS IMPLEMENTATION
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
