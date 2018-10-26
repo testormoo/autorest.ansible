@@ -143,7 +143,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
             if (Model.IsOptionRequired(optionName))
                 continue;
             // if option is required, don't include it
-@:        @(first ? ifStatement : ifPadding)self.@(optionName) is not None@((idx != ps.Length - 1) ? " and" : "):")
+@:        @(first ? ifStatement : ifPadding)self.@(optionNameAlt) is not None@((idx != ps.Length - 1) ? " and" : "):")
             first = false;
         }
         if (first)
