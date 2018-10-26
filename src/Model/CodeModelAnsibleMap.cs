@@ -1284,15 +1284,15 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public bool IsOptionRequired(string name)
+        public ModuleOption FindOptionByName(string name)
         {
             foreach (var o in ModuleOptions)
             {
-                if ((o.Name == name || o.NameAlt ==  name) && o.Required == "True")
-                    return true;
+                if (o.Name == name || o.NameAlt ==  name)
+                    return o;
             }
 
-            return false;
+            return null;
         }
 
         public string[] GenerateFactsMainIfStatement()
@@ -1308,9 +1308,11 @@ namespace AutoRest.Ansible.Model
                 for (int idx = 0; idx < ps.Length; idx++)
                 {
                     string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
-                    if (IsOptionRequired(optionName))
+                    var option = FindOptionByName(optionName);
+
+                    // don't include required options, as no need to check if they are specified
+                    if (option == null || option.Required)
                         continue;
-                    // if option is required, don't include it
         
                     response.Add("        " + (first ? ifStatement : ifPadding) + "self." + option.NameAlt + " is not None" + ((idx != ps.Length - 1) ? " and" : "):"));
                     first = false;
