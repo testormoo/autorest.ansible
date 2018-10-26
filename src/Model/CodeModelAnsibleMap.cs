@@ -1288,7 +1288,7 @@ namespace AutoRest.Ansible.Model
         {
             foreach (var o in ModuleOptions)
             {
-                if (o.IsOptionRequired)
+                if (o.Required)
                     return true;
             }
 
