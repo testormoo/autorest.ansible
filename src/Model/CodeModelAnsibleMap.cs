@@ -1312,7 +1312,7 @@ namespace AutoRest.Ansible.Model
                         continue;
                     // if option is required, don't include it
         
-                    response.Add("        " + (first ? ifStatement : ifPadding) + "self." + optionNameAlt + " is not None" + ((idx != ps.Length - 1) ? " and" : "):"));
+                    response.Add("        " + (first ? ifStatement : ifPadding) + "self." + option.NameAlt + " is not None" + ((idx != ps.Length - 1) ? " and" : "):"));
                     first = false;
                 }
                 if (first)
@@ -1323,6 +1323,8 @@ namespace AutoRest.Ansible.Model
                 ifStatement = "elif (";
                 ifPadding = "      ";
             }
+
+            return response.ToArray();
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
