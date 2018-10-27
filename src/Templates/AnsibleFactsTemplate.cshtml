@@ -132,7 +132,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 @EmptyLine
 @foreach (var line in Model.GenerateFactsMainIfStatement())
 {
-@:@(line)
+@:        @(line)
 }
         return self.results
 @foreach (var m in Model.ModuleMethods)

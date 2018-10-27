@@ -1321,7 +1321,7 @@ namespace AutoRest.Ansible.Model
                 {
                     for (int idx = 0; idx < ps.Length; idx++)
                     {
-                        string l = "        ";
+                        string l = "";
                         if (idx == 0)
                         {
                             l += firstMethod ? "if " : "elif ";
@@ -1349,9 +1349,9 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    response.Add("        else:");
+                    response.Add("else:");
                 }
-                response.Add("            self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
+                response.Add("    self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
                 firstMethod = false;
             }
 
