@@ -112,6 +112,11 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 
         super(AzureRM@(Model.ModuleOperationNameUpper)Facts, self).__init__(self.module_arg_spec, supports_tags=False)
 @EmptyLine
+//
+//
+// main exec_mofule method is generated here
+//
+//
     def exec_module(self, **kwargs):
 
         for key in self.module_arg_spec:
@@ -130,11 +135,21 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
     }
 }
 @EmptyLine
+//
+//
+// main if statement that is checking parameters and calling appropriate get(), list(), list_by_...() functions
+//
+//
 @foreach (var line in Model.GenerateFactsMainIfStatement())
 {
 @:        @(line)
 }
         return self.results
+//
+//
+// all the module methods, like get() list_by_...(), et.c are genetated here
+//
+//
 @foreach (var m in Model.ModuleMethods)
 {
 @EmptyLine
@@ -181,6 +196,11 @@ else
 @:        return results
 }
 @EmptyLine
+//
+//
+// format_item function uses by all the methods above is generated here
+//
+//
     def format_item(self, item):
         d = item.as_dict()
         d = {
@@ -193,6 +213,11 @@ else
         return d
 @EmptyLine
 @EmptyLine
+//
+//
+// module main() function
+//
+//
 def main():
     AzureRM@(Model.ModuleOperationNameUpper)Facts()
 @EmptyLine
