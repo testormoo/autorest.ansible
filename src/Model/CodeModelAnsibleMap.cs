@@ -1301,57 +1301,61 @@ namespace AutoRest.Ansible.Model
             bool firstMethod = true;
             foreach (var f in ModuleMethods)
             {
-                string[] ps = GetMethodRequiredOptionNames(f.Name);
-
-                // create new list with options that are not globally required by the module
-                var tmpOptions = new List<string>();
-                for (int idx = 0; idx < ps.Length; idx++)
+                if (ModuleMethods.Length > 1)
                 {
-                    string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
-                    var o = FindOptionByName(optionName);
+                    string[] ps = GetMethodRequiredOptionNames(f.Name);
 
-                    if (o == null || o.Required == "True")
-                        continue;
-
-                    tmpOptions.Add(o.NameAlt);
-                }
-                ps = tmpOptions.ToArray();
-
-                if (ps.Length > 0)
-                {
+                    // create new list with options that are not globally required by the module
+                    var tmpOptions = new List<string>();
                     for (int idx = 0; idx < ps.Length; idx++)
                     {
-                        string l = "";
-                        if (idx == 0)
-                        {
-                            l += firstMethod ? "if " : "elif ";
-                            if (ps.Length > 1) l += "(";
-                        }
-                        else
-                        {
-                            l += "        ";
-                        }
+                        string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
+                        var o = FindOptionByName(optionName);
 
-                        l += "self." + ps[idx] + " is not None";
+                        if (o == null || o.Required == "True")
+                            continue;
 
-                        if (idx != ps.Length - 1)
-                        {
-                            l += " and";
-                        }
-                        else
-                        {
-                            if (ps.Length > 1) l += ")";
-                            l += ":";
-                        }
+                        tmpOptions.Add(o.NameAlt);
+                    }
+                    ps = tmpOptions.ToArray();
 
-                        response.Add(l);
+                    if (ps.Length > 0)
+                    {
+                        for (int idx = 0; idx < ps.Length; idx++)
+                        {
+                            string l = "";
+                            if (idx == 0)
+                            {
+                                l += firstMethod ? "if " : "elif ";
+                                if (ps.Length > 1) l += "(";
+                            }
+                            else
+                            {
+                                l += "        ";
+                            }
+
+                            l += "self." + ps[idx] + " is not None";
+
+                            if (idx != ps.Length - 1)
+                            {
+                                l += " and";
+                            }
+                            else
+                            {
+                                if (ps.Length > 1) l += ")";
+                                l += ":";
+                            }
+
+                            response.Add(l);
+                        }
+                    }
+                    else
+                    {
+                        response.Add("else:");
                     }
                 }
-                else
-                {
-                    response.Add("else:");
-                }
-                response.Add("    self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
+
+                response.Add((ModuleMethods.Length > 1 ? "    " : "") + "self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
                 firstMethod = false;
             }
 
