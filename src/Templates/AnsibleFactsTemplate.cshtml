@@ -146,9 +146,9 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 }
         return self.results
 @{
-@//
-@// all the module methods, like get() list_by_...(), et.c are genetated here
-@//
+//
+// all the module methods, like get() list_by_...(), et.c are genetated here
+//
 }
 @foreach (var m in Model.ModuleMethods)
 {
@@ -197,9 +197,9 @@ else
 }
 @EmptyLine
 @{
-@//
-@// format_item function uses by all the methods above is generated here
-@//
+//
+// format_item function uses by all the methods above is generated here
+//
 }
     def format_item(self, item):
         d = item.as_dict()
@@ -214,9 +214,9 @@ else
 @EmptyLine
 @EmptyLine
 @{
-@//
-@// module main() function
-@//
+//
+// module main() function
+//
 }
 def main():
     AzureRM@(Model.ModuleOperationNameUpper)Facts()
