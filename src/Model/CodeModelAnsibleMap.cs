@@ -1298,33 +1298,62 @@ namespace AutoRest.Ansible.Model
         public string[] GenerateFactsMainIfStatement()
         {
             var response = new List<string>();
-
-            string ifStatement = "if (";
-            string ifPadding = "        ";
+            bool firstMethod = true;
             foreach (var f in ModuleMethods)
             {
                 string[] ps = GetMethodRequiredOptionNames(f.Name);
-                bool first = true;
+
+                // create new list with options that are not globally required by the module
+                var tmpOptions = new List<string>();
                 for (int idx = 0; idx < ps.Length; idx++)
                 {
                     string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
-                    var option = FindOptionByName(optionName);
+                    var o = FindOptionByName(optionName);
 
-                    // don't include required options, as no need to check if they are specified
-                    // XXX - that's stupid, why it's string
                     if (option == null || option.Required == "True")
                         continue;
-        
-                    response.Add("        " + (first ? ifStatement : ifPadding) + "self." + option.NameAlt + " is not None" + ((idx != ps.Length - 1) ? " and" : "):"));
-                    first = false;
+
+                    tmpOptions.Add(o.NameAlt);
                 }
-                if (first)
+                ps = tmpOptions.ToArray();
+
+                if (ps.Length > 0)
+                {
+                    for (int idx = 0; idx < ps.Length; idx++)
+                    {
+                        string optionName = ps[idx];  
+                        string l = "        ";
+                        if (idx == 0)
+                        {
+                            l += firstMethod ? "if " : "elif ";
+                            if (ps.Length > 1) l += "(";
+                        }
+                        else
+                        {
+                            l += "        ";
+                        }
+
+                        l += "self." + option.NameAlt + " is not None";
+
+                        if (idx != ps.Length - 1)
+                        {
+                            l += " and";
+                        }
+                        else
+                        {
+                            if (ps.Length > 1) l += ")";
+                            l += ":";
+                        }
+
+                        response.Add(l);
+                    }
+                }
+                else
                 {
                     response.Add("        else:");
                 }
                 response.Add("            self.results['" + ModuleOperationName +"'] = self." + f.Name + "()");
-                ifStatement = "elif (";
-                ifPadding = "      ";
+                firstMethod = false;
             }
 
             return response.ToArray();
