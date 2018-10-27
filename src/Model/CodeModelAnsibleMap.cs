@@ -1310,7 +1310,7 @@ namespace AutoRest.Ansible.Model
                     string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
                     var o = FindOptionByName(optionName);
 
-                    if (option == null || option.Required == "True")
+                    if (option == null || o.Required == "True")
                         continue;
 
                     tmpOptions.Add(o.NameAlt);
@@ -1321,7 +1321,6 @@ namespace AutoRest.Ansible.Model
                 {
                     for (int idx = 0; idx < ps.Length; idx++)
                     {
-                        string optionName = ps[idx];  
                         string l = "        ";
                         if (idx == 0)
                         {
@@ -1333,7 +1332,7 @@ namespace AutoRest.Ansible.Model
                             l += "        ";
                         }
 
-                        l += "self." + option.NameAlt + " is not None";
+                        l += "self." + ps[idx] + " is not None";
 
                         if (idx != ps.Length - 1)
                         {
