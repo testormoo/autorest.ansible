@@ -1310,7 +1310,7 @@ namespace AutoRest.Ansible.Model
                     string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
                     var o = FindOptionByName(optionName);
 
-                    if (option == null || o.Required == "True")
+                    if (o == null || o.Required == "True")
                         continue;
 
                     tmpOptions.Add(o.NameAlt);
