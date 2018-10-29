@@ -2,20 +2,29 @@
     - rename: azure_rm_cosmosdbaccount
 - azure_rm_cosmosdbdatabaseaccount.resource_group_name:
 - azure_rm_cosmosdbdatabaseaccount.account_name:
+    - rename: name
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.location:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.kind:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy.default_consistency_level:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy.max_staleness_prefix:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy.max_interval_in_seconds:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.location_name:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.provisioning_state:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.failover_priority:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.database_account_offer_type:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.ip_range_filter:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.enable_automatic_failover:
+    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.response.id:
 - azure_rm_cosmosdbdatabaseaccount.response.name:
 - azure_rm_cosmosdbdatabaseaccount.response.type:
@@ -51,6 +60,7 @@
     - rename: azure_rm_cosmosdbaccount_facts
 - azure_rm_cosmosdbdatabaseaccount_facts.resource_group_name:
 - azure_rm_cosmosdbdatabaseaccount_facts.account_name:
+    - rename: name
 - azure_rm_cosmosdbdatabaseaccount_facts.response.id:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.name:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.type:
