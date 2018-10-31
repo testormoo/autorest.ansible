@@ -125,12 +125,12 @@ echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
 
-/autorest.ansible/scripts/generate-generic.sh addons package-2018-03 /
-/autorest.ansible/scripts/generate-generic.sh adhybridhealthservice package-2014-01 /
-/autorest.ansible/scripts/generate-generic.sh advisor package-2017-04 /
-/autorest.ansible/scripts/generate-generic.sh alertsmanagement package-2018-01 /
-/autorest.ansible/scripts/generate-generic.sh apimanagement package-2018-01 /
-/autorest.ansible/scripts/generate-generic.sh applicationinsights package-2015-05 /
-/autorest.ansible/scripts/generate-generic.sh automation package-2018-06-preview /
-/autorest.ansible/scripts/generate-generic.sh azure-kusto package-2018-09-07-preview /
-/autorest.ansible/scripts/generate-generic.sh azurestack package-2017-06-01 /
+/autorest.ansible/scripts/generate-generic.sh addons package-2018-03 azure-mgmt-addons
+/autorest.ansible/scripts/generate-generic.sh adhybridhealthservice package-2014-01 azure-mgmt-adhybridhealthservice
+/autorest.ansible/scripts/generate-generic.sh advisor package-2017-04 azure-mgmt-advisor
+/autorest.ansible/scripts/generate-generic.sh alertsmanagement package-2018-05 .
+/autorest.ansible/scripts/generate-generic.sh apimanagement package-2018-01 azure-mgmt-apimanagement
+/autorest.ansible/scripts/generate-generic.sh applicationinsights package-2015-05 azure-mgmt-applicationinsights
+/autorest.ansible/scripts/generate-generic.sh automation package-2018-06-preview azure-mgmt-automation
+/autorest.ansible/scripts/generate-generic.sh azure-kusto package-2018-09-07-preview azure-mgmt-kusto
+/autorest.ansible/scripts/generate-generic.sh azurestack package-2017-06-01 .
