@@ -86,5 +86,9 @@ echo "----------------------------- Generating HDInsight"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-hdinsight.sh
 echo "---"
+echo "----------------------------- Generating FrontDoor"
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-frontdoor.sh
+echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
