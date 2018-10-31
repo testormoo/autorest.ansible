@@ -86,26 +86,38 @@ echo "----------------------------- Generating HDInsight"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-hdinsight.sh
 echo "---"
+cd /ansible-hatchery-tmp
+find -name azure_rm*.py
 echo "----------------------------- Generating FrontDoor"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-frontdoor.sh
 echo "---"
+cd /ansible-hatchery-tmp
+find -name azure_rm*.py
 echo "----------------------------- Generating Machine Learning"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-machinelearning.sh
 echo "---"
+cd /ansible-hatchery-tmp
+find -name azure_rm*.py
 echo "----------------------------- Generating Machine Learning Compute"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-machinelearningcompute.sh
 echo "---"
+cd /ansible-hatchery-tmp
+find -name azure_rm*.py
 echo "----------------------------- Generating Machine Learning Experimentation"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-machinelearningexperimentation.sh
 echo "---"
+cd /ansible-hatchery-tmp
+find -name azure_rm*.py
 echo "----------------------------- Generating Machine Learning Services"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-machinelearningservices.sh
 echo "---"
+cd /ansible-hatchery-tmp
+find -name azure_rm*.py
 echo "----------------------------- Generating MariaDB"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-mariadb.sh
