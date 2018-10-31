@@ -124,3 +124,13 @@ rm -rf /ansible-hatchery-tmp/*
 echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
+
+/autorest.ansible/scripts/generate-generic.sh addons package-2018-03 /
+/autorest.ansible/scripts/generate-generic.sh adhybridhealthservice package-2014-01 /
+/autorest.ansible/scripts/generate-generic.sh advisor package-2017-04 /
+/autorest.ansible/scripts/generate-generic.sh alertsmanagement package-2018-01 /
+/autorest.ansible/scripts/generate-generic.sh apimanagement package-2018-01 /
+/autorest.ansible/scripts/generate-generic.sh applicationinsights package-2015-05 /
+/autorest.ansible/scripts/generate-generic.sh automation package-2018-06-preview /
+/autorest.ansible/scripts/generate-generic.sh azure-kusto package-2018-09-07-preview /
+/autorest.ansible/scripts/generate-generic.sh azurestack package-2017-06-01 /
