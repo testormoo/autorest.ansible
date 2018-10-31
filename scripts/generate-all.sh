@@ -90,5 +90,25 @@ echo "----------------------------- Generating FrontDoor"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-frontdoor.sh
 echo "---"
+echo "----------------------------- Generating Machine Learning"
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-machinelearning.sh
+echo "---"
+echo "----------------------------- Generating Machine Learning Compute"
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-machinelearningcompute.sh
+echo "---"
+echo "----------------------------- Generating Machine Learning Experimentation"
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-machinelearningexperimentation.sh
+echo "---"
+echo "----------------------------- Generating Machine Learning Services"
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-machinelearningservices.sh
+echo "---"
+echo "----------------------------- Generating MariaDB"
+rm -rf /ansible-hatchery-tmp/*
+/autorest.ansible/scripts/generate-mariadb.sh
+echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
