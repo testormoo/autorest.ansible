@@ -550,6 +550,7 @@ namespace AutoRest.Ansible.Model
                                 suboption.Collapsed = true;
                             }
 
+                            this.Map.Info.Add("--------- GETTING SUBOPTIONS OF " + suboption.Name);
                             suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
                             option.Add(suboption);
                         }
@@ -610,6 +611,7 @@ namespace AutoRest.Ansible.Model
                                     //look += " " + pp.Name; 
                                     if (pp.Name == attrName)
                                     {
+                                        this.Map.Info.Add(" .... FOUND");
                                         subSampleValue = pp.Value;
                                     }
                                 }
@@ -642,6 +644,8 @@ namespace AutoRest.Ansible.Model
                             }
 
                             option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
+
+                            this.Map.Info.Add("--------- GETTING SUBOPTIONS OF " + option.Name);
 
                             // XXX - get next level of sample value
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
