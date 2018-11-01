@@ -486,6 +486,9 @@ namespace AutoRest.Ansible.Model
             {
                 this.Map.Info.Add("---SFM--- " + methodName);
                 this.Map.Info.Add(examples.First().Value.ToString());
+                foreach(KeyValuePair<string, var> kvp in example.Parameters) {
+                    this.Map.Info.Add(" .... " + kvp.Key);
+                }
             }
             else
             {
@@ -501,9 +504,16 @@ namespace AutoRest.Ansible.Model
                         // QQQQQQQQQQ
                         string type = ModelTypeNameToYamlTypeName(p.ModelType);
                         if (example != null)
-                        {
-                            
+                        {                 
                             example.Parameters.TryGetValue(p.SerializedName, out v);
+                            if (v == null)
+                            {
+                                this.Map.Info.Add(" .... NOT FOUND: " + p.SerializedName);
+                            }
+                            else
+                            {
+                                this.Map.Info.Add(" .... FOUND: " + p.SerializedName);
+                            }
                         }
 
                         if (type != "dict")
