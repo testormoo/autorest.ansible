@@ -1,0 +1,14 @@
+- azure_rm_addonssupportplantype:
+- azure_rm_addonssupportplantype.provider_name:
+- azure_rm_addonssupportplantype.plan_type_name:
+- azure_rm_addonssupportplantype.response.id:
+- azure_rm_addonssupportplantype.response.name:
+- azure_rm_addonssupportplantype.response.type:
+- azure_rm_addonssupportplantype.response.provisioning_state:
+- azure_rm_addonssupportplantype_facts:
+- azure_rm_addonssupportplantype_facts.provider_name:
+- azure_rm_addonssupportplantype_facts.plan_type_name:
+- azure_rm_addonssupportplantype_facts.response.id:
+- azure_rm_addonssupportplantype_facts.response.name:
+- azure_rm_addonssupportplantype_facts.response.type:
+- azure_rm_addonssupportplantype_facts.response.provisioning_state:

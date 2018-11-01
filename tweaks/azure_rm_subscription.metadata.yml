@@ -1,0 +1,11 @@
+- azure_rm_subscription_facts:
+- azure_rm_subscription_facts.subscription_id:
+- azure_rm_subscription_facts.response.id:
+- azure_rm_subscription_facts.response.subscription_id:
+- azure_rm_subscription_facts.response.display_name:
+- azure_rm_subscription_facts.response.state:
+- azure_rm_subscription_facts.response.subscription_policies:
+- azure_rm_subscription_facts.response.subscription_policies.location_placement_id:
+- azure_rm_subscription_facts.response.subscription_policies.quota_id:
+- azure_rm_subscription_facts.response.subscription_policies.spending_limit:
+- azure_rm_subscription_facts.response.authorization_source:

@@ -1,0 +1,4 @@
+- azure_rm_resourcehealthavailabilitystatuse_facts:
+- azure_rm_resourcehealthavailabilitystatuse_facts.resource_group_name:
+- azure_rm_resourcehealthavailabilitystatuse_facts.filter:
+- azure_rm_resourcehealthavailabilitystatuse_facts.expand:

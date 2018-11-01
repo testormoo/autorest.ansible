@@ -1,0 +1,15 @@
+- azure_rm_powerbiembeddedworkspacecollection:
+- azure_rm_powerbiembeddedworkspacecollection.resource_group_name:
+- azure_rm_powerbiembeddedworkspacecollection.workspace_collection_name:
+- azure_rm_powerbiembeddedworkspacecollection.location:
+- azure_rm_powerbiembeddedworkspacecollection.response.id:
+- azure_rm_powerbiembeddedworkspacecollection.response.name:
+- azure_rm_powerbiembeddedworkspacecollection.response.type:
+- azure_rm_powerbiembeddedworkspacecollection.response.location:
+- azure_rm_powerbiembeddedworkspacecollection.response.tags:
+- azure_rm_powerbiembeddedworkspacecollection.response.sku:
+- azure_rm_powerbiembeddedworkspacecollection.response.sku.name:
+- azure_rm_powerbiembeddedworkspacecollection.response.sku.tier:
+- azure_rm_powerbiembeddedworkspacecollection.response.properties:
+- azure_rm_powerbiembeddedworkspacecollection_facts:
+- azure_rm_powerbiembeddedworkspacecollection_facts.resource_group_name:
