@@ -485,7 +485,7 @@ namespace AutoRest.Ansible.Model
             if (!examples.IsNullOrEmpty())
             {
                 this.Map.Info.Add("---SFM--- " + methodName);
-                foreach(KeyValuePair<string, var> kvp in example.Parameters) {
+                foreach(KeyValuePair<string, Newtonsoft.Json.Linq.JToken> kvp in example.Parameters) {
                     this.Map.Info.Add(" .... " + kvp.Key);
                 }
             }
