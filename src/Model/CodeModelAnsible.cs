@@ -616,6 +616,21 @@ namespace AutoRest.Ansible.Model
                                         this.Map.Info.Add(" .... FOUND");
                                         subSampleValue = pp.Value;
                                     }
+                                    else if (pp.Name == "properties")
+                                    {
+                                        Newtonsoft.Json.Linq.JObject properties = pp.Value as Newtonsoft.Json.Linq.JObject;
+
+                                        foreach (var ppp in sampleValueObject.Properties())
+                                        {
+                                            this.Map.Info.Add(" .... SAMPLE (PP): " + ppp.Name + " - " + ppp.Value.ToString());
+                                            //look += " " + pp.Name; 
+                                            if (ppp.Name == attrName)
+                                            {
+                                                this.Map.Info.Add(" .... FOUND");
+                                                subSampleValue = ppp.Value;
+                                            }
+                                        }
+                                    }
                                 }
                             }
 
