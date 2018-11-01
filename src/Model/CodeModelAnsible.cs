@@ -482,6 +482,16 @@ namespace AutoRest.Ansible.Model
             // XXX - for now get first example
             var example = examples.IsNullOrEmpty() ? null : examples.First().Value;
 
+            if (!examples.IsNullOrEmpty())
+            {
+                this.Map.Info.Add("---SFM--- " + methodName);
+                this.Map.Info.Add(examples.First().Value.ToString());
+            }
+            else
+            {
+                this.Map.Info.Add("---SNF--- " + methodName);
+            }
+
             if (method != null)
             {
                 foreach (var p in method.Parameters)
@@ -490,7 +500,11 @@ namespace AutoRest.Ansible.Model
                     {
                         // QQQQQQQQQQ
                         string type = ModelTypeNameToYamlTypeName(p.ModelType);
-                        if (example != null) example.Parameters.TryGetValue(p.SerializedName, out v);
+                        if (example != null)
+                        {
+                            
+                            example.Parameters.TryGetValue(p.SerializedName, out v);
+                        }
 
                         if (type != "dict")
                         {
