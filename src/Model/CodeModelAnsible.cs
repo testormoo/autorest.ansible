@@ -567,6 +567,7 @@ namespace AutoRest.Ansible.Model
             if (modelName == "ServerPropertiesForCreate")
                 modelName = "ServerPropertiesForDefaultCreate";
 
+            this.Map.Info.Add(">>>>>>>>>>>>>>>>>>>>> SUB: " + modelName);
             CompositeTypePy model = GetModelTypeByName(modelName);
             var options = new List<ModuleOption>();
             AutoRest.Core.Model.Parameter p;
@@ -596,6 +597,8 @@ namespace AutoRest.Ansible.Model
 
                         if (attr.Name != "tags" && !attr.IsReadOnly)
                         {
+                            this.Map.Info.Add("--------- PROCESSING " + attr.Name);
+
                             string attrName = attr.Name;
                             try { attrName = attr.XmlName; } catch (Exception e) { }
 
@@ -604,10 +607,9 @@ namespace AutoRest.Ansible.Model
 
                             if (sampleValueObject != null)
                             {
-                                this.Map.Info.Add(" .... LOOKING FOR: " + attrName);
                                 foreach (var pp in sampleValueObject.Properties())
                                 {
-                                    this.Map.Info.Add(" .... CHECKING: " + pp.Name);
+                                    this.Map.Info.Add(" .... SAMPLE: " + pp.Name + " - " + pp.Value.ToString());
                                     //look += " " + pp.Name; 
                                     if (pp.Name == attrName)
                                     {
@@ -645,8 +647,6 @@ namespace AutoRest.Ansible.Model
 
                             option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
 
-                            this.Map.Info.Add("--------- GETTING SUBOPTIONS OF " + option.Name);
-
                             // XXX - get next level of sample value
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
 
@@ -661,6 +661,7 @@ namespace AutoRest.Ansible.Model
                     }
                 }
             }
+            this.Map.Info.Add("<<<<<<<<<<<<<<<<<<<<<");
             return options.ToArray();
         }
 
