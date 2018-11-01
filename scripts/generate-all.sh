@@ -4,126 +4,34 @@ rm -rf /ansible-hatchery/library/*
 rm -rf /ansible-hatchery/tests/integration/targets/*
 
 # generate all the modules API by API
-echo "----------------------------- Generating SQL"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-sql.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating MySQL"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-mysql.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating PostgreSQL"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-postgresql.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Authorization"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-authorization.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Web"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-web.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
 echo "----------------------------- Generating Network"
 rm -rf /ansible-hatchery-tmp/*
 /autorest.ansible/scripts/generate-network.sh
 echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
-echo "----------------------------- Generating Container Instance"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-containerinstance.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Container Registry"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-containerregistry.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating KeyVault"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-keyvault.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Batch"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-batch.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Batch AI"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-batchai.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Cosmos"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-cosmos.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Compute"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-compute.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating HDInsight"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-hdinsight.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating FrontDoor"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-frontdoor.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Machine Learning"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-machinelearning.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Machine Learning Compute"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-machinelearningcompute.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Machine Learning Experimentation"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-machinelearningexperimentation.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating Machine Learning Services"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-machinelearningservices.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
-echo "----------------------------- Generating MariaDB"
-rm -rf /ansible-hatchery-tmp/*
-/autorest.ansible/scripts/generate-mariadb.sh
-echo "---"
-cd /ansible-hatchery-tmp
-find -name azure_rm*.py
+
+/autorest.ansible/scripts/generate-generic.sh sql composite-v3 azure-mgmt-sql
+/autorest.ansible/scripts/generate-generic.sh mysql package-2017-04-preview azure-mgmt-rdbms
+/autorest.ansible/scripts/generate-generic.sh postgresql package-2017-04-preview azure-mgmt-rdbms
+/autorest.ansible/scripts/generate-generic.sh authorization package-2015-07 .
+/autorest.ansible/scripts/generate-generic.sh web package-2016-09 azure-mgmt-web
+# namespace issue
+#/autorest.ansible/scripts/generate-generic.sh network xxx .
+/autorest.ansible/scripts/generate-generic.sh containerinstance package-2017-10-preview azure-mgmt-containerinstance
+/autorest.ansible/scripts/generate-generic.sh containerregistry package-2017-10 azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2017_10_01
+/autorest.ansible/scripts/generate-generic.sh keyvault package-2016-10 azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
+/autorest.ansible/scripts/generate-generic.sh batch package-2017-09 azure-mgmt-batch
+/autorest.ansible/scripts/generate-generic.sh batchai package-2017-09-preview azure-mgmt-batchai
+/autorest.ansible/scripts/generate-generic.sh cosmos-db package-2015-04 azure-mgmt-cosmosdb
+/autorest.ansible/scripts/generate-generic.sh compute package-2018-10-01 .
+/autorest.ansible/scripts/generate-generic.sh hdinsight package-2015-03-preview azure-mgmt-hdinsight
+/autorest.ansible/scripts/generate-generic.sh frontdoor package-2018-08-preview azure-mgmt-frontdoor
+/autorest.ansible/scripts/generate-generic.sh machinelearning package-webservices-2017-01 .
+/autorest.ansible/scripts/generate-generic.sh machinelearningcompute package-2017-08-preview azure-mgmt-machinelearningcompute
+/autorest.ansible/scripts/generate-generic.sh machinelearningexperimentation package-2017-05-preview .
+/autorest.ansible/scripts/generate-generic.sh machinelearningservices package-2018-03-preview .
+/autorest.ansible/scripts/generate-generic.sh mariadb package-2018-06-01-preview azure-mgmt-rdbms
 
 /autorest.ansible/scripts/generate-generic.sh addons package-2018-03 azure-mgmt-addons
 /autorest.ansible/scripts/generate-generic.sh adhybridhealthservice package-2014-01 azure-mgmt-adhybridhealthservice
