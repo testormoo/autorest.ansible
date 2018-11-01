@@ -620,7 +620,7 @@ namespace AutoRest.Ansible.Model
                                     {
                                         Newtonsoft.Json.Linq.JObject properties = pp.Value as Newtonsoft.Json.Linq.JObject;
 
-                                        foreach (var ppp in sampleValueObject.Properties())
+                                        foreach (var ppp in properties.Properties())
                                         {
                                             this.Map.Info.Add(" .... SAMPLE (PP): " + ppp.Name + " - " + ppp.Value.ToString());
                                             //look += " " + pp.Name; 
