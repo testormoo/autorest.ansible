@@ -11,7 +11,7 @@ echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
 
-/autorest.ansible/scripts/generate-generic.sh sql composite-v3 azure-mgmt-sql
+/autorest.ansible/scripts/generate-generic.sh sql package-composite-v3 azure-mgmt-sql
 /autorest.ansible/scripts/generate-generic.sh mysql package-2017-04-preview azure-mgmt-rdbms
 /autorest.ansible/scripts/generate-generic.sh postgresql package-2017-04-preview azure-mgmt-rdbms
 /autorest.ansible/scripts/generate-generic.sh authorization package-2015-07 .
