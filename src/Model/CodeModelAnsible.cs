@@ -485,7 +485,6 @@ namespace AutoRest.Ansible.Model
             if (!examples.IsNullOrEmpty())
             {
                 this.Map.Info.Add("---SFM--- " + methodName);
-                this.Map.Info.Add(examples.First().Value.ToString());
                 foreach(KeyValuePair<string, var> kvp in example.Parameters) {
                     this.Map.Info.Add(" .... " + kvp.Key);
                 }
@@ -604,8 +603,10 @@ namespace AutoRest.Ansible.Model
 
                             if (sampleValueObject != null)
                             {
+                                this.Map.Info.Add(" .... LOOKING FOR: " + attrName);
                                 foreach (var pp in sampleValueObject.Properties())
                                 {
+                                    this.Map.Info.Add(" .... CHECKING: " + pp.Name);
                                     //look += " " + pp.Name; 
                                     if (pp.Name == attrName)
                                     {
