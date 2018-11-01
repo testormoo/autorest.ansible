@@ -30,7 +30,7 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh machinelearning package-webservices-2017-01 .
 /autorest.ansible/scripts/generate-generic.sh machinelearningcompute package-2017-08-preview azure-mgmt-machinelearningcompute
 /autorest.ansible/scripts/generate-generic.sh machinelearningexperimentation package-2017-05-preview .
-/autorest.ansible/scripts/generate-generic.sh machinelearningservices package-2018-03-preview .
+/autorest.ansible/scripts/generate-generic.sh machinelearningservices package-2018-03-preview azure-mgmt-machinelearningservices/all/modules
 /autorest.ansible/scripts/generate-generic.sh mariadb package-2018-06-01-preview azure-mgmt-rdbms
 
 /autorest.ansible/scripts/generate-generic.sh addons package-2018-03 azure-mgmt-addons
@@ -56,14 +56,14 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh databricks package-2018-04-01 .
 /autorest.ansible/scripts/generate-generic.sh datacatalog package-2016-03-30 .
 /autorest.ansible/scripts/generate-generic.sh datafactory package-2018-06 azure-mgmt-datafactory
-/autorest.ansible/scripts/generate-generic.sh datalake-analytics package-2016-11 azure-mgmt-datalake-analytics
+/autorest.ansible/scripts/generate-generic.sh datalake-analytics package-2016-11 azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
 /autorest.ansible/scripts/generate-generic.sh datalake-store package-2016-11 azure-mgmt-datalake-store
 /autorest.ansible/scripts/generate-generic.sh datamigration package-2018-07-15-preview azure-mgmt-datamigration
 /autorest.ansible/scripts/generate-generic.sh deploymentmanager package-2018-09-01-preview azure-mgmt-deploymentmanager
 /autorest.ansible/scripts/generate-generic.sh deviceprovisioningservices package-2018-01 azure-mgmt-iothubprovisioningservices
 /autorest.ansible/scripts/generate-generic.sh devspaces package-2018-06-01-preview azure-mgmt-devspaces
 /autorest.ansible/scripts/generate-generic.sh devtestlabs package-2016-05 azure-mgmt-devtestlabs
-/autorest.ansible/scripts/generate-generic.sh dns package-2018-05 azure-mgmt-dns
+/autorest.ansible/scripts/generate-generic.sh dns package-2018-05 azure-mgmt-dns/azure/mgmt/dns/v2018_05_01
 /autorest.ansible/scripts/generate-generic.sh domainservices package-2017-06 .
 /autorest.ansible/scripts/generate-generic.sh eventgrid package-2018-09-preview azure-mgmt-eventgrid
 /autorest.ansible/scripts/generate-generic.sh eventhub package-2017-04 azure-mgmt-eventhub
