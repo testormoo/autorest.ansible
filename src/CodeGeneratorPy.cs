@@ -173,7 +173,7 @@ namespace AutoRest.Ansible
                 await WriteWithLf(ansibleInfo, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".template.json"));
 
                 var metadataTemplate = new MetadataTemplateTemplate { Model = codeModelPure };
-                await WriteWithLf(metadataTemplate, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".metadata.template.yml"));
+                await WriteWithLf(metadataTemplate, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".metadata.yml"));
             }
         }
 
