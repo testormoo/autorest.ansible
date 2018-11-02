@@ -606,6 +606,11 @@ namespace AutoRest.Ansible.Model
                             Newtonsoft.Json.Linq.JToken subSampleValue = null;
                             Newtonsoft.Json.Linq.JObject sampleValueObject = sampleValue as Newtonsoft.Json.Linq.JObject;
 
+                            if (sampleValue != null)
+                            {
+                                this.Map.Info.Add("--------- SAMPLE: " + sampleValue.ToString());
+                            }
+
                             if (sampleValue == null)
                             {
                                 this.Map.Info.Add("--------- NO SAMPLE VALUE");
