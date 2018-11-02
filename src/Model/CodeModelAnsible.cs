@@ -607,7 +607,7 @@ namespace AutoRest.Ansible.Model
                             Newtonsoft.Json.Linq.JObject sampleValueObject = sampleValue as Newtonsoft.Json.Linq.JObject;
                             Newtonsoft.Json.Linq.JArray sampleValueArray = sampleValue as Newtonsoft.Json.Linq.JArray;
 
-                            if (sampleValueArray != null)
+                            if (sampleValueArray != null && sampleValueArray.Count > 0)
                             {
                                 sampleValueObject = sampleValueArray[0] as Newtonsoft.Json.Linq.JObject;
                             }
