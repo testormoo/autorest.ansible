@@ -605,6 +605,12 @@ namespace AutoRest.Ansible.Model
                             this.Map.Info.Add("--------- PROCESSING " + attr.Name + "/" + attrName);
                             Newtonsoft.Json.Linq.JToken subSampleValue = null;
                             Newtonsoft.Json.Linq.JObject sampleValueObject = sampleValue as Newtonsoft.Json.Linq.JObject;
+                            Newtonsoft.Json.Linq.JArray sampleValueArray = sampleValue as Newtonsoft.Json.Linq.JArray;
+
+                            if (sampleValueArray != null)
+                            {
+                                sampleValueObject = sampleValueArray[0] as Newtonsoft.Json.Linq.JObject;
+                            }
 
                             if (sampleValue != null)
                             {
