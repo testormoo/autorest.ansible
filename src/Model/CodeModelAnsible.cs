@@ -602,6 +602,7 @@ namespace AutoRest.Ansible.Model
                             string attrName = attr.Name;
                             try { attrName = attr.XmlName; } catch (Exception e) { }
 
+                            this.Map.Info.Add("--------- PROCESSING " + attr.Name + "/" + attrName);
                             Newtonsoft.Json.Linq.JToken subSampleValue = null;
                             Newtonsoft.Json.Linq.JObject sampleValueObject = sampleValue as Newtonsoft.Json.Linq.JObject;
 
