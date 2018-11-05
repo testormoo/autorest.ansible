@@ -46,6 +46,15 @@ namespace AutoRest.Ansible
                 throw new Exception("Code model is not a Python Code Model");
             }
 
+            if (codeModel.SelectFirstExample())
+            {
+                do
+                {
+                    ITemplate restTemplate = new AnsibleRestTemplate { Model = codeModel };
+                    await WriteWithLf(restTemplate, Path.Combine("examples", codeModel.GetExampleName() + ".yml"));
+                } while (codeModel.SelectNextExample());
+            }
+
             string[] empty = { "NOT SOURCE TEMPLATE" };
             map = codeModel.Map;
             report = empty;
@@ -174,15 +183,6 @@ namespace AutoRest.Ansible
 
                 var metadataTemplate = new MetadataTemplateTemplate { Model = codeModelPure };
                 await WriteWithLf(metadataTemplate, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".metadata.yml"));
-            }
-
-            if (codeModel.SelectFirstExample())
-            {
-                do
-                {
-                    ITemplate restTemplate = new AnsibleRestTemplate { Model = codeModel };
-                    await WriteWithLf(restTemplate, Path.Combine("examples", codeModel.GetExampleName() + ".yml"));
-                } while (codeModel.SelectNextExample());
             }
         }
 
