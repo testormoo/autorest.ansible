@@ -148,7 +148,7 @@ namespace AutoRest.Ansible.Model
             template.Add("        resource_type: automationaccounts");
             template.Add("        resource_name: '{{ automationaccountname }}'");
             template.Add("        body:");
-            template.AddRange(GetRestExampleBodyYaml(example, "          "));
+            template.AddRange(GetRestExampleBodyYaml(example.Item["parameters"], "          "));
             //template.Add("          properties:"); 
             //template.Add("            sku:");
             //template.Add("            name: Free");
@@ -171,7 +171,17 @@ namespace AutoRest.Ansible.Model
                 // dictionary -- 
                 foreach (var pp in vo.Properties())
                 {
-                    template.Add(prefix + pp.Name + ":");
+                    Newtonsoft.Json.Linq.JValue subv = pp as  Newtonsoft.Json.Linq.JValue;
+
+                    if (subv != null)
+                    {
+                        template.Add(prefix + pp.Name + ": " + subv.ToString());
+                    }
+                    else
+                    {
+                        template.Add(prefix + pp.Name + ":");
+                        template.AddRange(GetRestExampleBodyYaml(pp, prefix + "  "));
+                    }
                 }
             }
             else if (va != null)
