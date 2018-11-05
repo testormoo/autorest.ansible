@@ -198,13 +198,16 @@ namespace AutoRest.Ansible.Model
                 // dictionary -- 
                 foreach (var pp in vo.Properties())
                 {
-                    bool ignore = false;
-                    for (int i = 0; i < ignoreFields.Length; i++)
+                    if (ignoreFields != null)
                     {
-                        if (ignoreFields[i] == pp.Name) ignore = true;
-                    }
+                        bool ignore = false;
+                        for (int i = 0; i < ignoreFields.Length; i++)
+                        {
+                            if (ignoreFields[i] == pp.Name) ignore = true;
+                        }
 
-                    if (ignore) continue;
+                        if (ignore) continue;
+                    }
 
                     Newtonsoft.Json.Linq.JValue subv = pp.Value as  Newtonsoft.Json.Linq.JValue;
 
@@ -215,7 +218,7 @@ namespace AutoRest.Ansible.Model
                     else
                     {
                         template.Add(prefix + pp.Name + ":");
-                        template.AddRange(GetRestExampleBodyYaml(pp.Value, prefix + "  "));
+                        template.AddRange(GetRestExampleBodyYaml(pp.Value, prefix + "  ", null));
                     }
                 }
             }
