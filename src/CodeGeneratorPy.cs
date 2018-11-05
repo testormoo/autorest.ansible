@@ -176,13 +176,13 @@ namespace AutoRest.Ansible
                 await WriteWithLf(metadataTemplate, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".metadata.yml"));
             }
 
-            if (codeModel.SelectFirstSample())
+            if (codeModel.SelectFirstExample())
             {
                 do
                 {
                     ITemplate restTemplate = new AnsibleRestTemplate { Model = codeModel };
                     await WriteWithLf(restTemplate, Path.Combine("examples", codeModel.GetExampleName() + ".yml"));
-                } while (codeModel.SelectNextSample());
+                } while (codeModel.SelectNextExample());
             }
         }
 

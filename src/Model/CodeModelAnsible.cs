@@ -30,31 +30,26 @@ namespace AutoRest.Ansible.Model
 
         private int _currentOperation = 0;
         private int _currentMethod = 0;
-       Dictionary<string,Core.Model.XmsExtensions.Example>.Enumerator _examples = null;
+        Dictionary<string,Core.Model.XmsExtensions.Example>.Enumerator _examples;
 
         public bool SelectFirstExample()
         {
             _currentOperation = 0;
             _currentMethod = -1;
-            _examples = null;
+            _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
             return SelectNextExample();
         }
 
         public bool SelectNextExample()
         {
-            if (_examples != null)
-            {
-                _examples.MoveNext();
+            _examples.MoveNext();
 
-                if (_examples.Current != null)
-                    return true;
-
-                _examples = null;
-            }
+            if (_examples.Current != null)
+                return true;
 
             _currentMethod++;
 
-            while (_examples == null && _examples.Current == null)
+            while (_examples.Current == null)
             {
                 _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
                 if (!_examples.MoveNext())
