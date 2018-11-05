@@ -116,13 +116,31 @@ namespace AutoRest.Ansible.Model
         {
             List<string> template = new List<string>();
 
+            var method = Operations[_currentOperation].Methods[_currentMethod];
             template.Add("- hosts: localhost");
             template.Add("  vars:");
             template.Add("    resource_group:");
             template.Add("  tasks:");
             template.Add("");
             template.Add("    - name: Call REST API");
-            template.Add("      azure_rm_resource:");
+            // add method and use appropriate module
+            if (method.HttpMethod.ToLower() == "get")
+            {
+                template.Add("      azure_rm_resource_facts:");
+            }
+            else
+            {
+                template.Add("      azure_rm_resource:");
+
+                if (method.HttpMethod.ToLower() != "put")
+                {
+                    template.Add("        method: " + method.HttpMethod.ToUpper());
+                }
+            }
+            // add api version
+
+            // handle url
+            // XXX
             template.Add("        api_version: '" + ApiVersion + "'");
             template.Add("        resource_group: '{{ resource_group }}'");
             template.Add("        provider: automation");
