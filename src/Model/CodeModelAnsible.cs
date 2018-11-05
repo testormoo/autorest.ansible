@@ -116,7 +116,24 @@ namespace AutoRest.Ansible.Model
         {
             List<string> template = new List<string>();
 
-            template.Add("REST PLAYBOOK");
+            template.Add("- hosts: localhost");
+            template.Add("  vars:");
+            template.Add("    resource_group:");
+            template.Add("  tasks:");
+            template.Add("");
+            template.Add("    - name: Call REST API");
+            template.Add("      azure_rm_resource:");
+            template.Add("        api_version: '" + ApiVersion + "'");
+            template.Add("        resource_group: '{{ resource_group }}'");
+            template.Add("        provider: automation");
+            template.Add("        resource_type: automationaccounts");
+            template.Add("        resource_name: '{{ automationaccountname }}'");
+            template.Add("        body:");
+            template.Add("          properties:"); 
+            template.Add("            sku:");
+            template.Add("            name: Free");
+            template.Add("        name: myAutomationAccount9");
+            template.Add("        location: East US 2");
             return template.ToArray();
         }
 
