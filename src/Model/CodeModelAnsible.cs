@@ -117,6 +117,7 @@ namespace AutoRest.Ansible.Model
             List<string> template = new List<string>();
 
             var method = Operations[_currentOperation].Methods[_currentMethod];
+            var example = _examples.Current.Value;
             template.Add("- hosts: localhost");
             template.Add("  vars:");
             template.Add("    resource_group:");
@@ -147,11 +148,41 @@ namespace AutoRest.Ansible.Model
             template.Add("        resource_type: automationaccounts");
             template.Add("        resource_name: '{{ automationaccountname }}'");
             template.Add("        body:");
-            template.Add("          properties:"); 
-            template.Add("            sku:");
-            template.Add("            name: Free");
-            template.Add("        name: myAutomationAccount9");
-            template.Add("        location: East US 2");
+            template.AddRange(example, "          ");
+            #template.Add("          properties:"); 
+            #template.Add("            sku:");
+            #template.Add("            name: Free");
+            #template.Add("        name: myAutomationAccount9");
+            #template.Add("        location: East US 2");
+            return template.ToArray();
+        }
+
+        private string[] GetRestExampleBodyYaml(Newtonsoft.Json.Linq.JToken v, string prefix)
+        {
+            List<string> template = new List<string>();
+            // check if dict or list, or value
+            Newtonsoft.Json.Linq.JObject vo = v as Newtonsoft.Json.Linq.JObject;
+            Newtonsoft.Json.Linq.JArray va = v as Newtonsoft.Json.Linq.JArray;
+
+            //if (sampleValueArray != null && sampleValueArray.Count > 0)
+        
+            if (vo != null)
+            {
+                // dictionary -- 
+                foreach (var pp in vo.Properties())
+                {
+                    template.Add(prefix + pp.Name + ":");
+                }
+            }
+            else if (va != null)
+            {
+                // va.Count
+                for (int i = 0; i < va.Count; i++)
+                {
+                    template.Add(prefix + "- ");
+                }
+            }
+
             return template.ToArray();
         }
 
