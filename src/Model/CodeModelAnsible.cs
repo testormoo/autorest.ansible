@@ -30,33 +30,34 @@ namespace AutoRest.Ansible.Model
 
         private int _currentOperation = 0;
         private int _currentMethod = 0;
-        private Core.Model.XmsExtensions.Example _currentExample = null;
+       Dictionary<string,Core.Model.XmsExtensions.Example>.Enumerator _examples = null;
 
         public bool SelectFirstExample()
         {
             _currentOperation = 0;
             _currentMethod = -1;
-            _currentExample = null;
+            _examples = null;
             return SelectNextExample();
         }
 
         public bool SelectNextExample()
         {
-            if (_currentExample != null)
-                _currentExample = _currentExample.Next();
+            if (_examples != null)
+            {
+                _examples.MoveNext();
 
-            if (_currentExample != null)
-                return true;
+                if (_examples.Current != null)
+                    return true;
+
+                _examples = null;
+            }
 
             _currentMethod++;
 
-            while (_currentExample == null)
+            while (_examples == null && _examples.Current == null)
             {
-                Dictionary<string, Core.Model.XmsExtensions.Example> examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
-            
-                _currentExample = examples.IsNullOrEmpty() ? null : examples.First();
-
-                if (_currentExample == null)
+                _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
+                if (!_examples.MoveNext())
                 {
                     _currentMethod++;
 
@@ -75,7 +76,7 @@ namespace AutoRest.Ansible.Model
 
         public string GetExampleName()
         {
-            return "";
+            return _examples.Current.Name;
         }
 
         public string[] GetYaml()
