@@ -133,9 +133,9 @@ namespace AutoRest.Ansible.Model
             {
                 template.Add("      azure_rm_resource:");
 
-                if (method.HttpMethod.ToLower() != "put")
+                if (method.HttpMethod.ToString().ToLower() != "put")
                 {
-                    template.Add("        method: " + method.HttpMethod.ToUpper());
+                    template.Add("        method: " + method.HttpMethod.ToString().ToUpper());
                 }
             }
             // add api version
@@ -148,7 +148,7 @@ namespace AutoRest.Ansible.Model
             template.Add("        resource_type: automationaccounts");
             template.Add("        resource_name: '{{ automationaccountname }}'");
             template.Add("        body:");
-            template.AddRange(example, "          ");
+            template.AddRange(GetRestExampleBodyYaml(example, "          "));
             //template.Add("          properties:"); 
             //template.Add("            sku:");
             //template.Add("            name: Free");
