@@ -55,7 +55,7 @@ namespace AutoRest.Ansible.Model
 
             while (_examples == null)
             {
-                var operation = Operations[_currentOperation];
+                var operation = (_currentOperation >= 0 && _currentOperation < Operations.Count) ? Operations[_currentOperation] : null;
 
                 if (operation != null)
                 {
