@@ -59,7 +59,7 @@ namespace AutoRest.Ansible.Model
 
                 if (operation != null)
                 {
-                    var method = operation.Methods[_currentMethod];
+                    var method = (_currentMethod >= 0 && _currentMethod < operation.Methods.Count) operation.Methods[_currentMethod] : null;
                     if (method != null)
                     {
                         var d = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
