@@ -1,0 +1,11 @@
+﻿@using AutoRest.Ansible.Templates
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Ansible
+@using AutoRest.Ansible.Model
+@inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsible>
+@foreach (var line in Model.GetYaml())
+{
+@:@(line)
+}

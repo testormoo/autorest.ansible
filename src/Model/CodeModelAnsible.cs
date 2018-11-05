@@ -28,6 +28,64 @@ namespace AutoRest.Ansible.Model
 
         private string _namespace_upper;
 
+        private int _currentOperation = 0;
+        private int _currentMethod = 0;
+        private Core.Model.XmsExtensions.Example _currentExample = null;
+
+        public bool SelectFirstExample()
+        {
+            _currentOperation = 0;
+            _currentMethod = -1;
+            _currentExample = null;
+            return SelectNextExample();
+        }
+
+        public bool SelectNextExample()
+        {
+            if (_currentExample != null)
+                _currentExample = _currentExample.Next();
+
+            if (_currentExample != null)
+                return true;
+
+            _currentMethod++;
+
+            while (_currentExample == null)
+            {
+                Dictionary<string, Core.Model.XmsExtensions.Example> examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
+            
+                _currentExample = examples.IsNullOrEmpty() ? null : examples.First();
+
+                if (_currentExample == null)
+                {
+                    _currentMethod++;
+
+                    if (_currentMethod >= Operations[_currentOperation].Methods.Count)
+                    {
+                        _currentOperation++;
+                        _currentMethod = 0;
+
+                        if (_currentOperation >= Operations.Count)
+                            return false;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public string GetExampleName()
+        {
+            return "";
+        }
+
+        public string[] GetYaml()
+        {
+            List<string> template = new List<string>();
+
+            template.Add("REST PLAYBOOK");
+            return template.ToArray();
+        }
+
         private string AnsibleModuleName
         {
             get

@@ -2,6 +2,7 @@
 # remove all the old files from the hatchery
 rm -rf /ansible-hatchery/library/*
 rm -rf /ansible-hatchery/tests/integration/targets/*
+rm -rf /ansible-hatchery/examples/*
 
 # generate all the modules API by API
 echo "----------------------------- Generating Network"

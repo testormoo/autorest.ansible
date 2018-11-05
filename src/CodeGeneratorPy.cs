@@ -175,6 +175,15 @@ namespace AutoRest.Ansible
                 var metadataTemplate = new MetadataTemplateTemplate { Model = codeModelPure };
                 await WriteWithLf(metadataTemplate, Path.Combine("template", "azure_rm_" + codeModel.Namespace + ".metadata.yml"));
             }
+
+            if (codeModel.SelectFirstSample())
+            {
+                do
+                {
+                    ITemplate restTemplate = new AnsibleRestTemplate { Model = codeModel };
+                    await WriteWithLf(restTemplate, Path.Combine("examples", codeModel.GetExampleName() + ".yml"));
+                } while (codeModel.SelectNextSample());
+            }
         }
 
         public static string BuildSummaryAndDescriptionString(string summary, string description)
