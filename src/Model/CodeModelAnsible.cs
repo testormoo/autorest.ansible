@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace AutoRest.Ansible.Model
 
         private int _currentOperation = -1;
         private int _currentMethod = 0;
-        Dictionary<string,Core.Model.XmsExtensions.Example>.IEnumerator _examples = null;
+        IDictionaryEnumerator _examples = null;
 
         public bool SelectFirstExample()
         {
