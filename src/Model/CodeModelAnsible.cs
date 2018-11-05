@@ -31,7 +31,7 @@ namespace AutoRest.Ansible.Model
 
         private int _currentOperation = -1;
         private int _currentMethod = 0;
-        IDictionaryEnumerator _examples = null;
+        IEnumerator<System.Collections.Generic.KeyValuePair<string, Newtonsoft.Json.Linq.JToken>> _examples = null;
 
         public bool SelectFirstExample()
         {
