@@ -171,7 +171,7 @@ namespace AutoRest.Ansible.Model
                 // dictionary -- 
                 foreach (var pp in vo.Properties())
                 {
-                    Newtonsoft.Json.Linq.JValue subv = pp as  Newtonsoft.Json.Linq.JValue;
+                    Newtonsoft.Json.Linq.JValue subv = pp.Value as  Newtonsoft.Json.Linq.JValue;
 
                     if (subv != null)
                     {
