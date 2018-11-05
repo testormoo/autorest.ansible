@@ -45,17 +45,18 @@ namespace AutoRest.Ansible.Model
         {
             if (_examples != null)
             {
-                _examples.MoveNext();
-
-                if (_examples.Current != null)
-                    return true;
+                if (_examples.MoveNext())
+                {
+                    if (_examples.Current != null)
+                        return true;
+                }
                     
                 _examples = null;
             }
 
             _currentMethod++;
 
-            while (_examples == null || _examples.Current == null)
+            while (_examples == null)
             {
                 _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
                 if (!_examples.MoveNext())
