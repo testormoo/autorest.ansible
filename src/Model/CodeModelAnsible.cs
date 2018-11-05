@@ -62,7 +62,12 @@ namespace AutoRest.Ansible.Model
                     var method = operation.Methods[_currentMethod];
                     if (method != null)
                     {
-                        _examples = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
+                        var d = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
+                        
+                        if (d != null)
+                        {
+                            _examples = .GetEnumerator();
+                        }
                     }
                 }
 
