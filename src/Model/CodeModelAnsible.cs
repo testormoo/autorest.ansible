@@ -66,7 +66,7 @@ namespace AutoRest.Ansible.Model
                         
                         if (d != null)
                         {
-                            _examples = .GetEnumerator();
+                            _examples = d.GetEnumerator();
                         }
                     }
                 }
