@@ -80,7 +80,7 @@ namespace AutoRest.Ansible.Model
 
         public string GetExampleName()
         {
-            return _examples.Current.Name;
+            return _examples.Current.Key;
         }
 
         public string[] GetYaml()
