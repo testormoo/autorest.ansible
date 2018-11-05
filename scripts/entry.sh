@@ -23,4 +23,5 @@ find -name azure_rm*.py
 cp -R /ansible-hatchery-tmpx/all/modules/* /ansible-hatchery/library/
 cp -R /ansible-hatchery-tmpx/all/tests/* /ansible-hatchery/tests/integration/targets
 cp -R /ansible-hatchery-tmpx/template/* /ansible-hatchery/__template
+mkdir /ansible-hatchery/examples
 cp -R /ansible-hatchery-tmpx/examples/* /ansible-hatchery/examples
