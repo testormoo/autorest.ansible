@@ -125,7 +125,7 @@ namespace AutoRest.Ansible.Model
             template.Add("");
             template.Add("    - name: Call REST API");
             // add method and use appropriate module
-            if (method.HttpMethod.ToLower() == "get")
+            if (method.HttpMethod.ToString().ToLower() == "get")
             {
                 template.Add("      azure_rm_resource_facts:");
             }
