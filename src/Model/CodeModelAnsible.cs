@@ -180,7 +180,7 @@ namespace AutoRest.Ansible.Model
                     else
                     {
                         template.Add(prefix + pp.Name + ":");
-                        template.AddRange(GetRestExampleBodyYaml(pp, prefix + "  "));
+                        template.AddRange(GetRestExampleBodyYaml(pp.Value, prefix + "  "));
                     }
                 }
             }
