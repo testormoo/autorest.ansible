@@ -35,7 +35,7 @@ namespace AutoRest.Ansible.Model
         public bool SelectFirstExample()
         {
             _currentOperation = 0;
-            _currentMethod = -1;
+            _currentMethod = 0;
             _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
             return SelectNextExample();
         }
