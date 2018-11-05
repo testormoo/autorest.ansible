@@ -149,11 +149,11 @@ namespace AutoRest.Ansible.Model
             template.Add("        resource_name: '{{ automationaccountname }}'");
             template.Add("        body:");
             template.AddRange(example, "          ");
-            #template.Add("          properties:"); 
-            #template.Add("            sku:");
-            #template.Add("            name: Free");
-            #template.Add("        name: myAutomationAccount9");
-            #template.Add("        location: East US 2");
+            //template.Add("          properties:"); 
+            //template.Add("            sku:");
+            //template.Add("            name: Free");
+            //template.Add("        name: myAutomationAccount9");
+            //template.Add("        location: East US 2");
             return template.ToArray();
         }
 
