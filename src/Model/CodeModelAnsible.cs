@@ -28,28 +28,33 @@ namespace AutoRest.Ansible.Model
 
         private string _namespace_upper;
 
-        private int _currentOperation = 0;
+        private int _currentOperation = -1;
         private int _currentMethod = 0;
-        Dictionary<string,Core.Model.XmsExtensions.Example>.Enumerator _examples;
+        Dictionary<string,Core.Model.XmsExtensions.Example>.IEnumerator _examples = null;
 
         public bool SelectFirstExample()
         {
             _currentOperation = 0;
-            _currentMethod = 0;
-            _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
+            _currentMethod = -1;
+            _examples = null;
             return SelectNextExample();
         }
 
         public bool SelectNextExample()
         {
-            _examples.MoveNext();
+            if (_examples != null)
+            {
+                _examples.MoveNext();
 
-            if (_examples.Current != null)
-                return true;
+                if (_examples.Current != null)
+                    return true;
+                    
+                _examples = null;
+            }
 
             _currentMethod++;
 
-            while (_examples.Current == null)
+            while (_examples == null || _examples.Current == null)
             {
                 _examples = Operations[_currentOperation].Methods[_currentMethod].Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name).GetEnumerator();
                 if (!_examples.MoveNext())
@@ -64,9 +69,11 @@ namespace AutoRest.Ansible.Model
                         if (_currentOperation >= Operations.Count)
                             return false;
                     }
+
+                    _examples = null;
                 }
             }
-            return false;
+            return true;
         }
 
         public string GetExampleName()
