@@ -115,9 +115,14 @@ namespace AutoRest.Ansible.Model
         public string[] GetYaml()
         {
             List<string> template = new List<string>();
+            List<string> ignore = new List<string>();
+
+            ignore.Add("api-version");
 
             var method = Operations[_currentOperation].Methods[_currentMethod];
             var example = _examples.Current.Value;
+            string[] url = method.Url.Split("/");
+
             template.Add("- hosts: localhost");
             template.Add("  vars:");
             template.Add("    resource_group:");
@@ -143,12 +148,34 @@ namespace AutoRest.Ansible.Model
             // handle url
             // XXX
             template.Add("        api_version: '" + ApiVersion + "'");
-            template.Add("        resource_group: '{{ resource_group }}'");
-            template.Add("        provider: automation");
+
+            for (int i = 0; i < url.Length; i++)
+            {
+                if (url[i].StartsWith("{"))
+                {
+                    string p = url[i].Substring(1, url[i].Lenght - 2);
+
+                    if (url[i - 1] == "resourceGroups")
+                    {
+                        template.Add("        resource_group: " + example["parameters"][p]);
+                    }
+                    else if (url[i - 1] == "providers")
+                    {
+                        template.Add("        provider: " + p.Split(".")[1]);
+                    }
+
+                    // XXX - resource
+                    // XXX - subresource
+
+                    ignore.Add(p);
+                }
+            }
+
             template.Add("        resource_type: automationaccounts");
             template.Add("        resource_name: '{{ automationaccountname }}'");
+
             template.Add("        body:");
-            template.AddRange(GetRestExampleBodyYaml(example["parameters"], "          "));
+            template.AddRange(GetRestExampleBodyYaml(example["parameters"], "          ", ignore.ToArray()));
             //template.Add("          properties:"); 
             //template.Add("            sku:");
             //template.Add("            name: Free");
@@ -157,7 +184,7 @@ namespace AutoRest.Ansible.Model
             return template.ToArray();
         }
 
-        private string[] GetRestExampleBodyYaml(Newtonsoft.Json.Linq.JToken v, string prefix)
+        private string[] GetRestExampleBodyYaml(Newtonsoft.Json.Linq.JToken v, string prefix, string[] ignoreFields)
         {
             List<string> template = new List<string>();
             // check if dict or list, or value
@@ -171,6 +198,14 @@ namespace AutoRest.Ansible.Model
                 // dictionary -- 
                 foreach (var pp in vo.Properties())
                 {
+                    bool ignore = false;
+                    for (int i = 0; i < ignoreFields.Length; i++)
+                    {
+                        if (ignoreFields[i] == pp.Name) ignore = true;
+                    }
+
+                    if (ignore) continue;
+
                     Newtonsoft.Json.Linq.JValue subv = pp.Value as  Newtonsoft.Json.Linq.JValue;
 
                     if (subv != null)
