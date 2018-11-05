@@ -59,16 +59,31 @@ namespace AutoRest.Ansible.Model
 
                 if (operation != null)
                 {
+                    this.Map.Info.Add(" .... OPERATION IS NOT NULL");
                     var method = (_currentMethod >= 0 && _currentMethod < operation.Methods.Count) ? operation.Methods[_currentMethod] : null;
                     if (method != null)
                     {
+                        this.Map.Info.Add(" .... METHOD IS NOT NULL");
                         var d = method.Extensions.GetValue<Newtonsoft.Json.Linq.JObject>(AutoRest.Core.Model.XmsExtensions.Examples.Name);
                         
                         if (d != null)
                         {
+                            this.Map.Info.Add(" .... FOUND EXAMPLES");
                             _examples = d.GetEnumerator();
                         }
+                        else
+                        {
+                            this.Map.Info.Add(" .... NO EXAMPLES");
+                        }
                     }
+                    else
+                    {
+                        this.Map.Info.Add(" .... METHOD IS NULL " + _currentMethod.ToString());
+                    }
+                }
+                else
+                {
+                    this.Map.Info.Add(" .... OPERATION IS NULL " + _currentOperation.ToString());
                 }
 
                 if ((_examples == null) || !_examples.MoveNext())
@@ -87,6 +102,8 @@ namespace AutoRest.Ansible.Model
                     _examples = null;
                 }
             }
+
+            this.Map.Info.Add("CURRENT EXAMPLE NAME " + GetExampleName());
             return true;
         }
 
