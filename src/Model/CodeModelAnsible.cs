@@ -46,10 +46,7 @@ namespace AutoRest.Ansible.Model
             if (_examples != null)
             {
                 if (_examples.MoveNext())
-                {
-                    if (_examples.Current != null)
-                        return true;
-                }
+                    return true;
                     
                 _examples = null;
             }
