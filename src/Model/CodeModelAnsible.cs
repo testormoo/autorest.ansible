@@ -153,7 +153,7 @@ namespace AutoRest.Ansible.Model
             {
                 if (url[i].StartsWith("{"))
                 {
-                    string p = url[i].Substring(1, url[i].Lenght - 2);
+                    string p = url[i].Substring(1, url[i].Length - 2);
 
                     if (url[i - 1] == "resourceGroups")
                     {
