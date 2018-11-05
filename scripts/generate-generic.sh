@@ -6,4 +6,4 @@ cp -r /ansible-hatchery-tmp/$3/* /ansible-hatchery-tmpx/
 echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
-find -name azure_rm*.yml
+find -name *.yml
