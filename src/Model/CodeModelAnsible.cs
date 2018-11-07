@@ -124,8 +124,6 @@ namespace AutoRest.Ansible.Model
             string[] url = method.Url.Split("/");
 
             template.Add("- hosts: localhost");
-            template.Add("  vars:");
-            template.Add("    resource_group:");
             template.Add("  tasks:");
             template.Add("");
             template.Add("    - name: Call REST API");
@@ -149,6 +147,9 @@ namespace AutoRest.Ansible.Model
             // XXX
             template.Add("        api_version: '" + ApiVersion + "'");
 
+            bool resource = false;
+            bool subresource = false;
+
             for (int i = 0; i < url.Length; i++)
             {
                 if (url[i].StartsWith("{"))
@@ -162,12 +163,32 @@ namespace AutoRest.Ansible.Model
                     else if (url[i - 1] == "providers")
                     {
                         template.Add("        provider: " + p.Split(".")[1]);
+                        resource = true;
+                    }
+                    elseif (subresource)
+                    {
+
+                    }
+                    elseif (resource)
+                    {
+                        template.Add("        resource_name: " + p;
                     }
 
                     // XXX - resource
                     // XXX - subresource
 
                     ignore.Add(p);
+                }
+                else
+                {
+                    if (subresource)
+                    {
+
+                    }
+                    elseif (resource)
+                    {
+                        template.Add("        resource_type: " + url[i];
+                    }
                 }
             }
 
