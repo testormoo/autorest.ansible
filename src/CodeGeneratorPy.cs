@@ -51,7 +51,7 @@ namespace AutoRest.Ansible
                 do
                 {
                     ITemplate restTemplate = new AnsibleRestTemplate { Model = codeModel };
-                    await WriteWithLf(restTemplate, Path.Combine("examples", codeModel.Namespace + "_" + codeModel.GetExampleName().Replace(' ', '_').Replace('/', '_') + ".yml"));
+                    await WriteWithLf(restTemplate, Path.Combine("examples", codeModel.Namespace + "_" + codeModel.GetExampleName().Replace(' ', '_').Replace('/', '_').Replace('-', '_').Replace("$", "").Replace(".", "").Replace(",", "").ToLower() + ".yml"));
                 } while (codeModel.SelectNextExample());
             }
 

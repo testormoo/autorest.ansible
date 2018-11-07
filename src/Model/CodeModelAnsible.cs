@@ -149,6 +149,7 @@ namespace AutoRest.Ansible.Model
 
             bool resource = false;
             bool subresource = false;
+            bool subresourceAdded = false;
 
             template.Add("        # url: " + method.Url);
 
@@ -164,11 +165,12 @@ namespace AutoRest.Ansible.Model
                     }
                     else if (subresource)
                     {
-
+                        template.Add("            name:" +   example["parameters"][p]);
                     }
                     else if (resource)
                     {
-                        template.Add("        resource_name: " + p);
+                        template.Add("        resource_name: " +  example["parameters"][p]);
+                        subresource = true;
                     }
 
                     // XXX - resource
@@ -185,7 +187,13 @@ namespace AutoRest.Ansible.Model
                     }
                     else if (subresource)
                     {
+                        if (!subresourceAdded)
+                        {
+                            template.Add("        subresource:" );
+                            subresourceAdded = true;
+                        }
 
+                        template.Add("          - type:" +  url[i]);
                     }
                     else if (resource)
                     {
