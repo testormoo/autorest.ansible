@@ -162,11 +162,6 @@ namespace AutoRest.Ansible.Model
                     {
                         template.Add("        resource_group: " + example["parameters"][p]);
                     }
-                    else if (url[i - 1] == "providers")
-                    {
-                        template.Add("        provider: " + p.Split(".").Last());
-                        resource = true;
-                    }
                     else if (subresource)
                     {
 
@@ -183,7 +178,12 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    if (subresource)
+                    if (url[i - 1] == "providers")
+                    {
+                        template.Add("        provider: " + p.Split(".").Last());
+                        resource = true;
+                    }
+                    else if (subresource)
                     {
 
                     }
