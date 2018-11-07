@@ -165,11 +165,11 @@ namespace AutoRest.Ansible.Model
                         template.Add("        provider: " + p.Split(".")[1]);
                         resource = true;
                     }
-                    elseif (subresource)
+                    else if (subresource)
                     {
 
                     }
-                    elseif (resource)
+                    else if (resource)
                     {
                         template.Add("        resource_name: " + p;
                     }
@@ -185,7 +185,7 @@ namespace AutoRest.Ansible.Model
                     {
 
                     }
-                    elseif (resource)
+                    else if (resource)
                     {
                         template.Add("        resource_type: " + url[i];
                     }
