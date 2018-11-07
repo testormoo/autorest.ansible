@@ -187,7 +187,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else if (resource)
                     {
-                        template.Add("        resource_type: " + url[i];
+                        template.Add("        resource_type: " + url[i]);
                     }
                 }
             }
