@@ -192,9 +192,6 @@ namespace AutoRest.Ansible.Model
                 }
             }
 
-            template.Add("        resource_type: automationaccounts");
-            template.Add("        resource_name: '{{ automationaccountname }}'");
-
             template.Add("        body:");
             template.AddRange(GetRestExampleBodyYaml(example["parameters"], "          ", ignore.ToArray()));
             return template.ToArray();
