@@ -150,6 +150,8 @@ namespace AutoRest.Ansible.Model
             bool resource = false;
             bool subresource = false;
 
+            template.Add("        # url: " + method.Url);
+
             for (int i = 0; i < url.Length; i++)
             {
                 if (url[i].StartsWith("{"))
