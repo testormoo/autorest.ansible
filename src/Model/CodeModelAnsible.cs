@@ -162,7 +162,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else if (url[i - 1] == "providers")
                     {
-                        template.Add("        provider: " + p.Split(".")[1]);
+                        template.Add("        provider: " + p.Split(".").Last());
                         resource = true;
                     }
                     else if (subresource)
