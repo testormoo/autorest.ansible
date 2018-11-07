@@ -197,11 +197,6 @@ namespace AutoRest.Ansible.Model
 
             template.Add("        body:");
             template.AddRange(GetRestExampleBodyYaml(example["parameters"], "          ", ignore.ToArray()));
-            //template.Add("          properties:"); 
-            //template.Add("            sku:");
-            //template.Add("            name: Free");
-            //template.Add("        name: myAutomationAccount9");
-            //template.Add("        location: East US 2");
             return template.ToArray();
         }
 
