@@ -208,7 +208,7 @@ namespace AutoRest.Ansible.Model
                 string[] body = GetRestExampleBodyYaml(example["parameters"]["parameters"], "          ", ignore.ToArray());
 
                 template.Add("        body:");
-                template.AddRange(body, );
+                template.AddRange(body);
             }
             return template.ToArray();
         }
