@@ -165,7 +165,7 @@ namespace AutoRest.Ansible.Model
                     }
                     else if (subresource)
                     {
-                        template.Add("            name:" +   example["parameters"][p]);
+                        template.Add("            name: " +   example["parameters"][p]);
                     }
                     else if (resource)
                     {
@@ -193,7 +193,7 @@ namespace AutoRest.Ansible.Model
                             subresourceAdded = true;
                         }
 
-                        template.Add("          - type:" +  url[i]);
+                        template.Add("          - type: " +  url[i]);
                     }
                     else if (resource)
                     {

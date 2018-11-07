@@ -94,7 +94,7 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh powerbiembedded package-2016-01 azure-mgmt-powerbiembedded
 /autorest.ansible/scripts/generate-generic.sh recoveryservices package-2016-06 azure-mgmt-recoveryservices
 /autorest.ansible/scripts/generate-generic.sh recoveryservicesbackup package-2017-07 azure-mgmt-recoveryservicesbackup
-/autorest.ansible/scripts/generate-generic.sh recoveryservuicessiterecovery package-2018-01 .
+/autorest.ansible/scripts/generate-generic.sh recoveryservicessiterecovery package-2018-01 .
 /autorest.ansible/scripts/generate-generic.sh redis package-2018-03 azure-mgmt-redis
 /autorest.ansible/scripts/generate-generic.sh relay package-2017-04 azure-mgmt-relay
 /autorest.ansible/scripts/generate-generic.sh reservations package-2018-06 azure-mgmt-reservations
