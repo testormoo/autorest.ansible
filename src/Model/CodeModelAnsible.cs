@@ -250,7 +250,11 @@ namespace AutoRest.Ansible.Model
                 // va.Count
                 for (int i = 0; i < va.Count; i++)
                 {
-                    template.Add(prefix + "- ");
+                    string[] subitem = GetRestExampleBodyYaml(va[i], "", null);
+                    for (int j = 0; j < subitem.Count; j++)
+                    {
+                        template.Add(prefix + ((j == 0) ? "- " : "  ") + subitem[j]);
+                    }
                 }
             }
 
