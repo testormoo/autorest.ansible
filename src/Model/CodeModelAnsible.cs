@@ -126,7 +126,7 @@ namespace AutoRest.Ansible.Model
             template.Add("- hosts: localhost");
             template.Add("  tasks:");
             template.Add("");
-            template.Add("    - name: Call REST API");
+            template.Add("    - name: " + _examples.Current.Name);
             // add method and use appropriate module
             if (method.HttpMethod.ToString().ToLower() == "get")
             {
