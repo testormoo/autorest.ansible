@@ -243,10 +243,7 @@ else
 @EmptyLine
             response = self.create_update_@(Model.ObjectNamePythonized)()
 @EmptyLine
-            if not old_response:
-                self.results['changed'] = True
-            else:
-                self.results['changed'] = old_response.__ne__(response)
+            self.results['changed'] = True
             self.log("Creation / Update done")
         elif self.to_do == Actions.Delete:
             self.log("@(Model.ObjectName) instance deleted")

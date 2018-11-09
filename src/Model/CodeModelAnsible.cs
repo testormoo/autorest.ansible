@@ -831,6 +831,9 @@ namespace AutoRest.Ansible.Model
 
                     foreach (Property attr in model.ComposedProperties)
                     {
+                        if (attr.ForwardTo != null)
+                            attr = attr.ForwardTo;
+                            
                         if (idOnly && attr.Name != "id")
                             continue;
 
