@@ -664,7 +664,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string[] code = GetIdempotencyCheck(ModuleOptions, "self", "old_response", 0);
+                string[] code = GetIdempotencyCheck(ModuleOptions, "", "", 0);
 
                 if (code.Length != 0)
                 {
@@ -672,8 +672,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    // default
-                    return new string[1] { "self.to_do = Actions.Update"};
+                    return [];
                 }
             }
         }
@@ -685,38 +684,44 @@ namespace AutoRest.Ansible.Model
             foreach (var option in options)
             {
                 string optionStatementPrefix = statementPrefix;
-                //string optionDictPrefix = dictPrefix + ((level > 0) ? ("['" + option.Name + "']") : "");
-                string optionDictPrefix = dictPrefix;
+                //string optionDictPrefix = dictPrefix;
                 
-                if (!option.Name.Contains("parameters"))
-                    optionDictPrefix += "['" + option.Name + "']";
+                //if (!option.Name.Contains("parameters"))
+                //    optionDictPrefix += "['" + option.Name + "']";
 
-                if (!option.Collapsed)
-                {
-                    if (statementPrefix == "self")
-                    {
-                        optionStatementPrefix += "." + option.NameAlt;
-                    }
-                    else
-                    {
-                        optionStatementPrefix += "['" + option.NameAlt + "']";
-                    }
-                }
+                //if (!option.Collapsed)
+                //{
+                //    if (statementPrefix == "self")
+                //    {
+                //        optionStatementPrefix += "." + option.NameAlt;
+                //    }
+                //    else
+                //    {
+                //        optionStatementPrefix += "['" + option.NameAlt + "']";
+                //    }
+                //}
 
                 if (option.UpdateRule != null && option.UpdateRule != "none")
                 {
                     // if update rule is defined at this level, it will be applied, even if option has suboptions
                     // suboptions will be ignored
                     // right now just simple update rule
-                    if (statementPrefix == "self")
+                    //if (statementPrefix == "self")
+                    //{
+                    //    statements.Add("if (" + optionStatementPrefix + " is not None) and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                    //}
+                    //else
+                    //{
+                    //    statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                    //}
+                    if (option.UpdateRule == "default")
                     {
-                        statements.Add("if (" + optionStatementPrefix + " is not None) and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                        statements.Add(statementPrefix + "'" + option.NameAlt + "': None,");
                     }
                     else
                     {
-                        statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
+                        statements.Add(statementPrefix + "'" + option.NameAlt + "': '" + option.UpdateRule + "',");
                     }
-                    statements.Add("    self.to_do = Actions.Update");
                 }
                 else
                 {
@@ -724,18 +729,22 @@ namespace AutoRest.Ansible.Model
                     // check suboptions
                     if (option.SubOptions != null)
                     {
+                        statements.Add(statementPrefix + "'" + option.NameAlt + "': {");
+                        string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "    ", "", level + 1);
+                        statements.AddRange(subStatements);
                         // XXX - take collapse into account
                         // XXX - check if actually exists
-                        if (statementPrefix == "self")
-                        {
-                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, optionDictPrefix, level + 1);
-                            statements.AddRange(subStatements);
-                        }
-                        else
-                        {
-                            string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", optionDictPrefix, level + 1);
-                            statements.AddRange(subStatements);
-                        }
+                        //if (statementPrefix == "self")
+                        //{
+                        //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, optionDictPrefix, level + 1);
+                        //    statements.AddRange(subStatements);
+                        //}
+                        //else
+                        //{
+                        //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", optionDictPrefix, level + 1);
+                        //    statements.AddRange(subStatements);
+                        //}
+                        statements.Add(statementPrefix + "}");
                     }
                     else
                     {

@@ -157,7 +157,6 @@ else
 @:        self.adjust_parameters()
 @EmptyLine
 }
-        old_response = None
         response = None
 @EmptyLine
         self.mgmt_client = self.get_mgmt_svc_client(@(Model.MgmtClientName),
@@ -210,11 +209,20 @@ else
                 self.to_do = Actions.Delete
             elif self.state == 'present':
                 self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
+                if (not compare(self.parameters, old_response,
 @{
     foreach (var rule in Model.ModuleIdempotencyCheck)
     {
-@:                @(rule)
+        if (first)
+        {
+@:                                {@rule
+        }
+        else
+        {
+@:                                 @rule
+        }
     }
+                                })):
     if (Model.NeedsDeleteBeforeUpdate)
     {
         if (Model.NeedsForceUpdate)
