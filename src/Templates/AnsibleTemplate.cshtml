@@ -373,6 +373,44 @@ else
         return d
 @EmptyLine
 @EmptyLine
+def compare(a, b, t):
+    if isinstance(t, dict):
+        if isinstance(a, list) and isinstance(b, list):
+            s = t.get('__sort__', None)
+            if s is not None:
+                a = sorted(a, key=lambda x: x[s])
+                b = sorted(b, key=lambda x: x[s])
+            if len(a) != len(b):
+                return False
+            for i in range(len(a)):
+                if not compare(a[i], b[i], t):
+                    return False
+            return True
+        elif isinstance(a, dict) and isinstance(b, dict):
+            for k in t.keys():
+                if not k == '__sort__':
+                    if not compare(a.get(k, None), b.get(k, None), t[k]):
+                        return False
+            return True
+        else:
+            return a is None
+    else:
+        if a is None:
+            return True
+        if t == "location":
+            # location needs to be normalized, remove spaces, lowercase
+            a = a.replace(' ', '').lower()
+            b = b.replace(' ', '').lower()
+            return a == b
+        else:
+            # default comparison
+            if not isinstance(a, dict) and not isinstance(a, list):
+                a = str(a)
+            if not isinstance(b, dict) and not isinstance(b, list):
+                b = str(b)
+            return a == b
+@EmptyLine
+@EmptyLine
 @if (Model.IsSnakeToCamelNeeded)
 {
 @:def _snake_to_camel(snake, capitalize_first=False):
