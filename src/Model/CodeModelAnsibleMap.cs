@@ -672,7 +672,7 @@ namespace AutoRest.Ansible.Model
                 }
                 else
                 {
-                    return [];
+                    return Array<string>.Empty();
                 }
             }
         }
