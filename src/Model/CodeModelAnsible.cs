@@ -829,12 +829,8 @@ namespace AutoRest.Ansible.Model
                     //}
 
 
-                    foreach (Property a in model.ComposedProperties)
+                    foreach (Property attr in model.ComposedProperties)
                     {
-                        Property attr = a;
-                        if (attr.ForwardTo != null)
-                            attr = attr.ForwardTo;
-
                         if (idOnly && attr.Name != "id")
                             continue;
 
@@ -927,6 +923,7 @@ namespace AutoRest.Ansible.Model
 
                             option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
 
+                            this.Map.Info.Add("--------- SUBMODEL TYPE: " + modelTypeName);
                             // XXX - get next level of sample value
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
 
