@@ -5,7 +5,7 @@
     - rename: name
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.location:
-    - update_rule: compare
+    - update_rule: location
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.kind:
     - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy:
@@ -18,12 +18,15 @@
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations:
     - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.location_name:
+    - update_rule: location
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.provisioning_state:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.failover_priority:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.database_account_offer_type:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.ip_range_filter:
     - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.enable_automatic_failover:
+    - update_rule: compare
+- azure_rm_cosmosdbdatabaseaccount.create_update_parameters.enable_multiple_write_locations:
     - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.response.id:
 - azure_rm_cosmosdbdatabaseaccount.response.name:
