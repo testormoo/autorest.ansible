@@ -802,7 +802,10 @@ namespace AutoRest.Ansible.Model
             for (int i = a.Length - 1; i >= 0; i--)
             {
                 if (a[i].Name.EndsWith("_name"))
+                {
                     a[i].NameAlt = "name";
+                    break;
+                }
             }
 
             return a;
