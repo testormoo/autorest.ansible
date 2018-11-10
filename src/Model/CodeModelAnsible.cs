@@ -797,7 +797,16 @@ namespace AutoRest.Ansible.Model
                 }
             }
 
-            return option.ToArray();
+            // find last option ending with "_name" and set its altered name to "name"
+            ModuleOption[] a = option.ToArray();
+
+            for (int i = a.Length - 1; i >= 0; i++)
+            {
+                if (a[i].Name.EndsWith("_name"))
+                    a[i].NameAlt = "name";
+            }
+
+            return a;
         }
 
         private ModuleOption[] GetModelOptions(string modelName, int level, Newtonsoft.Json.Linq.JToken sampleValue)
