@@ -664,16 +664,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string[] code = GetIdempotencyCheck(ModuleOptions, "", "", 0);
-
-                if (code.Length != 0)
-                {
-                    return code;
-                }
-                else
-                {
-                    return Array<string>.Empty();
-                }
+                return GetIdempotencyCheck(ModuleOptions, "", "", 0);
             }
         }
 
