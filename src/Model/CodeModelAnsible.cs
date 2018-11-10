@@ -799,14 +799,10 @@ namespace AutoRest.Ansible.Model
 
             // find last option ending with "_name" and set its altered name to "name"
             ModuleOption[] a = option.ToArray();
-
-            if (a.Length > 0)
+            for (int i = a.Length - 1; i >= 0; i--)
             {
-                for (int i = a.Length - 1; i >= 0; i++)
-                {
-                    if (a[i].Name.EndsWith("_name"))
-                        a[i].NameAlt = "name";
-                }
+                if (a[i].Name.EndsWith("_name"))
+                    a[i].NameAlt = "name";
             }
 
             return a;
