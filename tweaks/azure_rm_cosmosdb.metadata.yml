@@ -16,7 +16,6 @@
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.consistency_policy.max_interval_in_seconds:
     - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations:
-    - update_rule: compare
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.location_name:
     - update_rule: location
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.locations.provisioning_state:

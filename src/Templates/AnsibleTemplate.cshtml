@@ -208,7 +208,6 @@ else
             if self.state == 'absent':
                 self.to_do = Actions.Delete
             elif self.state == 'present':
-                self.log("Need to check if @(Model.ObjectName) instance has to be deleted or may be updated")
                 if (not compare(self.parameters, old_response,
 @{
     bool first = true;
