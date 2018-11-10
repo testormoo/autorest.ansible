@@ -664,7 +664,15 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetIdempotencyCheck(ModuleOptions, "", "", 0);
+                foreach (var option in ModuleOptions)
+                {
+                    if (option.Name.Contains("parameters"))
+                    {
+                        return GetIdempotencyCheck(option.SubOptions, "", "", 0);
+                    }
+                }
+
+                return new string[] { };
             }
         }
 
@@ -705,7 +713,7 @@ namespace AutoRest.Ansible.Model
                     //{
                     //    statements.Add("if ('" + option.NameAlt + "' in " + statementPrefix + ") and (" + optionStatementPrefix + " != " + optionDictPrefix + "):");
                     //}
-                    if (option.UpdateRule == "default")
+                    if (option.UpdateRule == "compare")
                     {
                         statements.Add(statementPrefix + "'" + option.NameAlt + "': None,");
                     }
@@ -738,7 +746,7 @@ namespace AutoRest.Ansible.Model
                             //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", optionDictPrefix, level + 1);
                             //    statements.AddRange(subStatements);
                             //}
-                            statements.Add(statementPrefix + "}");
+                            statements.Add(statementPrefix + "},");
                         }
                     }
                     else
@@ -748,7 +756,15 @@ namespace AutoRest.Ansible.Model
                 }
             }
 
-            return statements.ToArray();
+            // remove coma from the last string
+            string[] a = statements.ToArray();
+            if (a.Length > 0)
+            {
+                string last = statements.Last();
+                last = last.Substring(0, last.Length - 1);
+                a[a.Length - 1] = last;
+            }
+            return a;
         }
 
         //
