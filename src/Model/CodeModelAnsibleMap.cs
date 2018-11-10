@@ -720,22 +720,26 @@ namespace AutoRest.Ansible.Model
                     // check suboptions
                     if (option.SubOptions != null)
                     {
-                        statements.Add(statementPrefix + "'" + option.NameAlt + "': {");
                         string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "    ", "", level + 1);
-                        statements.AddRange(subStatements);
-                        // XXX - take collapse into account
-                        // XXX - check if actually exists
-                        //if (statementPrefix == "self")
-                        //{
-                        //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, optionDictPrefix, level + 1);
-                        //    statements.AddRange(subStatements);
-                        //}
-                        //else
-                        //{
-                        //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", optionDictPrefix, level + 1);
-                        //    statements.AddRange(subStatements);
-                        //}
-                        statements.Add(statementPrefix + "}");
+
+                        if (subStatements.Length > 0)
+                        {
+                            statements.Add(statementPrefix + "'" + option.NameAlt + "': {");
+                            statements.AddRange(subStatements);
+                            // XXX - take collapse into account
+                            // XXX - check if actually exists
+                            //if (statementPrefix == "self")
+                            //{
+                            //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "." + option.NameAlt, optionDictPrefix, level + 1);
+                            //    statements.AddRange(subStatements);
+                            //}
+                            //else
+                            //{
+                            //    string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "['" + option.NameAlt + "']", optionDictPrefix, level + 1);
+                            //    statements.AddRange(subStatements);
+                            //}
+                            statements.Add(statementPrefix + "}");
+                        }
                     }
                     else
                     {
