@@ -763,6 +763,7 @@ namespace AutoRest.Ansible.Model
                             newParam.NoLog = p.Name.Contains("password");
                             newParam.DefaultValueSample["default"] = (v != null) ? v.ToString() : "NOT FOUND";
                             newParam.EnumValues = ModelTypeEnumValues(p.ModelType);
+                            newParam.UpdateRule = "compare";
 
                             if (newParam.EnumValues.Length > 0)
                             {
@@ -935,8 +936,12 @@ namespace AutoRest.Ansible.Model
                             option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
 
                             this.Map.Info.Add("--------- SUBMODEL TYPE: " + modelTypeName);
-                            // XXX - get next level of sample value
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
+
+                            if (option.SubOptions.Length == 0)
+                            {
+                                option.UpdateRule = "compare";
+                            }
 
                             // some options should be marked as collapsed by default
                             if (option.Name == "properties")
