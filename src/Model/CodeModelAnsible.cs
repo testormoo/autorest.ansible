@@ -1077,6 +1077,19 @@ namespace AutoRest.Ansible.Model
                 p.Required = (p.RequiredCount == methods.Length) ? "True" : "False";
             }
 
+            // find last option ending with "_name" and set its altered name to "name"
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                if (arr[i].Name.EndsWith("_name"))
+                {
+                    arr[i].NameAlt = "name";
+                    break;
+                }
+            }
+
+            return a;
+
+
             return arr;
         }
 
