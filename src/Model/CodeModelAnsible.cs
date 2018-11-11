@@ -1087,9 +1087,6 @@ namespace AutoRest.Ansible.Model
                 }
             }
 
-            return a;
-
-
             return arr;
         }
 
