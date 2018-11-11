@@ -2,7 +2,6 @@
     - rename: azure_rm_cosmosdbaccount
 - azure_rm_cosmosdbdatabaseaccount.resource_group_name:
 - azure_rm_cosmosdbdatabaseaccount.account_name:
-    - rename: name
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters:
 - azure_rm_cosmosdbdatabaseaccount.create_update_parameters.location:
     - update_rule: location
@@ -62,7 +61,6 @@
     - rename: azure_rm_cosmosdbaccount_facts
 - azure_rm_cosmosdbdatabaseaccount_facts.resource_group_name:
 - azure_rm_cosmosdbdatabaseaccount_facts.account_name:
-    - rename: name
 - azure_rm_cosmosdbdatabaseaccount_facts.response.id:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.name:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.type:

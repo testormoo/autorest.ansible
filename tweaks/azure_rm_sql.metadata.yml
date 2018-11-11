@@ -3,7 +3,6 @@
 - azure_rm_sqlbackuplongtermretentionpolicy.server_name:
 - azure_rm_sqlbackuplongtermretentionpolicy.database_name:
 - azure_rm_sqlbackuplongtermretentionpolicy.backup_long_term_retention_policy_name:
-    - rename: name
 - azure_rm_sqlbackuplongtermretentionpolicy.state:
 - azure_rm_sqlbackuplongtermretentionpolicy.recovery_services_backup_policy_resource_id:
 - azure_rm_sqlbackuplongtermretentionpolicy.response.id:
@@ -17,7 +16,6 @@
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.server_name:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.database_name:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.backup_long_term_retention_policy_name:
-    - rename: name
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.response.id:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.response.name:
 - azure_rm_sqlbackuplongtermretentionpolicy_facts.response.type:
@@ -220,7 +218,6 @@
 - azure_rm_sqlfirewallrule.server_name:
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlfirewallrule.firewall_rule_name:
-    - rename: name
     - test: firewallrule{{ rpfx }}
 - azure_rm_sqlfirewallrule.start_ip_address:
     - required: no
@@ -310,7 +307,6 @@
 - azure_rm_sqldatabase.server_name:
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqldatabase.database_name:
-    - rename: name
     - test: database{{ rpfx }}
 - azure_rm_sqldatabase.parameters:
 - azure_rm_sqldatabase.parameters.location:
@@ -457,7 +453,6 @@
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqldatabase_facts.database_name:
     - test: database{{ rpfx }}
-    - rename: name
 - azure_rm_sqldatabase_facts.elastic_pool_name:
 - azure_rm_sqldatabase_facts.response.id:
 - azure_rm_sqldatabase_facts.response.name:
@@ -511,7 +506,6 @@
 - azure_rm_sqlelasticpool.server_name:
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlelasticpool.elastic_pool_name:
-    - rename: name
     - test: elasticpool{{ rpfx }}
 - azure_rm_sqlelasticpool.parameters:
 - azure_rm_sqlelasticpool.parameters.location:
@@ -649,7 +643,6 @@
 - azure_rm_sqlserver.resource_group_name:
     - sample: resource_group
 - azure_rm_sqlserver.server_name:
-    - rename: name
     - test: sqlsrv{{ rpfx }}
 - azure_rm_sqlserver.parameters:
 - azure_rm_sqlserver.parameters.location:
@@ -829,7 +822,6 @@
 - azure_rm_sqlservicetieradvisor_facts.resource_group_name:
 - azure_rm_sqlservicetieradvisor_facts.server_name:
 - azure_rm_sqlservicetieradvisor_facts.database_name:
-    - rename: name
 - azure_rm_sqlservicetieradvisor_facts.service_tier_advisor_name:
 - azure_rm_sqlservicetieradvisor_facts.response.id:
 - azure_rm_sqlservicetieradvisor_facts.response.name:
@@ -1194,7 +1186,6 @@
 - azure_rm_sqlvirtualnetworkrule.resource_group_name:
 - azure_rm_sqlvirtualnetworkrule.server_name:
 - azure_rm_sqlvirtualnetworkrule.virtual_network_rule_name:
-    - rename: name
 - azure_rm_sqlvirtualnetworkrule.virtual_network_subnet_id:
     - update_rule: compare
 - azure_rm_sqlvirtualnetworkrule.ignore_missing_vnet_service_endpoint:

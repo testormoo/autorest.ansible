@@ -2,7 +2,6 @@
     - rename: azure_rm_hdinsightcluster
 - azure_rm_cluster.resource_group_name:
 - azure_rm_cluster.cluster_name:
-    - rename: name
 - azure_rm_cluster.parameters:
 - azure_rm_cluster.parameters.location:
 - azure_rm_cluster.parameters.properties:
@@ -167,7 +166,6 @@
 - azure_rm_clusterapplication.resource_group_name:
 - azure_rm_clusterapplication.cluster_name:
 - azure_rm_clusterapplication.application_name:
-    - rename: name
 - azure_rm_clusterapplication.parameters:
 - azure_rm_clusterapplication.parameters.compute_profile:
 - azure_rm_clusterapplication.parameters.compute_profile.roles:
@@ -347,7 +345,6 @@
 - azure_rm_clusterextension.parameters.workspace_id:
 - azure_rm_clusterextension.parameters.primary_key:
 - azure_rm_clusterextension.extension_name:
-    - rename: name
 - azure_rm_clusterextension_facts:
     - rename: azure_rm_hdinsightclusterextension_facts
 - azure_rm_clusterextension_facts.resource_group_name:

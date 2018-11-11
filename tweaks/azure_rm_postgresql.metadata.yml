@@ -3,7 +3,6 @@
     - object_name_plural: PostgreSQL Servers
 - azure_rm_postgresqlserver.resource_group_name:
 - azure_rm_postgresqlserver.server_name:
-    - rename: name
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlserver.parameters:
 - azure_rm_postgresqlserver.parameters.sku:
@@ -67,7 +66,6 @@
     - object_name_plural: PostgreSQL Servers
 - azure_rm_postgresqlserver_facts.resource_group_name:
 - azure_rm_postgresqlserver_facts.server_name:
-    - rename: name
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlserver_facts.response.id:
 - azure_rm_postgresqlserver_facts.response.name:
@@ -95,7 +93,6 @@
 - azure_rm_postgresqlfirewallrule.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.firewall_rule_name:
-    - rename: name
     - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule.parameters:
 - azure_rm_postgresqlfirewallrule.parameters.start_ip_address:
@@ -119,7 +116,6 @@
 - azure_rm_postgresqlfirewallrule_facts.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlfirewallrule_facts.firewall_rule_name:
-    - rename: name
     - test: firewallrule{{ rpfx }}
 - azure_rm_postgresqlfirewallrule_facts.response.id:
     - sample: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1
@@ -140,7 +136,6 @@
 - azure_rm_postgresqlvirtualnetworkrule.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlvirtualnetworkrule.virtual_network_rule_name:
-    - rename: name
     - test: test-virtual-network-rule
 - azure_rm_postgresqlvirtualnetworkrule.parameters:
 - azure_rm_postgresqlvirtualnetworkrule.parameters.virtual_network_subnet_id:
@@ -158,7 +153,6 @@
 - azure_rm_postgresqlvirtualnetworkrule_facts.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlvirtualnetworkrule_facts.virtual_network_rule_name:
-    - rename: name
     - test: test-virtual-network-rule
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.id:
 - azure_rm_postgresqlvirtualnetworkrule_facts.response.name:
@@ -173,7 +167,6 @@
 - azure_rm_postgresqldatabase.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqldatabase.database_name:
-    - rename: name
     - test: testdatabase
 - azure_rm_postgresqldatabase.parameters:
 - azure_rm_postgresqldatabase.parameters.charset:
@@ -194,7 +187,6 @@
 - azure_rm_postgresqldatabase_facts.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqldatabase_facts.database_name:
-    - rename: name
     - test: testdatabase
 - azure_rm_postgresqldatabase_facts.response.id:
 - azure_rm_postgresqldatabase_facts.response.name:
@@ -208,7 +200,6 @@
 - azure_rm_postgresqlconfiguration.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlconfiguration.configuration_name:
-    - rename: name
     - test: deadlock_timeout
 - azure_rm_postgresqlconfiguration.parameters:
 - azure_rm_postgresqlconfiguration.parameters.value:
@@ -231,7 +222,6 @@
 - azure_rm_postgresqlconfiguration_facts.server_name:
     - test: postgresqlsrv{{ rpfx }}
 - azure_rm_postgresqlconfiguration_facts.configuration_name:
-    - rename: name
     - test: deadlock_timeout
 - azure_rm_postgresqlconfiguration_facts.response.id:
 - azure_rm_postgresqlconfiguration_facts.response.name:

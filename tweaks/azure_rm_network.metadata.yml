@@ -2,7 +2,6 @@
     - rename: azure_rm_appgateway
 - azure_rm_networkapplicationgateway.resource_group_name:
 - azure_rm_networkapplicationgateway.application_gateway_name:
-    - rename: name
     - test: appgateway{{ rpfx }}
 - azure_rm_networkapplicationgateway.parameters:
 - azure_rm_networkapplicationgateway.parameters.id:
@@ -686,7 +685,6 @@
     - rename: azure_rm_appagateway_facts
 - azure_rm_networkapplicationgateway_facts.resource_group_name:
 - azure_rm_networkapplicationgateway_facts.application_gateway_name:
-    - rename: name
     - test: appgateway{{ rpfx }}
 - azure_rm_networkapplicationgateway_facts.response.id:
 - azure_rm_networkapplicationgateway_facts.response.name:
