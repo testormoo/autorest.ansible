@@ -275,19 +275,23 @@ namespace AutoRest.Ansible.Model
                 string sub = ModuleOperationNameUpper.ToLower();
                 if (sub.StartsWith(multi)) multi = "";
                 string name = "azure_rm_" + multi + sub;
-
-                // let's try to be smart here, as all operation names are plural so let's try to make it singular
-                if (name.EndsWith("ies"))
-                {
-                    name = name.Substring(0, name.Length - 3) + "y";
-                }
-                else if (name.EndsWith('s'))
-                {
-                    name = name.Substring(0, name.Length - 1);
-                }
-
-                return name;
+                return PluralToSingular(name);
             }
+        }
+
+        private static string PluralToSingular(string name)
+        {
+            // let's try to be smart here, as all operation names are plural so let's try to make it singular
+            if (name.EndsWith("ies"))
+            {
+                name = name.Substring(0, name.Length - 3) + "y";
+            }
+            else if (name.EndsWith('s') && !name.EndsWith("us") && !name.EndsWith("ss"))
+            {
+                name = name.Substring(0, name.Length - 1);
+            }
+
+            return name;
         }
 
         private string AnsibleModuleNameFacts
@@ -307,16 +311,7 @@ namespace AutoRest.Ansible.Model
                 // I P --> IP
                 // Sql --> SQL
 
-                string name = ModuleOperationNameUpper;
-
-                if (name.EndsWith("ies"))
-                {
-                    name = name.Substring(0, name.Length - 3) + "y";
-                }
-                else if (name.EndsWith('s'))
-                {
-                    name = name.Substring(0, name.Length - 1);
-                }
+                string name = PluralToSingular(ModuleOperationNameUpper);
 
                 name = System.Text.RegularExpressions.Regex.Replace(name, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
 
@@ -541,17 +536,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                string name = ModuleOperation.Name.ToPythonCase();
-                if (name.EndsWith("ies"))
-                {
-                    name = name.Substring(0, name.Length - 3) + "y";
-                }
-                else if (name.EndsWith('s'))
-                {
-                    name = name.Substring(0, name.Length - 1);
-                }
-
-                return name;
+                return PluralToSingular(ModuleOperation.Name.ToPythonCase());
             }
         }
 
@@ -938,7 +923,7 @@ namespace AutoRest.Ansible.Model
                             this.Map.Info.Add("--------- SUBMODEL TYPE: " + modelTypeName);
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
 
-                            if (option.SubOptions.Length == 0)
+                            if (option.SubOptions.Length == 0 && option.Name != "etag")
                             {
                                 option.UpdateRule = "compare";
                             }
