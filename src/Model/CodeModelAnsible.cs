@@ -831,7 +831,7 @@ namespace AutoRest.Ansible.Model
                         if (idOnly && attr.Name != "id")
                             continue;
 
-                        if (attr.Name != "tags" && !attr.IsReadOnly)
+                        if (attr.Name != "tags" && !attr.IsReadOnly && attr.Name != "etag" && attr.Name != "provisioning_state")
                         {
                             this.Map.Info.Add("--------- PROCESSING " + attr.Name);
 
@@ -923,7 +923,7 @@ namespace AutoRest.Ansible.Model
                             this.Map.Info.Add("--------- SUBMODEL TYPE: " + modelTypeName);
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
 
-                            if (option.SubOptions.Length == 0 && option.Name != "etag" && option.Name != "provisioning_state")
+                            if (option.SubOptions.Length == 0)
                             {
                                 option.UpdateRule = "compare";
                             }
