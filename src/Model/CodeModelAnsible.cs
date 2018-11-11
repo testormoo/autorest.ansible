@@ -923,7 +923,7 @@ namespace AutoRest.Ansible.Model
                             this.Map.Info.Add("--------- SUBMODEL TYPE: " + modelTypeName);
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
 
-                            if (option.SubOptions.Length == 0 && option.Name != "etag")
+                            if (option.SubOptions.Length == 0 && option.Name != "etag" && option.Name != "provisioning_state")
                             {
                                 option.UpdateRule = "compare";
                             }
