@@ -12,15 +12,14 @@
   roles:
     - ../../ansible-hatchery
   tasks:
-@EmptyLine
 @foreach (var line in Model.ModuleExamples)
 {
     if (line != "")
     {
-        @:@(line)
+@:  @(line)
     }
     else
     {
-        @EmptyLine
+@EmptyLine
     }
 }
