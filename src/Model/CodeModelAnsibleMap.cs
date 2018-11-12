@@ -1560,9 +1560,13 @@ namespace AutoRest.Ansible.Model
                 }
 
                 // write only if true
-                if (option.Required != "False")
+                if (option.Required == "True")
                 {
                     help.Add(padding + "    required: " + option.Required);
+                }
+                else if (option.Required == "Create")
+                {
+                    help.Add(padding + "        - Required when C(state) is I(present).");
                 }
 
                 // right now just add type if option is a list or bool
