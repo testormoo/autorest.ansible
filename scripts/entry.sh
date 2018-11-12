@@ -24,4 +24,4 @@ cp -R /ansible-hatchery-tmpx/all/modules/* /ansible-hatchery/library/
 cp -R /ansible-hatchery-tmpx/all/tests/* /ansible-hatchery/tests/integration/targets
 cp -R /ansible-hatchery-tmpx/template/* /ansible-hatchery/__template
 cp -R /ansible-hatchery-tmpx/examples/* /ansible-hatchery/examples
-cp -R /ansible-hatchery-tmpx/all/examples/* /ansible-hatchery/examples
+cp -R /ansible-hatchery-tmpx/all/examples/* /ansible-hatchery/module_examples
