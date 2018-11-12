@@ -164,8 +164,10 @@ namespace AutoRest.Ansible
                 ITemplate metaMainYmlTemplate = new MetaMainYmlTemplate { Model = codeModelPure };
                 ITemplate tasksMainYmlTemplate = new TasksMainYmlTemplate { Model = codeModelPure };
                 ITemplate tasksMainYmlFactsTemplate = new TasksMainYmlFactsTemplate { Model = codeModelPure };
+                ITemplate exampleTemplate = new ModuleExample { Model = codeModelPure };
 
                 await Write((isFacts ? ansibleTemplateFacts : ansibleTemplate), Path.Combine("all", "modules", codeModelPure.ModuleNameAlt + ".py"));
+                await Write(exampleTemplate, Path.Combine("all", "examples", codeModelPure.ModuleNameAlt + ".yml"));
                 await WriteWithLf(aliasesTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "aliases"));
                 await WriteWithLf(metaMainYmlTemplate, Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "meta", "main.yml"));
                 await WriteWithLf((isFacts ? tasksMainYmlFactsTemplate : tasksMainYmlTemplate), Path.Combine("all", "tests", codeModelPure.ModuleNameAlt, "tasks", "main.yml"));
