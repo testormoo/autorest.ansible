@@ -68,7 +68,6 @@
 - azure_rm_cosmosdbdatabaseaccount_facts.response.tags:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.kind:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.provisioning_state:
-    - remove
 - azure_rm_cosmosdbdatabaseaccount_facts.response.document_endpoint:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.database_account_offer_type:
 - azure_rm_cosmosdbdatabaseaccount_facts.response.ip_range_filter:
