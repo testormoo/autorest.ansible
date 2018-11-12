@@ -5,6 +5,13 @@
 @using AutoRest.Ansible
 @using AutoRest.Ansible.Model
 @inherits AutoRest.Ansible.PythonTemplate<AutoRest.Ansible.Model.CodeModelAnsibleMap>
+---
+- name: Ansible Example for @(Model.ModuleNameAlt)
+  hosts: localhost
+  connection: local
+  roles:
+    - ../../ansible-hatchery
+  tasks:
 @EmptyLine
 @foreach (var line in Model.ModuleExamples)
 {
