@@ -741,7 +741,7 @@ namespace AutoRest.Ansible.Model
 
                         if (type != "dict")
                         {
-                            var newParam = new ModuleOption(p.Name, type, p.IsRequired ? "Create" : "False", "None");
+                            var newParam = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "None");
 
                             newParam.IsList = (p.ModelTypeName == "list");
                             newParam.Documentation = p.Documentation;
@@ -894,7 +894,7 @@ namespace AutoRest.Ansible.Model
 
                             string type = ModelTypeNameToYamlTypeName(attr.ModelType);
                             string modelTypeName = attr.ModelTypeName;
-                            var option = new ModuleOption(attr.Name, type, attr.IsRequired ? "True" : "False", "None");
+                            var option = new ModuleOption(attr.Name, type, attr.IsRequired ? "Create" : "False", "None");
                             if (attr.ModelTypeName == "list")
                             {
                                 string subtype = ModelTypeNameToYamlTypeName(attr.ModelType);
