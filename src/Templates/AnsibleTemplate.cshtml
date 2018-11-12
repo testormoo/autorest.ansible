@@ -208,20 +208,11 @@ else
             if self.state == 'absent':
                 self.to_do = Actions.Delete
             elif self.state == 'present':
-                if (not compare(self.parameters, old_response,
+                if (not compare(self.parameters, old_response, {
 @{
-    bool first = true;
     foreach (var rule in Model.ModuleIdempotencyCheck)
     {
-        if (first)
-        {
-@:                                {@rule
-            first = false;
-        }
-        else
-        {
 @:                                 @rule
-        }
     }
 @:                                })):
 @:                    self.to_do = Actions.Update
