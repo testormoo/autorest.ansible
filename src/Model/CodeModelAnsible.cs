@@ -741,7 +741,7 @@ namespace AutoRest.Ansible.Model
 
                         if (type != "dict")
                         {
-                            var newParam = new ModuleOption(p.Name, type, p.IsRequired ? "True" : "False", "None");
+                            var newParam = new ModuleOption(p.Name, type, p.IsRequired ? "Create" : "False", "None");
 
                             newParam.IsList = (p.ModelTypeName == "list");
                             newParam.Documentation = p.Documentation;

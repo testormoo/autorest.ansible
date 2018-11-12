@@ -715,7 +715,7 @@ namespace AutoRest.Ansible.Model
                     //}
                     if (option.UpdateRule == "compare")
                     {
-                        statements.Add(statementPrefix + "'" + option.NameAlt + "': None,");
+                        statements.Add(statementPrefix + "'" + option.NameAlt + "': 'default',");
                     }
                     else
                     {
