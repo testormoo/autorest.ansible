@@ -50,7 +50,7 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh cognitiveservices package-2017-04 azure-mgmt-cognitiveservices
 /autorest.ansible/scripts/generate-generic.sh commerce package-2015-06-preview azure-mgmt-commerce
 /autorest.ansible/scripts/generate-generic.sh consumption package-2018-10 azure-mgmt-consumption
-/autorest.ansible/scripts/generate-generic.sh containerservices package-2018-08-preview .
+/autorest.ansible/scripts/generate-generic.sh containerservices package-2018-08-preview azure-mgmt-containerservice
 /autorest.ansible/scripts/generate-generic.sh cost-management package-2018-05 azure-mgmt-costmanagement
 /autorest.ansible/scripts/generate-generic.sh customer-insights package-2017-04 .
 /autorest.ansible/scripts/generate-generic.sh databox package-2018-01 azure-mgmt-databox
