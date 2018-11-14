@@ -208,8 +208,25 @@ else
             if self.state == 'absent':
                 self.to_do = Actions.Delete
             elif self.state == 'present':
-                if (not default_compare(self.parameters, old_response, '')):
-                    self.to_do = Actions.Update
+@{
+    string[] idempotence = Model.ModuleIdempotencyCheck;
+    if (idempotence.Length == 0)
+    {
+@:                if (not default_compare(self.parameters, old_response, '', {
+        foreach (var o in idempotence)
+        {
+@:                @(o)
+        }
+@:                       })):
+@:                    self.to_do = Actions.Update
+    }
+    else
+    {
+@:                if (not default_compare(self.parameters, old_response, '')):
+@:                    self.to_do = Actions.Update
+    }
+}
+@{
     if (Model.NeedsDeleteBeforeUpdate)
     {
         if (Model.NeedsForceUpdate)

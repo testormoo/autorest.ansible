@@ -686,13 +686,9 @@ namespace AutoRest.Ansible.Model
 
                 if (option.UpdateRule != null && option.UpdateRule != "none")
                 {
-                    if (option.UpdateRule == "compare")
+                    if (option.UpdateRule != "compare")
                     {
-                        statements.Add(statementPrefix + "'" + option.NameAlt + "': 'default',");
-                    }
-                    else
-                    {
-                        statements.Add(statementPrefix + "'" + option.NameAlt + "': '" + option.UpdateRule + "',");
+                        statements.Add("'" + statementPrefix + "/" + option.NameAlt + "': '" + option.UpdateRule + "',");
                     }
                 }
                 else
@@ -701,13 +697,11 @@ namespace AutoRest.Ansible.Model
                     // check suboptions
                     if (option.SubOptions != null)
                     {
-                        string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "    ", "", level + 1);
+                        string[] subStatements = GetIdempotencyCheck(option.SubOptions, statementPrefix + "/" + option.NameAlt, "", level + 1);
 
                         if (subStatements.Length > 0)
                         {
-                            statements.Add(statementPrefix + "'" + option.NameAlt + "': {");
                             statements.AddRange(subStatements);
-                            statements.Add(statementPrefix + "},");
                         }
                     }
                     else
