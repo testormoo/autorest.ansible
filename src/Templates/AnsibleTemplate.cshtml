@@ -210,7 +210,7 @@ else
             elif self.state == 'present':
 @{
     string[] idempotence = Model.ModuleIdempotencyCheck;
-    if (idempotence.Length == 0)
+    if (idempotence.Length != 0)
     {
 @:                if (not default_compare(self.parameters, old_response, '', {
         foreach (var o in idempotence)
