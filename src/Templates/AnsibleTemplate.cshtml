@@ -208,14 +208,8 @@ else
             if self.state == 'absent':
                 self.to_do = Actions.Delete
             elif self.state == 'present':
-                if (not compare(self.parameters, old_response, {
-@{
-    foreach (var rule in Model.ModuleIdempotencyCheck)
-    {
-@:                    @rule
-    }
-@:                                })):
-@:                    self.to_do = Actions.Update
+                if (not default_compare(self.parameters, old_response, ''):
+                    self.to_do = Actions.Update
     if (Model.NeedsDeleteBeforeUpdate)
     {
         if (Model.NeedsForceUpdate)
@@ -371,44 +365,36 @@ else
         return d
 @EmptyLine
 @EmptyLine
-def compare(a, b, t):
-    if isinstance(t, dict):
-        if isinstance(a, list) and isinstance(b, list):
-            s = None
-            for k in t.keys():
-                if t.get(k, None) == "index":
-                    s = k
-            if s is not None:
-                a = sorted(a, key=lambda x: x[s])
-                b = sorted(b, key=lambda x: x[s])
-            if len(a) != len(b):
+def default_compare(new, old, path):
+    if new is None:
+        return True
+    elif isinstance(new, dict):
+        if not isinstance(old, dict):
+            return False
+        for k in new.keys():
+            if not default_compare(new.get(k), old.get(k, None), path + '/' + k):
                 return False
-            for i in range(len(a)):
-                if not compare(a[i], b[i], t):
-                    return False
-            return True
-        elif isinstance(a, dict) and isinstance(b, dict):
-            for k in t.keys():
-                if not compare(a.get(k, None), b.get(k, None), t[k]):
-                    return False
-            return True
+        return True
+    elif isinstance(new, list):
+        if not isinstance(old, list) or len(new) != len(old):
+            return False
+        if isinstance(old[0], dict):
+            key = None
+            if 'id' in old[0] and 'id' in new[0]:
+                key = 'id'
+            elif 'name' in old[0] and 'name' in new[0]:
+                key = 'name'
+            new = sorted(new, key=lambda x: x.get(key, None))
+            old = sorted(old, key=lambda x: x.get(key, None))
         else:
-            return a is None
+            new = sorted(new)
+            old = sorted(old)
+        for i in range(len(new)):
+            if not default_compare(new[i], old[i], path + '/*'):
+                return False
+        return True
     else:
-        if a is None:
-            return True
-        if t == "location":
-            # location needs to be normalized, remove spaces, lowercase
-            a = a.replace(' ', '').lower()
-            b = b.replace(' ', '').lower()
-            return a == b
-        else:
-            # default comparison
-            if not isinstance(a, dict) and not isinstance(a, list):
-                a = str(a)
-            if not isinstance(b, dict) and not isinstance(b, list):
-                b = str(b)
-            return a == b
+        return new == old
 @EmptyLine
 @EmptyLine
 @if (Model.IsSnakeToCamelNeeded)
