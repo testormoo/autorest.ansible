@@ -789,7 +789,7 @@ namespace AutoRest.Ansible.Model
 
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i].Name == "name")
+                if (a[i].Name == "name" || a[i].NameAlt == "name")
                 {
                     hasName = true;
                     break;
