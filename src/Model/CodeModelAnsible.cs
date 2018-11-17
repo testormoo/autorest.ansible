@@ -777,6 +777,10 @@ namespace AutoRest.Ansible.Model
 
                             this.Map.Info.Add("--------- GETTING SUBOPTIONS OF " + suboption.Name);
                             suboption.SubOptions = GetModelOptions(suboption.IsList ? ((p.ModelType as SequenceType).ElementType.Name.FixedValue) : p.ModelTypeName, 0, v);
+                            
+                            if (suboption.SubOptions != null && suboption.SubOptions.Length > 0)
+                                suboption.Collapsed = true;
+                            
                             option.Add(suboption);
                         }
                     }
