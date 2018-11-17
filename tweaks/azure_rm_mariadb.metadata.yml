@@ -22,6 +22,9 @@
 - azure_rm_mariadbserver.parameters.properties.storage_profile.geo_redundant_backup:
 - azure_rm_mariadbserver.parameters.properties.storage_profile.storage_mb:
 - azure_rm_mariadbserver.parameters.properties.create_mode:
+    - documentation: "Currently only 'Default' value supported"
+    - default: "'Default'"
+    - exclude_from_documentation
 - azure_rm_mariadbserver.parameters.properties.administrator_login:
     - rename: admin_username
     - required: no
