@@ -1,4 +1,6 @@
 - azure_rm_mariadbserver:
+    - object_name: Azure MariaDB Server
+    - object_name_plural: Azure MariaDB Servers
 - azure_rm_mariadbserver.resource_group_name:
 - azure_rm_mariadbserver.server_name:
 - azure_rm_mariadbserver.parameters:
@@ -11,13 +13,23 @@
 - azure_rm_mariadbserver.parameters.properties:
 - azure_rm_mariadbserver.parameters.properties.version:
 - azure_rm_mariadbserver.parameters.properties.ssl_enforcement:
+    - rename: enforce_ssl
+    - test: True
+    - sample: True
+    - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
 - azure_rm_mariadbserver.parameters.properties.storage_profile:
 - azure_rm_mariadbserver.parameters.properties.storage_profile.backup_retention_days:
 - azure_rm_mariadbserver.parameters.properties.storage_profile.geo_redundant_backup:
 - azure_rm_mariadbserver.parameters.properties.storage_profile.storage_mb:
 - azure_rm_mariadbserver.parameters.properties.create_mode:
 - azure_rm_mariadbserver.parameters.properties.administrator_login:
+    - rename: admin_username
+    - required: no
+    - test: zimxyz
 - azure_rm_mariadbserver.parameters.properties.administrator_login_password:
+    - rename: admin_password
+    - required: no
+    - test: Testpasswordxyz12!
 - azure_rm_mariadbserver.parameters.location:
 - azure_rm_mariadbserver.response.id:
 - azure_rm_mariadbserver.response.name:
