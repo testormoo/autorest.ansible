@@ -1,6 +1,6 @@
 - azure_rm_mariadbserver:
-    - object_name: Azure MariaDB Server
-    - object_name_plural: Azure MariaDB Servers
+    - object_name: MariaDB Server
+    - object_name_plural: MariaDB Servers
 - azure_rm_mariadbserver.resource_group_name:
 - azure_rm_mariadbserver.server_name:
 - azure_rm_mariadbserver.parameters:

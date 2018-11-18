@@ -849,7 +849,7 @@ namespace AutoRest.Ansible.Model
                         if (idOnly && attr.Name != "id")
                             continue;
 
-                        if (attr.Name != "tags" && !attr.IsReadOnly && attr.Name != "etag" && attr.Name != "provisioning_state")
+                        if (attr.Name != "tags" && !attr.IsReadOnly && attr.Name != "etag" && attr.Name != "provisioning_state" && attr.Name != "unique_identifier")
                         {
                             this.Map.Info.Add("--------- PROCESSING " + attr.Name);
 
@@ -929,14 +929,32 @@ namespace AutoRest.Ansible.Model
                             option.Documentation = attr.Documentation;
                             option.NoLog = attr.Name.Contains("password");
                             option.AdditionalInfo = ((attr.ModelType.XmlProperties != null) ? attr.ModelType.XmlProperties.ToString() : "NO XML PROPERTIES") + " --- " + attr.ModelType.Qualifier;
+                            
                             option.EnumValues = ModelTypeEnumValues(attr.ModelType);
 
-                            if (option.EnumValues.Length > 0)
+                            // handle enabled / disabled automatically
+                            if (option.EnumValues.Length == 2)
                             {
-                                option.Documentation = option.Documentation.Split(" Possible values include:")[0];
+                                if ((option.EnumValues[0] == "Disabled" && option.EnumValues[1] == "Enabled") ||
+                                     option.EnumValues[1] == "Disabled" && option.EnumValues[0] == "Enabled"))
+                                {
+                                    // convert to bool
+                                    option.ValueIfFalse = "Disabled";
+                                    option.ValueIfTrue = "Enabled";
+                                    option.Type = "bool";
+                                    option.DefaultValue = null;
+                                }
                             }
+                            
+                            if (option.EnumValues != null)
+                            {
+                                if (option.EnumValues.Length > 0)
+                                {
+                                    option.Documentation = option.Documentation.Split(" Possible values include:")[0];
+                                }
 
-                            option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
+                                option.DefaultValueSample["default"] = (subSampleValue != null) ? subSampleValue.ToString() : "";
+                            }
 
                             this.Map.Info.Add("--------- SUBMODEL TYPE: " + modelTypeName);
                             option.SubOptions = GetModelOptions(modelTypeName, level + 1, subSampleValue);
