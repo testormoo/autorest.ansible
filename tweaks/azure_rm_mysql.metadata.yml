@@ -28,7 +28,6 @@
     - rename: enforce_ssl
     - test: True
     - sample: True
-    - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
 - azure_rm_mysqlserver.parameters.properties.create_mode:
     - documentation: "Currently only 'Default' value supported"
     - default: 'Default'

@@ -16,7 +16,6 @@
     - rename: enforce_ssl
     - test: True
     - sample: True
-    - make_boolean: Enabled|Disabled|no|Enable SSL enforcement.
 - azure_rm_mariadbserver.parameters.properties.storage_profile:
 - azure_rm_mariadbserver.parameters.properties.storage_profile.backup_retention_days:
 - azure_rm_mariadbserver.parameters.properties.storage_profile.geo_redundant_backup:
