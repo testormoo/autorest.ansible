@@ -935,8 +935,8 @@ namespace AutoRest.Ansible.Model
                             // handle enabled / disabled automatically
                             if (option.EnumValues.Length == 2)
                             {
-                                if ((option.EnumValues[0] == "Disabled" && option.EnumValues[1] == "Enabled") ||
-                                     option.EnumValues[1] == "Disabled" && option.EnumValues[0] == "Enabled"))
+                                if ((option.EnumValues[0].Key == "disabled" && option.EnumValues[1].Key == "enabled") ||
+                                    (option.EnumValues[1].Key == "disabled" && option.EnumValues[0].Key == "enabled"))
                                 {
                                     // convert to bool
                                     option.ValueIfFalse = "Disabled";
