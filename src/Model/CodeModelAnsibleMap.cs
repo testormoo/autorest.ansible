@@ -517,8 +517,6 @@ namespace AutoRest.Ansible.Model
 
                 if (option.SubOptions != null)
                 {
-                    foreach (var suboption in option.SubOptions)
-                    {
                         statements.AddRange(GetAdjustmentStatements(option.SubOptions, newPath, newExpand));
                         //if (suboption.EnumValues != null && suboption.EnumValues.Length > 0)
                         //{
@@ -555,7 +553,6 @@ namespace AutoRest.Ansible.Model
                         //        }
                         //    }
                         //}
-                    }
                     // XXX - not handling lists yet
                     // check 
                 }
