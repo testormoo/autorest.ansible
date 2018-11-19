@@ -493,20 +493,19 @@ namespace AutoRest.Ansible.Model
                 string[] newPathX = path;
                 var parameters = new List<string>();
 
+                List<string> tempPath = new List<string>(path);
+                tempPath.Add(option.Name);
+                newPathX = tempPath.ToArray();
+
                 if (option.Collapsed)
                 {
                     // if option is collapsed we will have to expand it
                     newExpand = option.Name;
-                    List<string> tempPath = new List<string>(path);
-                    tempPath.Add(option.Name);
-                    newPathX = tempPath.ToArray();
                 }
                 else
                 {
                     // if not collapsed add it to the path
-                    List<string> tempPath = new List<string>(path);
-                    tempPath.Add(option.NameAlt);
-                    newPath = tempPath.ToArray();
+                    newPath = newPathX;
                 }
 
                 if (option.Name != option.NameAlt)
