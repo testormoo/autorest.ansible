@@ -594,7 +594,7 @@ namespace AutoRest.Ansible.Model
                         variable += ", " + p;
                     }
 
-                    variable += ")"
+                    variable += ")";
 
                     statements.Add(variable);
                 }
