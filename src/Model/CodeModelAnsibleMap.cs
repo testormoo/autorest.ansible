@@ -700,7 +700,7 @@ namespace AutoRest.Ansible.Model
                         return o;
                     }
                 }
-                return null;
+                return "parameters";
             }
         }
 
