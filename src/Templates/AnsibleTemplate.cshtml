@@ -140,7 +140,7 @@ else
             if hasattr(self, key):
                 setattr(self, key, kwargs[key])
             elif kwargs[key] is not None:
-                self.@(Model.ParametersOption.Name)[key] = kwargs[key]
+                self.@(Model.ParametersOptionName)[key] = kwargs[key]
 @EmptyLine
 @{
     foreach (var o in Model.AdjustmentStatements)
@@ -204,7 +204,7 @@ else
     string[] idempotence = Model.ModuleIdempotencyCheck;
     if (idempotence.Length != 0)
     {
-@:                if (not default_compare(self.@(Model.ParametersOption.Name), old_response, '', {
+@:                if (not default_compare(self.@(Model.ParametersOptionName), old_response, '', {
         foreach (var o in idempotence)
         {
 @:                @(o)
@@ -214,7 +214,7 @@ else
     }
     else
     {
-@:                if (not default_compare(self.@(Model.ParametersOption.Name), old_response, '')):
+@:                if (not default_compare(self.@(Model.ParametersOptionName), old_response, '')):
 @:                    self.to_do = Actions.Update
     }
 }

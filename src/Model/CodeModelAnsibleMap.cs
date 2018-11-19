@@ -579,7 +579,7 @@ namespace AutoRest.Ansible.Model
                 // after suboptions are handled, add current parameter transformation
                 if (parameters.Count > 0)
                 {
-                    string variable = "expand_and_rename(self." + ParametersOption.Name + ", [";
+                    string variable = "expand_and_rename(self." + ParametersOptionName + ", [";
 
                     for (int i = 0; i < path.Length; i++)
                     {
@@ -688,7 +688,7 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public ModuleOption ParametersOption
+        public string ParametersOptionName
         {
             get
             {
@@ -697,7 +697,7 @@ namespace AutoRest.Ansible.Model
                 {
                     if (o.SubOptions != null && o.SubOptions.Length > 0)
                     {
-                        return o;
+                        return o.Name;
                     }
                 }
                 return "parameters";
