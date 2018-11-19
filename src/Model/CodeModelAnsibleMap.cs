@@ -490,12 +490,16 @@ namespace AutoRest.Ansible.Model
 
                 string newExpand = null;
                 string[] newPath = path;
+                string[] newPathX = path;
                 var parameters = new List<string>();
 
                 if (option.Collapsed)
                 {
                     // if option is collapsed we will have to expand it
                     newExpand = option.Name;
+                    List<string> tempPath = new List<string>(path);
+                    tempPath.Add(option.Name);
+                    newPathX = tempPath.ToArray();
                 }
                 else
                 {
@@ -562,10 +566,10 @@ namespace AutoRest.Ansible.Model
                 {
                     string variable = "expand_and_rename(self." + ParametersOptionName + ", [";
 
-                    for (int i = 0; i < newPath.Length; i++)
+                    for (int i = 0; i < newPathX.Length; i++)
                     {
-                        variable += "'" + newPath[i] + "'";
-                        variable += (i != newPath.Length - 1) ? ", " : "";
+                        variable += "'" + newPathX[i] + "'";
+                        variable += (i != newPathX.Length - 1) ? ", " : "";
                     }
 
                     variable += "]";
