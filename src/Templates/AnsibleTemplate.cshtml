@@ -139,23 +139,15 @@ else
         for key in list(self.module_arg_spec.keys()) + ['tags']:
             if hasattr(self, key):
                 setattr(self, key, kwargs[key])
+            elif kwargs[key] is not None:
+                self.@(Model.ParametersOption.Name)[key] = kwargs[key]
+@EmptyLine
 @{
-    var secondLevelStmts = Model.OptionMappingStatements;
-
-    if (secondLevelStmts.Length > 0)
+    foreach (var o in Model.AdjustmentStatements)
     {
-@:            elif kwargs[key] is not None:
-        foreach (var o in secondLevelStmts)
-        {
-@:                @(o)
-        }
+@:        @(o)
+@EmptyLine
     }
-}
-@EmptyLine
-@if (Model.FixParameterStatements.Length > 0)
-{
-@:        self.adjust_parameters()
-@EmptyLine
 }
         response = None
 @EmptyLine

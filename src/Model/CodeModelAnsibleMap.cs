@@ -467,7 +467,7 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] OptionMappingStatements
+        public string[] AdjustmentStatements
         {
             get
             {
@@ -484,7 +484,7 @@ namespace AutoRest.Ansible.Model
                     if (optionName.EndsWith("_parameters"))
                         optionName = "parameters";
 
-                    statements.AddRange(GetOptionsMappingStatements(single, "self." + optionName, statements.Count == 0));
+                    statements.AddRange(GetAdjustmentStatements(single, new List<string>().ToArray(), null));
                 }
 
                 return statements.ToArray();
@@ -494,141 +494,172 @@ namespace AutoRest.Ansible.Model
         //
         // Code to expand options to actual structure
         //
-        public string[] GetOptionsMappingStatements(ModuleOption[] options, string targetPrefix, bool first)
+        public string[] GetAdjustmentStatements(ModuleOption[] options, string[] path, string expand)
         {
-            var prefix = first ? "if" : "elif";
-            var variables = new List<string>();
+            var statements = new List<string>();
 
             foreach (var option in options)
             {
-                if (variables.Count > 0) prefix = "elif";
+                // option not included in arg spec.... just skip it
                 if (!option.IncludeInArgSpec)
                     continue;
 
+                string newExpand = null;
+                string[] newPath = path;
+                var parameters = new List<string>();
+
                 if (option.Collapsed)
                 {
-                    variables.AddRange(GetOptionsMappingStatements(option.SubOptions, targetPrefix + ".setdefault(\"" + option.Name + "\", {})", first));
-                    continue;
-                }
-
-                variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
-
-                //if (path.Length > 1)
-                //{
-                //    for (int i = 1; i < path.Length; i++)
-                //        variable += "";
-                //}
-
-                string variable = targetPrefix + "[\"" + option.Name + "\"] = ";
-
-                if (option.ValueIfFalse != null && option.ValueIfTrue != null)
-                {
-                    variable += "'" + option.ValueIfTrue + "' if kwargs[key] else '" + option.ValueIfFalse + "'";
+                    // if option is collapsed we will have to expand it
+                    newExpand = option.Name;
                 }
                 else
                 {
-                    var valueTranslation = new List<string>();
-                    string valueTranslationPrefix = "if";
-                    bool _snakeToCamelNeeded = false;
-
-                    if (option.EnumValues != null && option.EnumValues.Length > 0)
-                    {
-                        // if option contains enum value, check if it has to be translated
-                        valueTranslation.Add("    ev = kwargs[key]");
-                        foreach (var enumValue in option.EnumValues)
-                        {
-                            if (enumValue.Key != enumValue.Value)
-                            {
-                                // can it be translated using snake_to_camel?
-                                string camel = CamelCase(enumValue.Key);
-
-                                Map.Info.Add("CC: " + camel + " " + enumValue.Key + " " + enumValue.Value);
-
-                                if (camel != enumValue.Value)
-                                {
-                                    valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
-                                    valueTranslation.Add("        ev = '" + enumValue.Value + "'");
-                                    valueTranslationPrefix = "elif";
-                                }
-                                else
-                                {
-                                    _snakeToCamelNeeded = true;
-                                }
-                            }
-                        }
-                    }
-                    else if (option.SubOptions != null)
-                    {
-                        bool evDeclarationAdded = false;
-                        foreach (var suboption in option.SubOptions)
-                        {
-                            if (suboption.EnumValues != null && suboption.EnumValues.Length > 0)
-                            {
-                                bool ifStatementAdded = false;
-                                valueTranslationPrefix = "if";
-
-                                foreach (var enumValue in suboption.EnumValues)
-                                {
-                                    if (enumValue.Key != enumValue.Value)
-                                    {
-                                        if (!evDeclarationAdded)
-                                        {
-                                            valueTranslation.Add("    ev = kwargs[key]");
-                                            evDeclarationAdded = true;
-                                        }
-
-                                        if (!ifStatementAdded)
-                                        {
-                                            valueTranslation.Add("    if '" + suboption.NameAlt + "' in ev:");
-                                            ifStatementAdded = true;
-                                        }
-                                        string camel = ("_" + enumValue.Key).ToCamelCase();
-
-                                        if (camel != enumValue.Value)
-                                        {
-                                            valueTranslation.Add("        " + valueTranslationPrefix + " ev['" + suboption.NameAlt + "'] == '" + enumValue.Key + "':");
-                                            valueTranslation.Add("            ev['" + suboption.NameAlt + "'] = '" + enumValue.Value + "'");
-                                            valueTranslationPrefix = "elif";
-                                        }
-                                        else
-                                        {
-                                            IsSnakeToCamelNeeded = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        // XXX - not handling lists yet
-                        // check 
-                    }
-
-                    if (valueTranslation.Count > 1)
-                    {
-                        variables.AddRange(valueTranslation);
-
-                        if (!_snakeToCamelNeeded)
-                        {
-                            variable += "ev";
-                        }
-                        else
-                        {
-                            variable += "_snake_to_camel(ev, True)";
-                        }
-                    }
-                    else
-                    {
-                        variable += _snakeToCamelNeeded ? "_snake_to_camel(kwargs[key], True)" : "kwargs[key]";
-                    }
-
-                    if (_snakeToCamelNeeded) IsSnakeToCamelNeeded = true;
+                    // if not collapsed add it to the path
+                    List<string> tempPath = new List<string>(path);
+                    tempPath.Add(option.NameAlt);
+                    newPath = tempPath.ToArray();
                 }
 
-                variables.Add("    " + variable);
-                prefix = "elif";
-                first = false;
+                if (option.Name != option.NameAlt)
+                {
+                    parameters.Add("rename='" + option.Name + "'");
+                }
+
+                if (expand != null)
+                {
+                    parameters.Add("expand='" + expand + "'");                    
+                }
+
+                if (option.SubOptions != null)
+                {
+                    foreach (var suboption in option.SubOptions)
+                    {
+                        statements.AddRange(GetAdjustmentStatements(option.SubOptions, newPath, newExpand));
+                        //if (suboption.EnumValues != null && suboption.EnumValues.Length > 0)
+                        //{
+                        //    bool ifStatementAdded = false;
+                        //    valueTranslationPrefix = "if";
+
+                        //    foreach (var enumValue in suboption.EnumValues)
+                        //    {
+                        //        if (enumValue.Key != enumValue.Value)
+                        //        {
+                        //            if (!evDeclarationAdded)
+                        //            {
+                        //                valueTranslation.Add("    ev = kwargs[key]");
+                        //                evDeclarationAdded = true;
+                        //            }
+
+                        //            if (!ifStatementAdded)
+                        //            {
+                        //                valueTranslation.Add("    if '" + suboption.NameAlt + "' in ev:");
+                        //                ifStatementAdded = true;
+                        //            }
+                        //            string camel = ("_" + enumValue.Key).ToCamelCase();
+
+                        //            if (camel != enumValue.Value)
+                        //            {
+                        //                valueTranslation.Add("        " + valueTranslationPrefix + " ev['" + suboption.NameAlt + "'] == '" + enumValue.Key + "':");
+                        //                valueTranslation.Add("            ev['" + suboption.NameAlt + "'] = '" + enumValue.Value + "'");
+                        //                valueTranslationPrefix = "elif";
+                        //            }
+                        //            else
+                        //            {
+                        //                IsSnakeToCamelNeeded = true;
+                        //            }
+                        //        }
+                        //    }
+                        //}
+                    }
+                    // XXX - not handling lists yet
+                    // check 
+                }
+
+                // after suboptions are handled, add current parameter transformation
+                if (parameters.Count > 0)
+                {
+                    string variable = "expand_and_rename(self." + ParametersOption.Name + ", [";
+
+                    for (int i = 0; i < path.Length; i++)
+                    {
+                        variable += "'" + path[i] + "'";
+                        variable += (i != path.Length - 1) ? ", " : "]";
+                    }
+
+                    foreach (var p in parameters)
+                    {
+                        variable += ", " + p;
+                    }
+
+                    statements.Add(variable);
+                }
+
+                // XXX - handle this
+                //if (option.ValueIfFalse != null && option.ValueIfTrue != null)
+                //{
+                //    variable += "'" + option.ValueIfTrue + "' if kwargs[key] else '" + option.ValueIfFalse + "'";
+                //}
+                //else
+                //{
+                //    var valueTranslation = new List<string>();
+                //    string valueTranslationPrefix = "if";
+                //    bool _snakeToCamelNeeded = false;
+
+                //    if (option.EnumValues != null && option.EnumValues.Length > 0)
+                //    {
+                //        // if option contains enum value, check if it has to be translated
+                //        valueTranslation.Add("    ev = kwargs[key]");
+                //        foreach (var enumValue in option.EnumValues)
+                //        {
+                //            if (enumValue.Key != enumValue.Value)
+                //            {
+                //                // can it be translated using snake_to_camel?
+                //                string camel = CamelCase(enumValue.Key);
+
+                //                Map.Info.Add("CC: " + camel + " " + enumValue.Key + " " + enumValue.Value);
+
+                //                if (camel != enumValue.Value)
+                //                {
+                //                    valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
+                //                    valueTranslation.Add("        ev = '" + enumValue.Value + "'");
+                //                    valueTranslationPrefix = "elif";
+                //                }
+                //                else
+                //                {
+                //                    _snakeToCamelNeeded = true;
+                //                }
+                //            }
+                //        }
+                //    }
+
+                //    if (valueTranslation.Count > 1)
+                //    {
+                //        variables.AddRange(valueTranslation);
+
+                //        if (!_snakeToCamelNeeded)
+                //        {
+                //            variable += "ev";
+                //        }
+                //        else
+                //        {
+                //            variable += "_snake_to_camel(ev, True)";
+                //        }
+                //    }
+                //    else
+                //    {
+                //        variable += _snakeToCamelNeeded ? "_snake_to_camel(kwargs[key], True)" : "kwargs[key]";
+                //    }
+
+                //    if (_snakeToCamelNeeded) IsSnakeToCamelNeeded = true;
+                //}
+
+                //variables.Add("    " + variable);
+
+                //variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
             }
                 
-            return variables.ToArray();
+            return statements.ToArray();
         }
 
         // "parameters" is flattened by default
