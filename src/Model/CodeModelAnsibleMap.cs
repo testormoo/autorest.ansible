@@ -657,6 +657,22 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public ModuleOption ParametersOption
+        {
+            get
+            {
+                var m = GetModuleMap(ModuleName);
+                foreach (var o in m.Options)
+                {
+                    if (o.SubOptions != null && o.SubOptions.Length > 0)
+                    {
+                        return o;
+                    }
+                }
+                return null;
+            }
+        }
+
         //
         // Module idempotency check
         //

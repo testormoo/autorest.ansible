@@ -23,14 +23,14 @@
 - azure_rm_hdinsightcluster.parameters.properties.security_profile.aadds_resource_id:
 - azure_rm_hdinsightcluster.parameters.properties.security_profile.msi_resource_id:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile:
-  - collapse
+    - collapse
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles:
-  - rename: compute_profile_roles
+    - rename: compute_profile_roles
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.name:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.min_instance_count:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.target_instance_count:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.hardware_profile:
-  - collapse
+    - collapse
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.hardware_profile.vm_size:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.os_profile:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.os_profile.linux_operating_system_profile:
@@ -44,7 +44,7 @@
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.script_actions.uri:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.script_actions.parameters:
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile:
-  - collapse
+    - collapse
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts:
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts.name:
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts.is_default:

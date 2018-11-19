@@ -212,7 +212,7 @@ else
     string[] idempotence = Model.ModuleIdempotencyCheck;
     if (idempotence.Length != 0)
     {
-@:                if (not default_compare(self.parameters, old_response, '', {
+@:                if (not default_compare(self.@(Model.ParametersOption.Name), old_response, '', {
         foreach (var o in idempotence)
         {
 @:                @(o)
