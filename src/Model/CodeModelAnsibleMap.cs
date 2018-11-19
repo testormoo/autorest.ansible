@@ -471,23 +471,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                var m = GetModuleMap(ModuleName);
-                ModuleOption[] options = ModuleOptionsSecondLevel;
-                List<string> statements = new List<string>();
-
-                foreach (var o in options)
-                {
-                    ModuleOption[] single = new ModuleOption[1] { o };
-                    var optionName = o.Disposition;
-
-                    // XXX - this is a hack, can we unhack it? --- where does it come from?
-                    if (optionName.EndsWith("_parameters"))
-                        optionName = "parameters";
-
-                    statements.AddRange(GetAdjustmentStatements(single, new List<string>().ToArray(), null));
-                }
-
-                return statements.ToArray();
+                return GetAdjustmentStatements(ModuleOptionsSecondLevel, new List<string>().ToArray(), null);
             }
         }
 
