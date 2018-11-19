@@ -581,16 +581,20 @@ namespace AutoRest.Ansible.Model
                 {
                     string variable = "expand_and_rename(self." + ParametersOptionName + ", [";
 
-                    for (int i = 0; i < path.Length; i++)
+                    for (int i = 0; i < newPath.Length; i++)
                     {
-                        variable += "'" + path[i] + "'";
-                        variable += (i != path.Length - 1) ? ", " : "]";
+                        variable += "'" + newPath[i] + "'";
+                        variable += (i != newPath.Length - 1) ? ", " : "";
                     }
+
+                    variable += "]";
 
                     foreach (var p in parameters)
                     {
                         variable += ", " + p;
                     }
+
+                    variable += ")"
 
                     statements.Add(variable);
                 }
