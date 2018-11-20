@@ -943,6 +943,7 @@ namespace AutoRest.Ansible.Model
                                     option.ValueIfTrue = "Enabled";
                                     option.Type = "bool";
                                     option.DefaultValue = null;
+                                    option.EnumValues = null;
                                 }
                             }
                             
