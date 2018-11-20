@@ -1268,29 +1268,51 @@ namespace AutoRest.Ansible.Model
             return null;
         }
 
+        private class MethodIf
+        {
+            public MethodIf(string name, string[] parameters)
+            {
+                Name = name;
+                Parameters = parameters;
+            }
+            public string Name;
+            public string[] Parameters;
+        }
+
         public string[] GenerateFactsMainIfStatement()
         {
+
             var response = new List<string>();
             bool firstMethod = true;
+
+            var methods = new List<MethodIf>();
+
             foreach (var f in ModuleMethods)
             {
-                if (ModuleMethods.Length > 1)
+                string[] ps = GetMethodRequiredOptionNames(f.Name);
+                var tmpOptions = new List<string>();
+                for (int idx = 0; idx < ps.Length; idx++)
                 {
-                    string[] ps = GetMethodRequiredOptionNames(f.Name);
+                    string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group"; }
+                    var o = FindOptionByName(optionName);
 
-                    // create new list with options that are not globally required by the module
-                    var tmpOptions = new List<string>();
-                    for (int idx = 0; idx < ps.Length; idx++)
-                    {
-                        string optionName = ps[idx]; if (optionName == "resource_group_name") { optionName = "resource_group";  }
-                        var o = FindOptionByName(optionName);
+                    if (o == null || o.Required == "True")
+                        continue;
 
-                        if (o == null || o.Required == "True")
-                            continue;
+                    tmpOptions.Add(o.NameAlt);
+                }
+                ps = tmpOptions.ToArray();
 
-                        tmpOptions.Add(o.NameAlt);
-                    }
-                    ps = tmpOptions.ToArray();
+                methods.Add(new MethodIf(f.Name, ps));
+            }
+
+            methods.Sort(delegate (MethodIf x, MethodIf y) { int xl = x.Parameters.Length; int yl = x.Parameters.Length; if (xl > yl) return -1; else if (xl < yl) return 1; else return 0; });
+
+            foreach (var f in methods)
+            {
+                if (methods.Count > 1)
+                {
+                    string[] ps = f.Parameters;
 
                     if (ps.Length > 0)
                     {
