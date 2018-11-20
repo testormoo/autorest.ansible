@@ -608,43 +608,6 @@ namespace AutoRest.Ansible.Model
 
                     statements.Add(variable);
                 }
-
-                // XXX - handle this
-                //if (option.ValueIfFalse != null && option.ValueIfTrue != null)
-                //{
-                //    variable += "'" + option.ValueIfTrue + "' if kwargs[key] else '" + option.ValueIfFalse + "'";
-                //}
-                //else
-                //{
-                //    var valueTranslation = new List<string>();
-                //    string valueTranslationPrefix = "if";
-                //    bool _snakeToCamelNeeded = false;
-
-
-                //    if (valueTranslation.Count > 1)
-                //    {
-                //        variables.AddRange(valueTranslation);
-
-                //        if (!_snakeToCamelNeeded)
-                //        {
-                //            variable += "ev";
-                //        }
-                //        else
-                //        {
-                //            variable += "_snake_to_camel(ev, True)";
-                //        }
-                //    }
-                //    else
-                //    {
-                //        variable += _snakeToCamelNeeded ? "_snake_to_camel(kwargs[key], True)" : "kwargs[key]";
-                //    }
-
-                //    if (_snakeToCamelNeeded) IsSnakeToCamelNeeded = true;
-                //}
-
-                //variables.Add("    " + variable);
-
-                //variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
             }
                 
             return statements.ToArray();
