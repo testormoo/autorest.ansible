@@ -391,13 +391,13 @@ def default_compare(new, old, path):
         return new == old
 @EmptyLine
 @EmptyLine
-def expand_and_rename(d, path, **kwargs):
+def expand(d, path, **kwargs):
     expand = kwargs.get('expand', None)
     rename = kwargs.get('rename', None)
     camelize = kwargs.get('camelize', False)
     if isinstance(d, list):
         for i in range(len(d)):
-            expand_and_rename(d[i], path, **kwargs)
+            expand(d[i], path, **kwargs)
     elif isinstance(d, dict):
         if len(path) == 1:
             old_name = path[0]
@@ -417,7 +417,7 @@ def expand_and_rename(d, path, **kwargs):
         else:
             sd = d.get(path[0], None)
             if sd is not None:
-                expand_and_rename(sd, path[1:], **kwargs)
+                expand(sd, path[1:], **kwargs)
 @EmptyLine
 @EmptyLine
 @if (Model.IsSnakeToCamelNeeded)

@@ -560,10 +560,48 @@ namespace AutoRest.Ansible.Model
                     // check 
                 }
 
+                // translate boolean value
+                if (option.ValueIfFalse != null && option.ValueIfTrue != null)
+                {
+                    parameters.Add("bool_to_enum=['" + option.ValueIfTrue + "', '" + option.ValueIfFalse + "']");                    
+                }
+
+                // translate enum values
+                if (option.EnumValues != null && option.EnumValues.Length > 0)
+                {
+                    bool _snakeToCamel = true;
+                    // if option contains enum value, check if it has to be translated
+                    foreach (var enumValue in option.EnumValues)
+                    {
+                        if (enumValue.Key != enumValue.Value)
+                        {
+                            // can it be translated using snake_to_camel?
+                            string camel = CamelCase(enumValue.Key);
+                            if (camel != enumValue.Value)
+                            {
+                                // XXX - create map
+                                //valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
+                                //valueTranslation.Add("        ev = '" + enumValue.Value + "'");
+                                //valueTranslationPrefix = "elif";
+                                _snakeToCamel = false;
+                            }
+                        }
+                    }
+
+                    if (_snakeToCamel)
+                    {
+                        parameters.Add("to_camel=True");                    
+                    }
+                    else
+                    {
+                        parameters.Add("map={}");                    
+                    }
+                }
+
                 // after suboptions are handled, add current parameter transformation
                 if (parameters.Count > 0)
                 {
-                    string variable = "expand_and_rename(self." + ParametersOptionName + ", [";
+                    string variable = "expand(self." + ParametersOptionName + ", [";
 
                     for (int i = 0; i < newPathX.Length; i++)
                     {
@@ -594,32 +632,6 @@ namespace AutoRest.Ansible.Model
                 //    string valueTranslationPrefix = "if";
                 //    bool _snakeToCamelNeeded = false;
 
-                //    if (option.EnumValues != null && option.EnumValues.Length > 0)
-                //    {
-                //        // if option contains enum value, check if it has to be translated
-                //        valueTranslation.Add("    ev = kwargs[key]");
-                //        foreach (var enumValue in option.EnumValues)
-                //        {
-                //            if (enumValue.Key != enumValue.Value)
-                //            {
-                //                // can it be translated using snake_to_camel?
-                //                string camel = CamelCase(enumValue.Key);
-
-                //                Map.Info.Add("CC: " + camel + " " + enumValue.Key + " " + enumValue.Value);
-
-                //                if (camel != enumValue.Value)
-                //                {
-                //                    valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
-                //                    valueTranslation.Add("        ev = '" + enumValue.Value + "'");
-                //                    valueTranslationPrefix = "elif";
-                //                }
-                //                else
-                //                {
-                //                    _snakeToCamelNeeded = true;
-                //                }
-                //            }
-                //        }
-                //    }
 
                 //    if (valueTranslation.Count > 1)
                 //    {
