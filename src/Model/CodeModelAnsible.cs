@@ -1104,12 +1104,26 @@ namespace AutoRest.Ansible.Model
             }
 
             // find last option ending with "_name" and set its altered name to "name"
-            for (int i = arr.Length - 1; i >= 0; i--)
+            bool hasName = false;
+
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i].Name.EndsWith("_name"))
+                if (arr[i].Name == "name" || arr[i].NameAlt == "name")
                 {
-                    arr[i].NameAlt = "name";
+                    hasName = true;
                     break;
+                }
+            }
+
+            if (!hasName)
+            {
+                for (int i = arr.Length - 1; i >= 0; i--)
+                {
+                    if (arr[i].Name.EndsWith("_name"))
+                    {
+                        arr[i].NameAlt = "name";
+                        break;
+                    }
                 }
             }
 
