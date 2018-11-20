@@ -520,50 +520,13 @@ namespace AutoRest.Ansible.Model
 
                 if (option.SubOptions != null)
                 {
-                        statements.AddRange(GetAdjustmentStatements(option.SubOptions, newPath, newExpand));
-                        //if (suboption.EnumValues != null && suboption.EnumValues.Length > 0)
-                        //{
-                        //    bool ifStatementAdded = false;
-                        //    valueTranslationPrefix = "if";
-
-                        //    foreach (var enumValue in suboption.EnumValues)
-                        //    {
-                        //        if (enumValue.Key != enumValue.Value)
-                        //        {
-                        //            if (!evDeclarationAdded)
-                        //            {
-                        //                valueTranslation.Add("    ev = kwargs[key]");
-                        //                evDeclarationAdded = true;
-                        //            }
-
-                        //            if (!ifStatementAdded)
-                        //            {
-                        //                valueTranslation.Add("    if '" + suboption.NameAlt + "' in ev:");
-                        //                ifStatementAdded = true;
-                        //            }
-                        //            string camel = ("_" + enumValue.Key).ToCamelCase();
-
-                        //            if (camel != enumValue.Value)
-                        //            {
-                        //                valueTranslation.Add("        " + valueTranslationPrefix + " ev['" + suboption.NameAlt + "'] == '" + enumValue.Key + "':");
-                        //                valueTranslation.Add("            ev['" + suboption.NameAlt + "'] = '" + enumValue.Value + "'");
-                        //                valueTranslationPrefix = "elif";
-                        //            }
-                        //            else
-                        //            {
-                        //                IsSnakeToCamelNeeded = true;
-                        //            }
-                        //        }
-                        //    }
-                        //}
-                    // XXX - not handling lists yet
-                    // check 
+                    statements.AddRange(GetAdjustmentStatements(option.SubOptions, newPath, newExpand));
                 }
 
                 // translate boolean value
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
-                    parameters.Add("bool_to_enum=['" + option.ValueIfTrue + "', '" + option.ValueIfFalse + "']");                    
+                    parameters.Add("map={True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'}");                    
                 }
 
                 // translate enum values
@@ -590,7 +553,7 @@ namespace AutoRest.Ansible.Model
 
                     if (_snakeToCamel)
                     {
-                        parameters.Add("to_camel=True");                    
+                        parameters.Add("camelize=True");                    
                     }
                     else
                     {
@@ -620,43 +583,6 @@ namespace AutoRest.Ansible.Model
 
                     statements.Add(variable);
                 }
-
-                // XXX - handle this
-                //if (option.ValueIfFalse != null && option.ValueIfTrue != null)
-                //{
-                //    variable += "'" + option.ValueIfTrue + "' if kwargs[key] else '" + option.ValueIfFalse + "'";
-                //}
-                //else
-                //{
-                //    var valueTranslation = new List<string>();
-                //    string valueTranslationPrefix = "if";
-                //    bool _snakeToCamelNeeded = false;
-
-
-                //    if (valueTranslation.Count > 1)
-                //    {
-                //        variables.AddRange(valueTranslation);
-
-                //        if (!_snakeToCamelNeeded)
-                //        {
-                //            variable += "ev";
-                //        }
-                //        else
-                //        {
-                //            variable += "_snake_to_camel(ev, True)";
-                //        }
-                //    }
-                //    else
-                //    {
-                //        variable += _snakeToCamelNeeded ? "_snake_to_camel(kwargs[key], True)" : "kwargs[key]";
-                //    }
-
-                //    if (_snakeToCamelNeeded) IsSnakeToCamelNeeded = true;
-                //}
-
-                //variables.Add("    " + variable);
-
-                //variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
             }
                 
             return statements.ToArray();
