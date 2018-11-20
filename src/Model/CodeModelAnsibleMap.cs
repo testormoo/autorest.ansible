@@ -528,12 +528,13 @@ namespace AutoRest.Ansible.Model
                 {
                     parameters.Add("map={True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'}");                    
                 }
-
                 // translate enum values
-                if (option.EnumValues != null && option.EnumValues.Length > 0)
+                else if (option.EnumValues != null && option.EnumValues.Length > 0)
                 {
                     bool camelize = false;
-                    string exceptions = "";
+                    string exceptionsNormalCamel = "";
+                    string exceptionsLowerCamel = "";
+                    string exceptionsUpper = "";
                     // if option contains enum value, check if it has to be translated
                     foreach (var enumValue in option.EnumValues)
                     {
@@ -541,18 +542,47 @@ namespace AutoRest.Ansible.Model
                         {
                             camelize = true;
                             // can it be translated using snake_to_camel?
-                            string camel = CamelCase(enumValue.Key);
-                            if (camel != enumValue.Value)
+                            string camelUpper = CamelCase(enumValue.Key, false);
+                            string camelLower = CamelCase(enumValue.Key, true);
+                            string upper = enumValue.Key.ToUpper();
+                            if (camelUpper != enumValue.Value)
                             {
-                                if (exceptions != "") exceptions += ", ";
-                                exceptions += "'" + enumValue.Key + "': '" + enumValue.Value + "'";
+                                if (exceptionsNormalCamel != "") exceptionsNormalCamel += ", ";
+                                exceptionsNormalCamel += "'" + enumValue.Key + "': '" + enumValue.Value + "'";
+                            }
+
+                            if (camelLower != enumValue.Value)
+                            {
+                                if (exceptionsLowerCamel != "") exceptionsLowerCamel += ", ";
+                                exceptionsLowerCamel += "'" + enumValue.Key + "': '" + enumValue.Value + "'";
+                            }
+
+                            if (upper != enumValue.Value)
+                            {
+                                if (exceptionsUpper != "") exceptionsUpper += ", ";
+                                exceptionsUpper += "'" + enumValue.Key + "': '" + enumValue.Value + "'";
                             }
                         }
                     }
 
                     if (camelize)
                     {
-                        parameters.Add("camelize=" + ((exceptions == "") ? "True" : ("{" + exceptions + "}")));                    
+                        string selected = "camelize";
+                        string exceptions = exceptionsNormalCamel;
+
+                        if (exceptions.Length > exceptionsLowerCamel.Length)
+                        {
+                            selected = "camelize_lower";
+                            exceptions = exceptionsLowerCamel;
+                        }
+
+                        if (exceptions.Length > exceptionsUpper.Length)
+                        {
+                            selected = "upper";
+                            exceptions = exceptionsUpper;
+                        }
+
+                        parameters.Add(selected + "=" + ((exceptions == "") ? "True" : ("{" + exceptions + "}")));                    
                     }
                 }
 
@@ -1863,7 +1893,7 @@ namespace AutoRest.Ansible.Model
 
             return new string(a);
         }
-        public string CamelCase(string name)
+        public string CamelCase(string name, bool firstLower)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -1873,13 +1903,13 @@ namespace AutoRest.Ansible.Model
             if (name[0] == '_')
             // Preserve leading underscores.
             {
-                return '_' + CamelCase(name.Substring(1));
+                return '_' + CamelCase(name.Substring(1), firstLower);
             }
 
             return
                 name.Split('_', '-', ' ')
                     .Where(s => !string.IsNullOrEmpty(s))
-                    .Select((s, i) => FormatCase(s, false)) // Pass true/toLower for just the first element.
+                    .Select((s, i) => FormatCase(s, firstLower)) // Pass true/toLower for just the first element.
                     .DefaultIfEmpty("")
                     .Aggregate(string.Concat);
         }
