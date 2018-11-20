@@ -494,7 +494,7 @@ namespace AutoRest.Ansible.Model
                 var parameters = new List<string>();
 
                 List<string> tempPath = new List<string>(path);
-                tempPath.Add(option.Name);
+                tempPath.Add(option.NameAlt);
                 newPathX = tempPath.ToArray();
 
                 if (option.Collapsed)
