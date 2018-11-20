@@ -532,32 +532,27 @@ namespace AutoRest.Ansible.Model
                 // translate enum values
                 if (option.EnumValues != null && option.EnumValues.Length > 0)
                 {
-                    bool _snakeToCamel = true;
+                    bool camelize = false;
+                    string exceptions = "";
                     // if option contains enum value, check if it has to be translated
                     foreach (var enumValue in option.EnumValues)
                     {
                         if (enumValue.Key != enumValue.Value)
                         {
+                            camelize = true;
                             // can it be translated using snake_to_camel?
                             string camel = CamelCase(enumValue.Key);
                             if (camel != enumValue.Value)
                             {
-                                // XXX - create map
-                                //valueTranslation.Add("    " + valueTranslationPrefix + " ev == '" + enumValue.Key + "':");
-                                //valueTranslation.Add("        ev = '" + enumValue.Value + "'");
-                                //valueTranslationPrefix = "elif";
-                                _snakeToCamel = false;
+                                if (exceptions != "") exceptions += ", ";
+                                exceptions += "'" + enumValue.Key + "': '" + enumValue.Value + "'";
                             }
                         }
                     }
 
-                    if (_snakeToCamel)
+                    if (camelize)
                     {
-                        parameters.Add("camelize=True");                    
-                    }
-                    else
-                    {
-                        parameters.Add("map={}");                    
+                        parameters.Add("camelize=" + ((exceptions == "") ? "True" : ("{" + exceptions + "}")));                    
                     }
                 }
 
@@ -583,6 +578,43 @@ namespace AutoRest.Ansible.Model
 
                     statements.Add(variable);
                 }
+
+                // XXX - handle this
+                //if (option.ValueIfFalse != null && option.ValueIfTrue != null)
+                //{
+                //    variable += "'" + option.ValueIfTrue + "' if kwargs[key] else '" + option.ValueIfFalse + "'";
+                //}
+                //else
+                //{
+                //    var valueTranslation = new List<string>();
+                //    string valueTranslationPrefix = "if";
+                //    bool _snakeToCamelNeeded = false;
+
+
+                //    if (valueTranslation.Count > 1)
+                //    {
+                //        variables.AddRange(valueTranslation);
+
+                //        if (!_snakeToCamelNeeded)
+                //        {
+                //            variable += "ev";
+                //        }
+                //        else
+                //        {
+                //            variable += "_snake_to_camel(ev, True)";
+                //        }
+                //    }
+                //    else
+                //    {
+                //        variable += _snakeToCamelNeeded ? "_snake_to_camel(kwargs[key], True)" : "kwargs[key]";
+                //    }
+
+                //    if (_snakeToCamelNeeded) IsSnakeToCamelNeeded = true;
+                //}
+
+                //variables.Add("    " + variable);
+
+                //variables.Add(prefix + " key == \"" + option.NameAlt + "\":");
             }
                 
             return statements.ToArray();
