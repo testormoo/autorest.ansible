@@ -1306,7 +1306,7 @@ namespace AutoRest.Ansible.Model
                 methods.Add(new MethodIf(f.Name, ps));
             }
 
-            methods.Sort(delegate (MethodIf x, MethodIf y) { int xl = x.Parameters.Length; int yl = x.Parameters.Length; if (xl > yl) return -1; else if (xl < yl) return 1; else return 0; });
+            methods.Sort(delegate (MethodIf x, MethodIf y) { int xl = x.Parameters.Length; int yl = y.Parameters.Length; if (xl > yl) return -1; else if (xl < yl) return 1; else return 0; });
 
             foreach (var f in methods)
             {
