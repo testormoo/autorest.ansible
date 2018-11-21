@@ -33,7 +33,9 @@
     - collapse
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.hardware_profile.vm_size:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.os_profile:
+    - collapse
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.os_profile.linux_operating_system_profile:
+    - rename: linux_profile
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.virtual_network_profile:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.virtual_network_profile.id:
 - azure_rm_hdinsightcluster.parameters.properties.compute_profile.roles.virtual_network_profile.subnet:
@@ -46,6 +48,7 @@
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile:
     - collapse
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts:
+    - rename: storage_accounts
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts.name:
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts.is_default:
 - azure_rm_hdinsightcluster.parameters.properties.storage_profile.storageaccounts.container:

@@ -136,7 +136,14 @@ else
     def exec_module(self, **kwargs):
         """Main module execution method"""
 @EmptyLine
-        for key in list(self.module_arg_spec.keys()) + ['tags']:
+@if (Model.HasTags())
+{
+@:        for key in list(self.module_arg_spec.keys()) + ['tags']:
+}
+else
+{
+@:        for key in list(self.module_arg_spec.keys()):
+}
             if hasattr(self, key):
                 setattr(self, key, kwargs[key])
             elif kwargs[key] is not None:
