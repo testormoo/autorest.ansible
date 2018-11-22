@@ -75,12 +75,12 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh intune package-2015-01-preview .
 /autorest.ansible/scripts/generate-generic.sh iotcentral package-2018-09-01 azure-mgmt-iotcentral
 /autorest.ansible/scripts/generate-generic.sh iothub package-2018-04 azure-mgmt-iothub
-/autorest.ansible/scripts/generate-generic.sh iotespaces package-2017-10-preview .
+/autorest.ansible/scripts/generate-generic.sh iotspaces package-2017-10-preview .
 /autorest.ansible/scripts/generate-generic.sh logic package-2018-07-preview azure-mgmt-logic
 /autorest.ansible/scripts/generate-generic.sh managementgroups package-2018-03 azure-mgmt-managementgroups
 /autorest.ansible/scripts/generate-generic.sh managementpartner package-2018-02 azure-mgmt-managementpartner
 /autorest.ansible/scripts/generate-generic.sh maps package-2018-05 azure-mgmt-maps
-/autorest.ansible/scripts/generate-generic.sh marketpaceordering package-2015-06-01 .
+/autorest.ansible/scripts/generate-generic.sh marketplaceordering package-2015-06-01 .
 /autorest.ansible/scripts/generate-generic.sh mediaservices package-2018-07 azure-mgmt-media
 /autorest.ansible/scripts/generate-generic.sh migrate package-2018-02 .
 /autorest.ansible/scripts/generate-generic.sh monitor package-2018-09 azure-mgmt-monitor

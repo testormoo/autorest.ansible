@@ -286,6 +286,10 @@ namespace AutoRest.Ansible.Model
             {
                 name = name.Substring(0, name.Length - 3) + "y";
             }
+            else if (name.EndsWith("ses"))
+            {
+                name = name.Substring(0, name.Length - 3);                
+            }
             else if (name.EndsWith('s') && !name.EndsWith("us") && !name.EndsWith("ss") && !name.EndsWith("is"))
             {
                 name = name.Substring(0, name.Length - 1);
