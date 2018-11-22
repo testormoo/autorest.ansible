@@ -638,7 +638,7 @@ namespace AutoRest.Ansible.Model
                                 variable += ", '" + new_name + "'";
                                 break;
                             case "map":
-                                variable += ", " + exceptions;
+                                variable += ", {" + exceptions + "}";
                                 break;
                         }
 
