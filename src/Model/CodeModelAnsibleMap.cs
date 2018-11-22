@@ -530,7 +530,7 @@ namespace AutoRest.Ansible.Model
                 // translate boolean value
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
-                    exceptions="{True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'}";                    
+                    exceptions="True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'";                    
                 }
                 // translate enum values
                 else if (option.EnumValues != null && option.EnumValues.Length > 0)
