@@ -81,7 +81,7 @@ except ImportError:
     pass 
 @EmptyLine
 @EmptyLine
-class AzureRM@(Model.ObjectName)Facts(AzureRMModuleBase):
+class AzureRM@(Model.ObjectNameNoSpaces)Facts(AzureRMModuleBase):
 
     def __init__(self):
 
@@ -110,7 +110,7 @@ class AzureRM@(Model.ObjectName)Facts(AzureRMModuleBase):
 @:        self.tags = None
 }
 
-        super(AzureRM@(Model.ObjectName)Facts, self).__init__(self.module_arg_spec, supports_tags=False)
+        super(AzureRM@(Model.ObjectNameNoSpaces)Facts, self).__init__(self.module_arg_spec, supports_tags=False)
 @EmptyLine
 @{
 //
@@ -219,7 +219,7 @@ else
 //
 }
 def main():
-    AzureRM@(Model.ObjectName)Facts()
+    AzureRM@(Model.ObjectNameNoSpaces)Facts()
 @EmptyLine
 @EmptyLine
 if __name__ == '__main__':

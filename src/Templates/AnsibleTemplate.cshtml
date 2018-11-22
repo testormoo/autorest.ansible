@@ -101,7 +101,7 @@ class Actions:
     NoAction, Create, Update, Delete = range(4)
 @EmptyLine
 @EmptyLine
-class AzureRM@(Model.ObjectName)(AzureRMModuleBase):
+class AzureRM@(Model.ObjectNameNoSpaces)(AzureRMModuleBase):
     """Configuration class for an Azure RM @(Model.ObjectName) resource"""
 @EmptyLine
     def __init__(self):
@@ -122,7 +122,7 @@ class AzureRM@(Model.ObjectName)(AzureRMModuleBase):
         self.state = None
         self.to_do = Actions.NoAction
 @EmptyLine
-        super(AzureRM@(Model.ObjectName), self).__init__(derived_arg_spec=self.module_arg_spec,
+        super(AzureRM@(Model.ObjectNameNoSpaces), self).__init__(derived_arg_spec=self.module_arg_spec,
                                       @(CodeModelAnsible.Indent(Model.ObjectName))supports_check_mode=True,
 @if (Model.HasTags())
 {
@@ -407,6 +407,19 @@ def default_compare(new, old, path, result):
             return False 
 @EmptyLine
 @EmptyLine
+#
+# Dictionary transformation helper.
+#
+# Parameters:
+#  d: dictionary
+#  path: path in the dictionary, array of strings
+#  kwargs: optional operation parameters
+#   rename='new_name'               - rename item
+#   expand='new_dictionary_name'    - move item to a new dictionary
+#   camelize=True                   - camelize value
+#   camelize_lower=True             - camelize value, first part will start with lower case
+#   upper=Tru                       - convert value to upper case
+#   map={}                          - dictionary used to map values
 def expand(d, path, **kwargs):
     expandx = kwargs.get('expand', None)
     rename = kwargs.get('rename', None)
@@ -433,6 +446,8 @@ def expand(d, path, **kwargs):
                         new_value = _snake_to_camel(old_value, False)
                     elif upper:
                         new_value = old_value.upper()
+                    else:
+                        new_value = old_value
             if expandx is None:
                 # just rename
                 if new_name != old_name:
@@ -458,7 +473,7 @@ def _snake_to_camel(snake, capitalize_first=False):
 @EmptyLine
 def main():
     """Main execution"""
-    AzureRM@(Model.ObjectName)()
+    AzureRM@(Model.ObjectNameNoSpaces)()
 @EmptyLine
 @EmptyLine
 if __name__ == '__main__':

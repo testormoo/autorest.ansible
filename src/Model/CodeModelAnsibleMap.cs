@@ -1207,6 +1207,14 @@ namespace AutoRest.Ansible.Model
             }
         }
 
+        public string ObjectNameNoSpaces
+        {
+            get
+            {
+                return GetModuleMap(ModuleName).ObjectName.Replace(" ", "");
+            }
+        }
+
         public string ObjectNamePlural
         {
             get
