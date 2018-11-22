@@ -492,6 +492,8 @@ namespace AutoRest.Ansible.Model
                 string[] newPath = path;
                 string[] newPathX = path;
                 var parameters = new List<string>();
+                string new_name = "";
+                string exceptions = "";
 
                 List<string> tempPath = new List<string>(path);
                 tempPath.Add(option.NameAlt);
@@ -511,11 +513,13 @@ namespace AutoRest.Ansible.Model
                 if (option.Name != option.NameAlt)
                 {
                     parameters.Add("rename='" + option.Name + "'");
+                    new_name = option.Name;
                 }
 
                 if (expand != null)
                 {
-                    parameters.Add("expand='" + expand + "'");                    
+                    parameters.Add("expand");  
+                    new_name = expand;                  
                 }
 
                 if (option.SubOptions != null)
@@ -526,12 +530,13 @@ namespace AutoRest.Ansible.Model
                 // translate boolean value
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
-                    parameters.Add("map={True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'}");                    
+                    exceptions="{True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'}";                    
                 }
                 // translate enum values
                 else if (option.EnumValues != null && option.EnumValues.Length > 0)
                 {
                     bool camelize = false;
+                    exceptions = "";
                     string exceptionsNormalCamel = "";
                     string exceptionsLowerCamel = "";
                     string exceptionsUpper = "";
@@ -568,7 +573,7 @@ namespace AutoRest.Ansible.Model
                     if (camelize)
                     {
                         string selected = "camelize";
-                        string exceptions = exceptionsNormalCamel;
+                        exceptions = exceptionsNormalCamel;
 
                         if (exceptions.Length > exceptionsLowerCamel.Length)
                         {
@@ -582,31 +587,62 @@ namespace AutoRest.Ansible.Model
                             exceptions = exceptionsUpper;
                         }
 
-                        parameters.Add(selected + "=" + ((exceptions == "") ? "True" : ("{" + exceptions + "}")));                    
+                        parameters.Add(selected);                    
                     }
                 }
+
+                if (exceptions != "")
+                    parameters.Add("map");
 
                 // after suboptions are handled, add current parameter transformation
                 if (parameters.Count > 0)
                 {
-                    string variable = "expand(self." + ParametersOptionName + ", [";
-
-                    for (int i = 0; i < newPathX.Length; i++)
-                    {
-                        variable += "'" + newPathX[i] + "'";
-                        variable += (i != newPathX.Length - 1) ? ", " : "";
-                    }
-
-                    variable += "]";
-
                     foreach (var p in parameters)
                     {
-                        variable += ", " + p;
+                        string variable = "dict_";
+                        switch (p)
+                        {
+                            case "camelize_lower":
+                                variable += "camelize";
+                                break;
+                            case "camelize":
+                            case "expand":
+                            case "upper":
+                            case "rename":
+                            case "map":
+                                variable += p;
+                                break;
+                        }
+                        variable += "(self." + ParametersOptionName + ", [";
+
+                        for (int i = 0; i < newPathX.Length; i++)
+                        {
+                            variable += "'" + newPathX[i] + "'";
+                            variable += (i != newPathX.Length - 1) ? ", " : "";
+                        }
+
+                        switch (p)
+                        {
+                            case "camelize_lower":
+                                variable += ", False";
+                                break;
+                            case "camelize":
+                                variable += ", True";
+                                break;
+                            case "expand":
+                            case "upper":
+                                break;
+                            case "rename":
+                                variable += ", '" + new_name + "'";
+                                break;
+                            case "map":
+                                variable += ", '" + exceptions + "'";
+                                break;
+                        }
+
+                        variable += ")";
+                        statements.Add(variable);
                     }
-
-                    variable += ")";
-
-                    statements.Add(variable);
                 }
             }
                 
