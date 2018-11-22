@@ -790,7 +790,7 @@ namespace AutoRest.Ansible.Model
         }
 
         //
-        // This returns code to create dictionary for format_item() function
+        // This returns code to create dictionary for format_response() function
         //
         public string[] ModuleReturnResponseDictionary
         {

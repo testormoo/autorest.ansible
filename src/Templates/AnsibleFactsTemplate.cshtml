@@ -81,7 +81,7 @@ except ImportError:
     pass 
 @EmptyLine
 @EmptyLine
-class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
+class AzureRM@(Model.ObjectName)Facts(AzureRMModuleBase):
 
     def __init__(self):
 
@@ -110,7 +110,7 @@ class AzureRM@(Model.ModuleOperationNameUpper)Facts(AzureRMModuleBase):
 @:        self.tags = None
 }
 
-        super(AzureRM@(Model.ModuleOperationNameUpper)Facts, self).__init__(self.module_arg_spec, supports_tags=False)
+        super(AzureRM@(Model.ObjectName)Facts, self).__init__(self.module_arg_spec, supports_tags=False)
 @EmptyLine
 @{
 //
@@ -163,7 +163,7 @@ foreach (var line in Model.ModuleGenerateApiCall("            ", m.Name))
 }
 @:            self.log("Response : {0}".format(response))
 @:        except CloudError as e:
-@:            self.log('Could not get facts for @(Model.ModuleOperationNameUpper).')
+@:            self.log('Could not get facts for @(Model.ObjectName).')
 @EmptyLine
 if (m.Name.Contains("list"))
     {
@@ -172,11 +172,11 @@ if (m.Name.Contains("list"))
     if (Model.HasTags())
     {
 @:                if self.has_tags(item.tags, self.tags):
-@:                    results.append(self.format_item(item))
+@:                    results.append(self.format_response(item))
     }
     else
     {
-@:                results.append(self.format_item(item))
+@:                results.append(self.format_response(item))
     }
 }
 else
@@ -184,12 +184,12 @@ else
     if (Model.HasTags())
     {
 @:        if response and self.has_tags(response.tags, self.tags):
-@:            results.append(self.format_item(response))
+@:            results.append(self.format_response(response))
     }
     else
     {
 @:        if response is not None:
-@:            results.append(self.format_item(response))
+@:            results.append(self.format_response(response))
     }
 }
 @EmptyLine
@@ -198,10 +198,10 @@ else
 @EmptyLine
 @{
 //
-// format_item function uses by all the methods above is generated here
+// format_response function uses by all the methods above is generated here
 //
 }
-    def format_item(self, item):
+    def format_response(self, item):
         d = item.as_dict()
         d = {
             'resource_group': self.resource_group,
@@ -219,7 +219,7 @@ else
 //
 }
 def main():
-    AzureRM@(Model.ModuleOperationNameUpper)Facts()
+    AzureRM@(Model.ObjectName)Facts()
 @EmptyLine
 @EmptyLine
 if __name__ == '__main__':

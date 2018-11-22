@@ -101,7 +101,7 @@ class Actions:
     NoAction, Create, Update, Delete = range(4)
 @EmptyLine
 @EmptyLine
-class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
+class AzureRM@(Model.ObjectName)(AzureRMModuleBase):
     """Configuration class for an Azure RM @(Model.ObjectName) resource"""
 @EmptyLine
     def __init__(self):
@@ -122,15 +122,15 @@ class AzureRM@(Model.ModuleOperationNameUpper)(AzureRMModuleBase):
         self.state = None
         self.to_do = Actions.NoAction
 @EmptyLine
-        super(AzureRM@(Model.ModuleOperationNameUpper), self).__init__(derived_arg_spec=self.module_arg_spec,
-                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_check_mode=True,
+        super(AzureRM@(Model.ObjectName), self).__init__(derived_arg_spec=self.module_arg_spec,
+                                      @(CodeModelAnsible.Indent(Model.ObjectName))supports_check_mode=True,
 @if (Model.HasTags())
 {
-@:                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=True)
+@:                                      @(CodeModelAnsible.Indent(Model.ObjectName))supports_tags=True)
 }
 else
 {
-@:                                      @(CodeModelAnsible.Indent(Model.ModuleOperationNameUpper))supports_tags=False)
+@:                                      @(CodeModelAnsible.Indent(Model.ObjectName))supports_tags=False)
 }
 @EmptyLine
     def exec_module(self, **kwargs):
@@ -209,7 +209,7 @@ else
             elif self.state == 'present':
 @{
     string[] idempotence = Model.ModuleIdempotencyCheck;
-    if (idempotence.Length != 0)
+    if (false/*idempotence.Length != 0*/)
     {
 @:                if (not default_compare(self.@(Model.ParametersOptionName), old_response, '', {
         foreach (var o in idempotence)
@@ -221,7 +221,7 @@ else
     }
     else
     {
-@:                if (not default_compare(self.@(Model.ParametersOptionName), old_response, '')):
+@:                if (not default_compare(self.@(Model.ParametersOptionName), old_response, '', self.results)):
 @:                    self.to_do = Actions.Update
     }
 }
@@ -275,7 +275,7 @@ else
             response = old_response
 @EmptyLine
         if self.state == 'present':
-            self.results.update(self.format_item(response))
+            self.results.update(self.format_response(response))
         return self.results
 @EmptyLine
     def create_update_@(Model.ObjectNamePythonized)(self):
@@ -356,7 +356,7 @@ else
 @EmptyLine
         return False
 @EmptyLine
-    def format_item(self, d):
+    def format_response(self, d):
         d = {
 @foreach (var line in Model.ModuleReturnResponseDictionary)
 {
@@ -366,18 +366,20 @@ else
         return d
 @EmptyLine
 @EmptyLine
-def default_compare(new, old, path):
+def default_compare(new, old, path, result):
     if new is None:
         return True
     elif isinstance(new, dict):
         if not isinstance(old, dict):
+            result['compare'] = 'changed [' + path + '] old dict is null' 
             return False
         for k in new.keys():
-            if not default_compare(new.get(k), old.get(k, None), path + '/' + k):
+            if not default_compare(new.get(k), old.get(k, None), path + '/' + k, result):
                 return False
         return True
     elif isinstance(new, list):
         if not isinstance(old, list) or len(new) != len(old):
+            result['compare'] = 'changed [' + path + '] length is different or null' 
             return False
         if isinstance(old[0], dict):
             key = None
@@ -391,11 +393,18 @@ def default_compare(new, old, path):
             new = sorted(new)
             old = sorted(old)
         for i in range(len(new)):
-            if not default_compare(new[i], old[i], path + '/*'):
+            if not default_compare(new[i], old[i], path + '/*', result):
                 return False
         return True
     else:
-        return new == old
+        if path == '/location':
+            new = new.replace(' ', '').lower()
+            old = new.replace(' ', '').lower()
+        if new == old:
+            return True
+        else:
+            result['compare'] = 'changed [' + path + '] ' + new + ' != ' + old
+            return False 
 @EmptyLine
 @EmptyLine
 def expand(d, path, **kwargs):
@@ -449,7 +458,7 @@ def _snake_to_camel(snake, capitalize_first=False):
 @EmptyLine
 def main():
     """Main execution"""
-    AzureRM@(Model.ModuleOperationNameUpper)()
+    AzureRM@(Model.ObjectName)()
 @EmptyLine
 @EmptyLine
 if __name__ == '__main__':
