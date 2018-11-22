@@ -512,7 +512,7 @@ namespace AutoRest.Ansible.Model
 
                 if (option.Name != option.NameAlt)
                 {
-                    parameters.Add("rename='" + option.Name + "'");
+                    parameters.Add("rename");
                     new_name = option.Name;
                 }
 
@@ -620,6 +620,8 @@ namespace AutoRest.Ansible.Model
                             variable += "'" + newPathX[i] + "'";
                             variable += (i != newPathX.Length - 1) ? ", " : "";
                         }
+
+                        variable += "]";
 
                         switch (p)
                         {

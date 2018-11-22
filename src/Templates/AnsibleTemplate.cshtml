@@ -420,8 +420,8 @@ def dict_camelize(d, path, camelize_first):
             sd = d.get(path[0], None)
             if sd is not None:
                 dict_camelize(sd, path[1:], camelize_first)
-
-
+@EmptyLine
+@EmptyLine
 def dict_map(d, path, map):
     if isinstance(d, list):
         for i in range(len(d)):
@@ -435,8 +435,8 @@ def dict_map(d, path, map):
             sd = d.get(path[0], None)
             if sd is not None:
                 dict_map(sd, path[1:], map)
-
-
+@EmptyLine
+@EmptyLine
 def dict_upper(d, path):
     if isinstance(d, list):
         for i in range(len(d)):
@@ -450,8 +450,8 @@ def dict_upper(d, path):
             sd = d.get(path[0], None)
             if sd is not None:
                 dict_upper(sd, path[1:])
-
-
+@EmptyLine
+@EmptyLine
 def dict_rename(d, path, new_name):
     if isinstance(d, list):
         for i in range(len(d)):
@@ -465,8 +465,8 @@ def dict_rename(d, path, new_name):
             sd = d.get(path[0], None)
             if sd is not None:
                 dict_rename(sd, path[1:], new_name)
-
-
+@EmptyLine
+@EmptyLine
 def dict_expand(d, path, outer_dict_name):
     if isinstance(d, list):
         for i in range(len(d)):
