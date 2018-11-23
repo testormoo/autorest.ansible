@@ -348,9 +348,7 @@ namespace AutoRest.Ansible.Model
                 if (option.SubOptions != null && option.SubOptions.Length > 0)
                 {
                     string[] subspec = GetModuleArgSpecFromOptions(option.SubOptions);
-                    subspec[0] = "options=dict(";
-
-                    for (int j = 0; i < subspec.Length; j++)
+                    for (int j = 0; j < subspec.Length; j++)
                     {
                         argSpec.Add(((j == 0) ? "options=dict(" : "") + "    " + subspec[j] + ((j == subspec.Length - 1) ? "," : ""));
                     }
@@ -547,6 +545,11 @@ namespace AutoRest.Ansible.Model
                     statements.AddRange(GetAdjustmentStatements(option.SubOptions, newPath, newExpand));
                 }
 
+                if (option.name == "id")
+                {
+                    parameters.Add("resoirce_id");
+                }
+
                 // translate boolean value
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
@@ -630,6 +633,7 @@ namespace AutoRest.Ansible.Model
                             case "upper":
                             case "rename":
                             case "map":
+                            case "resource_id":
                                 variable += p;
                                 break;
                         }
@@ -659,6 +663,9 @@ namespace AutoRest.Ansible.Model
                                 break;
                             case "map":
                                 variable += ", {" + exceptions + "}";
+                                break;
+                            case "resource_id":
+                                variable += ", subscription_id=self.subscription_id, " + exceptions + "'}";
                                 break;
                         }
 
