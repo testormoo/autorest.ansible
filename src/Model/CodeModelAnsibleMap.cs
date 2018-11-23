@@ -337,6 +337,14 @@ namespace AutoRest.Ansible.Model
                     continue;
                 bool defaultOrRequired = (option.DefaultValue != null) || (option.Required == "True");
                 bool choices = (option.EnumValues != null) && option.EnumValues.Length > 0;
+                
+                if (argSpec.Count > 0)
+                {
+                    string n = argSpec.Last() + ",";
+                    argSpec.RemoveAt(argSpec.Count);
+                    argSpec.Add(n);
+                }
+                
                 argSpec.Add(option.NameAlt + "=dict(");
                 argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired || choices) ? "," : ""));
 
@@ -348,10 +356,12 @@ namespace AutoRest.Ansible.Model
                 if (option.SubOptions != null && option.SubOptions.Length > 0)
                 {
                     string[] subspec = GetModuleArgSpecFromOptions(option.SubOptions);
+                    argSpec.Add("    options=dict(");
                     for (int j = 0; j < subspec.Length; j++)
                     {
-                        argSpec.Add(((j == 0) ? "options=dict(" : "") + "    " + subspec[j] + ((j == subspec.Length - 1) ? "," : ""));
+                        argSpec.Add("        " + subspec[j]);
                     }
+                    argSpec.Add("    )");
                 }
 
                 if (choices)
@@ -387,7 +397,7 @@ namespace AutoRest.Ansible.Model
                     }
                 }
 
-                argSpec.Add(")" + (i < options.Length - 1 ? "," : ""));
+                argSpec.Add(")");
             }
 
             return argSpec.ToArray();
@@ -547,7 +557,7 @@ namespace AutoRest.Ansible.Model
 
                 if (option.Name == "id")
                 {
-                    parameters.Add("resoirce_id");
+                    parameters.Add("resource_id");
                 }
 
                 // translate boolean value
