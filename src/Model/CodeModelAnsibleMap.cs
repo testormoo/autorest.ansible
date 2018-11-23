@@ -296,6 +296,40 @@ namespace AutoRest.Ansible.Model
             var argSpec = new List<string>();
             var options = GetCollapsedOptions(ModuleOptions);
 
+            argSpec.AddRange(GetModuleArgSpecFromOptions(options));
+
+            if (appendMainModuleOptions)
+            {
+                if (NeedsForceUpdate)
+                {
+                    argSpec.Add("force_update=dict(");
+                    argSpec.Add("    type='bool'");
+                    argSpec.Add("),");
+                }
+
+                argSpec.Add("state=dict(");
+                argSpec.Add("    type='str',");
+                argSpec.Add("    default='present',");
+                argSpec.Add("    choices=['present', 'absent']");
+                argSpec.Add(")");
+            }
+            else
+            {
+                if (HasTags())
+                {
+                    argSpec.Add("tags=dict(");        
+                    argSpec.Add("    type='list'");        
+                    argSpec.Add(")");        
+                }
+            }
+
+            return argSpec.ToArray();
+        }
+
+        private string[] GetModuleArgSpecFromOptions(ModuleOption[] options)
+        {
+            var argSpec = new List<string>();
+
             for (int i = 0; i < options.Length; i++)
             {
                 var option = options[i];
@@ -309,6 +343,17 @@ namespace AutoRest.Ansible.Model
                 if (option.NoLog)
                 {
                     argSpec.Add("    no_log=True" + ((defaultOrRequired || choices) ? "," : ""));
+                }
+
+                if (option.SubOptions != null && option.SubOptions.Length > 0)
+                {
+                    string[] subspec = GetModuleArgSpecFromOptions(option.SubOptions);
+                    subspec[0] = "options=dict(";
+
+                    for (int j = 0; i < subspec.Length; j++)
+                    {
+                        argSpec.Add(((j == 0) ? "options=dict(" : "") + "    " + subspec[j] + ((j == subspec.Length - 1) ? "," : ""));
+                    }
                 }
 
                 if (choices)
@@ -344,32 +389,7 @@ namespace AutoRest.Ansible.Model
                     }
                 }
 
-                argSpec.Add(")" + ((i < options.Length - 1 || appendMainModuleOptions || (!appendMainModuleOptions && HasTags())) ? "," : ""));
-            }
-
-            if (appendMainModuleOptions)
-            {
-                if (NeedsForceUpdate)
-                {
-                    argSpec.Add("force_update=dict(");
-                    argSpec.Add("    type='bool'");
-                    argSpec.Add("),");
-                }
-
-                argSpec.Add("state=dict(");
-                argSpec.Add("    type='str',");
-                argSpec.Add("    default='present',");
-                argSpec.Add("    choices=['present', 'absent']");
-                argSpec.Add(")");
-            }
-            else
-            {
-                if (HasTags())
-                {
-                    argSpec.Add("tags=dict(");        
-                    argSpec.Add("    type='list'");        
-                    argSpec.Add(")");        
-                }
+                argSpec.Add(")" + (i < options.Length - 1 ? "," : ""));
             }
 
             return argSpec.ToArray();
