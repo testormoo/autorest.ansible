@@ -545,7 +545,7 @@ namespace AutoRest.Ansible.Model
                     statements.AddRange(GetAdjustmentStatements(option.SubOptions, newPath, newExpand));
                 }
 
-                if (option.name == "id")
+                if (option.Name == "id")
                 {
                     parameters.Add("resoirce_id");
                 }
