@@ -296,7 +296,14 @@ namespace AutoRest.Ansible.Model
             var argSpec = new List<string>();
             var options = GetCollapsedOptions(ModuleOptions);
 
-            argSpec.AddRange(GetModuleArgSpecFromOptions(options));
+            string[] l = GetModuleArgSpecFromOptions(options);
+
+            if (appendMainModuleOptions || HasTags())
+            {
+                l[l.Length - 1] += ",";
+            }
+
+            argSpec.AddRange(l);
 
             if (appendMainModuleOptions)
             {
@@ -313,14 +320,11 @@ namespace AutoRest.Ansible.Model
                 argSpec.Add("    choices=['present', 'absent']");
                 argSpec.Add(")");
             }
-            else
+            else if (HasTags())
             {
-                if (HasTags())
-                {
-                    argSpec.Add("tags=dict(");        
-                    argSpec.Add("    type='list'");        
-                    argSpec.Add(")");        
-                }
+                argSpec.Add("tags=dict(");        
+                argSpec.Add("    type='list'");        
+                argSpec.Add(")");        
             }
 
             return argSpec.ToArray();
@@ -675,7 +679,7 @@ namespace AutoRest.Ansible.Model
                                 variable += ", {" + exceptions + "}";
                                 break;
                             case "resource_id":
-                                variable += ", subscription_id=self.subscription_id, " + exceptions + "'}";
+                                variable += ", subscription_id=self.subscription_id, resource_group=self.resource_group";
                                 break;
                         }
 
