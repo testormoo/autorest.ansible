@@ -275,7 +275,7 @@ else
             response = old_response
 @EmptyLine
         if self.state == 'present':
-@foreach (var line in Model.GetResponseDictionary(ModuleResponseFields, "", "result"))
+@foreach (var line in Model.GetResponseDictionary(Model.ModuleResponseFields, "", "result"))
 {
 @:            @(line)
 }

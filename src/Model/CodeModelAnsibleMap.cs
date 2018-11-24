@@ -1793,7 +1793,7 @@ namespace AutoRest.Ansible.Model
             return help.ToArray();
         }
 
-        private string[] GetResponseDictionary(ModuleResponseField[] fields, string padding, string srcPrefix)
+        public string[] GetResponseDictionary(ModuleResponseField[] fields, string padding, string srcPrefix)
         {
             List<string> help = new List<string>();
 
