@@ -341,7 +341,7 @@ namespace AutoRest.Ansible.Model
                 if (argSpec.Count > 0)
                 {
                     string n = argSpec.Last() + ",";
-                    argSpec.RemoveAt(argSpec.Count);
+                    argSpec.RemoveAt(argSpec.Count - 1);
                     argSpec.Add(n);
                 }
                 
