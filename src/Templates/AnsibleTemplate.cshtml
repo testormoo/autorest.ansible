@@ -275,11 +275,12 @@ else
             response = old_response
 @EmptyLine
         if self.state == 'present':
+            self.results.update({
 @foreach (var line in Model.GetResponseDictionary(Model.ModuleResponseFields, "", "result"))
 {
-@:            @(line)
+@:                @(line)
 }
-            self.results.update(self.format_response(response))
+                })
         return self.results
 @EmptyLine
     def create_update_@(Model.ObjectNamePythonized)(self):
