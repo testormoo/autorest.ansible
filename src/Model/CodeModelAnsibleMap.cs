@@ -23,6 +23,8 @@ namespace AutoRest.Ansible.Model
             IsSnakeToCamelNeeded = false;
 
             _selectedMethod = method;
+
+            PrepareAdjustmentStatements();
         }
 
         public CodeModelAnsibleMap(MapAnsible map, string[] mergeReport, string module)
@@ -35,6 +37,8 @@ namespace AutoRest.Ansible.Model
                 if (Map.Modules[_selectedMethod].ModuleName == module)
                     break;
             }
+
+            PrepareAdjustmentStatements();
         }
 
         public string[] MergeReport { get; set; }
@@ -322,9 +326,9 @@ namespace AutoRest.Ansible.Model
             }
             else if (HasTags())
             {
-                argSpec.Add("tags=dict(");        
-                argSpec.Add("    type='list'");        
-                argSpec.Add(")");        
+                argSpec.Add("tags=dict(");
+                argSpec.Add("    type='list'");
+                argSpec.Add(")");
             }
 
             return argSpec.ToArray();
@@ -341,14 +345,14 @@ namespace AutoRest.Ansible.Model
                     continue;
                 bool defaultOrRequired = (option.DefaultValue != null) || (option.Required == "True");
                 bool choices = (option.EnumValues != null) && option.EnumValues.Length > 0;
-                
+
                 if (argSpec.Count > 0)
                 {
                     string n = argSpec.Last() + ",";
                     argSpec.RemoveAt(argSpec.Count - 1);
                     argSpec.Add(n);
                 }
-                
+
                 argSpec.Add(option.NameAlt + "=dict(");
                 argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired || choices) ? "," : ""));
 
@@ -499,20 +503,32 @@ namespace AutoRest.Ansible.Model
             }
         }
 
-        public string[] AdjustmentStatements
-        {
-            get
-            {
-                return GetAdjustmentStatements(ModuleOptionsSecondLevel, new List<string>().ToArray(), null);
-            }
-        }
-
         //
         // Code to expand options to actual structure
         //
-        public string[] GetAdjustmentStatements(ModuleOption[] options, string[] path, string expand)
+        public void PrepareAdjustmentStatements()
+        {
+            AdjustmentStatements = GetAdjustmentStatements(ModuleOptionsSecondLevel, new List<string>().ToArray(), null);
+        }
+
+        public string[] AdjustmentStatements { get; set; }
+        public bool IsCamelizeNeeded { get; set; }
+        public bool IsMapNeeded { get; set; }
+        public bool IsUpperNeeded { get; set; }
+        public bool IsRenameNeeded { get; set; }
+        public bool IsExpandNeeded { get; set; }
+        public bool IsResourceIdNeeded { get; set; }
+
+        private string[] GetAdjustmentStatements(ModuleOption[] options, string[] path, string expand)
         {
             var statements = new List<string>();
+
+            IsCamelizeNeeded = false;
+            IsMapNeeded = false;
+            IsUpperNeeded = false;
+            IsRenameNeeded = false;
+            IsExpandNeeded = false;
+            IsResourceIdNeeded = false;
 
             foreach (var option in options)
             {
@@ -546,12 +562,14 @@ namespace AutoRest.Ansible.Model
                 {
                     parameters.Add("rename");
                     new_name = option.Name;
+                    IsRenameNeeded = true;
                 }
 
                 if (expand != null)
                 {
                     parameters.Add("expand");  
-                    new_name = expand;                  
+                    new_name = expand;
+                    IsExpandNeeded = true;
                 }
 
                 if (option.SubOptions != null)
@@ -562,12 +580,13 @@ namespace AutoRest.Ansible.Model
                 if (option.Name == "id")
                 {
                     parameters.Add("resource_id");
+                    IsResourceIdNeeded = true;
                 }
 
                 // translate boolean value
                 if (option.ValueIfFalse != null && option.ValueIfTrue != null)
                 {
-                    exceptions="True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'";                    
+                    exceptions="True: '" + option.ValueIfTrue + "', False: '" + option.ValueIfFalse + "'";
                 }
                 // translate enum values
                 else if (option.EnumValues != null && option.EnumValues.Length > 0)
@@ -624,12 +643,24 @@ namespace AutoRest.Ansible.Model
                             exceptions = exceptionsUpper;
                         }
 
-                        parameters.Add(selected);                    
+                        parameters.Add(selected);
+
+                        if (selected == "upper")
+                        {
+                            IsUpperNeeded = true;
+                        }
+                        else
+                        {
+                            IsCamelizeNeeded = true;
+                        }
                     }
                 }
 
                 if (exceptions != "")
+                {
                     parameters.Add("map");
+                    IsMapNeeded = true;
+                }
 
                 // after suboptions are handled, add current parameter transformation
                 if (parameters.Count > 0)
