@@ -275,6 +275,10 @@ else
             response = old_response
 @EmptyLine
         if self.state == 'present':
+@foreach (var line in Model.GetResponseDictionary(ModuleResponseFields, "", "result"))
+{
+@:            @(line)
+}
             self.results.update(self.format_response(response))
         return self.results
 @EmptyLine
@@ -355,15 +359,6 @@ else
             return response.as_dict()
 @EmptyLine
         return False
-@EmptyLine
-    def format_response(self, d):
-        d = {
-@foreach (var line in Model.ModuleReturnResponseDictionary)
-{
-@:@(line)
-}
-        }
-        return d
 @EmptyLine
 @EmptyLine
 def default_compare(new, old, path, result):

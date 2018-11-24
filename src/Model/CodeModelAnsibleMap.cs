@@ -906,7 +906,7 @@ namespace AutoRest.Ansible.Model
         {
             get
             {
-                return GetResponseDictionary(ModuleResponseFields, "            ", "d");
+                return GetResponseDictionary(ModuleResponseFields, "", "d");
             }
         }
 
