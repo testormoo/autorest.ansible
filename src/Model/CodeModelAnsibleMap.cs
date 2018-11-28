@@ -504,6 +504,13 @@ namespace AutoRest.Ansible.Model
         //
         public void PrepareAdjustmentStatements()
         {
+            IsCamelizeNeeded = false;
+            IsMapNeeded = false;
+            IsUpperNeeded = false;
+            IsRenameNeeded = false;
+            IsExpandNeeded = false;
+            IsResourceIdNeeded = false;
+
             _AdjustmentStatements = GetAdjustmentStatements(ModuleOptionsSecondLevel, new List<string>().ToArray(), null);
         }
 
@@ -530,13 +537,6 @@ namespace AutoRest.Ansible.Model
         private string[] GetAdjustmentStatements(ModuleOption[] options, string[] path, string expand)
         {
             var statements = new List<string>();
-
-            IsCamelizeNeeded = false;
-            IsMapNeeded = false;
-            IsUpperNeeded = false;
-            IsRenameNeeded = false;
-            IsExpandNeeded = false;
-            IsResourceIdNeeded = false;
 
             foreach (var option in options)
             {
