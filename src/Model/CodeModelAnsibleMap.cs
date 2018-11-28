@@ -350,11 +350,11 @@ namespace AutoRest.Ansible.Model
                 }
 
                 argSpec.Add(option.NameAlt + "=dict(");
-                argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired || choices) ? "," : ""));
+                argSpec.Add("    type='" + (option.IsList ? "list" : option.Type) + "'" + ((option.NoLog || defaultOrRequired || choices || (option.SubOptions != null && option.SubOptions.Length > 0)) ? "," : ""));
 
                 if (option.NoLog)
                 {
-                    argSpec.Add("    no_log=True" + ((defaultOrRequired || choices) ? "," : ""));
+                    argSpec.Add("    no_log=True" + ((defaultOrRequired || choices || (option.SubOptions != null && option.SubOptions.Length > 0)) ? "," : ""));
                 }
 
                 if (option.SubOptions != null && option.SubOptions.Length > 0)
