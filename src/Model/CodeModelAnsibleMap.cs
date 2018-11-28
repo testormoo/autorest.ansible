@@ -23,8 +23,6 @@ namespace AutoRest.Ansible.Model
             IsSnakeToCamelNeeded = false;
 
             _selectedMethod = method;
-
-            PrepareAdjustmentStatements();
         }
 
         public CodeModelAnsibleMap(MapAnsible map, string[] mergeReport, string module)
@@ -37,8 +35,6 @@ namespace AutoRest.Ansible.Model
                 if (Map.Modules[_selectedMethod].ModuleName == module)
                     break;
             }
-
-            PrepareAdjustmentStatements();
         }
 
         public string[] MergeReport { get; set; }
@@ -508,10 +504,22 @@ namespace AutoRest.Ansible.Model
         //
         public void PrepareAdjustmentStatements()
         {
-            AdjustmentStatements = GetAdjustmentStatements(ModuleOptionsSecondLevel, new List<string>().ToArray(), null);
+            _AdjustmentStatements = GetAdjustmentStatements(ModuleOptionsSecondLevel, new List<string>().ToArray(), null);
         }
 
-        public string[] AdjustmentStatements { get; set; }
+        public string[] AdjustmentStatements {
+            get
+            {
+                if (_AdjustmentStatements == null)
+                {
+                    PrepareAdjustmentStatements();
+                }
+
+                return _AdjustmentStatements;
+            }
+        }
+
+        private string[] _AdjustmentStatements = null;
         public bool IsCamelizeNeeded { get; set; }
         public bool IsMapNeeded { get; set; }
         public bool IsUpperNeeded { get; set; }
