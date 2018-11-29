@@ -1245,6 +1245,7 @@
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.vm_extension_status_message:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.install_time:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifact_deployment_status:
+  - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifact_deployment_status.deployment_status:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifact_deployment_status.artifacts_applied:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifact_deployment_status.total_artifacts:
@@ -1256,6 +1257,7 @@
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.gallery_image_reference.version:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm.statuses:
+  - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm.statuses.code:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm.statuses.display_status:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm.statuses.message:
@@ -1327,6 +1329,7 @@
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.allow_claim:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.storage_type:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.virtual_machine_creation_source:
+  - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.environment_id:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.provisioning_state:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.unique_identifier:
