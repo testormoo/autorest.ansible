@@ -595,7 +595,7 @@ namespace AutoRest.Ansible.Model
                     // replace "GitHub" with "Github" so it's not pythonised to "git_hub"
                     if (old.Contains("GitHub")) old = old.Replace("GitHub", "Github");
 
-                    list.Add(new KeyValuePair<string,string>(v.Name.ToPythonCase(), v.Name));
+                    list.Add(new KeyValuePair<string,string>(old.ToPythonCase(), v.Name));
                 }
             }
             return list.ToArray();
