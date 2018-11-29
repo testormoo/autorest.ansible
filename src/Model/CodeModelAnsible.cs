@@ -590,6 +590,11 @@ namespace AutoRest.Ansible.Model
             {
                 foreach (var v in (type as EnumType).Values)
                 {
+                    string old = v.Name;
+
+                    // replace "GitHub" with "Github" so it's not pythonised to "git_hub"
+                    if (old.Contains("GitHub")) old = old.Replace("GitHub", "Github");
+
                     list.Add(new KeyValuePair<string,string>(v.Name.ToPythonCase(), v.Name));
                 }
             }
