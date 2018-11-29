@@ -1241,9 +1241,13 @@
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.parameters.name:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.parameters.value:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.status:
+    - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.deployment_status_message:
+    - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.vm_extension_status_message:
+    - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifacts.install_time:
+    - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifact_deployment_status:
     - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.artifact_deployment_status.deployment_status:
