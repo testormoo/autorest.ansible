@@ -1260,6 +1260,7 @@
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.gallery_image_reference.os_type:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.gallery_image_reference.version:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm:
+    - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm.statuses:
     - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.compute_vm.statuses.code:
@@ -1290,6 +1291,7 @@
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.network_interface.shared_public_ip_address_configuration.inbound_nat_rules.frontend_port:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.network_interface.shared_public_ip_address_configuration.inbound_nat_rules.backend_port:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.applicable_schedule:
+    - exclude
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.applicable_schedule.location:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.applicable_schedule.lab_vms_shutdown:
 - azure_rm_devtestlabsvirtualmachine.lab_virtual_machine.applicable_schedule.lab_vms_shutdown.location:
