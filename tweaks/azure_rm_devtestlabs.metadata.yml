@@ -1691,12 +1691,14 @@
 - azure_rm_devtestlabsvirtualnetwork.virtual_network:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.location:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.allowed_subnets:
+    - exclude
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.allowed_subnets.resource_id:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.allowed_subnets.lab_subnet_name:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.allowed_subnets.allow_public_ip:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.description:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.external_provider_resource_id:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.external_subnets:
+    - exclude
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.external_subnets.id:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.external_subnets.name:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.subnet_overrides:
@@ -1710,7 +1712,9 @@
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.subnet_overrides.shared_public_ip_address_configuration.allowed_ports.backend_port:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.subnet_overrides.virtual_network_pool_name:
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.provisioning_state:
+    - exclude
 - azure_rm_devtestlabsvirtualnetwork.virtual_network.unique_identifier:
+    - exclude
 - azure_rm_devtestlabsvirtualnetwork.response.id:
 - azure_rm_devtestlabsvirtualnetwork.response.name:
 - azure_rm_devtestlabsvirtualnetwork.response.type:
