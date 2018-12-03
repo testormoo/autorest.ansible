@@ -1,4 +1,5 @@
 - azure_rm_devtestlabslab:
+    - object_name: DevTest Lab
 - azure_rm_devtestlabslab.resource_group_name:
 - azure_rm_devtestlabslab.name:
 - azure_rm_devtestlabslab.lab:
@@ -128,6 +129,7 @@
 - azure_rm_devtestlabsglobalschedule_facts.response.provisioning_state:
 - azure_rm_devtestlabsglobalschedule_facts.response.unique_identifier:
 - azure_rm_devtestlabsartifactsource:
+    - object_name: DevTest Labs Artifacts Source
 - azure_rm_devtestlabsartifactsource.resource_group_name:
 - azure_rm_devtestlabsartifactsource.lab_name:
 - azure_rm_devtestlabsartifactsource.name:
@@ -1213,6 +1215,7 @@
 - azure_rm_devtestlabssecret_facts.response.provisioning_state:
 - azure_rm_devtestlabssecret_facts.response.unique_identifier:
 - azure_rm_devtestlabsvirtualmachine:
+    - DevTest Labs Virtual Machine
 - azure_rm_devtestlabsvirtualmachine.resource_group_name:
 - azure_rm_devtestlabsvirtualmachine.lab_name:
 - azure_rm_devtestlabsvirtualmachine.name:
@@ -1685,6 +1688,7 @@
 - azure_rm_devtestlabsvirtualmachineschedule_facts.response.provisioning_state:
 - azure_rm_devtestlabsvirtualmachineschedule_facts.response.unique_identifier:
 - azure_rm_devtestlabsvirtualnetwork:
+    - DevTest Labs Virtual Network
 - azure_rm_devtestlabsvirtualnetwork.resource_group_name:
 - azure_rm_devtestlabsvirtualnetwork.lab_name:
 - azure_rm_devtestlabsvirtualnetwork.name:
