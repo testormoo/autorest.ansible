@@ -12,27 +12,8 @@ echo "---"
 cd /ansible-hatchery-tmp
 find -name azure_rm*.py
 
-/autorest.ansible/scripts/generate-generic.sh sql package-composite-v3 azure-mgmt-sql
-/autorest.ansible/scripts/generate-generic.sh mysql package-2017-04-preview azure-mgmt-rdbms
-/autorest.ansible/scripts/generate-generic.sh postgresql package-2017-04-preview azure-mgmt-rdbms
-/autorest.ansible/scripts/generate-generic.sh authorization package-2015-07 .
-/autorest.ansible/scripts/generate-generic.sh web package-2016-09 azure-mgmt-web
 # namespace issue
 #/autorest.ansible/scripts/generate-generic.sh network xxx .
-/autorest.ansible/scripts/generate-generic.sh containerinstance package-2017-10-preview azure-mgmt-containerinstance
-/autorest.ansible/scripts/generate-generic.sh containerregistry package-2017-10 azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2017_10_01
-/autorest.ansible/scripts/generate-generic.sh keyvault package-2016-10 azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
-/autorest.ansible/scripts/generate-generic.sh batch package-2017-09 azure-mgmt-batch
-/autorest.ansible/scripts/generate-generic.sh batchai package-2017-09-preview azure-mgmt-batchai
-/autorest.ansible/scripts/generate-generic.sh cosmos-db package-2015-04 azure-mgmt-cosmosdb
-/autorest.ansible/scripts/generate-generic.sh compute package-2018-10-01 .
-/autorest.ansible/scripts/generate-generic.sh hdinsight package-2015-03-preview azure-mgmt-hdinsight
-/autorest.ansible/scripts/generate-generic.sh frontdoor package-2018-08-preview azure-mgmt-frontdoor
-/autorest.ansible/scripts/generate-generic.sh machinelearning package-webservices-2017-01 .
-/autorest.ansible/scripts/generate-generic.sh machinelearningcompute package-2017-08-preview azure-mgmt-machinelearningcompute
-/autorest.ansible/scripts/generate-generic.sh machinelearningexperimentation package-2017-05-preview .
-/autorest.ansible/scripts/generate-generic.sh machinelearningservices package-2018-03-preview azure-mgmt-machinelearningservices/all/modules
-/autorest.ansible/scripts/generate-generic.sh mariadb package-2018-06-01-preview azure-mgmt-rdbms
 
 /autorest.ansible/scripts/generate-generic.sh addons package-2018-03 azure-mgmt-addons
 /autorest.ansible/scripts/generate-generic.sh adhybridhealthservice package-2014-01 azure-mgmt-adhybridhealthservice
@@ -41,16 +22,23 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh apimanagement package-2018-01 azure-mgmt-apimanagement
 /autorest.ansible/scripts/generate-generic.sh applicationinsights package-2015-05 azure-mgmt-applicationinsights
 /autorest.ansible/scripts/generate-generic.sh automation package-2018-06-preview azure-mgmt-automation
+/autorest.ansible/scripts/generate-generic.sh authorization package-2015-07 .
 /autorest.ansible/scripts/generate-generic.sh azure-kusto package-2018-09-07-preview azure-mgmt-kusto
 /autorest.ansible/scripts/generate-generic.sh azurestack package-2017-06-01 .
+/autorest.ansible/scripts/generate-generic.sh batch package-2017-09 azure-mgmt-batch
+/autorest.ansible/scripts/generate-generic.sh batchai package-2017-09-preview azure-mgmt-batchai
 /autorest.ansible/scripts/generate-generic.sh billing package-2018-03-preview azure-mgmt-billing
 /autorest.ansible/scripts/generate-generic.sh blueprint package-2017-11-preview azure-mgmt-blueprint
 /autorest.ansible/scripts/generate-generic.sh botservice package-2018-07-12 azure-mgmt-botservice
 /autorest.ansible/scripts/generate-generic.sh cdn package-2017-10 azure-mgmt-cdn
 /autorest.ansible/scripts/generate-generic.sh cognitiveservices package-2017-04 azure-mgmt-cognitiveservices
 /autorest.ansible/scripts/generate-generic.sh commerce package-2015-06-preview azure-mgmt-commerce
+/autorest.ansible/scripts/generate-generic.sh compute package-2018-10-01 .
 /autorest.ansible/scripts/generate-generic.sh consumption package-2018-10 azure-mgmt-consumption
+/autorest.ansible/scripts/generate-generic.sh containerinstance package-2017-10-preview azure-mgmt-containerinstance
+/autorest.ansible/scripts/generate-generic.sh containerregistry package-2017-10 azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2017_10_01
 /autorest.ansible/scripts/generate-generic.sh containerservices package-2018-08-preview azure-mgmt-containerservice
+/autorest.ansible/scripts/generate-generic.sh cosmos-db package-2015-04 azure-mgmt-cosmosdb
 /autorest.ansible/scripts/generate-generic.sh cost-management package-2018-05 azure-mgmt-costmanagement
 /autorest.ansible/scripts/generate-generic.sh customer-insights package-2017-04 .
 /autorest.ansible/scripts/generate-generic.sh databox package-2018-01 azure-mgmt-databox
@@ -68,28 +56,38 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh domainservices package-2017-06 .
 /autorest.ansible/scripts/generate-generic.sh eventgrid package-2018-09-preview azure-mgmt-eventgrid
 /autorest.ansible/scripts/generate-generic.sh eventhub package-2017-04 azure-mgmt-eventhub
+/autorest.ansible/scripts/generate-generic.sh frontdoor package-2018-08-preview azure-mgmt-frontdoor
 #/autorest.ansible/scripts/generate-generic.sh graphrbac yyy .
 /autorest.ansible/scripts/generate-generic.sh guestconfiguration package-2018-06-30-preview .
 /autorest.ansible/scripts/generate-generic.sh hanaonazure package-2017-11 azure-mgmt-hanaonazure
 /autorest.ansible/scripts/generate-generic.sh hardwaresecuritymodules package-2018-10 .
+/autorest.ansible/scripts/generate-generic.sh hdinsight package-2015-03-preview azure-mgmt-hdinsight
 /autorest.ansible/scripts/generate-generic.sh intune package-2015-01-preview .
 /autorest.ansible/scripts/generate-generic.sh iotcentral package-2018-09-01 azure-mgmt-iotcentral
 /autorest.ansible/scripts/generate-generic.sh iothub package-2018-04 azure-mgmt-iothub
 /autorest.ansible/scripts/generate-generic.sh iotspaces package-2017-10-preview .
+/autorest.ansible/scripts/generate-generic.sh keyvault package-2016-10 azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
 /autorest.ansible/scripts/generate-generic.sh logic package-2018-07-preview azure-mgmt-logic
+/autorest.ansible/scripts/generate-generic.sh machinelearning package-webservices-2017-01 .
+/autorest.ansible/scripts/generate-generic.sh machinelearningcompute package-2017-08-preview azure-mgmt-machinelearningcompute
+/autorest.ansible/scripts/generate-generic.sh machinelearningexperimentation package-2017-05-preview .
+/autorest.ansible/scripts/generate-generic.sh machinelearningservices package-2018-03-preview azure-mgmt-machinelearningservices/all/modules
 /autorest.ansible/scripts/generate-generic.sh managementgroups package-2018-03 azure-mgmt-managementgroups
 /autorest.ansible/scripts/generate-generic.sh managementpartner package-2018-02 azure-mgmt-managementpartner
 /autorest.ansible/scripts/generate-generic.sh maps package-2018-05 azure-mgmt-maps
+/autorest.ansible/scripts/generate-generic.sh mariadb package-2018-06-01-preview azure-mgmt-rdbms
 /autorest.ansible/scripts/generate-generic.sh marketplaceordering package-2015-06-01 .
 /autorest.ansible/scripts/generate-generic.sh mediaservices package-2018-07 azure-mgmt-media
 /autorest.ansible/scripts/generate-generic.sh migrate package-2018-02 .
 /autorest.ansible/scripts/generate-generic.sh monitor package-2018-09 azure-mgmt-monitor
 /autorest.ansible/scripts/generate-generic.sh msi package-2015-08-31-preview azure-mgmt-msi
+/autorest.ansible/scripts/generate-generic.sh mysql package-2017-04-preview azure-mgmt-rdbms
 /autorest.ansible/scripts/generate-generic.sh netapp package-2017-08-15 azure-mgmt-netapp
 /autorest.ansible/scripts/generate-generic.sh notificationhubs package-2017-04 azure-mgmt-notificationhubs
 /autorest.ansible/scripts/generate-generic.sh operationalinsights package-2015-11-preview azure-mgmt-loganalytics
 /autorest.ansible/scripts/generate-generic.sh operationsmanagement package-2015-11-preview .
 /autorest.ansible/scripts/generate-generic.sh policyinsights package-2018-07 .
+/autorest.ansible/scripts/generate-generic.sh postgresql package-2017-04-preview azure-mgmt-rdbms
 /autorest.ansible/scripts/generate-generic.sh powerbidedicated package-2017-10-01 .
 /autorest.ansible/scripts/generate-generic.sh powerbiembedded package-2016-01 azure-mgmt-powerbiembedded
 /autorest.ansible/scripts/generate-generic.sh recoveryservices package-2016-06 azure-mgmt-recoveryservices
@@ -110,6 +108,7 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh servicefabricmesh package-2018-09-01-preview azure-mgmt-servicefabricmesh
 /autorest.ansible/scripts/generate-generic.sh service-map package-2015-11-preview .
 /autorest.ansible/scripts/generate-generic.sh signalr package-2018-03-01-preview azure-mgmt-signalr
+/autorest.ansible/scripts/generate-generic.sh sql package-composite-v3 azure-mgmt-sql
 /autorest.ansible/scripts/generate-generic.sh storage package-2018-07 azure-mgmt-storage/azure/mgmt/storage/v2018_07_01
 /autorest.ansible/scripts/generate-generic.sh storageimportexport package-2016-11 .
 /autorest.ansible/scripts/generate-generic.sh storagesync package-2018-07-01 azure-mgmt-storagesync
@@ -120,5 +119,6 @@ find -name azure_rm*.py
 /autorest.ansible/scripts/generate-generic.sh timeseriesinsights package-2017-11-15 .
 /autorest.ansible/scripts/generate-generic.sh trafficmanager package-2018-04 azure-mgmt-trafficmanager
 /autorest.ansible/scripts/generate-generic.sh visualstudio package-2014-04-preview .
+/autorest.ansible/scripts/generate-generic.sh web package-2016-09 azure-mgmt-web
 /autorest.ansible/scripts/generate-generic.sh windowsiot package-2018-02 .
 /autorest.ansible/scripts/generate-generic.sh workloadmonitor package-2018-08-31-preview azure-mgmt-workloadmonitor
